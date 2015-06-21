@@ -1,0 +1,177 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{amsmath}
+\usepackage{natbib}
+\setlength{\bibsep}{2pt}
+\renewcommand{\refname}{\ctxfbb 參考文獻}
+\title{\ctxfbb 許願樹WISH TREE}
+\author{IVAN CHU}
+\date{2015.6}
+\begin{document}
+\maketitle
+\fontsize{12}{20pt}\selectfont
+\noindent
+「賣火柴的女孩」是丹麥著名童話作家安徒生的一篇著名的童話。
+主要講了一個賣火柴的小女孩在富人歡樂，舉杯共慶的大年夜，
+只能點燃賣不出去火柴，
+在火柴的餘輝中看見了許多她想要但卻未曾擁有的事物。
+
+當年的小女孩無意間獲得一張「許願卡」，
+小女孩半信半疑地將心中的願望寫在「許願卡」上，
+在大街上找尋屬於她的「許願樹」。
+終於掛在一棟人家門前看上去有著華麗裝飾的聖誕樹上，
+好心人Daddy看到了許願卡聯絡上了小女孩，
+並依照「許願卡」上的描述，
+完成了小女孩多年來只能在火柴上看到的夢想。
+
+您想當「好心人Daddy」嗎？或者您是那位「賣火柴的女孩」？
+
+\begin{verse}\ctxff
+您是「好心人Daddy」嗎？可以透過WISH TREE，幫助更多女孩完成火柴裡的願望。
+
+您是童話故事裡的「火柴女孩」嗎？可以透過WISH TREE，尋找有錢人家完成火柴的心願。
+\end{verse}
+
+\section{\ctxfk 概念}
+wishtreedating是專門為尋找互惠約會，實現現代人需求與渴望而設計的網站，我們一共有2個身份:
+\begin{verse}\ctxff
+好心人Daddy:願意實現「火柴女孩」在「許願樹」上的夢想
+
+賣火柴的女孩:願意接受「好心人Daddy」幫助的女性
+\end{verse}
+
+wishtreedating約會網站，嚴格的會員審核與多項認證，
+在這裡妳可以很直接的提出火柴餘輝裡的心願，
+並尋求「好心人Daddy」的幫助。
+妳可以在平台上找到「好心人Daddy」，進一步安排約會。
+約會可以是交往也可以成為互惠朋友，實現妳的需求與渴望。
+
+\section{\ctxfk 角色}
+\subsection{\ctxfk 好心人Daddy}
+好心人Daddy想要在網上約妹，花多少錢都無所謂。因此設計以下權限：
+\begin{itemize}
+  \item \ctxfm 未註冊會員
+  \item \ctxfm 普通會員
+  \item \ctxfm VIP會員
+  \item \ctxfm 銀級會員
+  \item \ctxfm 金級會員
+  \item \ctxfm 鑽石級會員
+\end{itemize}
+銀級、金級及鑽石級會員可以上傳財力證明，經由管理員審核通過。
+目的是讓「火柴女孩」可以相信好心人Daddy是真正的有錢人。
+
+財力證明分級如下：\\
+銀級會員：只要有國產車或月收人達10萬台幣或有價存款達100W以上\\
+金級會員：有需有進口車或有價存款達300W以上\\
+鑽石級會員：稀有跑車或有價存款達500W以上\\
+
+\subsection{\ctxfk 火柴女孩}
+只需完成一般註冊會員，並無特殊需求。
+
+\section{\ctxfk 註冊欄位-好心人Daddy}
+*為必填
+\subsection{\ctxfk 第一部份-我的帳戶}
+\begin{enumerate}
+  \item \ctxfm 帳戶類型
+  \item \ctxfm *電子郵件
+  \item \ctxfm *密碼
+  \item \ctxfm *密碼確認
+\end{enumerate}
+\subsection{\ctxfk 第二部份-個人資料}
+
+\begin{enumerate}
+  \item \ctxfm *暱稱
+  \item \ctxfm *國籍
+  \item \ctxfm *所在的城市
+  \item \ctxfm *出生年、月
+  \item \ctxfm *身高
+  \item \ctxfm *體型
+  \item \ctxfm *車子種類(需提出財力證明)
+  \item \ctxfm *年收入(需提出財力證明)
+  \item \ctxfm *淨資產(需提出財力證明)
+  \item \ctxfm 婚姻狀態
+  \item \ctxfm 吸菸習慣
+  \item \ctxfm 飲酒習慣
+  \item \ctxfm 我的種族
+  \item \ctxfm 職業
+  \item \ctxfm 教育程度
+
+    
+\end{enumerate}
+
+\subsection{\ctxfk 第三部份-尋求約會、卡片}
+\begin{enumerate}  
+  \item \ctxfm 零用錢預算*(月)
+  \item \ctxfm 關於我-描述自己（興趣,喜好...）
+  \item \ctxfm 尋求卡片類型-美食、旅遊、購物、資助捐款、其他
+  \item \ctxfm 理想對象-描述您所要尋找的約會安排類型
+\end{enumerate}
+\section{\ctxfk 註冊欄位-火柴女孩}
+*為必填
+\subsection{\ctxfk 第一部份-我的帳戶}
+\begin{enumerate}
+  \item \ctxfm 帳戶類型
+  \item \ctxfm *電子郵件
+  \item \ctxfm *密碼
+  \item \ctxfm *密碼確認
+\end{enumerate}
+\subsection{\ctxfk 第二部份-個人資料 Daddy}
+
+\begin{enumerate}
+  \item \ctxfm *暱稱
+  \item \ctxfm *國籍
+  \item \ctxfm *所在的城市
+  \item \ctxfm *出生年、月
+  \item \ctxfm *身高
+  \item \ctxfm *體型
+  \item \ctxfm 婚姻狀態
+  \item \ctxfm 吸菸習慣
+  \item \ctxfm 飲酒習慣
+  \item \ctxfm 我的種族
+  \item \ctxfm 職業
+  \item \ctxfm 教育程度
+  \item \ctxfm 可約會地區
+
+
+\end{enumerate}
+\subsection{\ctxfk 第三部份-寫下許願卡}
+\begin{enumerate}
+  \item \ctxfm 零用錢預算*(月)
+  \item \ctxfm 關於我-描述自己（興趣,喜好...）
+  \item \ctxfm 許願卡-寫下您的願望卡類型-美食、旅遊、購物、資助捐款、其他
+\end{enumerate}
+
+\section{\ctxfk 網站選單-Daddy}
+\subsection{\ctxfk 首頁}
+\subsection{\ctxfk 照片}
+\subsection{\ctxfk 留言板}
+\subsection{\ctxfk 帳戶}
+\subsection{\ctxfk 搜詢}
+\subsection{\ctxfk 自動配對}
+\subsection{\ctxfk 升級VIP}
+
+\section{\ctxfk 網站選單-火柴女孩}
+\subsection{\ctxfk 首頁}
+\subsection{\ctxfk 照片}
+\subsection{\ctxfk 留言板}
+\subsection{\ctxfk 帳戶}
+\subsection{\ctxfk 搜詢}
+\subsection{\ctxfk 自動配對}
+
+
+\section{\ctxfk 耕者有其田}
+
+字型測試：
+
+\begin{itemize}
+  \item \ctxfm 中文字體範例
+  \item \ctxfbb 中文字體範例
+  \item \ctxff 中文字體範例
+  \item \ctxfk 中文字體範例
+  \item \ctxfr 中文字體範例
+
+
+\end{itemize}
+
+\bibliographystyle{ter}
+\bibliography{cx4test}
+\end{document}
