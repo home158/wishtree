@@ -1,5 +1,5 @@
 <?php 
-echo "111";
+echo date();
 require_once 'WindowsAzure/WindowsAzure.php';
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\ServiceException;
@@ -10,7 +10,19 @@ use WindowsAzure\Blob\Models\BlobBlockType;
     $instance = ServicesBuilder::getInstance();
     $blobRestProxy = $instance -> createBlobService($connectionString);
 echo "1111";
-    /*
+try {
+
+
+}
+catch(Exception $e){
+    // Handle exception based on error codes and messages.
+    // Error codes and messages are here: 
+    // http://msdn.microsoft.com/en-us/library/windowsazure/dd179439.aspx
+    $code = $e->getCode();
+    $error_message = $e->getMessage();
+    echo $code.": ".$error_message."<br />";
+}
+        /*
 try {
 
     $connectionString = "UseDevelopmentStorage=true";
