@@ -41,6 +41,8 @@
 $route['default_controller'] = "site/welcome";
 $route['404_override'] = '';
 $route['welcome'] = "site/welcome";
+$route['home'] = "site/home";
+$route['home/(:any)'] = 'site/home/$1';
 
 
 /* End of file routes.php */
