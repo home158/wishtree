@@ -1,14 +1,10 @@
 <?php 
+echo "1234567890";
 require_once 'WindowsAzure/WindowsAzure.php';
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Blob\Models\Block;
 use WindowsAzure\Blob\Models\BlobBlockType;
-define('CHUNK_SIZE', 1024*1024);//Block Size = 1 MB
-    $connectionString = "DefaultEndpointsProtocol=http;AccountName=wishtree;AccountKey=gK/aVIfRUq3MB0PX9bDqWrMmsLOjk3szVWJMOjnOJm64HruQEW7CfPUef7TwbbxOm6OAxIpofYtpwGT6PKPPwg==;";
-    $instance = ServicesBuilder::getInstance();
-    $blobRestProxy = $instance -> createBlobService($connectionString);
-    $containerName = "mycontainer";
 
 echo "1234567890";
     /*
