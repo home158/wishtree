@@ -1,14 +1,14 @@
 <?php 
-echo date();
+echo date("D M j G:i:s T Y");
 require_once 'WindowsAzure/WindowsAzure.php';
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Blob\Models\Block;
 use WindowsAzure\Blob\Models\BlobBlockType;
 
-    $connectionString = "DefaultEndpointsProtocol=http;AccountName=wishtree;AccountKey=gK/aVIfRUq3MB0PX9bDqWrMmsLOjk3szVWJMOjnOJm64HruQEW7CfPUef7TwbbxOm6OAxIpofYtpwGT6PKPPwg==";
-    $instance = ServicesBuilder::getInstance();
-    $blobRestProxy = $instance -> createBlobService($connectionString);
+    //$connectionString = "DefaultEndpointsProtocol=http;AccountName=wishtree;AccountKey=gK/aVIfRUq3MB0PX9bDqWrMmsLOjk3szVWJMOjnOJm64HruQEW7CfPUef7TwbbxOm6OAxIpofYtpwGT6PKPPwg==";
+    //$instance = ServicesBuilder::getInstance();
+    //$blobRestProxy = $instance -> createBlobService($connectionString);
 echo "1111";
 try {
 
