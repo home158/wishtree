@@ -1,1 +1,0 @@
-products_admin_index
