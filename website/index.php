@@ -1,150 +1,205 @@
-
 <?php
-/** * Copyright 2013 Microsoft Corporation 
-        *  
-        * Licensed under the Apache License, Version 2.0 (the "License"); 
-        * you may not use this file except in compliance with the License. 
-        * You may obtain a copy of the License at 
-        * http://www.apache.org/licenses/LICENSE-2.0 
-        *  
-        * Unless required by applicable law or agreed to in writing, software 
-        * distributed under the License is distributed on an "AS IS" BASIS, 
-        * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
-        * See the License for the specific language governing permissions and 
-        * limitations under the License. 
-        */
-require_once 'WindowsAzure\WindowsAzure.php';
-use WindowsAzure\Common\ServicesBuilder;
-use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\CloudConfigurationManager;
-use WindowsAzure\Blob\Models\Block;
-use WindowsAzure\Blob\Models\CreateContainerOptions;
-use WindowsAzure\Blob\Models\ListContainersOptions;
-define("CONTAINERNAME", "mycontainer");
-define("BLOCKBLOBNAME", "myblockblob");
-define("BLOCKSIZE", 4 * 1024 * 1024);    // Size of the block, modify if needed.
-define("PADLENGTH", 5);                  // Size of the string used for the block ID, modify if needed.
-define("FILENAME", "myfile.txt");        // Local file to upload as a block blob.
-function createContainerIfNotExists($blobRestProxy)
+
+/*
+ *---------------------------------------------------------------
+ * APPLICATION ENVIRONMENT
+ *---------------------------------------------------------------
+ *
+ * You can load different configurations depending on your
+ * current environment. Setting the environment also influences
+ * things like logging and error reporting.
+ *
+ * This can be set to anything, but default usage is:
+ *
+ *     development
+ *     testing
+ *     production
+ *
+ * NOTE: If you change these, also change the error_reporting() code below
+ *
+ */
+	define('ENVIRONMENT', 'development');
+/*
+ *---------------------------------------------------------------
+ * ERROR REPORTING
+ *---------------------------------------------------------------
+ *
+ * Different environments will require different levels of error reporting.
+ * By default development will show errors but testing and live will hide them.
+ */
+
+if (defined('ENVIRONMENT'))
 {
-    // See if the container already exists.
-    $listContainersOptions = new ListContainersOptions;
-    $listContainersOptions->setPrefix(CONTAINERNAME);
-    $listContainersResult = $blobRestProxy->listContainers($listContainersOptions);
-    $containerExists = false;
-    foreach ($listContainersResult->getContainers() as $container)
-    {
-        if ($container->getName() == CONTAINERNAME)
-        {
-            // The container exists.
-            $containerExists = true;
-            // No need to keep checking.
-            break;
-        }
-    }
-    if (!$containerExists)
-    {
-        echo "Creating container.\n";
-        $blobRestProxy->createContainer(CONTAINERNAME);
-        echo "Container '" . CONTAINERNAME . "' successfully created.\n";
-    }
+	switch (ENVIRONMENT)
+	{
+		case 'development':
+			error_reporting(E_ALL);
+		break;
+
+		case 'testing':
+		case 'production':
+			error_reporting(0);
+		break;
+
+		default:
+			exit('The application environment is not set correctly.');
+	}
 }
-try {
-    echo "Beginning processing.\n";
-  
-    /* 
-        Use CloudConfigurationManager::getConnectionString to retrieve 
-        the connection string whose name (in this example) is 
-        "StorageConnectionString".
-        
-        By default, the CloudConfigurationManager::getConnectionString method
-        will look for an environment variable with the name that is passed in
-        as the method parameter, and then assign the environment variable's 
-        value as the return value.
-        
-        For example, if you want to use the storage emulator, start
-        the storage emulator, set an environment variable through a technique 
-        such as 
-        
-            set StorageConnectionString=UseDevelopmentStorage=true
-            
-        and then run this sample at a command prompt that has the 
-        StorageConnectionString as an active environment variable.
-        If you want to use a production storage account, set the 
-        environment variable through a technique such as
-        
-            set StorageConnectionString=DefaultEndpointsProtocol=http;AccountName=your_account_name;AccountKey=your_account_key
-            
-        (Substitute your storage account name and account key for 
-        your_account_name and your_account_key, respectively.) 
-        Then run this sample at a command prompt that has the 
-        StorageConnectionString as an active environment variable.
-        The format for the storage connection string itself is documented at        
-        http://msdn.microsoft.com/en-us/library/windowsazure/ee758697.aspx
-        If you do not want to use an environment variable as the source
-        for the connection string name, you can register other sources 
-        via the CloudCofigurationManager::registerSource method.
-        
-    */
-    $connectionString = CloudConfigurationManager::getConnectionString("DefaultEndpointsProtocol=http;AccountName=wishtree;AccountKey=gK/aVIfRUq3MB0PX9bDqWrMmsLOjk3szVWJMOjnOJm64HruQEW7CfPUef7TwbbxOm6OAxIpofYtpwGT6PKPPwg==");
-    
-    if (null == $connectionString || "" == $connectionString)
-    {
-        echo "Did not find a connection string whose name is 'StorageConnectionString'.";
-        exit();
-    }
-   
-    $blobRestProxy = ServicesBuilder::getInstance()->createBlobService($connectionString);
-    createContainerIfNotExists($blobRestProxy);
-    echo "Using the '" . CONTAINERNAME . "' container and the '" . BLOCKBLOBNAME . "' blob.\n";
-    echo "Using file '" . FILENAME . "'\n";
-    if (!file_exists(FILENAME))
-    {
-        echo "The '" . FILENAME . "' file does not exist. Exiting program.\n";
-        exit();        
-    }
-    $handle = fopen(FILENAME, "r");
-    // Upload the blob using blocks.
-    $counter = 1;
-    $blockIds = array();
-    while (!feof($handle))
-    {
-        $blockId = str_pad($counter, PADLENGTH, "0", STR_PAD_LEFT);
-        echo "Processing block $blockId.\n";
-        
-        $block = new Block();
-        $block->setBlockId(base64_encode($blockId));
-        $block->setType("Uncommitted");
-        array_push($blockIds, $block);
-        
-        $data = fread($handle, BLOCKSIZE);
-        
-        // Upload the block.
-        $blobRestProxy->createBlobBlock(CONTAINERNAME, BLOCKBLOBNAME, base64_encode($blockId), $data);
-        $counter++;
-    }
-    // Done creating the blocks. Close the file and commit the blocks.
-    fclose($handle);
-    echo "Commiting the blocks.\n";    
-    $blobRestProxy->commitBlobBlocks(CONTAINERNAME, BLOCKBLOBNAME, $blockIds);
-    
-    echo "Done processing.\n";
-}
-catch(ServiceException $serviceException)
-{
-    // Handle exception based on error codes and messages.
-    // Error codes and messages are here: 
-    // http://msdn.microsoft.com/en-us/library/windowsazure/dd179439.aspx
-    echo "ServiceException encountered.\n";
-    $code = $serviceException->getCode();
-    $error_message = $serviceException->getMessage();
-    echo "$code: $error_message";
-}
-catch (Exception $exception) 
-{
-    echo "Exception encountered.\n";
-    $code = $exception->getCode();
-    $error_message = $exception->getMessage();
-    echo "$code: $error_message";
-}
-?>
+
+/*
+ *---------------------------------------------------------------
+ * SYSTEM FOLDER NAME
+ *---------------------------------------------------------------
+ *
+ * This variable must contain the name of your "system" folder.
+ * Include the path if the folder is not in the same  directory
+ * as this file.
+ *
+ */
+	$system_path = 'system';
+
+/*
+ *---------------------------------------------------------------
+ * APPLICATION FOLDER NAME
+ *---------------------------------------------------------------
+ *
+ * If you want this front controller to use a different "application"
+ * folder then the default one you can set its name here. The folder
+ * can also be renamed or relocated anywhere on your server.  If
+ * you do, use a full server path. For more info please see the user guide:
+ * http://codeigniter.com/user_guide/general/managing_apps.html
+ *
+ * NO TRAILING SLASH!
+ *
+ */
+	$application_folder = 'application';
+
+/*
+ * --------------------------------------------------------------------
+ * DEFAULT CONTROLLER
+ * --------------------------------------------------------------------
+ *
+ * Normally you will set your default controller in the routes.php file.
+ * You can, however, force a custom routing by hard-coding a
+ * specific controller class/function here.  For most applications, you
+ * WILL NOT set your routing here, but it's an option for those
+ * special instances where you might want to override the standard
+ * routing in a specific front controller that shares a common CI installation.
+ *
+ * IMPORTANT:  If you set the routing here, NO OTHER controller will be
+ * callable. In essence, this preference limits your application to ONE
+ * specific controller.  Leave the function name blank if you need
+ * to call functions dynamically via the URI.
+ *
+ * Un-comment the $routing array below to use this feature
+ *
+ */
+	// The directory name, relative to the "controllers" folder.  Leave blank
+	// if your controller is not in a sub-folder within the "controllers" folder
+	// $routing['directory'] = '';
+
+	// The controller class file name.  Example:  Mycontroller
+	// $routing['controller'] = '';
+
+	// The controller function you wish to be called.
+	// $routing['function']	= '';
+
+
+/*
+ * -------------------------------------------------------------------
+ *  CUSTOM CONFIG VALUES
+ * -------------------------------------------------------------------
+ *
+ * The $assign_to_config array below will be passed dynamically to the
+ * config class when initialized. This allows you to set custom config
+ * items or override any default config values found in the config.php file.
+ * This can be handy as it permits you to share one application between
+ * multiple front controller files, with each file containing different
+ * config values.
+ *
+ * Un-comment the $assign_to_config array below to use this feature
+ *
+ */
+	// $assign_to_config['name_of_config_item'] = 'value of config item';
+
+
+
+// --------------------------------------------------------------------
+// END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
+// --------------------------------------------------------------------
+
+/*
+ * ---------------------------------------------------------------
+ *  Resolve the system path for increased reliability
+ * ---------------------------------------------------------------
+ */
+
+	// Set the current directory correctly for CLI requests
+	if (defined('STDIN'))
+	{
+		chdir(dirname(__FILE__));
+	}
+
+	if (realpath($system_path) !== FALSE)
+	{
+		$system_path = realpath($system_path).'/';
+	}
+
+	// ensure there's a trailing slash
+	$system_path = rtrim($system_path, '/').'/';
+
+	// Is the system path correct?
+	if ( ! is_dir($system_path))
+	{
+		exit("Your system folder path does not appear to be set correctly. Please open the following file and correct this: ".pathinfo(__FILE__, PATHINFO_BASENAME));
+	}
+
+/*
+ * -------------------------------------------------------------------
+ *  Now that we know the path, set the main path constants
+ * -------------------------------------------------------------------
+ */
+	// The name of THIS file
+	define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
+
+	// The PHP file extension
+	// this global constant is deprecated.
+	define('EXT', '.php');
+
+	// Path to the system folder
+	define('BASEPATH', str_replace("\\", "/", $system_path));
+
+	// Path to the front controller (this file)
+	define('FCPATH', str_replace(SELF, '', __FILE__));
+
+	// Name of the "system folder"
+	define('SYSDIR', trim(strrchr(trim(BASEPATH, '/'), '/'), '/'));
+
+
+	// The path to the "application" folder
+	if (is_dir($application_folder))
+	{
+		define('APPPATH', $application_folder.'/');
+	}
+	else
+	{
+		if ( ! is_dir(BASEPATH.$application_folder.'/'))
+		{
+			exit("Your application folder path does not appear to be set correctly. Please open the following file and correct this: ".SELF);
+		}
+
+		define('APPPATH', BASEPATH.$application_folder.'/');
+	}
+
+/*
+ * --------------------------------------------------------------------
+ * LOAD THE BOOTSTRAP FILE
+ * --------------------------------------------------------------------
+ *
+ * And away we go...
+ *
+ */
+require_once BASEPATH.'core/CodeIgniter.php';
+
+/* End of file index.php */
+/* Location: ./index.php */
