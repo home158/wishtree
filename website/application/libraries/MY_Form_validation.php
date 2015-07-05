@@ -42,7 +42,7 @@ class MY_Form_validation extends CI_Form_validation {
         
         $this->CI->load->model('register_model');
         //不允許E-mail重覆
-        if( $this->CI->register_model->is_email_exist($email) == TRUE){
+        if( $this->CI->register_model->is_email_duplicate($email) == TRUE){
             return FALSE;
         }else{
             return TRUE;

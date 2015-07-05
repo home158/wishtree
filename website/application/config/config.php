@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://127.0.0.1/';
+$config['base_url']	= 'http://127.0.0.1:8000/';
 
 /*
 |--------------------------------------------------------------------------
@@ -358,6 +358,18 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
+/*
+| -------------------------------------------------------------------
+|  Azure Storage
+| -------------------------------------------------------------------
+| Prototype:
+|
+|	
+|
+*/
+$config['azure_storage_protocol'] = 'http'; // DefaultEndpointsProtocol
+$config['azure_storage_account_name'] = 'wishtree'; // Your Storage account name
+$config['azure_storage_account_key']  = 'gK/aVIfRUq3MB0PX9bDqWrMmsLOjk3szVWJMOjnOJm64HruQEW7CfPUef7TwbbxOm6OAxIpofYtpwGT6PKPPwg=='; // Your account key
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

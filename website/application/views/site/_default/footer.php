@@ -1,34 +1,37 @@
 
 <div id="footer">
   <div class="ft clearfix">
-    <div class="language fl">
-      <p class="hd">請選擇語系</p>
+    <div class="language">
+      <p class="hd">{footer_select_lang}</p>
         <span><a class="lang_choose" lang_code="en-us">English</a></span>
-        <span><a class="lang_choose" lang_code="zh-tw">繁中</a></span>
-        <span><a class="lang_choose" lang_code="zh-cn">简中</a></span>
-		</div>
-    <!--language end-->
-    <div class="about fl">
-      <p class="hd">關於 a SugarDating</p>
-      <ul>
-        <li><a href="http://www.asugardating.com/pages/privacy.html">隱私政策</a></li>
-        <li><a href="http://www.asugardating.com/pages/about_us.html">關於我們</a></li>
-        <li><a href="http://www.asugardating.com/pages/terms.html">使用條款</a></li>
-        <li><a href="mailto:service@asugardating.com">聯絡我們</a></li>
-      </ul>
+        <span><a class="lang_choose" lang_code="zh-tw">{footer_lang_zh_tw}</a></span>
+        <span><a class="lang_choose" lang_code="zh-cn">{footer_lang_zh_cn}</a></span>
     </div>
-    <!--about end-->
-    <div class="tool fr">
-      <p class="hd">相約在 a SugarDating</p>
+    <!--language end-->
+
+    <div class="tool">
+      <p class="hd">{footer_slogan}</p>
       <ul>
-        <li><a href="http://www.asugardating.com/register_1.html">免費註冊</a></li>
+        <li><a href="http://www.asugardating.com/register_1.html">{footer_register_free}</a></li>
       </ul>
     </div>
     <!--tool end-->
+    <div class="footer-links">
+        <a href="/privacy.html">{footer_privacy}</a>
+        <span>|</span>
+        <a href="/about.html">{footer_about}</a>    
+        <span>|</span>
+        <a href="/terms.html">{footer_terms}</a>
+        <span>|</span>
+        <a href="mailto:home158@gmail.com">{footer_contact}</a>
+    </div>
+    <!--footer-links end-->
   </div>
   <!--ft end-->
 </div>
 <!--footer end-->
+</div>
+<!--wrap end-->
 <script>
 $(function() {
     $('#footer a.lang_choose').bind('click',function(){
@@ -43,5 +46,6 @@ $(function() {
 });
     
 </script>
+
     </body>
 </html>

@@ -1,0 +1,392 @@
+@charset "utf-8";
+
+form {
+	padding: 0;
+	margin: 0;
+}
+
+/* 一般按鈕 */
+button,
+input[type=button],
+input[type=reset],
+input[type=submit] {
+	cursor: pointer;
+	padding: 0 1em;
+	border: 1px solid #ccc;
+	border-bottom-color: #aaa;
+	background-color: #f6f6f6;
+	/* Mozilla Firefox 3.6+ */
+	background-image: -moz-linear-gradient(top, #fcfcfc 0%, #f0f0f0 100%);
+	/* Webkit (Safari 4+, Chrome) */
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fcfcfc), color-stop(100%,#f0f0f0));
+	/* Webkit (Safari 5.1+, Chrome 10+) */
+	background-image: -webkit-linear-gradient(top, #fcfcfc 0%, #f0f0f0 100%);
+	/* Opera 11.10+ */
+	background-image: -o-linear-gradient(top, #fcfcfc 0%, #f0f0f0 100%);
+	/* IE 10+ */
+	background-image: -ms-linear-gradient(top, #fcfcfc 0%, #f0f0f0 100%);
+	/* W3C */
+	background-image: linear-gradient(to bottom, #fcfcfc 0%, #f0f0f0 100%);
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	font: inherit;
+	color: #333;
+	line-height: 1.8;
+}
+button:hover,
+input[type=button]:hover,
+input[type=reset]:hover,
+input[type=submit]:hover {
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+button:active,
+input[type=button]:active,
+input[type=reset]:active,
+input[type=submit]:active {
+	border: 0px solid #ccc;
+	border-top-color: #aaa;
+	background-color: #eee;
+	background-image: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	color: #000;
+}
+
+/* 平靜按鈕 */
+button.btn-calm,
+input[type=button].btn-calm,
+input[type=reset].btn-calm,
+input[type=submit].btn-calm {
+	border: 1px solid #3078bf;
+	border-bottom-color: #1a4066;
+	background-color: #3488d2;
+	background-image: -moz-linear-gradient(top, #3998e5 0%, #3078bf 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3998e5), color-stop(100%,#3078bf));
+	background-image: -webkit-linear-gradient(top, #3998e5 0%, #3078bf 100%);
+	background-image: -o-linear-gradient(top, #3998e5 0%, #3078bf 100%);
+	background-image: -ms-linear-gradient(top, #3998e5 0%, #3078bf 100%);
+	background-image: linear-gradient(to bottom, #3998e5 0%, #3078bf 100%);
+	font-size: 15px;
+	color: #fff;
+}
+button.btn-calm:hover,
+input[type=button].btn-calm:hover,
+input[type=submit].btn-calm:hover {
+	background-color: #469ae5;
+	background-image: -moz-linear-gradient(top, #59b4ff 0%, #3380cc 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#59b4ff), color-stop(100%,#3380cc));
+	background-image: -webkit-linear-gradient(top, #59b4ff 0%, #3380cc 100%);
+	background-image: -o-linear-gradient(top, #59b4ff 0%, #3380cc 100%);
+	background-image: -ms-linear-gradient(top, #59b4ff 0%, #3380cc 100%);
+	background-image: linear-gradient(to bottom, #59b4ff 0%, #3380cc 100%);
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+button.btn-calm:active,
+input[type=button].btn-calm:active,
+input[type=submit].btn-calm:active {
+	border-color: #3078bf;
+	border-top-color: #1a4066;
+	background-color: #3078bf;
+	background-image: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+
+
+/* 優雅按鈕 */
+button.btn-ele,
+input[type=button].btn-ele,
+input[type=reset].btn-ele,
+input[type=submit].btn-ele {
+	border: 1px solid #b8cfe5;
+	border-bottom-color: #8fa1b3;
+	background-color: #e1f1ff;
+	background-image: -moz-linear-gradient(top, #f0faff 0%, #d3e9ff 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f0faff), color-stop(100%,#d3e9ff));
+	background-image: -webkit-linear-gradient(top, #f0faff 0%, #d3e9ff 100%);
+	background-image: -o-linear-gradient(top, #f0faff 0%, #d3e9ff 100%);
+	background-image: -ms-linear-gradient(top, #f0faff 0%, #d3e9ff 100%);
+	background-image: linear-gradient(to bottom, #f0faff 0%, #d3e9ff 100%);
+	color: #333;
+}
+button.btn-ele:hover,
+input[type=button].btn-ele:hover,
+input[type=reset].btn-ele:hover,
+input[type=submit].btn-ele:hover {
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+button.btn-ele:active,
+input[type=button].btn-ele:active,
+input[type=reset].btn-ele:active,
+input[type=submit].btn-ele:active {
+	border-color: #b8cfe5;
+	border-top-color: #8fa1b3;
+	background-color: #d3e9ff;
+	background-image: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+/* 醒目按鈕 */
+button.btn-emp,
+input[type=button].btn-emp,
+input[type=reset].btn-emp,
+input[type=submit].btn-emp {
+	border: 1px solid #c30;
+	border-bottom-color: #920;
+	background-color: #e55400;
+	background-image: -moz-linear-gradient(top, #e60 0%, #d40 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e60), color-stop(100%,#d40));
+	background-image: -webkit-linear-gradient(top, #e60 0%, #d40 100%);
+	background-image: -o-linear-gradient(top, #e60 0%, #d40 100%);
+	background-image: -ms-linear-gradient(top, #e60 0%, #d40 100%);
+	background-image: linear-gradient(to bottom, #e60 0%, #d40 100%);
+	font-size: 15px;
+	color: #fff;
+}
+button.btn-emp:hover,
+input[type=button].btn-emp:hover,
+input[type=reset].btn-emp:hover,
+input[type=submit].btn-emp:hover {
+	background-color: #f56210;
+	background-image: -moz-linear-gradient(top, #ff8121 0%, #eb4600 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff8121), color-stop(100%,#eb4600));
+	background-image: -webkit-linear-gradient(top, #ff8121 0%, #eb4600 100%);
+	background-image: -o-linear-gradient(top, #ff8121 0%, #eb4600 100%);
+	background-image: -ms-linear-gradient(top, #ff8121 0%, #eb4600 100%);
+	background-image: linear-gradient(to bottom, #ff8121 0%, #eb4600 100%);
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+button.btn-emp:active,
+input[type=button].btn-emp:active,
+input[type=reset].btn-emp:active,
+input[type=submit].btn-emp:active {
+	border-color: #c30;
+	border-top-color: #920;
+	background-color: #d40;
+	background-image: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+/* 輕鬆按鈕 */
+button.btn-relax,
+input[type=button].btn-relax,
+input[type=reset].btn-relax,
+input[type=submit].btn-relax {
+	border: 1px solid #38c;
+	border-bottom-color: #258;
+	background-color: #3da9f2;
+	background-image: -moz-linear-gradient(top, #40b9ff 0%, #3998e5 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#40b9ff), color-stop(100%,#3998e5));
+	background-image: -webkit-linear-gradient(top, #40b9ff 0%, #3998e5 100%);
+	background-image: -o-linear-gradient(top, #40b9ff 0%, #3998e5 100%);
+	background-image: -ms-linear-gradient(top, #40b9ff 0%, #3998e5 100%);
+	background-image: linear-gradient(to bottom, #40b9ff 0%, #3998e5 100%);
+	font-size: 15px;
+	color: #fff;
+}
+button.btn-relax:hover,
+input[type=button].btn-relax:hover,
+input[type=reset].btn-relax:hover,
+input[type=submit].btn-relax:hover {
+	background-color: #57b5f8;
+	background-image: -moz-linear-gradient(top, #73ccff 0%, #3da0f2 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#73ccff), color-stop(100%,#3da0f2));
+	background-image: -webkit-linear-gradient(top, #73ccff 0%, #3da0f2 100%);
+	background-image: -o-linear-gradient(top, #73ccff 0%, #3da0f2 100%);
+	background-image: -ms-linear-gradient(top, #73ccff 0%, #3da0f2 100%);
+	background-image: linear-gradient(to bottom, #73ccff 0%, #3da0f2 100%);
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+button.btn-relax:active,
+input[type=button].btn-relax:active,
+input[type=reset].btn-relax:active,
+input[type=submit].btn-relax:active {
+	border-color: #38c;
+	border-top-color: #258;
+	background-color: #3998e5;
+	background-image: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+/* 灰色按鈕 */
+button.btn-gray,
+input[type=button].btn-gray,
+input[type=reset].btn-gray,
+input[type=submit].btn-gray {
+	border: 1px solid #38c;
+	border-bottom-color: #258;
+	background-color: #C4C4C4;
+	background-image: -moz-linear-gradient(top, #C4C4C4 0%, #3998e5 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C4C4C4), color-stop(100%,#3998e5));
+	background-image: -webkit-linear-gradient(top, #C4C4C4 0%, #3998e5 100%);
+	background-image: -o-linear-gradient(top, #C4C4C4 0%, #3998e5 100%);
+	background-image: -ms-linear-gradient(top, #C4C4C4 0%, #3998e5 100%);
+	background-image: linear-gradient(to bottom, #C4C4C4 0%, #3998e5 100%);
+	font-size: 15px;
+	color: #fff;
+}
+button.btn-gray:hover,
+input[type=button].btn-gray:hover,
+input[type=reset].btn-gray:hover,
+input[type=submit].btn-gray:hover {
+	background-color: #A6A6A6;
+	background-image: -moz-linear-gradient(top, #73ccff 0%, #A6A6A6 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#73ccff), color-stop(100%,#A6A6A6));
+	background-image: -webkit-linear-gradient(top, #73ccff 0%, #A6A6A6 100%);
+	background-image: -o-linear-gradient(top, #73ccff 0%, #A6A6A6 100%);
+	background-image: -ms-linear-gradient(top, #73ccff 0%, #A6A6A6 100%);
+	background-image: linear-gradient(to bottom, #73ccff 0%, #A6A6A6 100%);
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+button.btn-gray:active,
+input[type=button].btn-gray:active,
+input[type=reset].btn-gray:active,
+input[type=submit].btn-gray:active {
+	border-color: #D6D6D6;
+	border-top-color: #258;
+	background-color: #3998e5;
+	background-image: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+/* 按鈕尺寸 */
+button.btn-xl,
+input[type=button].btn-xl,
+input[type=reset].btn-xl,
+input[type=submit].btn-xl {
+	padding: 0 2em;
+	font-size: 20px;
+	font-weight: bold;
+}
+button.btn-l,
+input[type=button].btn-l,
+input[type=reset].btn-l,
+input[type=submit].btn-l {
+	padding: 0 1.5em;
+	font-size: 16px;
+	line-height: 2;
+}
+button.btn-m,
+input[type=button].btn-m,
+input[type=reset].btn-m,
+input[type=submit].btn-m {
+	padding: 0 0.5em;
+	font-size: 15px;
+}
+
+/* 其他表單元件 */
+input[type=checkbox],
+input[type=radio] {
+	margin: 0 3px 2px 3px;
+	vertical-align: middle;
+}
+input[type=text],
+input[type=email],
+input[type=password],
+select,
+ {
+	margin: 3px 0;
+	padding: 5px;
+	border: 1px solid #ddd;
+	border-top-color: #ccc;
+	outline: 0;
+	font: inherit;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	font-size: 14px;
+	color: #333;
+	line-height: 1;
+}
+input[type=text]:hover,
+input[type=email]:hover,
+input[type=password]:hover,
+select:hover,
+textarea:hover {
+	border-color: #bbb;
+	border-top-color: #aaa;
+	background-color: #fbfbfb;
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) inset;
+	-moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) inset;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) inset;
+}
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=password]:focus,
+select:focus,
+textarea:focus {
+	border-color: #6ae;
+	background-color: #fff;
+	-webkit-box-shadow:  0 1px 2px rgba(0, 0, 0, 0.2) inset, 0 0 4px rgba(51, 153, 255, 0.2);
+	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) inset, 0 0 4px rgba(51, 153, 255, 0.2);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) inset, 0 0 4px rgba(51, 153, 255, 0.2);
+}
+input[type=text][disabled],
+input[type=email][disabled] {
+	border: 1px solid #ddd;
+	background-color: #f6f6f6;
+}
+textarea {
+	font-size: 13px;
+	line-height: 1.6;
+}
+select {
+	padding: 4px;
+}
+select.sel-s {
+	margin: 0;
+	padding: 0;
+	font-size: 13px;
+}
+button[disabled].btn-calm,
+{
+	border: 1px solid #bcbcbc;
+	border-bottom-color: #bcbcbc;
+	background-color: #bcbcbc;
+	background-image: -moz-linear-gradient(top, #bcbcbc 0%, #bcbcbc 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#bcbcbc), color-stop(100%,#3078bf));
+	background-image: -webkit-linear-gradient(top, #bcbcbc 0%, #bcbcbc 100%);
+	background-image: -o-linear-gradient(top, #bcbcbc 0%, #bcbcbc 100%);
+	background-image: -ms-linear-gradient(top, #bcbcbc 0%, #bcbcbc 100%);
+	background-image: linear-gradient(to bottom, #bcbcbc 0%, #bcbcbc 100%);
+	font-size: 15px;
+	color: #fff;
+}
+button.btn-cancel
+,input.btn-cancel{
+	border: 1px solid #bcbcbc;
+	border-bottom-color: #bcbcbc;
+	background-color: #bcbcbc;
+	background-image: -moz-linear-gradient(top, #bcbcbc 0%, #bcbcbc 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#bcbcbc), color-stop(100%,#3078bf));
+	background-image: -webkit-linear-gradient(top, #bcbcbc 0%, #bcbcbc 100%);
+	background-image: -o-linear-gradient(top, #bcbcbc 0%, #bcbcbc 100%);
+	background-image: -ms-linear-gradient(top, #bcbcbc 0%, #bcbcbc 100%);
+	background-image: linear-gradient(to bottom, #bcbcbc 0%, #bcbcbc 100%);
+	font-size: 15px;
+	color: #fff;
+}

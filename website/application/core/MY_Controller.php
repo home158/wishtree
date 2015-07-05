@@ -6,16 +6,17 @@ class BASE_Controller extends CI_Controller{
     public function __construct() {
         parent::__construct();
         $this->get_lang();
+        $this->load->library('my_language');
         date_default_timezone_set('Asia/Taipei');
         $this->parse_display_data();
         
     }
-    private function parse_display_data(){
+    public function parse_display_data($data = array()){
+        foreach($data as $key){
+            $arr = $this->my_language->load($key);
+            $this->display_data = array_merge( $this->display_data, $arr);
+        }
         
-        $data = array(
-            
-        );
-        $this->display_data = array_merge( $this->display_data, $data );
     }
     public function get_lang()
     {
@@ -56,11 +57,7 @@ class Admin_Base_Controller extends BASE_Controller {
             redirect( base_url() , 'refresh');
         }
     }
-    private function parse_display_data(){
-        $data = array(
-        );
-        $this->display_data = array_merge( $this->display_data, $data );
-    }
+
 
 }
 
@@ -68,21 +65,11 @@ class Site_Base_Controller extends BASE_Controller {
     
     public function __construct() {
         parent::__construct();
-        $this->parse_display_data();
+        $this->parse_display_data(array('home' , 'footer'));
 
         //$cookie2 = $this->input->cookie();
         //var_dump($cookie2);
     }
-    private function parse_display_data(){
-        $this->lang->load('home');
-        $data = array(
-            'title' => $this->lang->line("home_site_title")
-        );
-        $this->display_data = array_merge( $this->display_data, $data );
-
-
-    }
-
 }
 
 /* End of file MY_Controller.php */

@@ -43,62 +43,13 @@ $route['404_override'] = '';
 $route['welcome'] = "site/welcome";
 $route['home'] = "site/home";
 $route['home/(:any)'] = 'site/home/$1';
-
-
-$route['admin'] = "admin/welcome";
-$route['site'] = "site/welcome";
-
-$route['register'] = "site/register";
-$route['register/(:any)'] = 'site/register/$1';
-
 $route['login'] = "site/login";
 $route['login/(:any)'] = 'site/login/$1';
 
-$route['news'] = "site/news";
-$route['news/(:any)'] = 'site/news/$1';
-
-$route['notepad'] = "site/notepad";
-$route['notepad/(:any)'] = 'site/notepad/$1';
-
-$route['contact'] = "site/contact";
-$route['contact/(:any)'] = 'site/contact';
-
-
-$route['member'] = "site/order/history";
-$route['member/(:any)'] = 'site/member/$1';
-
-$route['market'] = "site/market/category";
-$route['market/(:any)'] = 'site/market/$1';
-
-$route['order'] = "site/order";
-$route['order/(:any)'] = 'site/order/$1';
-
-$route['news/promotion'] = "site/page/preview/promotion";
-$route['news/promotion/(:any)']         = 'site/page/preview/promotion';
-$route['admin/news/promotion']          = 'admin/page/preview/promotion';
-$route['admin/news/promotion/(:any)']   = 'admin/page/preview/promotion';
-
-$route['admin/notepad/(:any)'] = 'admin/page/preview/$1';
-$route['notepad/farm_village'] = 'site/page/preview/farm_village';
-$route['notepad/growing'] = 'site/page/preview/growing';
-$route['notepad/process'] = 'site/page/preview/process';
-$route['notepad/farmer'] = 'site/page/preview/farmer';
-$route['notepad'] = 'site/page/preview/farm_village';
-$route['notepad/vegetable'] = 'site/notepad/vegetable';
-$route['notepad/vegetable/(:num)/(:num)'] = 'site/notepad/vegetable/$1/$2';
-
-$route['seasonal'] = "site/page/preview/seasonal";
-$route['seasonal/(:any)'] = "site/page/preview/seasonal";
-
-$route['admin/seasonal'] = 'admin/page/preview/seasonal';
-$route['admin/seasonal/(:any)'] = 'admin/page/preview/seasonal';
-
-$route['brand'] = 'site/brand';
-$route['brand/(:any)'] = 'site/brand/index/$1';
-
-
-//$route['(:any)'] = "site/$1";
 $route['logout'] = "site/logout";
+
+$route['register'] = "site/register";
+$route['register/(:any)'] = 'site/register/$1';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

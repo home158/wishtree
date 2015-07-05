@@ -1,0 +1,228 @@
+body {
+    background: #EEEDE8;
+}
+a{
+    text-decoration: none;
+}
+.wrap{
+    -moz-box-shadow: 0 -1px 4px #cfcfcf;
+    -webkit-box-shadow: 0 -1px 4px #cfcfcf;
+    box-shadow: 0 -1px 4px #cfcfcf;
+    background: #fff;
+    clear: both;
+    border-radius: 8px 8px 0 0;
+    -webkit-border-radius: 8px 8px 0 0;
+    -moz-border-radius: 8px 8px 0 0;
+    width: 980px;
+    margin: 5px auto 0;
+    padding-top: 10px;
+}
+#navi {
+    overflow: hidden;
+    height: 44px;
+    background: #000000 url("/_images/menu_bg.png") repeat-x 0 0;
+}
+#navi ul {
+    padding-left: 10px; 
+}
+#navi li {
+  /* line-height: 40px; */
+  height: 33px;
+  float: left;
+  
+  line-height: 33px;
+  font-weight: 700;
+  font-size: 14px;
+  
+}
+#navi li a {
+    float: left;
+    height: 44px;
+    line-height: 40px;
+    padding: 0 20px;
+    text-decoration: none;
+    color: #ffffff;
+}
+#navi li a:hover,#navi li a.highlight{
+  background: url("/_images/menu_bg_a.png") no-repeat 50% -44px;
+}
+ul li {
+  list-style: none;
+}
+#footer {
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px 10px 20px;
+    background: #ff5b7e;
+    position: relative;
+}
+.footer-links{
+
+}
+#footer .language{
+    color: #FFF;
+}
+#footer .language{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+#footer .language a{
+    cursor: pointer;
+    color: #FFF;
+    text-decoration: none;
+}
+#footer .footer-links a{
+    color: #FFF;
+    text-decoration: none;
+    transition: text-shadow 160ms ease, color 160ms ease;
+}
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+ .hd{
+    font-weight: bold;
+}
+#header{
+    position: relative;
+    height: 50px;
+}
+#header .header-link{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+#header .header-link li{
+    float: left;
+    margin-right: 8px;    
+}
+#header .header-link li a {
+    margin-right: 8px;
+    text-decoration: none;
+   
+}
+#content{
+  width: 100%;
+  padding: 10px 10px 0;
+  _padding-top: 10px;
+}
+.clearfix {
+  display: block;
+}
+.msg p {
+  font-size: 15px;
+}
+.redF {
+  color: #F00;
+}
+.msg .hd, .login_msg .hd {
+  font-family: "微軟正黑體","Microsoft JhengHei";
+  font-size: 22px;
+  font-weight: bold;
+}
+.tc {
+  text-align: center;
+}
+.deal_msg label {
+  padding: 0 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.vm {
+  vertical-align: middle;
+}
+.deal_msg .next {
+  margin: 0 auto;
+  padding: 10px 0;
+}
+#content .deal_in {
+  border: 1px solid #999;
+  height: 250px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 10px;
+  margin: 10px 0;
+}
+.well{
+    background-color: #fff;
+    padding: 19px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);
+    border-radius: 2px;
+    border: 0;
+}
+.well-lg {
+    padding: 26px;
+}
+.v-dot-line{
+    height: 400px;
+    background: red;
+    width: 2px;
+}
+.daddy ,.girl{
+    width: 450px;
+    padding: 10px;
+    cursor: pointer;
+}
+.daddy .roll-desc,.girl .roll-desc{
+    font-size: 17px;
+}
+.register .hd {
+  font-size: 17px;
+  font-weight: bold;
+}
+input[type=text], input[type=email], input[type=password], select, textarea {
+  margin: 3px 0;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-top-color: #ccc;
+  outline: 0;
+  font: inherit;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  font-size: 14px;
+  color: #333;
+  line-height: 1;
+}
+/* 區塊-填寫會員資料
+---------------------------------------------------- */
+.blk-reg .item {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	margin-left: -200px;
+	width: 200px;
+
+}
+.blk-reg form {
+	margin-left: 200px;
+}
+.blk-reg p{
+	margin-left: -200px;
+}
+.blk-reg input[type=text],
+.blk-reg input[type=email],
+.blk-reg input[type=password],
+.blk-reg select {
+	width: 20em;
+}
+.blk-reg .section{
+  margin-top: 10px;
+  border-bottom: 1px solid #ff5b7e;
+}
+.blk-reg em.note {
+  font-style: normal;
+  color: #000;
+}
+.blk-reg em {
+  
+  color: #F00;
+}
+.blk-reg textarea{
+    height: 150px;
+    width: 280px;
+}
