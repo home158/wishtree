@@ -26,13 +26,13 @@ a{
     padding-left: 10px; 
 }
 #navi li {
-  /* line-height: 40px; */
-  height: 33px;
-  float: left;
-  
-  line-height: 33px;
-  font-weight: 700;
-  font-size: 14px;
+    /* line-height: 40px; */
+    height: 33px;
+    float: left;
+    
+    line-height: 33px;
+    font-weight: 700;
+    font-size: 14px;
   
 }
 #navi li a {
@@ -44,10 +44,10 @@ a{
     color: #ffffff;
 }
 #navi li a:hover,#navi li a.highlight{
-  background: url("/_images/menu_bg_a.png") no-repeat 50% -44px;
+    background: url("/_images/menu_bg_a.png") no-repeat 50% -44px;
 }
 ul li {
-  list-style: none;
+    list-style: none;
 }
 #footer {
     width: 100%;
@@ -105,46 +105,46 @@ ul li {
    
 }
 #content{
-  width: 100%;
-  padding: 10px 10px 0;
-  _padding-top: 10px;
+    width: 100%;
+    padding: 10px 10px 0;
+    _padding-top: 10px;
 }
 .clearfix {
-  display: block;
+    display: block;
 }
 .msg p {
-  font-size: 15px;
+    font-size: 15px;
 }
 .redF {
-  color: #F00;
+    color: #F00;
 }
 .msg .hd, .login_msg .hd {
-  font-family: "微軟正黑體","Microsoft JhengHei";
-  font-size: 22px;
-  font-weight: bold;
+    font-family: "微軟正黑體","Microsoft JhengHei";
+    font-size: 22px;
+    font-weight: bold;
 }
 .tc {
-  text-align: center;
+    text-align: center;
 }
 .deal_msg label {
-  padding: 0 10px;
-  font-size: 16px;
-  font-weight: bold;
+    padding: 0 10px;
+    font-size: 16px;
+    font-weight: bold;
 }
 .vm {
-  vertical-align: middle;
+    vertical-align: middle;
 }
 .deal_msg .next {
-  margin: 0 auto;
-  padding: 10px 0;
+    margin: 0 auto;
+    padding: 10px 0;
 }
 #content .deal_in {
-  border: 1px solid #999;
-  height: 250px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  padding: 10px;
-  margin: 10px 0;
+    border: 1px solid #999;
+    height: 250px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 10px;
+    margin: 10px 0;
 }
 .well{
     background-color: #fff;
@@ -171,22 +171,22 @@ ul li {
     font-size: 17px;
 }
 .register .hd {
-  font-size: 17px;
-  font-weight: bold;
+    font-size: 17px;
+    font-weight: bold;
 }
 input[type=text], input[type=email], input[type=password], select, textarea {
-  margin: 3px 0;
-  padding: 5px;
-  border: 1px solid #ddd;
-  border-top-color: #ccc;
-  outline: 0;
-  font: inherit;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-  font-size: 14px;
-  color: #333;
-  line-height: 1;
+    margin: 0px 0;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-top-color: #ccc;
+    outline: 0;
+    font: inherit;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    font-size: 14px;
+    color: #333;
+    line-height: 1;
 }
 /* 區塊-填寫會員資料
 ---------------------------------------------------- */
@@ -207,22 +207,55 @@ input[type=text], input[type=email], input[type=password], select, textarea {
 .blk-reg input[type=text],
 .blk-reg input[type=email],
 .blk-reg input[type=password],
+.blk-reg input[type=password],
 .blk-reg select {
-	width: 20em;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;    
+    margin-left: -4px;
+    display: inline-block;
+    margin-bottom: 4px;
+  
 }
 .blk-reg .section{
-  margin-top: 10px;
-  border-bottom: 1px solid #ff5b7e;
+    margin-top: 10px;
+    border-bottom: 1px solid #ff5b7e;
 }
 .blk-reg em.note {
-  font-style: normal;
-  color: #000;
+    font-style: normal;
+    color: #000;
 }
 .blk-reg em {
-  
-  color: #F00;
+    color: #F00;
 }
+
 .blk-reg textarea{
     height: 150px;
-    width: 280px;
+    width: 100%;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;    
+    display: inline-block;
 }

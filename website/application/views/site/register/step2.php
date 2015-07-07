@@ -35,14 +35,22 @@ $(function(){
     },function(){
         $(this).css('background-color','transparent');
     }).click(function(){
-		window.location.href="/register/male";
+        $.cookie("WG_role", 'male' , {
+           expires : 1,           
+           path    : '/'
+        });
+		window.location.href="/register/step_3";
 	});
 	$(".girl").hover(function(){
         $(this).css('background-color','#ff5b7e');
     },function(){
         $(this).css('background-color','transparent');
     }).click(function(){
-		window.location.href="/register/female";
+        $.cookie("WG_role", 'female' , {
+           expires : 1,           
+           path    : '/'
+        });
+		window.location.href="/register/step_3";
 	});
     
 });

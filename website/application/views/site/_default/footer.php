@@ -12,7 +12,7 @@
     <div class="tool">
       <p class="hd">{footer_slogan}</p>
       <ul>
-        <li><a href="http://www.asugardating.com/register_1.html">{footer_register_free}</a></li>
+        <li><a href="/register">{footer_register_free}</a></li>
       </ul>
     </div>
     <!--tool end-->
