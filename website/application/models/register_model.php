@@ -77,6 +77,44 @@ class Register_model extends CI_Model {
         }
         return $option;
     }
+    function sent_email_verification($GUID , $email , $nickname)
+    {
+        $this->config->load('email');
+        $this->lang->load('register');
+        $this->load->library('uuid');
+        $this->load->library('email');
+        $ValidateKey = strtoupper($this->uuid->v4());
+        $update_data = array(
+            'ValidateKey' => $ValidateKey,
+            'DateModify' => date('Y-m-d H:i:s'),
+            'DateValidate' => date('Y-m-d H:i:s')
+        );
+        $display_data = array(
+            'Nickname' => $nickname,
+            'Email' => $email,
+            'GUID' => $GUID,
+            'ValidateKey' => $ValidateKey,
+            'base_url' => base_url()
+        );
+        $this->db->update('[dbo].[i_user]', $update_data, array('GUID' => $GUID));
+
+        $this->email->from($this->config->item('sending_address') , $this->config->item('sending_name') );
+        $this->email->to( $email ); 
+        $this->email->subject( $this->lang->line('register_email_verification_subject') );
+        $msg = $this->parser->parse('site/register/email_verification_msg', $display_data ,true);
+        $this->email->message( $msg ); 
+        $this->email->print_debugger();
+        echo $msg;
+
+        if( $this->email->send() ){
+            $is_send_success = TRUE;
+        }else{
+            $is_send_success = FALSE;
+        }
+
+        return $is_send_success;
+
+    }
 }
 
 /* End of file welcome.php */

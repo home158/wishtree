@@ -17,6 +17,7 @@ $lang['register_part1']      = "第一部份：帳戶用戶名＆密碼";
 $lang['register_part2']      = "第二部份：個人資料";
 $lang['register_part3']      = "第三部份：關於自己";
 $lang['register_part4']      = "第四部份：您想要的約會安排";
+$lang['register_email_verification_subject']      = "驗證您的電子郵件地址";
 
 /* End of file menu_lang.php */
 /* Location: ./application/language/zh-tw/register_lang.php */

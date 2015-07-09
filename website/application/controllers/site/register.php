@@ -52,6 +52,8 @@ class Register extends Site_Base_Controller {
     }
     public function step_3()
     {
+      
+
         //Agree error redirect setp 1
         if( !$this->register_model->agree_validation() ){
             redirect(base_url().'register/step_1', 'refresh');
@@ -81,6 +83,7 @@ class Register extends Site_Base_Controller {
 		$this->form_validation->set_rules('maritalstatus', $this->display_data['grid_column_Maritalstatus'], 'trim');
         $this->form_validation->set_rules('smoking', $this->display_data['grid_column_Smoking'], 'trim|required');
         $this->form_validation->set_rules('drinking', $this->display_data['grid_column_Drinking'], 'trim|required');
+        $this->form_validation->set_rules('ideal_desc', $this->display_data['grid_column_IdealDesc'], 'trim|required');
 
         if( $this->input->cookie("WG_role") == 'male' ){
             $this->form_validation->set_rules('income', $this->display_data['grid_column_Income'], 'trim|required');
@@ -91,13 +94,51 @@ class Register extends Site_Base_Controller {
             $this->display_data['birthday_year_options'] = $this->register_model->birthday_year_options(1997,1917);
             $this->display_data['birthday_month_options'] = $this->register_model->birthday_month_options();
             $this->display_data['birthday_date_options'] = $this->register_model->birthday_date_options();
+
             $this->parser->parse('site/_default/header',$this->display_data);
             $this->parser->parse('site/_default/header_login',$this->display_data);
 		    $this->parser->parse('site/register/step3',$this->display_data);
 		    $this->parser->parse('site/_default/footer',$this->display_data);
         }else{
+            $this->load->library('uuid');
+            $uuid = strtoupper($this->uuid->v4());
+            $register_data = array(
+                'GUID' => $uuid,
+                'Nickname' => $this->input->post('nickname',true),
+                'Role' => $this->input->cookie("WG_role"),
+                'Email' => $this->input->post('email',true),
+                'Password' => $this->input->post('password',true),
+                'PasswordEncrypt' => md5($this->input->post('password',true)),
+                'AboutMe' => $this->input->post('aboutme'),
+
+			    'Natinal' => $this->input->post('national',true),
+			    'City' => $this->input->post('city',true),
+			    'Language' => $this->input->post('language',true),
+			    'Income' => $this->input->post('income',true),
+			    'Property' => $this->input->post('property',true),
+			    'Birthday' => date('Y-m-d H:i:s'),
+			    'Height' => $this->input->post('height',true),
+			    'Bodytype' => $this->input->post('bodytype',true),
+			    'Race' => $this->input->post('race',true),
+			    'Education' => $this->input->post('education',true),
+			    'Maritalstatus'=> $this->input->post('maritalstatus',true),
+			    'Smoking' => $this->input->post('smoking',true),
+			    'Drinking'=> $this->input->post('drinking',true),
+			    'IdealDesc'=> $this->input->post('ideal_desc')
+			
+            );
+            
+            $insert_string = $this->db->insert_string('[dbo].[i_user]', $register_data);
+            $this->db->query( $insert_string );
+
+            $this->register_model->sent_email_verification($register_data['GUID'],$register_data['Email'],$register_data['Nickname']);
+
+            //redirect( base_url().'register/register_success' , 'refresh');
 
         }
 		
+    }
+    public function register_success()
+    {
     }
 }

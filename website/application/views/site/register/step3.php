@@ -54,7 +54,7 @@
                         <div>
                             <!-- National -->
                             <span class="item"  style="margin-top:10px;position: absolute;">{grid_column_National}</span>
-                            <div style="display: inline-block;width: 100%" class="bfh-selectbox bfh-countries" data-country="<?= set_value('national'); ?>" data-flags="true" data-blank="false" data-name="national" >
+                            <div style="display: inline-block;width: 100%" class="bfh-selectbox bfh-countries" data-country="<?= set_value('national','TW'); ?>" data-flags="true" data-blank="false" data-name="national" >
                             </div>
                             <em class="note"></em><br>
                             <?= form_error('national'); ?><br>
@@ -106,7 +106,6 @@
                             <div class="male_only">
                             <span class="item" style="margin-top:10px;position: absolute;">{grid_column_Income}</span>
                             <div style="display: inline-block;width: 100%" class="bfh-selectbox" data-value="<?= set_value('income'); ?>" data-name="income" >
-                                <div data-value="">{income_please_select}</div>
                                 <div data-value="">{income_please_select}</div>
                                 <div data-value="50000_below">{income_50000_below}</div>
                                 <div data-value="50001_75000">{income_50001_75000}</div>
@@ -275,10 +274,10 @@
                         <p class="section"></p>
                         <p class="hd">{register_part4}</p>
                         <div>
-                            <span class="item" style="position: absolute;">{grid_column_IdealMatch}</span>
-                                <textarea name="idealMatch" ><?= set_value('idealMatch'); ?></textarea>
+                            <span class="item" style="position: absolute;">{grid_column_IdealDesc}</span>
+                                <textarea name="ideal_desc" ><?= set_value('ideal_desc'); ?></textarea>
                             <em class="note"></em><br>
-                            <?= form_error('idealMatch'); ?><br>
+                            <?= form_error('ideal_desc'); ?><br>
                             
 
                         </div>

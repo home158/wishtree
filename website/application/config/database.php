@@ -47,12 +47,18 @@
 
 $active_group = 'default';
 $active_record = TRUE;
-
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = '';
-$db['default']['password'] = '';
-$db['default']['database'] = '';
-$db['default']['dbdriver'] = 'mysql';
+/*
+$db['default']['hostname'] = 'hj5grgc1wq.database.windows.net';
+$db['default']['username'] = 'shan730@hj5grgc1wq';
+$db['default']['password'] = 'cadu@4023';
+$db['default']['database'] = 'db_shan730';
+*/
+$db['default']['hostname'] = 'im1b5hckje.database.windows.net';
+$db['default']['username'] = 'db_wishtree@im1b5hckje';
+$db['default']['password'] = 'cadu@4023';
+$db['default']['database'] = 'db_wishtree';
+$db['default']['dbdriver'] = 'sqlsrv';
+$db['default']['port'] = 1433;
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
@@ -63,6 +69,7 @@ $db['default']['dbcollat'] = 'utf8_general_ci';
 $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
+$db['default']['pconnect'] = FALSE; // Pay attention to this, codeigniter makes true for default
 
 
 /* End of file database.php */
