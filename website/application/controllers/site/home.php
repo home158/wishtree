@@ -7,7 +7,7 @@ class Home extends Site_Base_Controller {
         parent::__construct();
         $this->display_data["highlight_navi"] = "home";
         
-
+        $this->login_required_validation();
     }
     public function index()
 	{
@@ -30,7 +30,7 @@ class Home extends Site_Base_Controller {
             echo $blob->getName().": ".$blob->getUrl()."<br />";
         }
 
-        print_r($this->display_data);
+        
 		$this->parser->parse('site/_default/header',$this->display_data);
 		$this->parser->parse('site/_default/header_logout',$this->display_data);
 		$this->parser->parse('site/_default/female_navi',$this->display_data);

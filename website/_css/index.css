@@ -4,6 +4,7 @@ body {
 a{
     text-decoration: none;
 }
+
 .wrap{
     -moz-box-shadow: 0 -1px 4px #cfcfcf;
     -webkit-box-shadow: 0 -1px 4px #cfcfcf;
@@ -79,11 +80,13 @@ ul li {
 }
 .fl{
     float: left;
-}
+    display: inline;}
 .fr{
     float: right;
+    display: inline;
+    
 }
- .hd{
+.hd{
     font-weight: bold;
 }
 #header{
@@ -105,8 +108,8 @@ ul li {
    
 }
 #content{
-    width: 100%;
-    padding: 10px 10px 0;
+    
+    padding: 30px 10px;
     _padding-top: 10px;
 }
 .clearfix {
@@ -209,6 +212,13 @@ input[type=text], input[type=email], input[type=password], select, textarea {
 .blk-reg input[type=password],
 .blk-reg input[type=password],
 .blk-reg select {
+    margin-left: -4px;
+}
+input[type=text],
+input[type=email],
+input[type=password],
+input[type=password],
+select {
     width: 100%;
     height: 34px;
     padding: 6px 12px;
@@ -224,7 +234,6 @@ input[type=text], input[type=email], input[type=password], select, textarea {
     -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
     -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;    
-    margin-left: -4px;
     display: inline-block;
     margin-bottom: 4px;
   
@@ -258,4 +267,133 @@ input[type=text], input[type=email], input[type=password], select, textarea {
     -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;    
     display: inline-block;
+}
+.contentl {
+  width: 640px;
+  margin-right: 10px;
+}
+.blk-login em.note {
+    font-style: normal;
+    color: #000;
+}
+.blk-login em {
+    color: #F00;
+    width: 100%;
+}
+
+
+.wrap-box.login-box {
+  width: 300px;
+}
+.wrap-box {
+  margin: auto;
+}
+.wrap-box .wrap-inner {
+  padding: 10px 15px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border: solid 1px #ccc;
+  -webkit-box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #fff, 2px 2px 3px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #fff, 2px 2px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #fff, 2px 2px 3px rgba(0, 0, 0, 0.2);
+  background: url(images/signbox-BG.jpg) repeat-x top #ebebeb;
+  background-image: -webkit-gradient(linear,left top,left bottom,from(#FCFCFC),to(#ebebeb 25%));
+  background-image: -webkit-linear-gradient(top, #FCFCFC, #ebebeb 25%);
+  background-image: -moz-linear-gradient(top, #FCFCFC, #ebebeb 25%);
+  background-image: -ms-linear-gradient(top, #FCFCFC, #ebebeb 25%);
+  background-image: -o-linear-gradient(top, #FCFCFC, #ebebeb 25%);
+  background-image: linear-gradient(top, #FCFCFC, #ebebeb 25%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ebebeb',GradientType=0 );
+  clear: both;
+}
+.help {
+  margin: 10px 0;
+}
+.field .label {
+  display: inline-block;
+  text-align: right;
+  vertical-align: top;
+  color: #333;
+  max-width: 250px;
+  padding: 5px 0;
+}
+.wrap-box h3 {
+  font-size: 18px;
+  padding-bottom: 10px;
+  height: 30px;
+  line-height: 30px;
+  vertical-align: bottom;
+  color: #000;
+}
+.keepin {
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+}
+  
+.account_set {
+  font-size: 15px;
+    
+}
+.account_set .hd {
+  font-size: 22px;
+    
+}
+.account_set ul {
+  padding-left: 10px;
+}
+.account_set ul li{
+  line-height: 30px;
+}
+.validate_mail{
+  font-size: 15px;
+}
+.validate_mail .hd {
+  font-size: 22px;
+    
+}
+.validate_mail ul {
+  padding-left: 10px;
+}
+.validate_mail ul li{
+  line-height: 30px;
+}
+/* Apply these styles only when #preview-pane has
+   been placed within the Jcrop widget */
+#crop-pane {
+  z-index: 2000;
+  top: 10px;
+  right: -280px;
+  padding: 6px;
+  border: 1px rgba(0,0,0,.4) solid;
+  background-color: white;
+
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+
+  -webkit-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+}
+#crop-pane .crop-container {
+  width: 200px;
+  height: 240px;
+  overflow: hidden;
+}
+#crop-pane , #preview{
+    margin-bottom:20px;
+}
+#preview img{
+  max-height: 500px;
+  max-width: 500px;
+}
+.photo_update{
+    width: 800px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
+.photo_update .crop{
+    width: 214px;
 }

@@ -62,13 +62,32 @@ class Admin_Base_Controller extends BASE_Controller {
 }
 
 class Site_Base_Controller extends BASE_Controller {
-    
+    private $except_page = array('validate_mail' , 'setp_4');
     public function __construct() {
         parent::__construct();
         $this->parse_display_data(array('home' , 'footer'));
 
         //$cookie2 = $this->input->cookie();
         //var_dump($cookie2);
+    }
+
+    public function logout_required_validation()
+    {
+        /*
+        if( in_array($this->uri->segment(2) , $this->except_page) ){
+            return;
+        }
+        */
+        
+        if( $this->session->userdata('Email') ){
+            redirect( base_url().'home' );
+        }
+    }
+    public function login_required_validation()
+    {
+        if( !$this->session->userdata('Email') ){
+            redirect( base_url() );
+        }
     }
 }
 

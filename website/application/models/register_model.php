@@ -87,7 +87,7 @@ class Register_model extends CI_Model {
         $update_data = array(
             'ValidateKey' => $ValidateKey,
             'DateModify' => date('Y-m-d H:i:s'),
-            'DateValidate' => date('Y-m-d H:i:s')
+            'Validated' => 0
         );
         $display_data = array(
             'Nickname' => $nickname,
@@ -101,10 +101,10 @@ class Register_model extends CI_Model {
         $this->email->from($this->config->item('sending_address') , $this->config->item('sending_name') );
         $this->email->to( $email ); 
         $this->email->subject( $this->lang->line('register_email_verification_subject') );
-        $msg = $this->parser->parse('site/register/email_verification_msg', $display_data ,true);
+        $msg = $this->parser->parse('site/msg/'.$this->config->item('language').'/email_verification_msg', $display_data ,true);
         $this->email->message( $msg ); 
-        $this->email->print_debugger();
-        echo $msg;
+        
+        
 
         if( $this->email->send() ){
             $is_send_success = TRUE;
@@ -115,7 +115,35 @@ class Register_model extends CI_Model {
         return $is_send_success;
 
     }
+    function retrieve_user_info_by_account_passwd($data)
+    {
+        $query = $this->db->query("SELECT * FROM [dbo].[i_user] WHERE Email = '".$data['Email']."' AND PasswordEncrypt = '".$data['PasswordEncrypt']."' AND Rank >= ".$data['Rank']);
+        return $query;
+    }
+    function validate_mail($GUID , $ValidateKey)
+    {
+        $query = $this->db->query("SELECT * FROM [dbo].[i_user] WHERE Rank = 2 AND GUID = '".$GUID."' AND ValidateKey = '".$ValidateKey."'");
+        $update_data = array(  
+            'Rank' => 3,
+            'ValidateKey' => NULL,
+            'Validated' =>1,
+            'ValidatedDate' => date('Y-m-d H:i:s'),
+            'DateModify' => date('Y-m-d H:i:s')
+        );
+
+        if($query->num_rows() > 0){
+            $query = $this->db->update('[dbo].[i_user]', $update_data, array('GUID' => $GUID));
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+    function retrieve_user_info_by_account_email_verification($data)
+    {
+        $query = $this->db->query("SELECT * FROM [dbo].[i_user] WHERE GUID = '".$data['GUID']."' AND ValidateKey = '".$data['ValidateKey']."' AND Rank >= ".$data['Rank']);
+        return $query;
+    }
 }
 
-/* End of file welcome.php */
+/* End of file register_model.php */
 /* Location: ./application/model/register_model.php */

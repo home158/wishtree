@@ -51,5 +51,11 @@ $route['logout'] = "site/logout";
 $route['register'] = "site/register";
 $route['register/(:any)'] = 'site/register/$1';
 
+$route['account'] = "site/account";
+$route['account/(:any)'] = 'site/account/$1';
+
+$route['photo'] = "site/photo";
+$route['photo/(:any)'] = 'site/photo/$1';
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

@@ -3,63 +3,30 @@
 <div id="content">    
     <div class="ct clearfix">
         <div class="msg">
-            <p class="hd">{register_step3}</p>
-            <p></p>
+            <p class="hd">{account_update_profile}</p>
         </div>
         <div class="login_gp">
             <div class="login_type borR register ">
                 
                 <div class="well well-lg  msg clearfix blk-reg">
-                    <form name="register" action="/register/step_3" method="post">
-                        <p class="redF hd ">{register_under_review_cannot_post}</p>
-                        <p class="hd">{register_part1}</p>
-                        <div>
-                            <span class="item">{grid_column_Gender}</span>
-                            {register_male}
-                            <br>
-                            <br>
-                           <span class="item">{grid_column_Email} : </span>
-                            <input name="email" type="text" value="<?= set_value('email'); ?>" />
-                            <em class="note"></em><br>
-                            <?= form_error('email'); ?><br>
-                           
+                    <form name="register" action="/account/update_profile" method="post">
+                        <p class="redF hd ">{account_update_profile_review_again}</p>
 
-                            <span class="item">{grid_column_Password}</span>
-                            <input name="password" type="password" value="" /><br>
-                            <em class="note">{member_password_8_20_length}</em><br>
-                            <?= form_error('password'); ?><br>
-            
-                            <span class="item">{grid_column_PasswordCheck}</span>
-                            <input name="password_chk" type="password" value="" /><br>
-                            <?= form_error('password_chk'); ?><br>
-            
-                        </div>
-                        <p class="section"></p>
-                        <p class="hd">{register_part2}</p>
                         <div>
                             <span class="item" >{grid_column_Nickname}</span>
-                            <input name="nickname" type="text" value="<?= set_value('nickname'); ?>" />
+                            <input name="nickname" type="text" value="<?= set_value('nickname','{Nickname}'); ?>" />
                             <em class="note"></em><br>
                             <?= form_error('nickname'); ?><br>
-
-                            <span class="item" style="position: absolute;">{grid_column_AboutMe}</span>
-                                <textarea name="aboutme" ><?= set_value('aboutme'); ?></textarea>
-                            <em class="note"></em><br>
-                            <?= form_error('aboutme'); ?><br>
-                        </div>
-                        <p class="section"></p>
-                        <p class="hd">{register_part3}</p>
-                        <div>
-                            <!-- National Code-->
+                            <!-- National -->
                             <span class="item"  style="margin-top:10px;position: absolute;">{grid_column_NationalCode}</span>
-                            <div style="display: inline-block;width: 100%" class="bfh-selectbox bfh-countries" data-country="<?= set_value('national_code','TW'); ?>" data-flags="true" data-blank="false" data-name="national_code" >
+                            <div style="display: inline-block;width: 100%" class="bfh-selectbox bfh-countries" data-country="<?= set_value('national','{NationalCode}'); ?>" data-flags="true" data-blank="false" data-name="national_code" >
                             </div>
                             <em class="note"></em><br>
                             <?= form_error('national_code'); ?><br>
 
                             <!-- City -->
                             <span class="item" style="margin-top:10px;position: absolute;">{grid_column_City}</span>
-                            <div style="display: inline-block;width: 100%" class="bfh-selectbox" data-value="<?= set_value('city'); ?>" data-name="city" >
+                            <div style="display: inline-block;width: 100%" class="bfh-selectbox" data-value="<?= set_value('city','{City}'); ?>" data-name="city" >
                                 <div data-value="">{city_please_select}</div>
                                 <div data-value="KL">{city_KL}</div>
                                 <div data-value="TP">{city_TP}</div>
@@ -90,7 +57,7 @@
 
                             <!-- Langugae -->
                             <span class="item" style="margin-top:10px;position: absolute;">{grid_column_Language}</span>
-                            <div style="display: inline-block;width: 100%" class="bfh-selectbox" data-value="<?= set_value('language'); ?>" data-name="language" >
+                            <div style="display: inline-block;width: 100%" class="bfh-selectbox" data-value="<?= set_value('language','{Language}'); ?>" data-name="language" >
                                 <div data-value="">{language_please_select}</div>
                                 <div data-value="english">{language_english}</div>
                                 <div data-value="chinese">{language_chinese}</div>
@@ -103,7 +70,7 @@
                             <!-- Income -->
                             <div class="male_only">
                             <span class="item" style="margin-top:10px;position: absolute;">{grid_column_Income}</span>
-                            <div style="display: inline-block;width: 100%" class="bfh-selectbox" data-value="<?= set_value('income'); ?>" data-name="income" >
+                            <div style="display: inline-block;width: 100%" class="bfh-selectbox" data-value="<?= set_value('income','{Income}'); ?>" data-name="income" >
                                 <div data-value="">{income_please_select}</div>
                                 <div data-value="50000_below">{income_50000_below}</div>
                                 <div data-value="50001_75000">{income_50001_75000}</div>
@@ -127,7 +94,7 @@
                             <!-- Property -->
                             <div class="male_only">
                             <span class="item" style="margin-top:10px;position: absolute;">{grid_column_Property}</span>
-                            <div style="display: inline-block;width: 100%" class="bfh-selectbox" data-value="<?= set_value('property'); ?>" data-name="property" >
+                            <div style="display: inline-block;width: 100%" class="bfh-selectbox" data-value="<?= set_value('property','{Property}'); ?>" data-name="property" >
                                 <div data-value="">{property_please_select}</div>
                                 <div data-value="100_thousand_bellow">{property_100_thousand_bellow}</div>
                                 <div data-value="100_thousand_250_thousand">{property_100_thousand_250_thousand}</div>
@@ -148,13 +115,13 @@
 
                             <!-- Birthday -->
                             <span class="item" style="margin-top:10px;position: absolute;">{grid_column_Birthday}</span>
-                            <div style="display: inline-block;width: 33%;" class="bfh-selectbox" data-value="<?= set_value('birthday_date'); ?>" data-name="birthday_date" >
+                            <div style="display: inline-block;width: 33%;" class="bfh-selectbox" data-value="<?= set_value('birthday_date','{j}'); ?>" data-name="birthday_date" >
                                 {birthday_date_options}
                             </div>
-                            <div style="display: inline-block;width: 32.5%;" class="bfh-selectbox" data-value="<?= set_value('birthday_month'); ?>" data-name="birthday_month" >
+                            <div style="display: inline-block;width: 32.5%;" class="bfh-selectbox" data-value="<?= set_value('birthday_month','{n}'); ?>" data-name="birthday_month" >
                                 {birthday_month_options}
                             </div>
-                            <div style="display: inline-block;width: 32.5%;" class="bfh-selectbox" data-value="<?= set_value('birthday_year'); ?>" data-name="birthday_year" >
+                            <div style="display: inline-block;width: 32.5%;" class="bfh-selectbox" data-value="<?= set_value('birthday_year','{Y}'); ?>" data-name="birthday_year" >
                                 {birthday_year_options}
                             </div>
                             <em class="note"></em><br>
@@ -162,7 +129,7 @@
 
                             <!--  Height  -->
                             <span class="item" style="margin-top:10px;position: absolute;">{grid_column_Height}</span>
-                            <div style="display: inline-block;width: 100%;" class="bfh-selectbox" data-value="<?= set_value('height'); ?>" data-name="height" >
+                            <div style="display: inline-block;width: 100%;" class="bfh-selectbox" data-value="<?= set_value('height','{Height}'); ?>" data-name="height" >
                                 <div data-value="">{height_please_select}</div>
                                 <div data-value="140_below">{height_140_below}</div>
                                 <div data-value="141-145">141-145 {height_cm}</div>
@@ -187,7 +154,7 @@
                         
                             <!-- Body type -->
                             <span class="item" style="margin-top:10px;position: absolute;">{grid_column_Bodytype}</span>
-                            <div style="display: inline-block;width: 100%;" class="bfh-selectbox" data-value="<?= set_value('bodytype'); ?>" data-name="bodytype" >
+                            <div style="display: inline-block;width: 100%;" class="bfh-selectbox" data-value="<?= set_value('bodytype','{Bodytype}'); ?>" data-name="bodytype" >
                                 <div data-value="">{bodytype_please_select}</div>
                                 <div data-value="slim">{bodytype_slim}</div>
                                 <div data-value="athletic">{bodytype_athletic}</div>
@@ -201,7 +168,7 @@
 
                             <!-- Race -->
                             <span class="item" style="margin-top:10px;position: absolute;">{grid_column_Race}</span>
-                            <div style="display: inline-block;width: 100%;" class="bfh-selectbox" data-value="<?= set_value('race'); ?>" data-name="race" >
+                            <div style="display: inline-block;width: 100%;" class="bfh-selectbox" data-value="<?= set_value('race','{Race}'); ?>" data-name="race" >
                                 <div data-value="">{race_please_select}</div>
                                 <div data-value="aian">{race_aian}</div>
                                 <div data-value="black">{race_black}</div>
@@ -217,7 +184,7 @@
 
                             <!-- Education -->
                             <span class="item" style="margin-top:10px;position: absolute;">{grid_column_Education}</span>
-                            <div style="display: inline-block;width: 100%;" class="bfh-selectbox" data-value="<?= set_value('education'); ?>" data-name="education" >
+                            <div style="display: inline-block;width: 100%;" class="bfh-selectbox" data-value="<?= set_value('education','{Education}'); ?>" data-name="education" >
                                 <div data-value="">{education_please_select}</div>
                                 <div data-value="phd">{education_phd}</div>
                                 <div data-value="graduate">{education_graduate}</div>
@@ -232,7 +199,7 @@
 
                             <!-- Maritalstatus -->
                             <span class="item" style="margin-top:10px;position: absolute;">{grid_column_Maritalstatus}</span>
-                            <div style="display: inline-block;width: 100%;" class="bfh-selectbox" data-value="<?= set_value('maritalstatus'); ?>" data-name="maritalstatus" >
+                            <div style="display: inline-block;width: 100%;" class="bfh-selectbox" data-value="<?= set_value('maritalstatus','{Maritalstatus}'); ?>" data-name="maritalstatus" >
                                 <div data-value="">{maritalstatus_please_select}</div>
                                 <div data-value="single">{maritalstatus_single}</div>
                                 <div data-value="divorced">{maritalstatus_divorced}</div>
@@ -245,7 +212,7 @@
 
                             <!-- Smoking -->
                             <span class="item" style="margin-top:10px;position: absolute;">{grid_column_Smoking}</span>
-                            <div style="display: inline-block;width: 100%;" class="bfh-selectbox" data-value="<?= set_value('smoking'); ?>" data-name="smoking" >
+                            <div style="display: inline-block;width: 100%;" class="bfh-selectbox" data-value="<?= set_value('smoking','{Smoking}'); ?>" data-name="smoking" >
                                 <div data-value="">{smoking_please_select}</div>
                                 <div data-value="none">{smoking_none}</div>
                                 <div data-value="light">{smoking_light}</div>
@@ -257,7 +224,7 @@
 
                             <!-- Drinking -->
                             <span class="item" style="margin-top:10px;position: absolute;">{grid_column_Drinking}</span>
-                            <div style="display: inline-block;width: 100%;" class="bfh-selectbox" data-value="<?= set_value('drinking'); ?>" data-name="drinking" >
+                            <div style="display: inline-block;width: 100%;" class="bfh-selectbox" data-value="<?= set_value('drinking','{Drinking}'); ?>" data-name="drinking" >
                                 <div data-value="">{drinking_please_select}</div>
                                 <div data-value="none">{drinking_none}</div>
                                 <div data-value="light">{drinking_light}</div>
@@ -267,22 +234,28 @@
                             <em class="note"></em><br>
                             <?= form_error('maritalstatus'); ?><br>
 
-                        </div>
 
-                        <p class="section"></p>
-                        <p class="hd">{register_part4}</p>
-                        <div>
+
+                            <!-- About me -->
+                            <span class="item" style="position: absolute;">{grid_column_AboutMe}</span>
+                                <textarea name="aboutme" ><?= set_value('aboutme','{AboutMe}'); ?></textarea>
+                            <em class="note"></em><br>
+                            <?= form_error('aboutme'); ?><br>
+
+
                             <span class="item" style="position: absolute;">{grid_column_IdealDesc}</span>
-                                <textarea name="ideal_desc" ><?= set_value('ideal_desc'); ?></textarea>
+                                <textarea name="ideal_desc" ><?= set_value('ideal_desc','{IdealDesc}'); ?></textarea>
                             <em class="note"></em><br>
                             <?= form_error('ideal_desc'); ?><br>
                             
-
                         </div>
+
                         
-                        <p class="redF hd">{register_under_review_cannot_post}</p>
+                        <p class="redF hd">{account_update_profile_review_again}</p>
 	                    <p class="tc">
-                          <input id="go_step2" type="submit" class="btn-xl btn-ele" value="{register_submit}">
+                          <input id="go_back" type="button" class="btn-xl btn-ele" value="{btn_goback}">
+                            &nbsp;&nbsp;&nbsp;
+                          <input type="submit" class="btn-xl btn-emp" value="{btn_update_profile}">
                         </p>
                     </form>
                 </div>
@@ -296,5 +269,8 @@ $(function(){
     if( $.cookie("WG_role") != 'male'){
         $('.male_only').hide();
     }
+    $('#go_back').click(function(){
+       window.location.href = "/account";
+    });
 });
 </script>

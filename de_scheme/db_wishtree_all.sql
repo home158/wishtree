@@ -23,8 +23,10 @@ SET @GUID = NEWID()
 			[Email] [nvarchar](255) NOT NULL , -- 登入用 email;
 			[Password] [nvarchar](20) NULL, -- 密碼
 			[PasswordEncrypt] [char](32) NOT NULL, -- 加密後密碼;
+			[Rank] [tinyint] NOT NULL default 1 ,  --權限 0:刪除 1:停權 2:註冊未認證; 3:已認證會員; ........ 255:站長;
+			[ForbiddenMsg] [nvarchar](128) NULL, -- 停權原因
 			[AboutMe] [nvarchar](max) NOT NULL, -- 關於我
-			[Natinal] [char](2) NOT NULL, -- 國籍
+			[NationalCode] [char](2) NOT NULL, -- 國籍
 			[City] [nvarchar](3) NOT NULL, -- 城市
 			[Language] [nvarchar](20) NOT NULL, -- 慣用語言
 			[Income] [nvarchar](30) NOT NULL,-- 年收入
@@ -40,8 +42,15 @@ SET @GUID = NEWID()
 			[IdealDesc] [nvarchar](max) NULL, -- 理想中的約會對象
 			
 			[ValidateKey] [char](36) NULL, -- 註冊驗證碼
+			[Validated] [bit] NOT NULL default 0, --電子郵件證認證註記 0 : 未認證 ，1:己認證
+			[ValidatedDate] [datetime] NULL ,	 -- 驗證時間
+
+			[ProfileReviewStatus] [char](1) NOT NULL default 0, --個人資料審核註記 0:等待審核 1 : 未通過 ，2:通過
+			[ProfileReviewRejectReason] [nvarchar](30) NULL , --個人資料審核未通過原因
+			[ProfileReviewDate]  [datetime] NULL, --個人資料審核時間
+			[ProfileLatestUpdateDate]  [datetime] NULL, --個人資料更新時間
+			
 			[LastLoginTime] [datetime] NOT NULL  default CURRENT_TIMESTAMP,						-- 最後登入時間
-			[DateValidate] [char](36) NULL, -- 驗證時間
 			[DateCreate] [datetime] NOT NULL default CURRENT_TIMESTAMP,	-- 註冊資料時間
 			[DateModify] [datetime] NOT NULL default CURRENT_TIMESTAMP  -- 更新資料時間
 

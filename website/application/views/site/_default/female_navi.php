@@ -6,8 +6,8 @@
         <li><a href="#">誰看過我</a></li>
         <li><a href="#">我的願望</a></li>
         <li><a href="#">搜索</a></li>
-        <li><a href="#">照片</a></li>
-        <li><a href="#">帳號</a></li>
+        <li><a id="photo" href="/photo">照片</a></li>
+        <li><a id="account" href="/account">帳號</a></li>
     </ul>
 </div>
 <script>
