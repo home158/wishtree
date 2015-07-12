@@ -40,6 +40,8 @@ class Photo extends Site_Base_Controller {
 		else
 		{
 			$data = $this->upload->data();
+            
+ 
 $fn = $data['full_path'];
 $size = getimagesize($fn);
 $ratio = $size[0]/$size[1]; // width/height
