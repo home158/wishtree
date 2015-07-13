@@ -10,6 +10,7 @@ class Photo extends Site_Base_Controller {
         );
         $this->login_required_validation();
         $this->display_data["highlight_navi"] = "photo";
+        $this->load->model('photo_model');
 
     }
 
@@ -41,30 +42,32 @@ class Photo extends Site_Base_Controller {
 		{
 			$data = $this->upload->data();
             
- 
-$fn = $data['full_path'];
-$size = getimagesize($fn);
-$ratio = $size[0]/$size[1]; // width/height
-	        $jpeg_quality = 90;
+            //resize to 500 x 500px
+            $full_path = $data['full_path'];
+            $thumb_path = $config['upload_path'].'/'.$data['raw_name'].'_thumb'.$data['file_ext'];
 
-if( $ratio > 1) {
-    $width = 500;
-    $height = 500/$ratio;
-}
-else {
-    $width = 500*$ratio;
-    $height = 500;
-}
-$src = imagecreatefromstring(file_get_contents($fn));
-$dst = imagecreatetruecolor($width,$height);
-imagecopyresampled($dst,$src,0,0,0,0,$width,$height,$size[0],$size[1]);
-imagedestroy($src);
-	        //header('Content-type: image/jpeg');
-	        //imagejpeg($dst,null,$jpeg_quality);
-//imagedestroy($dst);
+            $size = getimagesize($full_path);
+            $ratio = $size[0]/$size[1]; // width/height
+
+            if($size[0] > 500 or $size[1] > 500){
+                if( $ratio > 1) {
+                    $width = 500;
+                    $height = 500/$ratio;
+                }
+                else {
+                    $width = 500*$ratio;
+                    $height = 500;
+                }
+                $src = imagecreatefromstring(file_get_contents($full_path));
+                $dst = imagecreatetruecolor($width,$height);
+                imagecopyresampled($dst,$src,0,0,0,0,$width,$height,$size[0],$size[1]);
+                imagedestroy($src);
+            }else{
+                $dst = imagecreatefromstring(file_get_contents($full_path));
+            }
 
 
-          
+            //crop thumb image
 	        $targ_w = 300;
             $targ_h = 360;
 	        $jpeg_quality = 90;
@@ -75,15 +78,44 @@ imagedestroy($src);
 
 	        imagecopyresampled($dst_r,$img_r,0,0,$this->input->post('x',true),$this->input->post('y',true),
 	        $targ_w,$targ_h,$this->input->post('w',true),$this->input->post('h',true));
-
-	        header('Content-type: image/jpeg');
-	        imagejpeg($dst_r,null,$jpeg_quality);
+	        imagejpeg($dst_r,$thumb_path,$jpeg_quality);
             
-			print_r($data);
+
+
+            //Save to Azure Storage
+            $full_path_parts = pathinfo($full_path);
+            $thumb_path_parts = pathinfo($thumb_path);
+
+            $container = 'container-'.$this->session->userdata('Role');
+            $this->photo_model->saveToAzureStorage($container , $full_path_parts['basename'] , $full_path );
+            $this->photo_model->saveToAzureStorage($container , $thumb_path_parts['basename'] , $thumb_path );
+
+            //Save to db_photo
+            $photo_data = array(
+                'UserGUID' => $this->session->userdata('GUID'),
+                'Container' => $container,
+                'FullBasename' => $full_path_parts['basename'] ,
+                'ThumbBasename' => $thumb_path_parts['basename']
+            );
+            $insert_string = $this->db->insert_string('[dbo].[i_photo]', $photo_data);
+            $this->db->query( $insert_string );
+
 		}
 
 
 	}
+    public function test(){
+        $this->load->library('azure');
+        $blobRestProxy = $this->azure->createBlobService();
+        $blob_list = $blobRestProxy->listBlobs("container-male");
+        $blobs = $blob_list->getBlobs();
+
+        foreach($blobs as $blob)
+        {
+            echo $blob->getName().": ".$blob->getUrl()."<br />";
+            echo "<img src='".$blob->getUrl()."'>";
+        }
+    }
 }
 
 /* End of file photo.php */

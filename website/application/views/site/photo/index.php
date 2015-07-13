@@ -8,7 +8,7 @@
         <div class="well well-lg">
             <p class="redF hd ">{account_update_profile_review_again}</p>            
             <p class=""></p>
-                <?= form_open_multipart('/photo');?>
+                <?= form_open_multipart(base_url().'photo');?>
 			    <input type="text" id="x" name="x" />
 			    <input type="text" id="y" name="y" />
 			    <input type="text" id="w" name="w" />
@@ -72,6 +72,7 @@ $(function(){
         onChange: updatePreview,
         onSelect: updateCoords,
         allowSelect: true,
+        //setSelect: [ 0, 0, 200, 240 ],
         aspectRatio: xsize / ysize
       },function(){
       // Use the API to get the real image size
@@ -80,9 +81,8 @@ $(function(){
         boundy = bounds[1];
 
         jcrop_api = this;
-        jcrop_api.animateTo([0,0,200,270]);
         $pimg = $('#crop-pane .crop-container img');
-
+        jcrop_api.setSelect([ 10, 10, 210, 250 ]);
       });
     }
     function updateCoords(c)

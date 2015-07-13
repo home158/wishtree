@@ -146,6 +146,7 @@ class Register extends Site_Base_Controller {
             $this->session->set_userdata('Email', $register_data['Email']);
             $this->session->set_userdata('Nickname', $register_data['Nickname']);
             $this->session->set_userdata('Rank', 2);//2:註冊未認證;
+            $this->session->set_userdata('Role', $register_data['Role']);
             
 
             $this->register_model->sent_email_verification($register_data['GUID'],$register_data['Email'],$register_data['Nickname']);
@@ -181,6 +182,7 @@ class Register extends Site_Base_Controller {
             $data_db['Nickname'] = $row->Nickname;
             $data_db['Rank'] = $row->Rank;
             $data_db['GUID'] = $row->GUID;
+            $data_db['Role'] = $row->Role;
             
             $this->session->set_userdata($data_db);
 

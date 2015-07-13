@@ -11,25 +11,7 @@ class Home extends Site_Base_Controller {
     }
     public function index()
 	{
-        $this->load->library('azure');
-        
-
-        // List blobs.
-        $blobRestProxy = $this->azure->createBlobService();
-        //$mblob = $blobRestProxy->getBlobProperties("mycontainer", "IMG_2923.JPG");
-        //var_dump($mblob);
-
-      
-
-
-        $blob_list = $blobRestProxy->listBlobs("mycontainer");
-        $blobs = $blob_list->getBlobs();
-
-        foreach($blobs as $blob)
-        {
-            echo $blob->getName().": ".$blob->getUrl()."<br />";
-        }
-
+ 
         
 		$this->parser->parse('site/_default/header',$this->display_data);
 		$this->parser->parse('site/_default/header_logout',$this->display_data);
@@ -68,8 +50,8 @@ class Home extends Site_Base_Controller {
             //Upload blob
             try{
                 $blobRestProxy->createBlockBlob("mycontainer", $blob_name, $content);
-                chmod('./uploads/'.$data['file_name'], 0777);
-                unlink('./uploads/'.$data['file_name']);
+                //chmod('./uploads/'.$data['file_name'], 0777);
+                //unlink('./uploads/'.$data['file_name']);
             } catch(ServiceException $e){
                 $code = $e->getCode();
                 $error_message = $e->getMessage();
@@ -80,7 +62,16 @@ class Home extends Site_Base_Controller {
 
     }
     public function test(){
-        $this->set_cookie();
+        $this->load->library('azure');
+        $blobRestProxy = $this->azure->createBlobService();
+        $blob_list = $blobRestProxy->listBlobs("mycontainer");
+        $blobs = $blob_list->getBlobs();
+
+        foreach($blobs as $blob)
+        {
+            echo $blob->getName().": ".$blob->getUrl()."<br />";
+            ///echo "<img src='".$blob->getUrl()."'>";
+        }
     }
 
 }

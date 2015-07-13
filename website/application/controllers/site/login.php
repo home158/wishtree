@@ -70,6 +70,7 @@ class Login extends Site_Base_Controller {
                         $data_db['Email'] = $row->Email;
                         $data_db['Rank'] = $row->Rank;
                         $data_db['GUID'] = $row->GUID;
+                        $data_db['Role'] = $row->Role;
                         $this->session->set_userdata($data_db);
                         $this->login_model->set_info_cookie($row, $remember_me);
 
@@ -82,6 +83,7 @@ class Login extends Site_Base_Controller {
                         $data_db['Email'] = $row->Email;
                         $data_db['Rank'] = $row->Rank;
                         $data_db['GUID'] = $row->GUID;
+                        $data_db['Role'] = $row->Role;
                         $this->login_model->set_info_cookie($row, $remember_me);
                         $this->session->set_userdata($data_db);
                         redirect( base_url().'home' , 'refresh');
