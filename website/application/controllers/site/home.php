@@ -49,7 +49,7 @@ class Home extends Site_Base_Controller {
 
             //Upload blob
             try{
-                $blobRestProxy->createBlockBlob("mycontainer", $blob_name, $content);
+                $blobRestProxy->createBlockBlob("container-male", $blob_name, $content);
                 //chmod('./uploads/'.$data['file_name'], 0777);
                 //unlink('./uploads/'.$data['file_name']);
             } catch(ServiceException $e){

@@ -370,6 +370,8 @@ $config['proxy_ips'] = '';
 $config['azure_storage_protocol'] = 'http'; // DefaultEndpointsProtocol
 $config['azure_storage_account_name'] = 'wishtree'; // Your Storage account name
 $config['azure_storage_account_key']  = 'gK/aVIfRUq3MB0PX9bDqWrMmsLOjk3szVWJMOjnOJm64HruQEW7CfPUef7TwbbxOm6OAxIpofYtpwGT6PKPPwg=='; // Your account key
+$config['azure_storage_baseurl'] = 'https://wishtree.blob.core.windows.net/'; // DefaultEndpointsProtocol
+$config['azure_storage_temp_forder'] = './temp'; // DefaultEndpointsProtocol
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

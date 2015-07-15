@@ -1,5 +1,6 @@
 body {
     background: #EEEDE8;
+    font: 14px/1.5 'Gotham Narrow SSm', "Microsoft YaHei", "微軟雅黑", "Microsoft Jhenghei", "Helvetica Neue", HelveticaNeue, Arial, sans-serif;
 }
 a{
     text-decoration: none;
@@ -128,6 +129,9 @@ ul li {
 }
 .tc {
     text-align: center;
+}
+.tl{
+    text-align: left;
 }
 .deal_msg label {
     padding: 0 10px;
@@ -396,4 +400,20 @@ select {
 }
 .photo_update .crop{
     width: 214px;
+}
+.photo_list ul{
+    margin: 0 auto;
+    width: 800px;
+}
+.photo_list li{
+    text-align: center;
+    padding: 15px;
+    float: left;
+    width: 130px;
+    font-family: "Segoe UI Semibold";
+    margin-bottom: 0px;
+}
+.photo_list li img{
+    padding-bottom: 5px;
+    cursor: pointer;
 }

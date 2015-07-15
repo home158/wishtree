@@ -6,38 +6,53 @@
             <p class="hd">{account_update_profile}</p>
         </div>
         <div class="well well-lg">
-            <p class="redF hd ">{account_update_profile_review_again}</p>            
-            <p class=""></p>
-                <?= form_open_multipart(base_url().'photo');?>
-			    <input type="text" id="x" name="x" />
-			    <input type="text" id="y" name="y" />
-			    <input type="text" id="w" name="w" />
-			    <input type="text" id="h" name="h" />
+            <p class="redF hd "></p>            
+            <div class="photo_list">
+                <ul class="clearfix">
+                {my_photos}
+                    <li>
+                        <label class="redF">{review_status}</label>
+                        <img class="update_image" src="{thumb_image_url}" data-GUID="{GUID}" data-full="{full_image_url}" data-crop="{crop_image_url}"/>
+                        <input type="button" class="delete_image btn-m btn-emp" data-GUID="{GUID}" value="{btn_delete}">
+                        
+                    
+                    </li>
+                {/my_photos}
+                </ul>
+            </div>
+            <div>
+                <?= form_open_multipart(base_url().'photo',array('id' => 'upload_image'));?>
+			    <input type="hidden" id="x" name="x" />
+			    <input type="hidden" id="y" name="y" />
+			    <input type="hidden" id="w" name="w" />
+			    <input type="hidden" id="h" name="h" />
+			    <input type="hidden" id="GUID" name="GUID" />
                 <div class="photo_update  clearfix">
                     <div class="fl tc">
                         <div id="preview">
-                            <img src="/_images/IMAG1300.jpg" id="target" />
+                            <img src="/_images/null_face.jpg" id="target" />
                         </div>
                         <input type="file" id="uploadImage" name="userfile" class="validate[custom[validateMIME[image/jpeg|image/png]]]" >
+                        <?php echo $error;?>
                     </div>
 
                     <div class="fr tc">
                         <div id="crop-pane">
                           <div class="crop-container">
-                                <img src="/_images/IMAG1300.jpg" class="jcrop-preview" alt="Preview" />
+                                <img src="/_images/null_face.jpg" class="jcrop-preview" alt="Preview" />
                           </div>
                         </div>
                         <input type="submit" class="btn-xl btn-emp" value="{btn_submit}">
                         <br>
 
                     </div>
-                    <div >
-                    
-                    </div>
-                </form>
                 </div>
+                </form>
+            </div>
+            
+           
             <p class="">根據我們的經驗。附有照片的個人資料，將比沒有照片的個人資料接收多達10倍以上的關注度，所以我們強烈建議您上傳一張照片。</p>
-            <?php echo $error;?>
+            
             
         </div>
     </div>
@@ -120,7 +135,8 @@ $(function(){
     };
     $('#uploadImage').change(function(){
         
-    
+        $('#upload_image').attr('action' , '/photo');
+
         var oFReader = new FileReader();
         oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
     
@@ -137,6 +153,43 @@ $(function(){
         };
     });
 
+    $('img.update_image').bind('click',function(){
+            if(jcrop_api){
+                 $('#target').attr('style', ''); 
+                jcrop_api.destroy();
+            }
+            $full_image_url = $(this).attr('data-full');
+            $('#target').attr('src' , $full_image_url );
+           // $('#preview').html('<img id="target" src="'+oFREvent.target.result+'">');
+            $pcnt.html('<img src="'+$full_image_url+'" class="jcrop-preview" >');
+            initJcrop();
+
+            $('#upload_image').attr('action' , '/photo/update');
+            //pull remote files
+            var $GUID = $(this).attr('data-GUID');
+            $('input[name="GUID"]').val($GUID);
+    });
+    $('input.delete_image').bind('click',function(){
+        var $this = $(this);
+        $this.parent().fadeOut();
+        
+        $.ajax({
+            url: '/photo/delete',
+            dataType: 'json',
+            type: 'POST',
+            data: {
+                GUID : $this.attr('data-GUID')
+            },
+            success: function(r) {
+                $('#upload_image').attr('action' , '/photo');
+            },
+            complete : function(){
+                
+            }
+        });
+        
+    });
+    
 });
 	
 </script>
