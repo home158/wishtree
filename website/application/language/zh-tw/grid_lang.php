@@ -20,6 +20,7 @@ $lang['grid_column_Smoking'] = "吸菸習慣";
 $lang['grid_column_Drinking'] = "飲酒習慣";
 $lang['grid_column_Income'] = "年收入";
 $lang['grid_column_Property'] = "總資產";
+$lang['grid_column_MessageContent'] = "訊息";
 
 /* End of file grid_lang.php */
 /* Location: ./application/language/zh-tw/grid_lang.php */

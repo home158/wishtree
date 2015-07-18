@@ -54,6 +54,9 @@ $route['register/(:any)'] = 'site/register/$1';
 $route['account'] = "site/account";
 $route['account/(:any)'] = 'site/account/$1';
 
+$route['message'] = "site/message";
+$route['message/(:any)'] = 'site/message/$1';
+
 $route['photo'] = "site/photo/show/public";
 $route['photo/public'] = "site/photo/show/public";
 $route['photo/private'] = "site/photo/show/private";

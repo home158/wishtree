@@ -8,7 +8,6 @@ class Photo extends Site_Base_Controller {
         $this->parse_display_data(
             array('btn' )
         );
-        $this->login_required_validation();
         $this->display_data["highlight_navi"] = "photo";
         $this->load->model('photo_model');
 
