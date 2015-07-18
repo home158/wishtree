@@ -11,6 +11,7 @@ class Account extends Site_Base_Controller {
         );
         $this->login_required_validation();
         $this->load->model('account_model');
+        $this->load->model('photo_model');
         $this->load->model('register_model');
         $this->display_data["highlight_navi"] = "account";
 
@@ -19,6 +20,8 @@ class Account extends Site_Base_Controller {
 	public function index()
 	{
         $this->rank_validated_role_profileReview_updateProfile();
+        $this->public_photos();
+        $this->private_photos();
 
 		$this->parser->parse('site/_default/header',$this->display_data);
 		$this->parser->parse('site/_default/header_logout',$this->display_data);
@@ -26,6 +29,14 @@ class Account extends Site_Base_Controller {
 		$this->parser->parse('site/account/index',$this->display_data);
 		$this->parser->parse('site/_default/footer',$this->display_data);
 	}
+    public function profile()
+    {
+		$this->parser->parse('site/_default/header',$this->display_data);
+		$this->parser->parse('site/_default/header_logout',$this->display_data);
+		$this->parser->parse('site/_default/female_navi',$this->display_data);
+		$this->parser->parse('site/account/profile',$this->display_data);
+		$this->parser->parse('site/_default/footer',$this->display_data);
+    }
     public function update_profile()
     {
         $GUID = $this->session->userdata('GUID');
@@ -117,6 +128,33 @@ class Account extends Site_Base_Controller {
 		$this->parser->parse('site/account/update_profile_success',$this->display_data);
 		$this->parser->parse('site/_default/footer',$this->display_data);
 
+    }
+    private function public_photos()
+    {
+        $public = $this->photo_model->retrieve_my_photos( $this->session->userdata('GUID') , 'public');
+        $public_photo = count($public);
+        $public_photo_reviewed = 0;
+        foreach( $public as $key => $row){
+            if($row['ReviewStatus'] == 2){
+                $public_photo_reviewed++;
+            }
+        }
+        $this->display_data['public_photo_review'] = sprintf( $this->display_data['account_photo_review_count'] , $public_photo , $public_photo_reviewed );
+        $this->display_data['public_photo_total_count'] = sprintf( $this->display_data['account_photo_total_count'] , $public_photo );
+        
+    }
+    private function private_photos()
+    {
+        $private = $this->photo_model->retrieve_my_photos( $this->session->userdata('GUID') , 'private');
+        $private_photo = count($private);
+        $private_photo_reviewed = 0;
+        foreach( $private as $key => $row){
+            if($row['ReviewStatus'] == 2){
+                $private_photo_reviewed++;
+            }
+        }
+        $this->display_data['private_photo_review'] = sprintf( $this->display_data['account_photo_review_count'] , $private_photo , $private_photo_reviewed );
+        $this->display_data['private_photo_total_count'] = sprintf( $this->display_data['account_photo_total_count'] , $private_photo );
     }
     //會員資格
     private function rank_validated_role_profileReview_updateProfile()

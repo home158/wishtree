@@ -54,7 +54,10 @@ $route['register/(:any)'] = 'site/register/$1';
 $route['account'] = "site/account";
 $route['account/(:any)'] = 'site/account/$1';
 
-$route['photo'] = "site/photo";
+$route['photo'] = "site/photo/show/public";
+$route['photo/public'] = "site/photo/show/public";
+$route['photo/private'] = "site/photo/show/private";
+
 $route['photo/(:any)'] = 'site/photo/$1';
 
 /* End of file routes.php */

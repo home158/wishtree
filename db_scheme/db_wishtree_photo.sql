@@ -20,7 +20,6 @@ SET @GUID = NEWID()
 			[UserGUID] [char](36) NOT NULL  
 					REFERENCES [dbo].[i_user](GUID)						
 					ON DELETE CASCADE, 
-			[Container] [nvarchar](36) NOT NULL,
 			[FullBasename] [nvarchar](50) NOT NULL,
 			[CropBasename] [nvarchar](50) NOT NULL,
 			[ThumbBasename] [nvarchar](50) NOT NULL,
@@ -28,6 +27,7 @@ SET @GUID = NEWID()
 			[ReviewStatus] [char](1) NOT NULL default 0, --審核註記 0:等待審核 1 : 未通過 ，2:通過
 			[ReviewRejectReason] [nvarchar](30)  NULL , --審核未通過原因
 
+			[IsPrivate] [bit] NOT NULL default 0, -- 私人照片 0 : 公開 ，1:私人
 			[LastViewDate] [datetime] NOT NULL  default CURRENT_TIMESTAMP,						-- 最後點擊時間
 			[DateModify] [datetime] NOT NULL default CURRENT_TIMESTAMP,	-- 更新資料時間
 			[DateCreate] [datetime] NOT NULL default CURRENT_TIMESTAMP,	-- 新增資料時間

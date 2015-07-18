@@ -83,7 +83,7 @@ class Register_model extends CI_Model {
         $this->lang->load('register');
         $this->load->library('uuid');
         $this->load->library('email');
-        $ValidateKey = strtoupper($this->uuid->v4());
+        $ValidateKey = $this->uuid->v4();
         $update_data = array(
             'ValidateKey' => $ValidateKey,
             'DateModify' => date('Y-m-d H:i:s'),
@@ -125,7 +125,6 @@ class Register_model extends CI_Model {
         $query = $this->db->query("SELECT * FROM [dbo].[i_user] WHERE Rank = 2 AND GUID = '".$GUID."' AND ValidateKey = '".$ValidateKey."'");
         $update_data = array(  
             'Rank' => 3,
-            'ValidateKey' => NULL,
             'Validated' =>1,
             'ValidatedDate' => date('Y-m-d H:i:s'),
             'DateModify' => date('Y-m-d H:i:s')
@@ -143,6 +142,16 @@ class Register_model extends CI_Model {
         $query = $this->db->query("SELECT * FROM [dbo].[i_user] WHERE GUID = '".$data['GUID']."' AND ValidateKey = '".$data['ValidateKey']."' AND Rank >= ".$data['Rank']);
         return $query;
     }
+    function create_container($container)
+    {
+        $this->load->library('azure');
+        $createContainerOptions = $this->azure->createContainerOptions(); 
+           
+        $blobRestProxy = $this->azure->createBlobService();
+        $blobRestProxy->createContainer($container , $createContainerOptions);
+    }
+
+
 }
 
 /* End of file register_model.php */

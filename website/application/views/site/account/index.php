@@ -11,8 +11,8 @@
                 </ul>
                 <p class="hd">帳戶統計資料</p>
                 <ul>
-                    <li>公開照片：</li>
-                    <li>私人照片：</li>
+                    <li>公開照片：{public_photo_total_count}</li>
+                    <li>私人照片：{private_photo_total_count}</li>
                     <li>我己授權查看我的私人照片：</li>
     
                 </ul>
@@ -22,14 +22,14 @@
                     <li>更改密碼</li>
                     <li>刪除帳號</li>
                     <li><a href="/account/update_profile">編輯您的個人檔案</a> {profile_latest_update_date}</li>
-                    <li>瀏覽我的主頁</li>
+                    <li><a href="/account/profile">瀏覽我的主頁</a></li>
                 </ul>
                 <p class="hd">審核狀態</p>
                 <ul>
                     <li>電子郵件認證：{email_validated} {send_email_validated_again}</li>
                     <li>資料審核：{profile_review} {profile_review_date}</li>
                     
-                    <li>公開照片：</li>
+                    <li>公開照片：{public_photo_review}</li>
                 </ul>
 
 

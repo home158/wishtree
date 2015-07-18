@@ -34,9 +34,14 @@ class Photo_model extends CI_Model {
             return FALSE;
         }
     }
-    function retrieve_my_photos($userGUID)
+    function retrieve_my_photos($userGUID , $type)
     {
-        $query = $this->db->query("SELECT * FROM [dbo].[i_photo] WHERE UserGUID = '".$userGUID."' ORDER BY PhotoID");
+        if($type == 'public'){
+            $query = $this->db->query("SELECT * FROM [dbo].[i_photo] WHERE UserGUID = '".$userGUID."' AND IsPrivate = 0 ORDER BY PhotoID");
+        }
+        if($type == 'private'){
+            $query = $this->db->query("SELECT * FROM [dbo].[i_photo] WHERE UserGUID = '".$userGUID."' AND IsPrivate = 1 ORDER BY PhotoID");
+        }
         $r = $query->result_array();
         $this->lang->load('photo');
         $my_photo = array();
@@ -54,11 +59,13 @@ class Photo_model extends CI_Model {
                 break;
             }
             $photo = array(
+                'IsPrivate' => $row['IsPrivate'],
                 'GUID' => $row['GUID'],
-                'full_image_url' => $this->config->item('azure_storage_baseurl') . $row['Container'] . '/' . $row['FullBasename'],
-                'crop_image_url' =>$this->config->item('azure_storage_baseurl') . $row['Container'] . '/' . $row['CropBasename'],
-                'thumb_image_url' =>$this->config->item('azure_storage_baseurl') . $row['Container'] . '/' . $row['ThumbBasename'],
-                'review_status' => $review_status
+                'full_image_url' => $this->config->item('azure_storage_baseurl') . $row['UserGUID'] . '/' . $row['FullBasename'].'?'.time(),
+                'crop_image_url' =>$this->config->item('azure_storage_baseurl') . $row['UserGUID'] . '/' . $row['CropBasename'].'?'.time(),
+                'thumb_image_url' =>$this->config->item('azure_storage_baseurl') . $row['UserGUID'] . '/' . $row['ThumbBasename'].'?'.time(),
+                'review_status' => $review_status,
+                'ReviewStatus' => $row['ReviewStatus']
             );
             
             array_push($my_photo , $photo);
@@ -78,7 +85,7 @@ class Photo_model extends CI_Model {
             $row = $query->row_array(); 
             $this->load->library('azure');
             $blobRestProxy = $this->azure->createBlobService();
-            $blob = $blobRestProxy->getBlob( $row['Container'] , $row['FullBasename']);
+            $blob = $blobRestProxy->getBlob( $row['UserGUID'] , $row['FullBasename']);
             $source = stream_get_contents($blob->getContentStream());
             
             $file = $this->config->item('azure_storage_temp_forder').'/'.$row['FullBasename'];

@@ -104,7 +104,7 @@ class Register extends Site_Base_Controller {
 		    $this->parser->parse('site/_default/footer',$this->display_data);
         }else{
             $this->load->library('uuid');
-            $uuid = strtoupper($this->uuid->v4());
+            $uuid = $this->uuid->v4();
             $birthday = date(
                             $this->input->post('birthday_year',true).'-'.
                             $this->input->post('birthday_month',true).'-'.
@@ -191,7 +191,8 @@ class Register extends Site_Base_Controller {
             $this->parser->parse('site/_default/header_logout',$this->display_data);
 		    $this->parser->parse('site/register/validate_mail_success',$this->display_data);
 		    $this->parser->parse('site/_default/footer',$this->display_data);
-
+            //Creaate Azure storage
+            $this->register_model->create_container($row->GUID);
             
         }else{
             $this->parser->parse('site/_default/header',$this->display_data);
@@ -207,4 +208,5 @@ class Register extends Site_Base_Controller {
         $this->register_model->sent_email_verification($this->session->userdata('GUID') ,$this->session->userdata('Email'), $this->session->userdata('Nickname'));
         redirect( base_url().'register/sending_validate_mail' , 'refresh');
     }
+
 }

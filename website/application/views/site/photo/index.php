@@ -6,7 +6,13 @@
             <p class="hd">{account_update_profile}</p>
         </div>
         <div class="well well-lg">
-            <p class="redF hd "></p>            
+            <p class="redF hd "></p>  
+            <div class="borR">
+                  <ul>
+                    <li><a class="on" href="/photo/public">上傳公開照片</a></li>
+                    <li><a href="/photo/private">上傳私人照片</a></li>
+                  </ul>
+            </div>                      
             <div class="photo_list">
                 <ul class="clearfix">
                 {my_photos}
@@ -21,7 +27,7 @@
                 </ul>
             </div>
             <div>
-                <?= form_open_multipart(base_url().'photo',array('id' => 'upload_image'));?>
+                <?= form_open_multipart(base_url().'../{form_action}',array('id' => 'upload_image'));?>
 			    <input type="hidden" id="x" name="x" />
 			    <input type="hidden" id="y" name="y" />
 			    <input type="hidden" id="w" name="w" />
@@ -135,7 +141,7 @@ $(function(){
     };
     $('#uploadImage').change(function(){
         
-        $('#upload_image').attr('action' , '/photo');
+        $('#upload_image').attr('action' , '{form_action}');
 
         var oFReader = new FileReader();
         oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
@@ -164,7 +170,7 @@ $(function(){
             $pcnt.html('<img src="'+$full_image_url+'" class="jcrop-preview" >');
             initJcrop();
 
-            $('#upload_image').attr('action' , '/photo/update');
+            $('#upload_image').attr('action' , '{form_update_action}');
             //pull remote files
             var $GUID = $(this).attr('data-GUID');
             $('input[name="GUID"]').val($GUID);

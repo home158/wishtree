@@ -216,7 +216,7 @@ input[type=text], input[type=email], input[type=password], select, textarea {
 .blk-reg input[type=password],
 .blk-reg input[type=password],
 .blk-reg select {
-    margin-left: -4px;
+    margin-left: -5px;
 }
 input[type=text],
 input[type=email],
@@ -416,4 +416,7 @@ select {
 .photo_list li img{
     padding-bottom: 5px;
     cursor: pointer;
+}
+.profile_set{
+
 }

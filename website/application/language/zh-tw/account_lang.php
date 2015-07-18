@@ -7,6 +7,8 @@ $lang['account_profile_review_pass']        = "通過";
 $lang['account_profile_review_reject']        = "不通過，原因：%s。";
 $lang['account_profile_review_date']        = "(審核時間 %s)";
 $lang['account_profile_latest_update_date']        = "(最後更新 %s)";
+$lang['account_photo_review_count']        = "上傳 %s 張照片 %s 張照片通過審查";
+$lang['account_photo_total_count']        = "%s 張";
 
 
 

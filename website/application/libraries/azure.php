@@ -8,6 +8,8 @@
  */
 require_once (dirname(__FILE__) . '/vendor/autoload.php');
 use WindowsAzure\Common\ServicesBuilder;
+use WindowsAzure\Blob\Models\CreateContainerOptions;
+use WindowsAzure\Blob\Models\PublicAccessType;
 class Azure {
     private $connectionString = "DefaultEndpointsProtocol=%s;AccountName=%s;AccountKey=%s";
 
@@ -29,6 +31,10 @@ class Azure {
     function createTableService(){
         return ServicesBuilder::getInstance()->createTableService($this->connectionString);
     }
-    
+    function createContainerOptions(){
+        $createContainerOptions = new CreateContainerOptions(); 
+        $createContainerOptions->setPublicAccess(PublicAccessType::BLOBS_ONLY); 
+        return $createContainerOptions;
+    }
     
 }

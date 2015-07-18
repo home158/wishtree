@@ -14,9 +14,10 @@ class Photo extends Site_Base_Controller {
 
     }
 
-	public function index()
+	public function show($type = 'public')
 	{
-        $my_photos = $this->photo_model->retrieve_my_photos( $this->session->userdata('GUID') );
+
+        $my_photos = $this->photo_model->retrieve_my_photos( $this->session->userdata('GUID') , $type);
         $this->display_data['my_photos'] = $my_photos;
 
 
@@ -34,6 +35,8 @@ class Photo extends Site_Base_Controller {
 		if ( ! $this->upload->do_upload() )
 		{
 			$this->display_data['error'] = $this->upload->display_errors( '<p class="redF tl">','</p>');
+			$this->display_data['form_action'] = '/photo/'.$type;
+			$this->display_data['form_update_action'] = '/photo/update/'.$type;
 
 		    $this->parser->parse('site/_default/header',$this->display_data);
 		    $this->parser->parse('site/_default/header_logout',$this->display_data);
@@ -44,7 +47,7 @@ class Photo extends Site_Base_Controller {
 		else
 		{
 			$data = $this->upload->data();
-            $container = 'container-'.$this->session->userdata('Role');
+            $container = $this->session->userdata('GUID');
 
             //Scale
             $full_path = $data['full_path'];
@@ -83,7 +86,6 @@ class Photo extends Site_Base_Controller {
             //Save to db_photo
             $photo_data = array(
                 'UserGUID' => $this->session->userdata('GUID'),
-                'Container' => $container,
                 'FullBasename' => $full_path_parts['basename'] ,
                 'ThumbBasename' => $thumb_path_parts['basename'],
                 'CropBasename' => $crop_path_parts['basename'],
@@ -91,21 +93,28 @@ class Photo extends Site_Base_Controller {
                 'DateModify' => date('Y-m-d H:i:s'),
                 'DateCreate' => date('Y-m-d H:i:s')
             );
+            if($type == 'public'){
+                $photo_data['IsPrivate'] = 0;
+            }
+            if($type == 'private'){
+                $photo_data['IsPrivate'] = 1;
+            }
+
             $insert_string = $this->db->insert_string('[dbo].[i_photo]', $photo_data);
             $this->db->query( $insert_string );
-            redirect( base_url().'photo' , 'refresh');
+            redirect( base_url().'photo/'.$type , 'refresh');
 		}
 
 
 	}
-    public function update()
+    public function update($type = 'public')
     {
         $image_data = $this->photo_model->download_remote_file_to_local($this->session->userdata('GUID') , $this->input->post('GUID') );
         if(! $image_data){
             redirect( base_url().'photo' , 'refresh');
             exit;
         }
-        $container = 'container-'.$this->session->userdata('Role');
+        $container = $this->session->userdata('GUID');
 
         //Scale
         $full_path = $this->config->item('azure_storage_temp_forder').'/'.$image_data['FullBasename'];
@@ -138,7 +147,7 @@ class Photo extends Site_Base_Controller {
         $this->photo_model->saveToAzureStorage($container , $thumb_path_parts['basename'] , $thumb_path );
 
         $update_data = array(
-            'ReviewStatus' => 2,
+            'ReviewStatus' => 0,
             'ReviewRejectReason' => NULL,
             'DateModify' => date('Y-m-d H:i:s')
         );
