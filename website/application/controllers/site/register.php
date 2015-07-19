@@ -191,9 +191,11 @@ class Register extends Site_Base_Controller {
             $this->parser->parse('site/_default/header_logout',$this->display_data);
 		    $this->parser->parse('site/register/validate_mail_success',$this->display_data);
 		    $this->parser->parse('site/_default/footer',$this->display_data);
-            //Creaate Azure storage
+            //Create Azure storage
             $this->register_model->create_container($row->GUID);
-            
+            //Create  repositories
+            $this->register_model->create_repository($row->GUID);
+ 
         }else{
             $this->parser->parse('site/_default/header',$this->display_data);
             $this->parser->parse('site/_default/header_login',$this->display_data);

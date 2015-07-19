@@ -150,7 +150,15 @@ class Register_model extends CI_Model {
         $blobRestProxy = $this->azure->createBlobService();
         $blobRestProxy->createContainer($container , $createContainerOptions);
     }
-
+    function create_repository($GUID)
+    {
+        $path = $this->config->item('repositories_forder') . '/' . $GUID;
+        
+        if(!is_dir($path)) //create the folder if it's not already exists
+        {
+            mkdir($path,0755,TRUE);
+        }
+    }
 
 }
 

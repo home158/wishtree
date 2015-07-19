@@ -133,6 +133,9 @@ ul li {
 .tl{
     text-align: left;
 }
+.tr{
+    text-align: right;
+}
 .deal_msg label {
     padding: 0 10px;
     font-size: 16px;
@@ -419,4 +422,61 @@ select {
 }
 .profile_set{
 
+}
+
+.write_set .write_right{
+    margin: 15px;
+    width: 63%;
+}
+.write_set .write_right textarea{
+    width: 100%;
+    height: 100px;
+}
+.message_right {
+  width: 58%;
+  padding: 5px;
+  
+}
+.message_right textarea{
+    width: 100%;
+    height: 100px;
+}
+.message_left {
+  width: 40%;
+}
+.message_left .text{
+    padding-left: 20px;  
+}
+.message_box{
+    padding: 10px;
+    border-bottom: 1px dotted #efd6fc;
+    cursor: pointer;
+    margin-right: 10px;
+  color: #333;
+}
+.message_box:hover{
+  background-color: #efd6fc;
+}
+.scrollbar-container {
+    max-width: 1200px;
+}
+.scrollbar-container > div {
+    max-height: 500px;
+    overflow: auto;
+}
+.scrollbar-container-history {
+    max-width: 1200px;
+}
+.scrollbar-container-history > div {
+    max-height: 300px;
+    overflow: auto;
+}
+.message_history{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px dotted #efd6fc;
+}
+.message_history .text {
+  padding-left: 20px;
+  width: 400px;
 }

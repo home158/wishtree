@@ -15,11 +15,26 @@ class Message extends Site_Base_Controller {
     }
 	public function index()
 	{
+        $message_box = $this->message_model->retrieve_message_box($this->session->userdata('GUID'));
+
+        $this->display_data = array_merge( $this->display_data , $message_box);
+
         $this->parser->parse('site/_default/header',$this->display_data);
 	    $this->parser->parse('site/_default/header_logout',$this->display_data);
 	    $this->parser->parse('site/_default/female_navi',$this->display_data);
 	    $this->parser->parse('site/message/index',$this->display_data);
 	    $this->parser->parse('site/_default/footer',$this->display_data);
+
+    }
+    public function history()
+    {
+        $owner = $this->session->userdata('GUID');
+        $sender = $this->input->post('GUID');
+        $msg = $this->message_model->get_history($owner , $sender);
+
+        $this->display_data['msg'] = $msg;
+
+	    echo $this->parser->parse('site/message/history',$this->display_data , true);
 
     }
     public function write($GUID = NULL)
@@ -31,6 +46,7 @@ class Message extends Site_Base_Controller {
             redirect( base_url().'message' , 'refresh');
         }
         $target = $this->message_model->retrieve_target_info($GUID);
+        print_r($target);
         $this->display_data = array_merge( $this->display_data , $target);
 		$this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<em class="form_error">', '</em>');
@@ -48,10 +64,10 @@ class Message extends Site_Base_Controller {
             $message_box_data = array(
                 'UserGUID' => $GUID,
                 'FromUserGUID' => $this->session->userdata('GUID'),
-                'IsNew' => 1
+                'IsNew' => 1,
+                'DateModify' => date('Y-m-d H:i:s')
             );
-            $message_box_insert_string = $this->db->insert_string('[dbo].[i_message_box]', $message_box_data);
-            $this->db->query( $message_box_insert_string );
+            $this->message_model->update_message_box($message_box_data);
 
             $pending_message_data = array(
                 'FromUserGUID' => $this->session->userdata('GUID'),
@@ -63,6 +79,10 @@ class Message extends Site_Base_Controller {
             );
             $pending_message_insert_string = $this->db->insert_string('[dbo].[i_pending_message]', $pending_message_data);
             $this->db->query( $pending_message_insert_string );
+            
+            //寫入FILE
+            $this->message_model->save_message_history($this->session->userdata('GUID') , $GUID , $pending_message_data['MessageContent'] , 'say');
+            $this->message_model->save_message_history($this->session->userdata('GUID') , $GUID , $pending_message_data['MessageContent'] , 'target');
             
         }
     }

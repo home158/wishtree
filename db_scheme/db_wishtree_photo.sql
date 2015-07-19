@@ -26,6 +26,7 @@ SET @GUID = NEWID()
 			[Hits] [int] NOT NULL default 0, -- 被點擊數
 			[ReviewStatus] [char](1) NOT NULL default 0, --審核註記 0:等待審核 1 : 未通過 ，2:通過
 			[ReviewRejectReason] [nvarchar](30)  NULL , --審核未通過原因
+			[IsCover] [bit] NOT NULL default 0, -- 封面照片 0 : 否 ，1:是
 
 			[IsPrivate] [bit] NOT NULL default 0, -- 私人照片 0 : 公開 ，1:私人
 			[LastViewDate] [datetime] NOT NULL  default CURRENT_TIMESTAMP,						-- 最後點擊時間

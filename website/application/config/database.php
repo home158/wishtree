@@ -53,8 +53,13 @@ $db['default']['username'] = 'shan730@hj5grgc1wq';
 $db['default']['password'] = 'cadu@4023';
 $db['default']['database'] = 'db_shan730';
 */
+/*
 $db['default']['hostname'] = 'im1b5hckje.database.windows.net';
 $db['default']['username'] = 'db_wishtree@im1b5hckje';
+*/
+$db['default']['hostname'] = '127.0.0.1';
+$db['default']['username'] = 'home158';
+
 $db['default']['password'] = 'cadu@4023';
 $db['default']['database'] = 'db_wishtree';
 $db['default']['dbdriver'] = 'sqlsrv';

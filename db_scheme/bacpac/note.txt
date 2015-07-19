@@ -1,0 +1,8 @@
+"C:\Program Files (x86)\Microsoft SQL Server\120\DAC\bin\SqlPackage.exe" /a:Export /ssn:"127.0.0.1" /sdn:"db_wishtree" /su:"home158" /sp:"cadu@4023" /tf:"D:\Git\wishtree\db_scheme\bacpac\GM.bacpac"
+
+
+
+
+
+"C:\Program Files (x86)\Microsoft SQL Server\120\DAC\bin\sqlpackage.exe" /a:Import /tsn:"qrxyiy40z7.database.windows.net" /tdn:"db_shan730" /tu:"shan730@qrxyiy40z7" /tp:"cadu@4023" /sf:"D:\Git\shan730\db_scheme\bacpac\GM.bacpac"
+    

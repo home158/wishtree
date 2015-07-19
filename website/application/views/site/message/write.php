@@ -4,7 +4,7 @@
     <div class="write_set bg">
         <div class="well well-lg  clearfix">
             <div class="write_left fl">
-                
+                <img src="{CropBasename}">
             </div>
             <div class="write_right fr">
                 
@@ -14,8 +14,9 @@
                     <textarea name="message_content" id="message_content"></textarea>
                     <em class="note"></em><br>
                     <?= form_error('message_content'); ?><br>
-
+                    <div class="tr">
                     <input type="submit" class="btn-xl btn-emp" value="{btn_submit}">
+                    </div>
                 </form>
             </div>
         </div>
