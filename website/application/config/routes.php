@@ -63,5 +63,7 @@ $route['photo/private'] = "site/photo/show/private";
 
 $route['photo/(:any)'] = 'site/photo/$1';
 
+$route['view/(:any)'] = 'site/view/index/$1';
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

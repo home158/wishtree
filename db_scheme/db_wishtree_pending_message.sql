@@ -19,6 +19,7 @@ SET @GUID = NEWID()
 			[MessageID] [int] IDENTITY(1,1) NOT NULL,
 			[GUID] [char](36) NOT NULL DEFAULT NEWID()  PRIMARY KEY, -- GUID
 			[FromUserGUID] [char](36) NOT NULL,  -- GUID
+			[FromUserNickname] [nvarchar](128)  NULL,	-- 匿稱
 			[TargetUserGUID] [char](36) NOT NULL,  -- GUID
 			[MessageContent] [nvarchar](max) NOT NULL,		
 			[MessageReviewStatus] [char] NOT NULL default 0, -- 0:等待審核 1: 審核不通過 2: 審核通過

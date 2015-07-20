@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://wishtree.azurewebsites.net/';
+$config['base_url']	= 'http://127.0.0.1:8000/';
 
 /*
 |--------------------------------------------------------------------------
@@ -371,7 +371,20 @@ $config['azure_storage_protocol'] = 'http'; // DefaultEndpointsProtocol
 $config['azure_storage_account_name'] = 'wishtree'; // Your Storage account name
 $config['azure_storage_account_key']  = 'gK/aVIfRUq3MB0PX9bDqWrMmsLOjk3szVWJMOjnOJm64HruQEW7CfPUef7TwbbxOm6OAxIpofYtpwGT6PKPPwg=='; // Your account key
 $config['azure_storage_baseurl'] = 'https://wishtree.blob.core.windows.net/'; // DefaultEndpointsProtocol
-$config['azure_storage_temp_forder'] = './temp'; // DefaultEndpointsProtocol
+$config['azure_storage_temp_forder'] = './temp';
+
+/*
+| -------------------------------------------------------------------
+|  Message
+| -------------------------------------------------------------------
+| Prototype:
+|
+|	
+|
+*/
+
+$config['repositories_forder'] = './repositories';
+$config['message_new_icon'] = '/_images/1437392466_1302-speech-bubbles.png';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

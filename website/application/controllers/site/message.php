@@ -5,13 +5,24 @@ class Message extends Site_Base_Controller {
     {
         parent::__construct();
         $this->login_required_validation();
+        
         $this->parse_display_data(
-            array('btn','grid' )
+            array('btn','grid' ,'message')
         );
         $this->display_data["highlight_navi"] = "message";
         $this->load->model('message_model');
         $this->load->model('utility_model');
         
+    }
+    function require_public_photo()
+    {
+        $this->parser->parse('site/_default/header',$this->display_data);
+	    $this->parser->parse('site/_default/header_logout',$this->display_data);
+	    $this->parser->parse('site/_default/female_navi',$this->display_data);
+	    $this->parser->parse('site/message/require_public_photo',$this->display_data);
+	    $this->parser->parse('site/_default/footer',$this->display_data);
+
+        exit;
     }
 	public function index()
 	{
@@ -30,6 +41,19 @@ class Message extends Site_Base_Controller {
     {
         $owner = $this->session->userdata('GUID');
         $sender = $this->input->post('GUID');
+
+        //設定為沒有新訊息
+        $message_box_data = array(
+            'UserGUID' => $this->session->userdata('GUID'),
+            'FromUserGUID' => $sender,
+            'IsNew' => 0,
+            'ReadTime' => date('Y-m-d H:i:s'),
+            'DateModify' => date('Y-m-d H:i:s')
+        );
+        $this->message_model->update_message_box($message_box_data);
+
+
+
         $msg = $this->message_model->get_history($owner , $sender);
 
         $this->display_data['msg'] = $msg;
@@ -68,12 +92,13 @@ class Message extends Site_Base_Controller {
                 'DateModify' => date('Y-m-d H:i:s')
             );
             $this->message_model->update_message_box($message_box_data);
-
+            //無需審核
             $pending_message_data = array(
                 'FromUserGUID' => $this->session->userdata('GUID'),
+                'FromUserNickname' => $this->session->userdata('Nickname'),
                 'TargetUserGUID' => $GUID,
                 'MessageContent' => $this->input->post('message_content'),
-                'MessageReviewStatus' => 2,
+                'MessageReviewStatus' => 2,//無需審核
                 'MessageReviewTime' => date('Y-m-d H:i:s'),
                 'MessageReviewByGUID' => NULL
             );
@@ -81,9 +106,42 @@ class Message extends Site_Base_Controller {
             $this->db->query( $pending_message_insert_string );
             
             //寫入FILE
-            $this->message_model->save_message_history($this->session->userdata('GUID') , $GUID , $pending_message_data['MessageContent'] , 'say');
-            $this->message_model->save_message_history($this->session->userdata('GUID') , $GUID , $pending_message_data['MessageContent'] , 'target');
+            $this->message_model->save_message_history($this->session->userdata('GUID') , $this->session->userdata('Nickname') ,$GUID , $pending_message_data['MessageContent'] , 'say');
+            $this->message_model->save_message_history($this->session->userdata('GUID') , $this->session->userdata('Nickname') ,$GUID , $pending_message_data['MessageContent'] , 'target');
             
         }
+    }
+    public function send()
+    {
+        $GUID = $this->input->post('targetGUID' , TRUE);
+        $msg_content = $this->input->post('content');
+        //無需審核
+        $message_box_data = array(
+            'UserGUID' => $GUID,
+            'FromUserGUID' => $this->session->userdata('GUID'),
+            'IsNew' => 1,
+            'DateModify' => date('Y-m-d H:i:s')
+        );
+        $this->message_model->update_message_box($message_box_data);
+        //無需審核
+        $pending_message_data = array(
+            'FromUserGUID' => $this->session->userdata('GUID'),
+            'FromUserNickname' => $this->session->userdata('Nickname'),
+            'TargetUserGUID' => $GUID,
+            'MessageContent' => $msg_content,
+            'MessageReviewStatus' => 2,//無需審核
+            'MessageReviewTime' => date('Y-m-d H:i:s'),
+            'MessageReviewByGUID' => NULL
+        );
+        $pending_message_insert_string = $this->db->insert_string('[dbo].[i_pending_message]', $pending_message_data);
+        $this->db->query( $pending_message_insert_string );
+        //寫入FILE
+        $msg = $this->message_model->save_message_history($this->session->userdata('GUID') , $this->session->userdata('Nickname') ,$GUID , $msg_content , 'say');
+        $this->message_model->save_message_history($this->session->userdata('GUID') , $this->session->userdata('Nickname') ,$GUID , $msg_content , 'target');
+        $msg = $this->message_model->message_to_convert($msg);
+        $this->display_data['msg'] = array($msg);
+
+	    echo $this->parser->parse('site/message/history',$this->display_data , true);
+        
     }
 }

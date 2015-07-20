@@ -6,16 +6,25 @@ class Home extends Site_Base_Controller {
     {
         parent::__construct();
         $this->display_data["highlight_navi"] = "home";
+        $this->parse_display_data(
+            array('btn' )
+        );
         
         $this->login_required_validation();
+        $this->load->model('home_model');
     }
     public function index()
 	{
- 
         
+        $this->display_data['home_welcome'] = sprintf( $this->display_data['home_welcome'] , $this->session->userdata('Nickname') );
+        $this->display_data['random_user'] = $this->home_model->get_random_user();
+
+        print_r($this->display_data['random_user']);
 		$this->parser->parse('site/_default/header',$this->display_data);
 		$this->parser->parse('site/_default/header_logout',$this->display_data);
 		$this->parser->parse('site/_default/female_navi',$this->display_data);
+		$this->parser->parse('site/home/'.$this->session->userdata('Role').'_index',$this->display_data);
+
 		$this->parser->parse('site/_default/footer',$this->display_data);
 
 	}

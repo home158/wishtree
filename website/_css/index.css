@@ -445,14 +445,22 @@ select {
   width: 40%;
 }
 .message_left .text{
-    padding-left: 20px;  
+    padding-left: 20px; 
+    width: 250px; 
+    display: block;
+    position: relative;
+}
+.message_left .text .new_icon{
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 .message_box{
     padding: 10px;
     border-bottom: 1px dotted #efd6fc;
     cursor: pointer;
     margin-right: 10px;
-  color: #333;
+    color: #333;
 }
 .message_box:hover{
   background-color: #efd6fc;
@@ -468,7 +476,7 @@ select {
     max-width: 1200px;
 }
 .scrollbar-container-history > div {
-    max-height: 300px;
+    max-height: 500px;
     overflow: auto;
 }
 .message_history{
@@ -478,5 +486,37 @@ select {
 }
 .message_history .text {
   padding-left: 20px;
-  width: 400px;
+  padding-right: 10px;
+  width: 440px;
+  position: relative;
+}
+.message_history .text .read_status{
+  position: absolute;
+  right: 10px;
+  bottom: :0;
+}
+.home_left{
+    width:65%;
+}
+.home_left .catwalk{
+    padding: 15px 0;
+}
+.home_left ul{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.home_left li{
+  float: left;
+  padding: 4px 8px;
+}
+.home_left .title{
+  font-size: 17px;
+  font-weight: bold;
+}
+.profile_left{
+    width:30%;
+}
+.profile_right{
+    width:62%;
 }
