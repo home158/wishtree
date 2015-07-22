@@ -36,6 +36,8 @@ SET @GUID = NEWID()
 			[Role] [nvarchar](10) NOT NULL default 'female', -- 帳戶類型0:Girl , 1:Daddy
 			[Email] [nvarchar](255) NOT NULL , -- 登入用 email;
 			[Password] [nvarchar](20) NULL, -- 密碼
+			[TimezoneOffset] [char](6) NOT NULL default '+00:00', -- 時區;
+			[DST] [bit] NOT NULL default 0, -- 日光節約 0:關閉 1:開啟
 			[PasswordEncrypt] [char](32) NOT NULL, -- 加密後密碼;
 			[Rank] [tinyint] NOT NULL default 1 ,  --權限 0:刪除 1:停權 2:註冊未認證; 3:已認證會員; ........ 255:站長;
 			[ForbiddenMsg] [nvarchar](128) NULL, -- 停權原因

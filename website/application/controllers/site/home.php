@@ -19,7 +19,6 @@ class Home extends Site_Base_Controller {
         $this->display_data['home_welcome'] = sprintf( $this->display_data['home_welcome'] , $this->session->userdata('Nickname') );
         $this->display_data['random_user'] = $this->home_model->get_random_user();
 
-        print_r($this->display_data['random_user']);
 		$this->parser->parse('site/_default/header',$this->display_data);
 		$this->parser->parse('site/_default/header_logout',$this->display_data);
 		$this->parser->parse('site/_default/female_navi',$this->display_data);
@@ -82,5 +81,25 @@ class Home extends Site_Base_Controller {
             ///echo "<img src='".$blob->getUrl()."'>";
         }
     }
+    public function test2(){
+        echo date('Y-m-d H:i:s');
 
+
+
+        $this->db->update('[dbo].[i_test]', array('DateCreate' =>date('Y-m-d H:i:s')), array('UserID' => 1 ));
+
+        $query = $this->db->query(
+        "
+        SELECT *
+                
+	          ,
+              ".$this->utility_model->dbColumnDatetime('[DateCreate]')."
+              
+          FROM [db_wishtree].[dbo].[i_test]
+        ");
+        $r = $query->result_array();
+        print_r($r);
+        //            "CONVERT(VARCHAR(20) , SWITCHOFFSET (DateCreate, '+00:00') ,113)  AS [DateCreate]",
+        echo $this->timezoneOffset;
+    }
 }

@@ -32,7 +32,59 @@
                             <span class="item">{grid_column_PasswordCheck}</span>
                             <input name="password_chk" type="password" value="" /><br>
                             <?= form_error('password_chk'); ?><br>
-            
+
+                            <!-- timezoneoffset -->
+                            <span class="item" style="margin-top:10px;position: absolute;">{grid_column_TimezoneOffset}</span>
+                            <div style="display: inline-block;width: 100%" class="bfh-selectbox" data-value="<?= set_value('timezoneoffset'); ?>" data-name="timezoneoffset" >
+                                <div data-value="">{timezoneoffset_please_select}</div>
+                                <div data-value="-12:00">{timezoneoffset__12}</div> 
+                                <div data-value="-11:00">{timezoneoffset__11}</div> 
+                                <div data-value="-10:00">{timezoneoffset__10}</div> 
+                                <div data-value="-09:00">{timezoneoffset__9}</div>  
+                                <div data-value="-08:00">{timezoneoffset__8}</div>  
+                                <div data-value="-07:00">{timezoneoffset__7}</div>  
+                                <div data-value="-06:00">{timezoneoffset__6}</div>  
+                                <div data-value="-05:00">{timezoneoffset__5}</div>  
+                                <div data-value="-04:30">{timezoneoffset__4.5}</div>
+                                <div data-value="-04:00">{timezoneoffset__4}</div>  
+                                <div data-value="-03:30">{timezoneoffset__3.5}</div>
+                                <div data-value="-03:00">{timezoneoffset__3}</div>  
+                                <div data-value="-02:00">{timezoneoffset__2}</div>  
+                                <div data-value="-01:00">{timezoneoffset__1}</div>  
+                                <div data-value="+00:00">{timezoneoffset_0}</div>   
+                                <div data-value="+01:00">{timezoneoffset_1}</div>   
+                                <div data-value="+02:00">{timezoneoffset_2}</div>   
+                                <div data-value="+03:00">{timezoneoffset_3}</div>   
+                                <div data-value="+03:30">{timezoneoffset_3.5}</div> 
+                                <div data-value="+04:00">{timezoneoffset_4}</div>   
+                                <div data-value="+04:30">{timezoneoffset_4.5}</div> 
+                                <div data-value="+05:00">{timezoneoffset_5}</div>   
+                                <div data-value="+05:30">{timezoneoffset_5.5}</div> 
+                                <div data-value="+05:45">{timezoneoffset_5.75}</div>
+                                <div data-value="+06:00">{timezoneoffset_6}</div>   
+                                <div data-value="+06:30">{timezoneoffset_6.5}</div> 
+                                <div data-value="+07:00">{timezoneoffset_7}</div>   
+                                <div data-value="+08:00">{timezoneoffset_8}</div>   
+                                <div data-value="+09:00">{timezoneoffset_9}</div>   
+                                <div data-value="+09:30">{timezoneoffset_9.5}</div> 
+                                <div data-value="+10:00">{timezoneoffset_10}</div>  
+                                <div data-value="+11:00">{timezoneoffset_11}</div>  
+                                <div data-value="+12:00">{timezoneoffset_12}</div>    
+                            </div>
+                            <em class="note"></em><br>
+                            <?= form_error('timezoneoffset'); ?><br>
+
+
+                            <!-- DST -->
+                            <span class="item" style="margin-top:10px;position: absolute;">{grid_column_DST}</span>
+                            <div style="display: inline-block;width: 100%" class="bfh-selectbox" data-value="<?= set_value('dst' , '0'); ?>" data-name="dst" >
+                                <div data-value="1">{dst_on}</div>
+                                <div data-value="0">{dst_off}</div> 
+                            </div>
+                            <em class="note"></em><br>
+                            <?= form_error('dst'); ?><br>
+
+
                         </div>
                         <p class="section"></p>
                         <p class="hd">{register_part2}</p>
@@ -165,20 +217,20 @@
                             <div style="display: inline-block;width: 100%;" class="bfh-selectbox" data-value="<?= set_value('height'); ?>" data-name="height" >
                                 <div data-value="">{height_please_select}</div>
                                 <div data-value="140_below">{height_140_below}</div>
-                                <div data-value="141-145">141-145 {height_cm}</div>
-                                <div data-value="146-150">146-150 {height_cm}</div>
-                                <div data-value="151-155">151-155 {height_cm}</div>
-                                <div data-value="156-160">156-160 {height_cm}</div>
-                                <div data-value="161-165">161-165 {height_cm}</div>
-                                <div data-value="166-170">166-170 {height_cm}</div>
-                                <div data-value="171-175">171-175 {height_cm}</div>
-                                <div data-value="176-180">176-180 {height_cm}</div>
-                                <div data-value="181-185">181-185 {height_cm}</div>
-                                <div data-value="186-190">186-190 {height_cm}</div>
-                                <div data-value="191-195">191-195 {height_cm}</div>
-                                <div data-value="196-200">196-200 {height_cm}</div>
-                                <div data-value="201-205">201-205 {height_cm}</div>
-                                <div data-value="206-210">206-210 {height_cm}</div>
+                                <div data-value="141_145">141-145 {height_cm}</div>
+                                <div data-value="146_150">146-150 {height_cm}</div>
+                                <div data-value="151_155">151-155 {height_cm}</div>
+                                <div data-value="156_160">156-160 {height_cm}</div>
+                                <div data-value="161_165">161-165 {height_cm}</div>
+                                <div data-value="166_170">166-170 {height_cm}</div>
+                                <div data-value="171_175">171-175 {height_cm}</div>
+                                <div data-value="176_180">176-180 {height_cm}</div>
+                                <div data-value="181_185">181-185 {height_cm}</div>
+                                <div data-value="186_190">186-190 {height_cm}</div>
+                                <div data-value="191_195">191-195 {height_cm}</div>
+                                <div data-value="196_200">196-200 {height_cm}</div>
+                                <div data-value="201_205">201-205 {height_cm}</div>
+                                <div data-value="206_210">206-210 {height_cm}</div>
                                 <div data-value="210_up">{height_210_up}</div>
                             </div>
                             <em class="note"></em><br>

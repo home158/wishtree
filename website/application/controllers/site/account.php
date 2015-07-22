@@ -7,7 +7,7 @@ class Account extends Site_Base_Controller {
         $this->login_required_validation();
         $this->parse_display_data(
             array( 'account' , 'rank' , 'email' , 'role' ,'btn', 'grid','register','member','city','language','birthday','height','bodytype','race',
-                'income','property','education','maritalstatus' ,'smoking','drinking')
+                'income','property','education','maritalstatus' ,'smoking','drinking' , 'timezoneoffset' , 'dst')
         );
         $this->login_required_validation();
         $this->load->model('account_model');
@@ -42,6 +42,7 @@ class Account extends Site_Base_Controller {
         $GUID = $this->session->userdata('GUID');
 		$this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<em class="form_error">', '</em>');
+		$this->form_validation->set_rules('timezoneoffset', $this->display_data['grid_column_TimezoneOffset'], 'trim|required|min_length[3]|max_length[50]');
 		$this->form_validation->set_rules('aboutme', $this->display_data['grid_column_AboutMe'], 'trim|required');
 		$this->form_validation->set_rules('national_code', $this->display_data['grid_column_NationalCode'], 'trim|required');
 		$this->form_validation->set_rules('city', $this->display_data['grid_column_City'], 'trim|required');
@@ -87,6 +88,8 @@ class Account extends Site_Base_Controller {
                             $this->input->post('birthday_date',true) 
                         );
             $update_data = array(
+                'TimezoneOffset' => $this->input->post('timezoneoffset'),
+                'DST' => $this->input->post('dst'),
                 'AboutMe' => $this->input->post('aboutme'),
 			    'NationalCode' => $this->input->post('national_code',true),
 			    'City' => $this->input->post('city',true),
@@ -110,7 +113,8 @@ class Account extends Site_Base_Controller {
                 'ProfileLatestUpdateDate' => date('Y-m-d H:i:s') , 
                 'DateModify' => date('Y-m-d H:i:s')
             );
-			
+            $this->utility_model->setTimezoneOffset($update_data['TimezoneOffset'] , $update_data['DST']);
+
 
             $result = $this->db->update('[dbo].[i_user]', $update_data, array('GUID' => $GUID ));
             if($result == TRUE){

@@ -61,13 +61,17 @@ ul li {
 .footer-links{
 
 }
-#footer .language{
+#footer .timezone{
     color: #FFF;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
 }
 #footer .language{
     position: absolute;
     right: 10px;
     top: 10px;
+    color: #FFF;
 }
 #footer .language a{
     cursor: pointer;

@@ -1,6 +1,11 @@
 
 <div id="footer">
   <div class="ft clearfix">
+    <div class="timezone">
+      <p class="hd">{footer_select_timezone}</p>
+    </div>
+    <!--timezone end-->
+
     <div class="language">
       <p class="hd">{footer_select_lang}</p>
         <span><a class="lang_choose" lang_code="en-us">English</a></span>

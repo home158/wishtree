@@ -35,6 +35,8 @@ $lang['grid_column_Income_s'] = "<li>年收入：%s</li>";
 $lang['grid_column_Property'] = "總資產";
 $lang['grid_column_Property_s'] = "<li>總資產：%s</li>";
 $lang['grid_column_MessageContent'] = "訊息";
+$lang['grid_column_TimezoneOffset'] = "時區";
+$lang['grid_column_DST'] = "日光節約時間";
 
 /* End of file grid_lang.php */
 /* Location: ./application/language/zh-tw/grid_lang.php */

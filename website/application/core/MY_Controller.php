@@ -2,12 +2,16 @@
 class BASE_Controller extends CI_Controller{
     public $session_data ;
     public $display_data = array();
+    public $timezoneOffset;
 
     public function __construct() {
         parent::__construct();
         $this->get_lang();
         $this->load->library('my_language');
-        date_default_timezone_set('Asia/Taipei');
+        $this->load->model('utility_model');
+        date_default_timezone_set('UTC');
+
+        $this->timezoneOffset = $this->utility_model->getTimezoneOffset();
         $this->parse_display_data();
         
     }

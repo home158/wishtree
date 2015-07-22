@@ -7,7 +7,7 @@ class Register extends Site_Base_Controller {
         parent::__construct();
         $this->parse_display_data(
             array('btn', 'grid','register','member','city','language','birthday','height','bodytype','race',
-                'income','property','education','maritalstatus' ,'smoking','drinking'
+                'income','property','education','maritalstatus' ,'smoking','drinking' , 'timezoneoffset' , 'dst'
             )
         );
         $this->load->model('register_model');
@@ -71,7 +71,8 @@ class Register extends Site_Base_Controller {
 		$this->form_validation->set_rules('email', $this->display_data['grid_column_Email'], 'trim|valid_email|required|email_duplicate_check');
 		$this->form_validation->set_rules('password', $this->display_data['grid_column_Password'], 'required|min_length[8]|max_length[20]|password_least_alpha_numeric_check');
 		$this->form_validation->set_rules('password_chk', $this->display_data['grid_column_PasswordCheck'], 'required|matches[password]');
-		$this->form_validation->set_rules('nickname', $this->display_data['grid_column_Nickname'], 'trim|required|min_length[3]|max_length[50]');
+		$this->form_validation->set_rules('timezoneoffset', $this->display_data['grid_column_TimezoneOffset'], 'trim|required|min_length[3]|max_length[50]');
+		$this->form_validation->set_rules('nickname', $this->display_data['grid_column_Nickname'], 'trim|required');
 		$this->form_validation->set_rules('aboutme', $this->display_data['grid_column_AboutMe'], 'trim|required');
 		$this->form_validation->set_rules('national_code', $this->display_data['grid_column_NationalCode'], 'trim|required');
 		$this->form_validation->set_rules('city', $this->display_data['grid_column_City'], 'trim|required');
@@ -117,6 +118,8 @@ class Register extends Site_Base_Controller {
                 'Email' => $this->input->post('email',true),
                 'Password' => $this->input->post('password',true),
                 'PasswordEncrypt' => md5($this->input->post('password',true)),
+                'TimezoneOffset' => $this->input->post('timezoneoffset',true),
+                'DST' => $this->input->post('dst',true),
                 'AboutMe' => $this->input->post('aboutme'),
                 'Rank' => 2,
 			    'NationalCode' => $this->input->post('national_code',true),
@@ -147,7 +150,8 @@ class Register extends Site_Base_Controller {
             $this->session->set_userdata('Nickname', $register_data['Nickname']);
             $this->session->set_userdata('Rank', 2);//2:註冊未認證;
             $this->session->set_userdata('Role', $register_data['Role']);
-            
+            $this->utility_model->setTimezoneOffset($register_data['TimezoneOffset'] , $register_data['DST']);
+
 
             $this->register_model->sent_email_verification($register_data['GUID'],$register_data['Email'],$register_data['Nickname']);
 
