@@ -152,8 +152,8 @@ $(function(){
                 jcrop_api.destroy();
             }
             
-            $('#target').attr('src' , oFREvent.target.result);
-           // $('#preview').html('<img id="target" src="'+oFREvent.target.result+'">');
+            //$('#target').attr('src' , oFREvent.target.result);
+            $('#preview').html('<img id="target" src="'+oFREvent.target.result+'">');
             $pcnt.html('<img src="'+oFREvent.target.result+'" class="jcrop-preview" >');
             initJcrop();
         };

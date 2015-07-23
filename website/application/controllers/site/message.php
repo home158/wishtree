@@ -47,8 +47,7 @@ class Message extends Site_Base_Controller {
             'UserGUID' => $this->session->userdata('GUID'),
             'FromUserGUID' => $sender,
             'IsNew' => 0,
-            'ReadTime' => date('Y-m-d H:i:s'),
-            'DateModify' => date('Y-m-d H:i:s')
+            'ReadTime' => date('Y-m-d H:i:s')
         );
         $this->message_model->update_message_box($message_box_data);
 

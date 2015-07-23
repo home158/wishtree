@@ -112,7 +112,8 @@ class Message_model extends CI_Model {
             B.[FromUserGUID] AS FromUserGUID,
 			B.[IsNew] ,
 			B.[ReadTime],
-            B.[DateModify],
+            ".$this->utility_model->dbColumnDatetime('B.[DateModify]' , '[DateModify]' ).",
+
 			U.[Nickname],
 			U.[Birthday],
 			U.[Role],
@@ -167,6 +168,7 @@ class Message_model extends CI_Model {
     }
     function get_history($owner , $sender)
     {
+        $this->load->model('utility_model');
         //message box
         $query = $this->db->query(
         "
@@ -192,17 +194,22 @@ class Message_model extends CI_Model {
             foreach($logs as $key => $row){
                 $info = $this->retrieve_target_info($row->sender);
 
-                $logs[$key]->time = date('Y-m-d H:i',$row->time );
+                $logs[$key]->sender = $row->sender;
+                $send_time = $row->time;
+                $logs[$key]->time =  $this->utility_model->convertTimestampFormat('Y-m-d H:i', $row->time );
                 $logs[$key]->thumb_image = $info['ThumbBasename'];
                 $logs[$key]->nickname = $info['Nickname'];
                 if($logs[$key]->sender == $owner){
                     if( $query->num_rows() > 0){
-                        if($r['ReadTime'] >= $logs[$key]->time){
+                        $ReadTime = new DateTime($r['ReadTime']);
+                        if($ReadTime->getTimestamp() >= $send_time){
                             $logs[$key]->read_status = $this->lang->line('message_readed');
                         }else{
                             $logs[$key]->read_status = $this->lang->line('message_unread');
                         }
-                        $logs[$key]->read_time = $r['ReadTime'];
+                        
+                         
+                        $logs[$key]->read_time = $ReadTime->getTimestamp();
                     }else{
                         $logs[$key]->read_status = $this->lang->line('message_unread');
                     }

@@ -135,13 +135,27 @@ class Utility_model extends CI_Model {
         }
         return '+00:00';
     }
-    function dbColumnDatetime($column , $AS_column = NULL)
+    function dbColumnDatetime($column , $AS_column = NULL , $chars = 16 , $style = 121)
     {
         if(  $AS_column == NULL)  $AS_column = $column;
 
-        $str = "CONVERT(VARCHAR(22) , SWITCHOFFSET ( CONVERT(datetimeoffset, ".$column."), '".$this->getTimezoneOffset()."')  ,121 ) AS ".$AS_column;
+        $str = "CONVERT(VARCHAR(".$chars.") , SWITCHOFFSET ( CONVERT(datetimeoffset, ".$column."), '".$this->getTimezoneOffset()."')  ,".$style." ) AS ".$AS_column;
 
         return $str;
+    }
+    function convertTimestampFormat($format, $timestamp)
+    {
+        $timezone_offset = $this->getTimezoneOffset();
+        $sign               = substr($timezone_offset, 0, 1) == '+'? '': '-';
+        $offset_h             = substr($timezone_offset, 1, 2);
+        $offset_m             = substr($timezone_offset, 4, 2);
+        $offset = $offset_h * 3600 + $offset_m*60;
+
+        if($sign == '-'){
+            $offset = 0 - $offset;
+        }
+
+        return date($format , $timestamp + $offset );
     }
     function is_user_exist_by_GUID($GUID)
     {

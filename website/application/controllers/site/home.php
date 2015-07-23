@@ -101,5 +101,20 @@ class Home extends Site_Base_Controller {
         print_r($r);
         //            "CONVERT(VARCHAR(20) , SWITCHOFFSET (DateCreate, '+00:00') ,113)  AS [DateCreate]",
         echo $this->timezoneOffset;
+
+        echo "<br>";
+
+$timezone_offset    = '+08:00'; # 2H
+$sign               = substr($timezone_offset, 0, 1) == '+'? '': '-';
+$offset_h             = substr($timezone_offset, 1, 2);
+$offset_m             = substr($timezone_offset, 4, 2);
+$offset = $offset_h * 3600 + $offset_m*60;
+
+if($sign == '-'){
+    $offset = 0 - $offset;
+}
+
+echo date('Y-m-d H:i:s' , time() +$offset );
+
     }
 }

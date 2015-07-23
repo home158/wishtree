@@ -41,7 +41,7 @@ class View extends Site_Base_Controller {
         if( !is_null($r['City'] ))
             array_push( $profile , sprintf( $this->display_data['grid_column_City_s'] , $this->display_data['city_'.$r['City']] ) );
 
-        if( !is_null($r['Income'] ))
+        if( $r['Income'] )
             array_push( $profile , sprintf( $this->display_data['grid_column_Income_s'] , $this->display_data['income_'.$r['Income']] ) );
 
         if( !is_null($r['Language'] ))

@@ -185,20 +185,20 @@
                             <div style="display: inline-block;width: 100%;" class="bfh-selectbox" data-value="<?= set_value('height','{Height}'); ?>" data-name="height" >
                                 <div data-value="">{height_please_select}</div>
                                 <div data-value="140_below">{height_140_below}</div>
-                                <div data-value="141-145">141-145 {height_cm}</div>
-                                <div data-value="146-150">146-150 {height_cm}</div>
-                                <div data-value="151-155">151-155 {height_cm}</div>
-                                <div data-value="156-160">156-160 {height_cm}</div>
-                                <div data-value="161-165">161-165 {height_cm}</div>
-                                <div data-value="166-170">166-170 {height_cm}</div>
-                                <div data-value="171-175">171-175 {height_cm}</div>
-                                <div data-value="176-180">176-180 {height_cm}</div>
-                                <div data-value="181-185">181-185 {height_cm}</div>
-                                <div data-value="186-190">186-190 {height_cm}</div>
-                                <div data-value="191-195">191-195 {height_cm}</div>
-                                <div data-value="196-200">196-200 {height_cm}</div>
-                                <div data-value="201-205">201-205 {height_cm}</div>
-                                <div data-value="206-210">206-210 {height_cm}</div>
+                                <div data-value="141_145">141-145 {height_cm}</div>
+                                <div data-value="146_150">146-150 {height_cm}</div>
+                                <div data-value="151_155">151-155 {height_cm}</div>
+                                <div data-value="156_160">156-160 {height_cm}</div>
+                                <div data-value="161_165">161-165 {height_cm}</div>
+                                <div data-value="166_170">166-170 {height_cm}</div>
+                                <div data-value="171_175">171-175 {height_cm}</div>
+                                <div data-value="176_180">176-180 {height_cm}</div>
+                                <div data-value="181_185">181-185 {height_cm}</div>
+                                <div data-value="186_190">186-190 {height_cm}</div>
+                                <div data-value="191_195">191-195 {height_cm}</div>
+                                <div data-value="196_200">196-200 {height_cm}</div>
+                                <div data-value="201_205">201-205 {height_cm}</div>
+                                <div data-value="206_210">206-210 {height_cm}</div>
                                 <div data-value="210_up">{height_210_up}</div>
                             </div>
                             <em class="note"></em><br>

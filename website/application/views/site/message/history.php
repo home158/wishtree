@@ -2,7 +2,7 @@
 <div class="message_history" >
     <div class="clearfix" >
         <div class="fl">
-            <img src="{thumb_image}" style="width:75px;height:84px;">
+            <a href="/view/{sender}"><img src="{thumb_image}" style="width:75px;height:84px;"></a>
         </div>
         <ul class="text fl">
             <li><span>{nickname}</span><span class="fr">{time}</span></li>
