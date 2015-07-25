@@ -48,7 +48,7 @@
                                 <img src="/_images/null_face.jpg" class="jcrop-preview" alt="Preview" />
                           </div>
                         </div>
-                        <input type="submit" class="btn-xl btn-emp" value="{btn_submit}">
+                        <input type="submit" class="disabled btn-xl btn-emp" value="{btn_submit}">
                         <br>
 
                     </div>

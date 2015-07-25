@@ -1,8 +1,12 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+$lang['grid_column_UserID']      = "編號";
 $lang['grid_column_Gender']      = "帳戶類型";
 $lang['grid_column_Email']      = "電子郵件";
 $lang['grid_column_Password'] = "密碼";
+$lang['grid_column_OldPassword'] = "原始密碼";
+$lang['grid_column_NewPassword'] = "新密碼";
+
 $lang['grid_column_PasswordCheck'] = "再輸入一次密碼";
 $lang['grid_column_Nickname'] = "暱稱";
 $lang['grid_column_Nickname_s'] = "<li>暱稱：%s</li>";
@@ -37,6 +41,11 @@ $lang['grid_column_Property_s'] = "<li>總資產：%s</li>";
 $lang['grid_column_MessageContent'] = "訊息";
 $lang['grid_column_TimezoneOffset'] = "時區";
 $lang['grid_column_DST'] = "日光節約時間";
+$lang['grid_column_LastLoginTime'] = "最後登入時間";
+$lang['grid_column_DateModify'] = "更改時間";
+$lang['grid_column_DateCreate'] = "建立時間";
+$lang['grid_column_ProfileReviewStatus'] = "資料審核狀態";
+$lang['grid_column_ProfileReviewDate'] = "資料審核時間";
 
 /* End of file grid_lang.php */
 /* Location: ./application/language/zh-tw/grid_lang.php */

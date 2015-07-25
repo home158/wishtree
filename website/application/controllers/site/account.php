@@ -7,14 +7,21 @@ class Account extends Site_Base_Controller {
         $this->login_required_validation();
         $this->parse_display_data(
             array( 'account' , 'rank' , 'email' , 'role' ,'btn', 'grid','register','member','city','language','birthday','height','bodytype','race',
-                'income','property','education','maritalstatus' ,'smoking','drinking' , 'timezoneoffset' , 'dst')
+                'income','property','education','maritalstatus' ,'smoking','drinking' , 'timezoneoffset' , 'dst' , 'alert')
         );
         $this->login_required_validation();
         $this->load->model('account_model');
         $this->load->model('photo_model');
         $this->load->model('register_model');
         $this->display_data["highlight_navi"] = "account";
+        $this->alertMsg();
 
+    }
+    private function alertMsg()
+    {
+        if ( $this->session->userdata('Rank') <= 2){
+            $this->display_data['alert_content'] = $this->display_data['alert_mail_need_to_vaildate_at_account'];
+        }
     }
 
 	public function index()

@@ -6,11 +6,36 @@ class Photo extends Site_Base_Controller {
         parent::__construct();
         $this->login_required_validation();
         $this->parse_display_data(
-            array('btn' )
+            array('btn' ,'alert')
         );
         $this->display_data["highlight_navi"] = "photo";
         $this->load->model('photo_model');
+        $this->alertMsg();
+        
+    }
+    private function alertMsg()
+    {
+        if( $this->session->userdata('Rank') <= 2){
+            $this->display_data['alert_content'] = $this->display_data['alert_mail_need_to_vaildate_before_upload_photo'];
+        }
+        if( $this->session->userdata('Rank') <= 3  ){
+            $public = $this->photo_model->retrieve_my_photos( $this->session->userdata('GUID') , 'public');
+            $public_photo_count = count($public);
 
+            $public_photo_reviewed_count = 0;
+            foreach( $public as $key => $row){
+                if($row['ReviewStatus'] == 2){
+                    $public_photo_reviewed++;
+                }
+            }
+            if( $public_photo_count == 0){
+                $this->display_data['alert_content'] = $this->display_data['alert_upload_a_photo_to_public_before_send_message'];
+            }else{
+                if( $public_photo_reviewed_count == 0){
+                    $this->display_data['alert_content'] = $this->display_data['alert_upload_a_photo_to_public_under_review_before_send_message'];
+                }
+            }
+        }
     }
 
 	public function show($type = 'public')

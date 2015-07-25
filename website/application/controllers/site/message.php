@@ -7,12 +7,23 @@ class Message extends Site_Base_Controller {
         $this->login_required_validation();
         
         $this->parse_display_data(
-            array('btn','grid' ,'message')
+            array('btn','grid' ,'message' ,'alert')
         );
         $this->display_data["highlight_navi"] = "message";
         $this->load->model('message_model');
         $this->load->model('utility_model');
-        
+        $this->alertMsg();
+
+    }
+    private function alertMsg()
+    {
+        if ( $this->session->userdata('Rank') <= 2){
+            if($this->session->userdata('Role') == 'male'){
+                $this->display_data['alert_content'] = $this->display_data['alert_mail_need_to_vaildate_before_message_to_femele'];
+            }else{
+                $this->display_data['alert_content'] = $this->display_data['alert_mail_need_to_vaildate_before_message_to_mele'];
+            }
+        }
     }
     function require_public_photo()
     {

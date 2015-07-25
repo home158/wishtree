@@ -40,6 +40,7 @@
 
 $route['default_controller'] = "site/welcome";
 $route['404_override'] = '';
+$route['admin'] = "admin/welcome";
 $route['welcome'] = "site/welcome";
 $route['home'] = "site/home";
 $route['home/(:any)'] = 'site/home/$1';
@@ -64,6 +65,9 @@ $route['photo/private'] = "site/photo/show/private";
 $route['photo/(:any)'] = 'site/photo/$1';
 
 $route['view/(:any)'] = 'site/view/index/$1';
+
+$route['admin/member/(:any)'] = 'admin/member/$1';
+$route['admin/account/(:any)'] = 'admin/account/$1';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

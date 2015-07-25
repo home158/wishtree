@@ -7,26 +7,55 @@ class Home extends Site_Base_Controller {
         parent::__construct();
         $this->display_data["highlight_navi"] = "home";
         $this->parse_display_data(
-            array('btn' )
+            array('btn' ,'alert')
         );
         
         $this->login_required_validation();
         $this->load->model('home_model');
+
+        $this->alertMsg();
+
+    }
+    private function alertMsg()
+    {
+        if ( $this->session->userdata('Rank') <= 2){
+            if($this->session->userdata('Role') == 'male'){
+                $this->display_data['alert_content'] = $this->display_data['alert_mail_need_to_vaildate_before_view_femele_profile'];
+            }else{
+                $this->display_data['alert_content'] = $this->display_data['alert_mail_need_to_vaildate_before_view_mele_profile'];
+            }
+        }
     }
     public function index()
 	{
-        
         $this->display_data['home_welcome'] = sprintf( $this->display_data['home_welcome'] , $this->session->userdata('Nickname') );
-        $this->display_data['random_user'] = $this->home_model->get_random_user();
+
+        if($this->session->userdata('Role') == 'male'){
+            $this->display_data['random_user'] = $this->home_model->get_random_user('female');
+            $this->display_data['newcomer_user'] = $this->home_model->get_newcomer_user('female');
+        }else{
+            $this->display_data['random_user'] = $this->home_model->get_random_user('male');
+            $this->display_data['newcomer_user'] = $this->home_model->get_newcomer_user('male');
+        }
 
 		$this->parser->parse('site/_default/header',$this->display_data);
 		$this->parser->parse('site/_default/header_logout',$this->display_data);
-		$this->parser->parse('site/_default/female_navi',$this->display_data);
+        if($this->session->userdata('Role') == 'male'){
+            $this->parser->parse('site/_default/female_navi',$this->display_data);
+        }else{
+            $this->parser->parse('site/_default/male_navi',$this->display_data);
+        }
+		
 		$this->parser->parse('site/home/'.$this->session->userdata('Role').'_index',$this->display_data);
 
 		$this->parser->parse('site/_default/footer',$this->display_data);
 
 	}
+    public function phpinfo()
+    {
+        print_r(openssl_get_cert_locations());
+        echo phpinfo();
+    }
     public function do_upload(){
 		$config['upload_path'] = './uploads';
 		$config['allowed_types'] = 'gif|jpg|png';

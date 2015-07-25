@@ -20,7 +20,6 @@ class BASE_Controller extends CI_Controller{
             $arr = $this->my_language->load($key);
             $this->display_data = array_merge( $this->display_data, $arr);
         }
-        
     }
     public function get_lang()
     {
@@ -50,16 +49,8 @@ class BASE_Controller extends CI_Controller{
 class Admin_Base_Controller extends BASE_Controller {
     public function __construct() {
         parent::__construct();
-        $this->parse_display_data();
-        //管理者未登入，回到前端首頁
-        if( $this->session->userdata('user_exist') == false){
-            redirect( base_url() , 'refresh');
-        }
-        //管理者session失效或無管理者權限，回到前端首頁
-        if( $this->session->userdata('user_exist') == false || $this->session_data['Rank'] != 255)
-        {
-            redirect( base_url() , 'refresh');
-        }
+        $this->parse_display_data(array('home' , 'footer'));
+
     }
 
 

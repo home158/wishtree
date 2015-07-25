@@ -1,0 +1,147 @@
+/** ==================================================
+  *
+  * CONSTANTS.
+  *         #FFFFFF (background), #666666 (border), #D4D0C8 (cell-border-lint , resizable-drag-line),
+  *         #0066cc(hearder hover) , #3399FF(ui-selected)
+  * 
+  * ================================================== */
+.trend-tree {
+    background: #FFFFFF;
+    cursor: default;
+    height:100%;
+    overflow:hidden;
+    width:100%;
+    position: relative;
+    text-align:left;
+}
+.trend-tree .contentScrollerWrap{
+    position:relative;
+    overflow:auto;
+    height:100%;
+}
+.trend-tree .content{
+    padding:0px;
+    margin-left:0px;
+    margin-right:0px;
+    margin-bottom:0px;
+    position:relative;
+    margin-top:4px;
+    overflow:visible;
+}
+.trend-tree .content div.ui-hover{
+    background-color:#E5F1FF;
+}
+.trend-tree .content div.ui-selected , .trend-tree .content div.ui-selected-fake{
+    background-color:#BEDFFF;
+}
+.trend-tree .content div.node{
+    position:absolute;
+    height:20px;
+    white-space: nowrap;
+    width:100%;
+}
+.trend-tree .content .node-indent{
+    height:20px;
+    display:inline-block;
+    padding-left:4px;
+}
+.trend-tree .content .node-indent .dot-line{
+    width:20px;
+    height:20px;
+    display:inline-block;
+}
+.trend-tree .content .node-indent .dot-default{
+    background-position:0px -50px;
+}
+
+.trend-tree .content .node-indent .dot-middle{
+    background-position:0px 0px;
+}
+.trend-tree .content .node-indent .dot-last{
+    background-position:0px -1766px;
+}
+.trend-tree .content .node-indent .dot-empty{
+    background-position:-30px 0px
+}
+.trend-tree .content .icons{
+    width:20px;
+    height:20px;
+    display:inline-block;
+    background-repeat:no-repeat;
+}
+.trend-tree .content .node-indent .expand-collapse{
+    background-image:url(images/expand-collapse.png);
+    width:20px;
+    height:20px;    
+}
+.trend-tree .content .node-indent .icon-expand{
+    background-position:-5px -29px;
+}
+.trend-tree .content .node-indent .icon-collapse{
+    background-position:-5px -7px;
+}
+.trend-tree .content .node-icons-text{
+    height: 20px;
+    display: inline-block;
+    padding-left: 0px;
+    vertical-align: top;
+}
+.trend-tree .content .text{
+    height:100%;
+    line-height:20px;
+    vertical-align:top;
+    padding-left:2px;
+    padding-right:2px;
+}
+.trend-tree .content .icons-root{
+    background-image: url(images/tm_sever.png) 0px center no-repeat;
+    width:20px;
+    height:20px;
+    background-position:2px 2px;
+}
+.trend-tree .content .icons-node{
+    background: url(images/search-16.png)  0px center no-repeat;
+    width:20px;
+    height:20px;
+    background-position:2px 2px;
+}
+.trend-tree .content .search-result .icons-node {
+    background-image: url(images/icon_search_result.png);
+}
+.trend-tree .content .icons-checkbox{
+    background-image: url(images/icons_checkbox.png);
+    width:20px;
+    height:20px;
+    background-repeat:no-repeat;
+}
+.trend-tree .content .off{
+    background-position:0px 0px;
+}
+.trend-tree .content .half{
+    background-position:0px -20px;
+}
+.trend-tree .content .on{
+    background-position:0px -40px;
+}
+.trend-tree .ajax-loading{
+    background-image: url(images/75p_white.png) ;
+    height:100%;
+    position:absolute;
+    top:0px;
+    width:100%;
+    z-index:4;
+    line-height:100%;
+}
+.trend-tree .ajax-loading .message{
+    height:32px;
+    width:32px;
+    position:absolute;
+    background-image: url(images/loading_32.gif);
+    background-repeat:no-repeat;
+}
+.trend-tree .ui-state-active{
+    background-color:#BEDFFF;
+}
+.trend-tree .ui-state-active .node-indent{
+    background-color:#FFFFFF;
+}

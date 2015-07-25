@@ -92,6 +92,9 @@ class Register extends Site_Base_Controller {
         if( $this->input->cookie("WG_role") == 'male' ){
             $this->form_validation->set_rules('income', $this->display_data['grid_column_Income'], 'trim|required');
             $this->form_validation->set_rules('property', $this->display_data['grid_column_Property'], 'trim|required');
+            $this->display_data['register_gender'] = $this->display_data['register_male'];
+        }else{
+            $this->display_data['register_gender'] = $this->display_data['register_female'];
         }
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -212,7 +215,7 @@ class Register extends Site_Base_Controller {
     {
         $this->login_required_validation();
         $this->register_model->sent_email_verification($this->session->userdata('GUID') ,$this->session->userdata('Email'), $this->session->userdata('Nickname'));
-        redirect( base_url().'register/sending_validate_mail' , 'refresh');
+     //   redirect( base_url().'register/sending_validate_mail' , 'refresh');
     }
 
 }

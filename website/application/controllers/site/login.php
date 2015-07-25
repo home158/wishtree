@@ -43,6 +43,12 @@ class Login extends Site_Base_Controller {
             $row = $query->row();
             //登人成功，轉至會員中心
             if( $query->num_rows == 1){
+                //更新最後上線時間
+                $new_data = array(
+                    'LastLoginTime' => date('Y-m-d H:i:s')
+                );
+                $result = $this->db->update('[dbo].[i_user]', $new_data, array('GUID' => $row->GUID ));
+
                 switch($row->Rank){
                     //刪除帳號
                     case 0:
@@ -89,6 +95,18 @@ class Login extends Site_Base_Controller {
                         $this->login_model->set_info_cookie($row, $remember_me);
                         $this->session->set_userdata($data_db);
                         redirect( base_url().'home' , 'refresh');
+                    break;
+                    //管理員
+                    case 255:
+                        $data_db['Nickname'] = $row->Nickname;
+                        $data_db['Email'] = $row->Email;
+                        $data_db['Rank'] = $row->Rank;
+                        $data_db['GUID'] = $row->GUID;
+                        $data_db['Role'] = $row->Role;
+                        $this->utility_model->setTimezoneOffset($row->TimezoneOffset , $row->DST);
+                        $this->login_model->set_info_cookie($row, $remember_me);
+                        $this->session->set_userdata($data_db);
+                        redirect( base_url().'admin' , 'refresh');
                     break;
                 }
             }else{

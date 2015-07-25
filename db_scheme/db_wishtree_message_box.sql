@@ -27,7 +27,7 @@ SET @GUID = NEWID()
 			[DateCreate] [datetime] NOT NULL default CURRENT_TIMESTAMP,	-- 資料建立時間
 			[DateModify] [datetime] NOT NULL default CURRENT_TIMESTAMP,  -- 更新資料時間
 			FOREIGN KEY (UserGUID) REFERENCES i_user(GUID) ON DELETE CASCADE,
-			FOREIGN KEY (FromUserGUID) REFERENCES i_user(GUID)
+			FOREIGN KEY (FromUserGUID) REFERENCES i_user(GUID) 
 
 		) 
 	END;

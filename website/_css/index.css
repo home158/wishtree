@@ -524,3 +524,10 @@ select {
 .profile_right{
     width:62%;
 }
+.alert {
+  margin-bottom: 0px;
+}  
+#bs_alert{
+    padding: 15px;
+    display: none;
+}

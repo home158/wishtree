@@ -15,7 +15,7 @@
                         <p class="hd">{register_part1}</p>
                         <div>
                             <span class="item">{grid_column_Gender}</span>
-                            {register_male}
+                            {register_gender}
                             <br>
                             <br>
                            <span class="item">{grid_column_Email} : </span>

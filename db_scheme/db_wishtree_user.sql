@@ -8,11 +8,6 @@ SET @GUID = NEWID()
 		WHERE object_id = OBJECT_ID(N'[dbo].[i_photo]') 
 		AND type in (N'U'))
 	DROP TABLE [dbo].[i_photo]
--- Drop the i_user.
-	IF EXISTS (SELECT * FROM sys.objects 
-		WHERE object_id = OBJECT_ID(N'[dbo].[i_user]') 
-		AND type in (N'U'))
-	DROP TABLE [dbo].[i_user]
 -- Drop the i_message_box.
 	IF EXISTS (SELECT * FROM sys.objects 
 		WHERE object_id = OBJECT_ID(N'[dbo].[i_message_box]') 
@@ -23,6 +18,15 @@ SET @GUID = NEWID()
 		WHERE object_id = OBJECT_ID(N'[dbo].[i_pending_message]') 
 		AND type in (N'U'))
 	DROP TABLE [dbo].[i_pending_message]
+-- Drop the i_photo.
+	IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[i_photo]') 
+		AND type in (N'U'))
+	DROP TABLE [dbo].[i_photo]-- Drop the i_user.
+	IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[i_user]') 
+		AND type in (N'U'))
+	DROP TABLE [dbo].[i_user]
 
 -- Create the i_user table.
 

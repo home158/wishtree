@@ -1,0 +1,127 @@
+body {
+    background: #EEEDE8;
+    font: 14px/1.5 'Gotham Narrow SSm', "Microsoft YaHei", "微軟雅黑", "Microsoft Jhenghei", "Helvetica Neue", HelveticaNeue, Arial, sans-serif;
+    padding-top: 50px; 
+    min-height: 410px;
+
+}
+.wrap{
+    margin: 5px auto 0;
+    padding-top: 10px;
+
+}
+.account_set{
+    width: 980px;
+}
+/* 區塊-填寫會員資料
+---------------------------------------------------- */
+.blk-reg .item {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	margin-left: -200px;
+	width: 200px;
+
+}
+.blk-reg form {
+	margin-left: 200px;
+}
+.blk-reg p{
+	margin-left: -200px;
+}
+.blk-reg input[type=text],
+.blk-reg input[type=email],
+.blk-reg input[type=password],
+.blk-reg input[type=password],
+.blk-reg select {
+    margin-left: -5px;
+}
+input[type=text],
+input[type=email],
+input[type=password],
+input[type=password],
+select {
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;    
+    display: inline-block;
+    margin-bottom: 4px;
+  
+}
+.blk-reg .section{
+    margin-top: 10px;
+    border-bottom: 1px solid #ff5b7e;
+}
+.blk-reg em.note {
+    font-style: normal;
+    color: #000;
+}
+.blk-reg em {
+    color: #F00;
+}
+.alert {
+  margin-bottom: 0px;
+}  
+
+#bs_alert{
+    display: none;
+    width: 980px;
+    margin: 0 auto;
+}
+.pand-console{
+    height:100%;
+    margin:10px 20px 20px 20px;
+    min-width:980px;
+}
+.pane-status{
+    height:30px;
+    border-bottom:1px #b2b2b2 solid;
+    border-left:1px #b2b2b2 solid;
+    border-right:1px #b2b2b2 solid;
+    padding-left:4px;
+}
+.pane-search{
+    margin-bottom:10px;
+}
+.pane-search input[type=text]{
+    width: 300px;
+}
+.pane-menu{
+    border-top:1px #b2b2b2 solid;
+    border-left:1px #b2b2b2 solid;
+    border-right:1px #b2b2b2 solid;
+}
+.pane-tree{
+    float:left;
+    height:450px;
+    width:230px;
+    border-top:1px #b2b2b2 solid;
+    border-left:1px #b2b2b2 solid;
+    border-bottom:1px #b2b2b2 solid;
+}
+.pane-grid{
+    height:450px;
+    margin-left:230px;
+    position:relative;
+}
+.pane-footer {
+    text-align: center;
+}
+.pane-header{
+  clear: both;
+  padding-left: 4px;
+  border-bottom: 1px solid #b2b2b2;
+  margin-bottom: 1em;
+}
