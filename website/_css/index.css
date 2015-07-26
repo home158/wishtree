@@ -408,6 +408,8 @@ select {
 .photo_update .crop{
     width: 214px;
 }
+.photo_list .update_image{
+}
 .photo_list ul{
     margin: 0 auto;
     width: 800px;
@@ -420,10 +422,57 @@ select {
     font-family: "Segoe UI Semibold";
     margin-bottom: 0px;
 }
-.photo_list li img{
-    padding-bottom: 5px;
-    cursor: pointer;
+.photo_list li .image-box{
+    position: relative;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+
+    display: inline-block;
+    padding: 5px;
 }
+.photo_list li .image-box img{
+    cursor: pointer;
+    width: 100px;
+    height: 120px;
+}
+.photo_list li .image-box-off .btn-clickboard{
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    display: block;
+    padding: 0px 3px;
+    font-size: 10px;
+    color: #767676;
+    cursor: pointer;
+    background-color: #fff;
+    border-left: 1px solid #e1e1e8;
+    border-bottom: 1px solid #e1e1e8;
+    border-radius: 0 0px 0 4px;
+    display: none;
+}
+.photo_list li .image-box-on .btn-clickboard{
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    display: block;
+    padding: 0px 3px;
+    font-size: 10px;
+    color: #FFF;
+    cursor: pointer;
+    background-color: #ff5b7e;
+    border-left: 1px solid #e1e1e8;
+    border-bottom: 1px solid #e1e1e8;
+    border-radius: 0 0px 0 4px;
+    border-color: #ff5b7e;
+}
+.photo_list li .image-box-off .btn-clickboard-hover{
+    background-color: #ff5b7e;
+    border-color: #ff5b7e;
+    color: #FFF;
+}
+
 .profile_set{
 
 }
@@ -530,4 +579,20 @@ select {
 #bs_alert{
     padding: 15px;
     display: none;
+}
+.fileinput-button {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+.fileinput-button input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    font-size: 200px;
+    direction: ltr;
+    cursor: pointer;
 }

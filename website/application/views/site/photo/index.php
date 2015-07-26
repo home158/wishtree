@@ -1,7 +1,7 @@
 <script src="/_js/jquery.Jcrop.min.js"></script>
 <link rel="stylesheet" href="/_css/jquery.Jcrop.min.css" type="text/css" />
 <div id="content">
-    <div class="validate_mail bg clearfix">
+    <div class="bg clearfix">
         <div class="msg deal_msg">
             <p class="hd">{account_update_profile}</p>
         </div>
@@ -16,11 +16,14 @@
             <div class="photo_list">
                 <ul class="clearfix">
                 {my_photos}
-                    <li>
+                    <li >
                         <label class="redF">{review_status}</label>
-                        <img class="update_image" src="{thumb_image_url}" data-GUID="{GUID}" data-full="{full_image_url}" data-crop="{crop_image_url}"/>
-                        <input type="button" class="delete_image btn-m btn-emp" data-GUID="{GUID}" value="{btn_delete}">
-                        
+                        <div class="image-box image-box-{IsCover}"><img class="update_image" src="{thumb_image_url}" data-GUID="{GUID}" data-full="{full_image_url}" data-crop="{crop_image_url}"/><div class="btn-clickboard" data-GUID="{GUID}" >Top</div>
+                        </div>
+                        <button type="button" class="delete_image btn btn-danger delete btn-sm " data-GUID="{GUID}" >
+                            <i class="glyphicon glyphicon-trash"></i>
+                            <span>{btn_delete}</span>
+                        </button>
                     
                     </li>
                 {/my_photos}
@@ -35,10 +38,14 @@
 			    <input type="hidden" id="GUID" name="GUID" />
                 <div class="photo_update  clearfix">
                     <div class="fl tc">
-                        <div id="preview">
+                        <div id="preview" style="max-width: 500px; max-height: 500px;">
                             <img src="/_images/null_face.jpg" id="target" />
                         </div>
-                        <input type="file" id="uploadImage" name="userfile" class="validate[custom[validateMIME[image/jpeg|image/png]]]" >
+                <span class="btn btn-success fileinput-button">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>{btn_add_photo}</span>
+                    <input type="file" id="uploadImage" name="userfile" multiple="">
+                </span>
                         <?php echo $error;?>
                     </div>
 
@@ -48,7 +55,10 @@
                                 <img src="/_images/null_face.jpg" class="jcrop-preview" alt="Preview" />
                           </div>
                         </div>
-                        <input type="submit" class="disabled btn-xl btn-emp" value="{btn_submit}">
+                        <button type="submit" class="btn btn-primary start">
+                            <i class="glyphicon glyphicon-upload"></i>
+                            <span>{btn_start_upload}</span>
+                        </button>
                         <br>
 
                     </div>
@@ -155,7 +165,9 @@ $(function(){
             //$('#target').attr('src' , oFREvent.target.result);
             $('#preview').html('<img id="target" src="'+oFREvent.target.result+'">');
             $pcnt.html('<img src="'+oFREvent.target.result+'" class="jcrop-preview" >');
-            initJcrop();
+            setTimeout(function(){
+                initJcrop();
+            });
         };
     });
 
@@ -175,7 +187,7 @@ $(function(){
             var $GUID = $(this).attr('data-GUID');
             $('input[name="GUID"]').val($GUID);
     });
-    $('input.delete_image').bind('click',function(){
+    $('button.delete_image').bind('click',function(){
         var $this = $(this);
         $this.parent().fadeOut();
         
@@ -195,7 +207,43 @@ $(function(){
         });
         
     });
-    
+    //btn-clickboard
+    $('.image-box-off').hover(function(){
+        $('.btn-clickboard' , $(this)).show();
+    },function(){
+        $('.btn-clickboard', $(this)).hide();
+    });
+    $('.btn-clickboard').hover(function(){
+        $(this).addClass('btn-clickboard-hover');
+    },function(){
+        $(this).removeClass('btn-clickboard-hover');
+    }).bind('click',function(){
+        
+        var $this = $(this);
+        $('.image-box-on').removeClass('image-box-on').addClass('image-box-off');
+        $this.parent().removeClass('image-box-off').addClass('image-box-on').unbind('mouseenter mouseleave');
+        $('.image-box-off .btn-clickboard').hide();
+
+        $('.image-box-off').hover(function(){
+            $('.btn-clickboard' , $(this)).show();
+        },function(){
+            $('.btn-clickboard', $(this)).hide();
+        });
+        $.ajax({
+            url: '/photo/set_top',
+            dataType: 'json',
+            type: 'POST',
+            data: {
+                GUID : $this.attr('data-GUID')
+            },
+            success: function(r) {
+                
+            },
+            complete : function(){
+                
+            }
+        });
+    });
 });
 	
 </script>

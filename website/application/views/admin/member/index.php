@@ -20,8 +20,8 @@
         <h1 id="myHeader" class="trend-header">{menu_admin_member}</h1>
     </div>
     <div class="pane-search">
-        {member_search_account}
-        <input id="emailNameText" placeholder="{member_search_hint}" name="search_text" type="text" value=""/>&nbsp;&nbsp;<input id="searchBtn" type="submit" class="btn-calm" value="&nbsp;&nbsp;{btn_search}&nbsp;&nbsp;"/>
+        {menu_search_account}
+        <input id="emailNameText" placeholder="{menu_search_hint}" name="search_text" type="text" value=""/>&nbsp;&nbsp;<input id="searchBtn" type="submit" class="btn-calm" value="&nbsp;&nbsp;{btn_search}&nbsp;&nbsp;"/>
     </div>
     <div class="pane-menu">
         <div id="myMenu" class="trend-menu"></div>
@@ -34,7 +34,7 @@
         <div id="myGrid" class="trend-grid"></div>
     </div>
     <div class="pane-status">
-        <div id="myrtatus" class="trend-status">{member_total_rows}</div><!-- PHP Parse data-->
+        <div id="myrtatus" class="trend-status">{menu_total_rows}</div><!-- PHP Parse data-->
     </div>
 </div>
 <!-- ui-dialog -->
@@ -69,6 +69,8 @@ var O_PARENT = {
             RANK_BETWEEN_FROM: 0,
             RANK_BETWEEN_TO: 255,
             PROFILE_REVIEW_STATUS: '0,1,2',
+            DELETE_STATUS: '0,1',
+            FORBIDDEN_STATUS: '0,1',
             ICON:'/_images/friends-16.png',
             CHILD: [
                         {
@@ -78,7 +80,9 @@ var O_PARENT = {
                             RANK_BETWEEN_TO: 2,
                             HAS_EXPAND_COLLAPSE_ICON : false,
                             ICON:'/_images/people-16.png',
-                            PROFILE_REVIEW_STATUS: '0,1,2'
+                            PROFILE_REVIEW_STATUS: '0,1,2',
+                            DELETE_STATUS: '0,1',
+                            FORBIDDEN_STATUS: '0,1'
                         },
                         {
                             NAME:'{rank_validated}',
@@ -87,7 +91,9 @@ var O_PARENT = {
                             RANK_BETWEEN_TO: 255,
                             HAS_EXPAND_COLLAPSE_ICON : false,
                             ICON:'/_images/people-16.png',
-                            PROFILE_REVIEW_STATUS: '0,1,2'
+                            PROFILE_REVIEW_STATUS: '0,1,2',
+                            DELETE_STATUS: '0,1',
+                            FORBIDDEN_STATUS: '0,1'
                         },
                         {
                             NAME:'{rank_review_process}',
@@ -96,7 +102,9 @@ var O_PARENT = {
                             RANK_BETWEEN_TO: 255,
                             HAS_EXPAND_COLLAPSE_ICON : false,
                             ICON:'/_images/people-16.png',
-                            PROFILE_REVIEW_STATUS: '0'
+                            PROFILE_REVIEW_STATUS: '0',
+                            DELETE_STATUS: '0,1',
+                            FORBIDDEN_STATUS: '0,1'
                         },
                         {
                             NAME:'{rank_review_pass}',
@@ -105,7 +113,9 @@ var O_PARENT = {
                             RANK_BETWEEN_TO: 255,
                             HAS_EXPAND_COLLAPSE_ICON : false,
                             ICON:'/_images/people-16.png',
-                            PROFILE_REVIEW_STATUS: '2'
+                            PROFILE_REVIEW_STATUS: '2',
+                            DELETE_STATUS: '0,1',
+                            FORBIDDEN_STATUS: '0,1'
                         },
                         {
                             NAME:'{rank_review_not_pass}',
@@ -114,7 +124,9 @@ var O_PARENT = {
                             RANK_BETWEEN_TO: 255,
                             HAS_EXPAND_COLLAPSE_ICON : false,
                             ICON:'/_images/people-16.png',
-                            PROFILE_REVIEW_STATUS: '1'
+                            PROFILE_REVIEW_STATUS: '1',
+                            DELETE_STATUS: '0,1',
+                            FORBIDDEN_STATUS: '0,1'
                         },
                         {
                             NAME:'{rank_advance_vip}',
@@ -123,25 +135,31 @@ var O_PARENT = {
                             RANK_BETWEEN_TO: 255,
                             HAS_EXPAND_COLLAPSE_ICON : false,
                             ICON:'/_images/people-16.png',
-                            PROFILE_REVIEW_STATUS: '2'
+                            PROFILE_REVIEW_STATUS: '2',
+                            DELETE_STATUS: '0,1',
+                            FORBIDDEN_STATUS: '0,1'
                         },
                         {
                             NAME:'{rank_deleted}',
                             GUID: '6A928D1F-EB98-4D78-A792-F8B35B03E166',
                             RANK_BETWEEN_FROM: 0,
-                            RANK_BETWEEN_TO: 0,
+                            RANK_BETWEEN_TO: 255,
                             HAS_EXPAND_COLLAPSE_ICON : false,
                             ICON:'/_images/people-16.png',
-                            PROFILE_REVIEW_STATUS: '0,1,2'
+                            PROFILE_REVIEW_STATUS: '0,1,2',
+                            DELETE_STATUS: '1',
+                            FORBIDDEN_STATUS: '0,1'
                         },
                         {
                             NAME:'{rank_forbidden}',
                             GUID: '8C06A53F-4971-4954-9C6B-D3EC709A3BC9',
-                            RANK_BETWEEN_FROM: 1,
-                            RANK_BETWEEN_TO: 1,
+                            RANK_BETWEEN_FROM: 0,
+                            RANK_BETWEEN_TO: 255,
                             HAS_EXPAND_COLLAPSE_ICON : false,
                             ICON:'/_images/forbidden-16.png',
-                            PROFILE_REVIEW_STATUS: '0,1,2'
+                            PROFILE_REVIEW_STATUS: '0,1,2',
+                            DELETE_STATUS: '0,1',
+                            FORBIDDEN_STATUS: '1'
                         },
                         {
                             NAME: '{rank_administrator}',
@@ -150,7 +168,9 @@ var O_PARENT = {
                             RANK_BETWEEN_TO: 255,
                             HAS_EXPAND_COLLAPSE_ICON : false,
                             ICON:'/_images/key-16.png',
-                            PROFILE_REVIEW_STATUS: '0,1,2'
+                            PROFILE_REVIEW_STATUS: '0,1,2',
+                            DELETE_STATUS: '0,1',
+                            FORBIDDEN_STATUS: '0,1'
                         }
                     ]
         },
@@ -317,7 +337,7 @@ var O_PARENT = {
                     ONCLICK: function(e) {
                         $('#myGrid').trendGrid('getSelected', function(r){
                             var GUID = O_PARENT.grid.GUID_list[r];
-                            O_PARENT.menu.ajax_account_delete(GUID,r[0] , 0);
+                            O_PARENT.menu.ajax_account_delete(GUID,r[0] , 1);
                         });
                     }
                 },
@@ -347,7 +367,7 @@ var O_PARENT = {
                     ONCLICK: function(e) {
                         $('#myGrid').trendGrid('getSelected', function(r){
                             var GUID = O_PARENT.grid.GUID_list[r];
-                            O_PARENT.menu.ajax_account_forbidden(GUID,r[0] , 0);
+                            O_PARENT.menu.ajax_account_forbidden(GUID,r[0] , 1);
                         });
                     }
                 },
@@ -379,6 +399,68 @@ var O_PARENT = {
                     }
                 }
             ]
+        },
+        ajax_account_delete: function(GUID , top , status){
+            $.isLoading({
+                    text: "Loading" ,
+                    position:   "overlay"
+            });
+
+            $.ajax({
+                //must to set synchronous, otherwise your need good design concept
+                url: '/admin/member/account_delete',
+                dataType: 'json',
+                type: 'POST',
+                data: {
+                    status: status,
+                    GUID:GUID
+                },
+                success: function(r) {
+                    if(r.error_code == 0){
+
+                        $('#myGrid').trendGrid('registerRowsData', {
+                            data: [
+                                    r.content
+                            ],
+                            top: top
+                        });
+                        $('#myGrid').trendGrid('renderContent');
+                        O_PARENT.menu.toggle_contextmenu([]);
+                        $.isLoading( "hide" );
+                    }
+                }
+            });
+        },
+        ajax_account_forbidden: function(GUID , top , status){
+            $.isLoading({
+                    text: "Loading" ,
+                    position:   "overlay"
+            });
+
+            $.ajax({
+                //must to set synchronous, otherwise your need good design concept
+                url: '/admin/member/account_forbidden',
+                dataType: 'json',
+                type: 'POST',
+                data: {
+                    status: status,
+                    GUID:GUID
+                },
+                success: function(r) {
+                    if(r.error_code == 0){
+
+                        $('#myGrid').trendGrid('registerRowsData', {
+                            data: [
+                                    r.content
+                            ],
+                            top: top
+                        });
+                        $('#myGrid').trendGrid('renderContent');
+                        O_PARENT.menu.toggle_contextmenu([]);
+                        $.isLoading( "hide" );
+                    }
+                }
+            });
         },
         ajax_profile_review_pass: function(GUID , top , status){
             $.isLoading({
@@ -493,13 +575,13 @@ var O_PARENT = {
                     }
 
                     //Delete Rank = 0
-                    if(r[0].Rank == 0){
+                    if(r[0].DeleteStatus == 1){
                         CLIENT_MENU.menu[4].DISABLED = true;
                     }else{
                         CLIENT_MENU.menu[5].DISABLED = true;
                     }
                     //Forbidden Rank = 1
-                    if(r[0].Rank == 1){
+                    if(r[0].ForbiddenStatus == 1){
                         CLIENT_MENU.menu[6].DISABLED = true;
                     }else{
                         CLIENT_MENU.menu[7].DISABLED = true;
@@ -535,7 +617,9 @@ var O_PARENT = {
             bottom:37,
             SORT_COLUMN_ID: 'UserID',
             ORDER_METHOD: 'ASC',
-            PROFILE_REVIEW_STATUS: '0,1,2'
+            PROFILE_REVIEW_STATUS: '0,1,2',
+            DELETE_STATUS: '0,1',
+            FORBIDDEN_STATUS: '0,1',
         },
         init: function(){
             this.$myGrid.trendGrid({
@@ -550,7 +634,7 @@ var O_PARENT = {
                     {
                         id: "Nickname",
                         name: '{grid_column_Nickname}',
-                        width: 55,
+                        width: 155,
                         sortAsc: true
                     },
                     {
@@ -565,23 +649,47 @@ var O_PARENT = {
                         width: 55,
                         sortAsc: true
                     },
+                    {
+                        id: "ForbiddenStatus",
+                        name: '{grid_column_ForbiddenStatus}',
+                        width: 65,
+                        sortAsc: true
+                    },
+                    {
+                        id: "ForbiddenDate",
+                        name: '{grid_column_ForbiddenDate}',
+                        width: 130,
+                        sortAsc: true
+                    },
+                    {
+                        id: "DeleteStatus",
+                        name: '{grid_column_DeleteStatus}',
+                        width: 65,
+                        sortAsc: true
+                    },
+                    {
+                        id: "DeleteDate",
+                        name: '{grid_column_DeleteDate}',
+                        width: 130,
+                        sortAsc: true
+                    },
                     
                     {
                         id: "LastLoginTime",
                         name: '{grid_column_LastLoginTime}',
-                        width: 155,
+                        width: 130,
                         sortAsc: true
                     },
                     {
                         id: "DateModify",
                         name: '{grid_column_DateModify}',
-                        width: 155,
+                        width: 130,
                         sortAsc: true
                     },
                     {
                         id: "DateCreate",
                         name: '{grid_column_DateCreate}',
-                        width: 155,
+                        width: 130,
                         sortAsc: true
                     }
                 ],
@@ -629,6 +737,28 @@ var O_PARENT = {
                             break;
                             case 2:
                                 return '{account_profile_review_pass}';
+                            break;
+                        }
+                    },
+                    DeleteStatus: function(o){
+                        o.$cell.css('text-align','center');
+                        switch(parseInt(o.text,10)){
+                            case 0:
+                                return '';
+                            break;
+                            case 1:
+                                return 'Y';
+                            break;
+                        }
+                    },
+                    ForbiddenStatus: function(o){
+                        o.$cell.css('text-align','center');
+                        switch(parseInt(o.text,10)){
+                            case 0:
+                                return '';
+                            break;
+                            case 1:
+                                return 'Y';
                             break;
                         }
                     }

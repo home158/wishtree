@@ -20,11 +20,13 @@
           </li>      
 
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">照片審核<b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">{menu_admin_photo}<b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a tabindex="-1" href="/admin/notepad/farm_village">等待審核</a></li>
-              <li><a tabindex="-1" href="/admin/notepad/process">審核通過</a></li>
-              <li><a tabindex="-1" href="/admin/notepad/growing">審核不通過</a></li>
+              <li><a tabindex="-1" href="/admin/photo/view">{photo_view_all}</a></li>
+              <li class="divider"></li>
+              <li><a tabindex="-1" href="/admin/photo/view/">{photo_review_pending}</a></li>
+              <li><a tabindex="-1" href="/admin/photo/view/">{photo_review_pass}</a></li>
+              <li><a tabindex="-1" href="/admin/photo/view/">{photo_review_reject}</a></li>
             </ul>
           </li>      
           <li class="dropdown">

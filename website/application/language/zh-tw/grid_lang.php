@@ -1,11 +1,18 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 $lang['grid_column_UserID']      = "編號";
-$lang['grid_column_Gender']      = "帳戶類型";
+$lang['grid_column_Role']      = "帳戶類型";
 $lang['grid_column_Email']      = "電子郵件";
 $lang['grid_column_Password'] = "密碼";
 $lang['grid_column_OldPassword'] = "原始密碼";
 $lang['grid_column_NewPassword'] = "新密碼";
+
+$lang['grid_column_PhotoID']      = "編號";
+$lang['grid_column_ReviewStatus']      = "審核狀態";
+$lang['grid_column_ReviewDate']      = "審核時間";
+$lang['grid_column_IsPrivate']      = "公開/私人";
+$lang['grid_column_FullBasename']        = "1比1照片";
+$lang['grid_column_CropBasename']        = "截圖照片";
 
 $lang['grid_column_PasswordCheck'] = "再輸入一次密碼";
 $lang['grid_column_Nickname'] = "暱稱";
@@ -46,6 +53,10 @@ $lang['grid_column_DateModify'] = "更改時間";
 $lang['grid_column_DateCreate'] = "建立時間";
 $lang['grid_column_ProfileReviewStatus'] = "資料審核狀態";
 $lang['grid_column_ProfileReviewDate'] = "資料審核時間";
+$lang['grid_column_DeleteStatus'] = "刪除註記";
+$lang['grid_column_DeleteDate'] = "刪除時間";
+$lang['grid_column_ForbiddenStatus'] = "停權註記";
+$lang['grid_column_ForbiddenDate'] = "停權時間";
 
 /* End of file grid_lang.php */
 /* Location: ./application/language/zh-tw/grid_lang.php */

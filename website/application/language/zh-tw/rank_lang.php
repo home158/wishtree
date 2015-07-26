@@ -8,8 +8,8 @@ $lang['rank_review_process']        = "等待審核中";
 $lang['rank_review_pass']        = "審核通過";
 $lang['rank_review_not_pass']        = "審核未通過";
 
-$lang['rank_forbidden']        = "停權";//1
-$lang['rank_advance_vip']        = "VIP會員";//1
+$lang['rank_forbidden']        = "停權註記";
+$lang['rank_advance_vip']        = "VIP會員";
 
 $lang['rank_normal']        = "普通會員";   // 2:註冊未認證; 3:已認證會員;
 $lang['rank_normal_trial']        = "普通會員(試用中)";//5

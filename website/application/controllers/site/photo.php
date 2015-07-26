@@ -44,7 +44,6 @@ class Photo extends Site_Base_Controller {
         $my_photos = $this->photo_model->retrieve_my_photos( $this->session->userdata('GUID') , $type);
         $this->display_data['my_photos'] = $my_photos;
 
-
 		$config['upload_path'] = $this->config->item('azure_storage_temp_forder');
 		$config['allowed_types'] = 'gif|jpg|jpeg|png';
 		//$config['max_size']	= '1000';
@@ -198,6 +197,26 @@ class Photo extends Site_Base_Controller {
         $blobRestProxy->deleteBlob($row['Container'], $row['FullBasename']);
         $blobRestProxy->deleteBlob($row['Container'], $row['CropBasename']);
         $blobRestProxy->deleteBlob($row['Container'], $row['ThumbBasename']);
+    }
+    public function set_top()
+    {
+        $UserGUID = $this->session->userdata('GUID');
+        $GUID = $this->input->post('GUID');
+        //Set all public photo Cover is false
+        $reset_data = array(
+            'IsCover' => 0
+        );
+
+        $this->db->update('[dbo].[i_photo]', $reset_data, array('IsPrivate' => 0, 'UserGUID'=> $UserGUID));
+
+        $update_data = array(
+            'IsCover' => 1,
+            'DateModify' => date('Y-m-d H:i:s')
+        );
+
+        
+        $this->db->update('[dbo].[i_photo]', $update_data, array('GUID' => $GUID, 'UserGUID'=> $UserGUID));
+
     }
     public function test(){
         $this->load->library('azure');

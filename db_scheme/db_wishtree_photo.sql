@@ -25,6 +25,7 @@ SET @GUID = NEWID()
 			[ThumbBasename] [nvarchar](50) NOT NULL,
 			[Hits] [int] NOT NULL default 0, -- 被點擊數
 			[ReviewStatus] [char](1) NOT NULL default 0, --審核註記 0:等待審核 1 : 未通過 ，2:通過
+			[ReviewDate] [datetime] NULL, --審核時間
 			[ReviewRejectReason] [nvarchar](30)  NULL , --審核未通過原因
 			[IsCover] [bit] NOT NULL default 0, -- 封面照片 0 : 否 ，1:是
 

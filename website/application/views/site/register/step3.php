@@ -14,7 +14,7 @@
                         <p class="redF hd ">{register_under_review_cannot_post}</p>
                         <p class="hd">{register_part1}</p>
                         <div>
-                            <span class="item">{grid_column_Gender}</span>
+                            <span class="item">{grid_column_Role}</span>
                             {register_gender}
                             <br>
                             <br>

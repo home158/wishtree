@@ -29,6 +29,8 @@ class Member_model extends CI_Model {
                     $column ='*',
                     $Rank_between_from = 0, $Rank_between_to = 255 ,
                     $Profile_review_status = '0,1,2', 
+                    $delete_status = '0,1', 
+                    $forbidden_status = '0,1',
                     $sort_column_id = 'UserID' , $order_method = 'ASC' , 
                     $search_txt = false)
     {
@@ -49,6 +51,10 @@ class Member_model extends CI_Model {
             WHERE 
                 ProfileReviewStatus in (".$Profile_review_status.") 
                 AND 
+                DeleteStatus in (".$delete_status.") 
+                AND 
+                ForbiddenStatus in (".$forbidden_status.") 
+                AND 
                 (Rank BETWEEN ".$Rank_between_from." AND ".$Rank_between_to.") 
                 ".$query_search." 
             ORDER BY ".$sort_column_id." ".$order_method."
@@ -58,11 +64,15 @@ class Member_model extends CI_Model {
 
         $query_count = $this->db->query(
             "SELECT 
-                * 
+                [GUID]
              FROM 
                 ".$table." 
              WHERE 
                 ProfileReviewStatus in (".$Profile_review_status.") 
+                AND 
+                DeleteStatus in (".$delete_status.") 
+                AND 
+                ForbiddenStatus in (".$forbidden_status.") 
                 AND 
                 (Rank BETWEEN ".$Rank_between_from." AND ".$Rank_between_to.") 
                 ".$query_search." 
