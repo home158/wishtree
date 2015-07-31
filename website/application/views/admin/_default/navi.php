@@ -11,11 +11,13 @@
         <ul class="nav navbar-nav">
 
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">訊息審核<b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">{menu_admin_message}<b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a tabindex="-1" href="/admin/notepad/farm_village">等待審核</a></li>
-              <li><a tabindex="-1" href="/admin/notepad/process">審核通過</a></li>
-              <li><a tabindex="-1" href="/admin/notepad/growing">審核不通過</a></li>
+              <li><a tabindex="-1" href="/admin/message/view">{message_view_all}</a></li>
+              <li class="divider"></li>
+              <li><a tabindex="-1" href="/admin/message/view">{message_review_pending}</a></li>
+              <li><a tabindex="-1" href="/admin/message/view">{message_review_pass}</a></li>
+              <li><a tabindex="-1" href="/admin/message/view">{message_review_reject}</a></li>
             </ul>
           </li>      
 
@@ -57,12 +59,12 @@
            </ul>
           </li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">管理者帳戶<b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">{menu_admin_account}<b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a tabindex="-1" href="/admin/account/settings">設定</a></li>
+              <li><a tabindex="-1" href="/admin/account/settings">{account_change_settings}</a></li>
               <li><a tabindex="-1" href="/admin/account/change_password">{account_change_password}</a></li>
               <li class="divider"></li>
-              <li><a tabindex="-1" href="/logout">登出</a></li>
+              <li><a tabindex="-1" href="/logout">{account_logout}</a></li>
             </ul>
           </li>
         </ul>

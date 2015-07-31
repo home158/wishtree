@@ -20,6 +20,10 @@ class BASE_Controller extends CI_Controller{
             $arr = $this->my_language->load($key);
             $this->display_data = array_merge( $this->display_data, $arr);
         }
+        $this->display_data = array_merge( $this->display_data, $this->session->all_userdata() );
+        $this->display_data["highlight_navi"] = "none";
+        $this->display_data["alert_content"] = "";
+
     }
     public function get_lang()
     {
@@ -83,6 +87,10 @@ class Site_Base_Controller extends BASE_Controller {
         if( !$this->session->userdata('Email') ){
             redirect( base_url() );
         }
+    }
+    public function alertMsg()
+    {
+        return;
     }
 }
 

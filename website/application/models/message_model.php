@@ -7,6 +7,82 @@ class Message_model extends CI_Model {
         parent::__construct();
         $this->lang->load('message');
     }
+    function select_data_limit_offset($table , 
+                    $top = 0, $bottom = 20 ,
+                    $column ='*',
+                    $review_status = '0,1,2',
+                    $sort_column_id = 'MessageID' , $order_method = 'ASC' , 
+                    $search_txt = false)
+    {
+        $P = array('DateModify' , 'MessageReviewDate' , 'DateCreate');
+        if( in_array( $sort_column_id , $P) ){
+            $sort_column_id = 'P.'.$sort_column_id;
+        }
+
+
+        if($search_txt === false){
+            $query_search = "";
+        }else{
+            $query_search = " AND (concat(Name, Email) LIKE '%".$search_txt."%')";
+        }
+        if(is_array($column)){
+            $column = join(",", $column);
+        }
+        $number_rows = $bottom - $top + 1 ;
+        $query_rows = $this->db->query(
+            "SELECT 
+                ".$column."
+            FROM 
+                ".$table." AS M
+            
+                    
+                LEFT JOIN 
+                    [dbo].[i_user] AS U1
+                ON
+                    M.[FromUserGUID] = U1.[GUID]
+            
+                LEFT JOIN 
+                    [dbo].[i_user] AS U2 
+                ON
+                    M.[TargetUserGUID] = U2.[GUID]
+            
+            WHERE 
+                MessageReviewStatus in (".$review_status.") 
+                ".$query_search." 
+            ORDER BY ".$sort_column_id." ".$order_method."
+            OFFSET ".$top."  ROWS
+            FETCH NEXT ".$number_rows." ROWS ONLY"
+        );
+
+        $query_count = $this->db->query(
+            "SELECT 
+                M.[GUID] AS [GUID]
+            FROM 
+            (
+                    [dbo].[i_user] AS U
+                LEFT JOIN 
+                    ".$table." AS M
+                ON
+                    M.[FromUserGUID] = U.[GUID]
+            )
+            WHERE 
+                MessageReviewStatus in (".$review_status.") 
+                ".$query_search." 
+            ORDER BY ".$sort_column_id." ".$order_method.""
+        );
+        $GUID = array();
+        foreach ($query_count->result_array() as $row)
+        {
+            array_push($GUID, $row['GUID']);
+        }
+
+        $result = array(
+            'object' => $query_rows,
+            'num_rows' => $query_count->num_rows(),
+            'GUID_list' => $GUID
+        );
+        return $result;
+    }
     function retrieve_target_info($GUID)
     {
         $this->config->load('photo');
@@ -201,15 +277,19 @@ class Message_model extends CI_Model {
                 $logs[$key]->nickname = $info['Nickname'];
                 if($logs[$key]->sender == $owner){
                     if( $query->num_rows() > 0){
-                        $ReadTime = new DateTime($r['ReadTime']);
-                        if($ReadTime->getTimestamp() >= $send_time){
-                            $logs[$key]->read_status = $this->lang->line('message_readed');
+                        if($r['ReadTime'] == NULL){
+                            $logs[$key]->read_status = '';
                         }else{
-                            $logs[$key]->read_status = $this->lang->line('message_unread');
+                            $ReadTime = new DateTime($r['ReadTime']);
+                            if($ReadTime->getTimestamp() >= $send_time){
+                                $logs[$key]->read_status = $this->lang->line('message_readed');
+                            }else{
+                                $logs[$key]->read_status = $this->lang->line('message_unread');
+                            }
+                            $logs[$key]->read_time = $ReadTime->getTimestamp();
                         }
-                        
                          
-                        $logs[$key]->read_time = $ReadTime->getTimestamp();
+                        
                     }else{
                         $logs[$key]->read_status = $this->lang->line('message_unread');
                     }

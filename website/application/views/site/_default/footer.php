@@ -38,6 +38,7 @@
 </div>
 <!--wrap end-->
 <script>
+
 $(function() {
     $('#footer a.lang_choose').bind('click',function(){
 

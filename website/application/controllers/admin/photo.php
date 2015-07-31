@@ -1,12 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Photo extends Admin_Base_Controller {
-    private $UI_columns = array('PhotoID', 'P.[GUID]' ,'Email','UserGUID', 'U.[Nickname] AS [Nickname]' , 'ReviewStatus' ,'IsPrivate' ,'[FullBasename]' ,'[CropBasename]','U.[Role]');
+    private $UI_columns = array('PhotoID', 'P.[GUID]' ,'Email','UserGUID', 'U.[Nickname] AS [Nickname]' , 'ReviewStatus' , 'IsCover' ,'IsPrivate' ,'[FullBasename]' ,'[CropBasename]','U.[Role]');
     public function __construct()
     {
         parent::__construct();
         $this->parse_display_data(
-            array( 'btn','alert', 'rank', 'role','photo','menu' , 'grid' , 'contextmenu')
+            array( 'btn','alert', 'rank', 'role','photo','menu' , 'grid' , 'contextmenu', 'message', 'account')
         );
         $this->load->model('photo_model');
 

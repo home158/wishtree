@@ -7,7 +7,7 @@ class Home extends Site_Base_Controller {
         parent::__construct();
         $this->display_data["highlight_navi"] = "home";
         $this->parse_display_data(
-            array('btn' ,'alert')
+            array('btn' ,'alert' ,'role')
         );
         
         $this->login_required_validation();
@@ -16,7 +16,7 @@ class Home extends Site_Base_Controller {
         $this->alertMsg();
 
     }
-    private function alertMsg()
+    public function alertMsg()
     {
         if ( $this->session->userdata('Rank') <= 2){
             if($this->session->userdata('Role') == 'male'){
@@ -41,12 +41,15 @@ class Home extends Site_Base_Controller {
 		$this->parser->parse('site/_default/header',$this->display_data);
 		$this->parser->parse('site/_default/header_logout',$this->display_data);
         if($this->session->userdata('Role') == 'male'){
+            $this->display_data['role_random_title'] = $this->display_data['role_female_long'];
             $this->parser->parse('site/_default/female_navi',$this->display_data);
         }else{
+            $this->display_data['role_random_title'] = $this->display_data['role_male_long'];
             $this->parser->parse('site/_default/male_navi',$this->display_data);
         }
 		
-		$this->parser->parse('site/home/'.$this->session->userdata('Role').'_index',$this->display_data);
+		$this->parser->parse('site/home/index',$this->display_data);
+		$this->parser->parse('site/notification/index',$this->display_data);
 
 		$this->parser->parse('site/_default/footer',$this->display_data);
 

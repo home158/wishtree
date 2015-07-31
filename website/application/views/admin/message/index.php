@@ -313,67 +313,68 @@ var O_PARENT = {
             this.$myGrid.trendGrid({
                 columns: [
                     {
-                        id: "PhotoID",
-                        name: '{grid_column_PhotoID}',
+                        id: "MessageID",
+                        name: '{grid_column_MessageID}',
                         width: 55,
                         sortAsc: true
                     },
                     {
-                        id: "Nickname",
-                        name: '{grid_column_Nickname}',
+                        id: "FromUserNickname",
+                        name: '{grid_column_FromUserNickname}',
                         width: 155,
                         sortAsc: true
                     },
                     {
-                        id: "Email",
-                        name: '{grid_column_Email}',
+                        id: "FromUserEmail",
+                        name: '{grid_column_FromUserEmail}',
                         width: 200,
                         sortAsc: true
                     },
                     
                     {
-                        id: "Role",
-                        name: '{grid_column_Role}',
+                        id: "FromUserRole",
+                        name: '{grid_column_FromUserRole}',
                         width: 80,
                         sortAsc: true
                     },
                     {
-                        id: "FullBasename",
-                        name: '{grid_column_FullBasename}',
-                        width: 100,
+                        id: "MessageContent",
+                        name: '{grid_column_MessageContent}',
+                        width: 130,
                         sortAsc: true
                     },
                     {
-                        id: "CropBasename",
-                        name: '{grid_column_CropBasename}',
-                        width: 100,
-                        sortAsc: true
-                    },
-                    {
-                        id: "IsPrivate",
-                        name: '{grid_column_IsPrivate}',
-                        width: 155,
-                        sortAsc: true
-                    },
-                    {
-                        id: "IsCover",
-                        name: '{grid_column_IsCover}',
-                        width: 50,
-                        sortAsc: true
-                    },
-                    
-                    {
-                        id: "ReviewStatus",
+                        id: "MessageReviewStatus",
                         name: '{grid_column_ReviewStatus}',
                         width: 130,
                         sortAsc: true
                     },
                     {
-                        id: "ReviewDate",
+                        id: "MessageReviewDate",
                         name: '{grid_column_ReviewDate}',
                         width: 130,
                         sortAsc: true
                     },
+                    {
+                        id: "TargetUserNickname",
+                        name: '{grid_column_TargetUserNickname}',
+                        width: 155,
+                        sortAsc: true
+                    },
+                    {
+                        id: "TargetUserEmail",
+                        name: '{grid_column_TargetUserEmail}',
+                        width: 200,
+                        sortAsc: true
+                    },
+                    {
+                        id: "TargetUserRole",
+                        name: '{grid_column_TargetUserRole}',
+                        width: 80,
+                        sortAsc: true
+                    },
+
+
                     {
                         id: "DateModify",
                         name: '{grid_column_DateModify}',
@@ -417,7 +418,7 @@ var O_PARENT = {
                     }
                 },
                 cellsFormat: {
-                    PhotoID : function(o){
+                    MessageID : function(o){
                         o.$cell.css('text-align','center');
                         return o.text;
                     },
@@ -431,28 +432,7 @@ var O_PARENT = {
                             break;
                         }
                     },
-                    IsPrivate: function(o){
-                        switch(parseInt(o.text,10)){
-                            case 0:
-                                return '{photo_public}';
-                            break;
-                            case 1:
-                                return '{photo_private}';
-                            break;
-                        }
-                    },
-                    IsCover: function(o){
-                        o.$cell.css('text-align','center');
-                        switch(parseInt(o.text,10)){
-                            case 0:
-                                return '';
-                            break;
-                            case 1:
-                                return 'Y';
-                            break;
-                        }
-                    },
-                    ReviewStatus: function(o){
+                    MessageReviewStatus: function(o){
                         switch(parseInt(o.text,10)){
                             case 0:
                                 return '{photo_review_pending}';
@@ -464,17 +444,7 @@ var O_PARENT = {
                                 return '{photo_review_pass}';
                             break;
                         }
-                    },
-                    FullBasename: function(o){
-                        return '<a href="{azure_storage_baseurl}'+o.data.UserGUID+'/'+o.text+'" data-footer="'+o.text+'" data-title="{grid_column_PhotoID}:'+o.data.PhotoID +'('+o.data.Nickname+')" data-toggle="lightbox" data-parent="" data-gallery="'+o.data.GUID+'">{photo_open_up}</a>';
-                    },
-                    CropBasename: function(o){
-                        return '<a href="{azure_storage_baseurl}'+o.data.UserGUID+'/'+o.text+'" data-footer="'+o.text+'" data-title="{grid_column_PhotoID}:'+o.data.PhotoID +'('+o.data.Nickname+')" data-toggle="lightbox" data-parent="" data-gallery="'+o.data.GUID+'">{photo_open_up}</a>';
                     }
-
-                    
-
-
                 }
             });
         },

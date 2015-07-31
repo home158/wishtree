@@ -58,6 +58,12 @@ $route['account/(:any)'] = 'site/account/$1';
 $route['message'] = "site/message";
 $route['message/(:any)'] = 'site/message/$1';
 
+$route['chat'] = "site/chat";
+$route['chat/(:any)'] = 'site/chat/$1';
+
+$route['favor'] = "site/favor";
+$route['favor/(:any)'] = 'site/favor/$1';
+
 $route['photo'] = "site/photo/show/public";
 $route['photo/public'] = "site/photo/show/public";
 $route['photo/private'] = "site/photo/show/private";

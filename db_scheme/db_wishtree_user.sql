@@ -3,6 +3,11 @@ DECLARE @GUID uniqueidentifier
 SET @GUID = NEWID()
 
 --Drop tables
+-- Drop the i_favor.
+	IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[i_favor]') 
+		AND type in (N'U'))
+	DROP TABLE [dbo].[i_favor]
 -- Drop the i_photo.
 	IF EXISTS (SELECT * FROM sys.objects 
 		WHERE object_id = OBJECT_ID(N'[dbo].[i_photo]') 

@@ -15,7 +15,7 @@ class Home_model extends CI_Model {
         $query = $this->db->query(
         "
         SELECT TOP 10
-            U.[GUID],
+            P.[UserGUID],
             U.[Role],
             U.[Nickname],
             P.[ThumbBasename],
@@ -28,14 +28,16 @@ class Home_model extends CI_Model {
             LEFT JOIN 
             [dbo].[i_photo] AS P
             ON
-            P.[UserGUID] = U.[GUID]
+                P.[UserGUID] = U.[GUID]
 			AND
-			P.[IsPrivate] = 0
+			    P.[IsPrivate] = 0
 			AND
-			P.[IsCover] = 1
+			    P.[IsCover] = 1
+            AND
+                P.[ReviewStatus] = 2
         )
 		WHERE 
-				Role = 'male'
+				Role = '".$role."'
 			AND
 				U.[DateCreate] >  DATEADD(d,-30,GETUTCDATE())
         ORDER BY NEWID()
@@ -46,7 +48,7 @@ class Home_model extends CI_Model {
             if( is_null($row['ThumbBasename']) ){
                 $r[$key]['ThumbBasename'] = $this->config->item('photo_'.$row['Role'].'_default');
             }else{
-                $r[$key]['ThumbBasename'] = $this->config->item('azure_storage_baseurl').$row['GUID'].'/'.$row['ThumbBasename'];
+                $r[$key]['ThumbBasename'] = $this->config->item('azure_storage_baseurl').$row['UserGUID'].'/'.$row['ThumbBasename'];
             }
         }
         return $r;
@@ -56,7 +58,7 @@ class Home_model extends CI_Model {
         $query = $this->db->query(
         "
         SELECT TOP 10
-            U.[GUID],
+            P.[UserGUID],
             U.[Role],
             U.[Nickname],
             P.[ThumbBasename],
@@ -68,13 +70,16 @@ class Home_model extends CI_Model {
             LEFT JOIN 
             [dbo].[i_photo] AS P
             ON
-            P.[UserGUID] = U.[GUID]
+                P.[UserGUID] = U.[GUID]
 			AND
-			P.[IsPrivate] = 0
+			    P.[IsPrivate] = 0
 			AND
-			P.[IsCover] = 1
+			    P.[IsCover] = 1
+            AND
+                P.[ReviewStatus] = 2
         )
-		WHERE Role = 'male'
+		WHERE 
+            Role = '".$role."'
         ORDER BY NEWID()
         ");
 
@@ -83,7 +88,7 @@ class Home_model extends CI_Model {
             if( is_null($row['ThumbBasename']) ){
                 $r[$key]['ThumbBasename'] = $this->config->item('photo_'.$row['Role'].'_default');
             }else{
-                $r[$key]['ThumbBasename'] = $this->config->item('azure_storage_baseurl').$row['GUID'].'/'.$row['ThumbBasename'];
+                $r[$key]['ThumbBasename'] = $this->config->item('azure_storage_baseurl').$row['UserGUID'].'/'.$row['ThumbBasename'];
             }
         }
         return $r;

@@ -5,7 +5,7 @@ class Welcome extends Admin_Base_Controller {
     {
         parent::__construct();
         $this->parse_display_data(
-            array( 'rank' ,'alert' , 'account' , 'menu')
+            array( 'rank' ,'alert' , 'account' , 'menu', 'message', 'photo')
         );
 
     }

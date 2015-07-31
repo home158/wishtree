@@ -15,7 +15,7 @@ class Message extends Site_Base_Controller {
         $this->alertMsg();
 
     }
-    private function alertMsg()
+    public function alertMsg()
     {
         if ( $this->session->userdata('Rank') <= 2){
             if($this->session->userdata('Role') == 'male'){
@@ -80,7 +80,7 @@ class Message extends Site_Base_Controller {
             redirect( base_url().'message' , 'refresh');
         }
         $target = $this->message_model->retrieve_target_info($GUID);
-        print_r($target);
+        
         $this->display_data = array_merge( $this->display_data , $target);
 		$this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<em class="form_error">', '</em>');
@@ -119,6 +119,7 @@ class Message extends Site_Base_Controller {
             $this->message_model->save_message_history($this->session->userdata('GUID') , $this->session->userdata('Nickname') ,$GUID , $pending_message_data['MessageContent'] , 'say');
             $this->message_model->save_message_history($this->session->userdata('GUID') , $this->session->userdata('Nickname') ,$GUID , $pending_message_data['MessageContent'] , 'target');
             
+            redirect( base_url().'view/'.$GUID , 'refresh');
         }
     }
     public function send()

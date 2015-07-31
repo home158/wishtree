@@ -13,7 +13,7 @@ class Photo extends Site_Base_Controller {
         $this->alertMsg();
         
     }
-    private function alertMsg()
+    public function alertMsg()
     {
         if( $this->session->userdata('Rank') <= 2){
             $this->display_data['alert_content'] = $this->display_data['alert_mail_need_to_vaildate_before_upload_photo'];
@@ -125,6 +125,8 @@ class Photo extends Site_Base_Controller {
 
             $insert_string = $this->db->insert_string('[dbo].[i_photo]', $photo_data);
             $this->db->query( $insert_string );
+            $this->photo_model->set_public_cover( $this->session->userdata('GUID') );
+
             redirect( base_url().'photo/'.$type , 'refresh');
 		}
 
@@ -171,19 +173,23 @@ class Photo extends Site_Base_Controller {
 
         $update_data = array(
             'ReviewStatus' => 0,
+            'ReviewDate' => NULL,
             'ReviewRejectReason' => NULL,
             'DateModify' => date('Y-m-d H:i:s')
         );
         
         
         $result = $this->db->update('[dbo].[i_photo]', $update_data, array('GUID' => $image_data['GUID'] ));
+
         if($result == TRUE){
+            $this->photo_model->set_public_cover( $this->session->userdata('GUID') );
+
             redirect( base_url().'photo' , 'refresh');
         }else{
             //DB error
         }
 
-        
+
 
     }
     public function delete()
@@ -194,14 +200,17 @@ class Photo extends Site_Base_Controller {
 
         $this->load->library('azure');
         $blobRestProxy = $this->azure->createBlobService();
-        $blobRestProxy->deleteBlob($row['Container'], $row['FullBasename']);
-        $blobRestProxy->deleteBlob($row['Container'], $row['CropBasename']);
-        $blobRestProxy->deleteBlob($row['Container'], $row['ThumbBasename']);
+        $blobRestProxy->deleteBlob($row['UserGUID'], $row['FullBasename']);
+        $blobRestProxy->deleteBlob($row['UserGUID'], $row['CropBasename']);
+        $blobRestProxy->deleteBlob($row['UserGUID'], $row['ThumbBasename']);
+        $this->photo_model->set_public_cover( $this->session->userdata('GUID') );
     }
     public function set_top()
     {
         $UserGUID = $this->session->userdata('GUID');
         $GUID = $this->input->post('GUID');
+        $row = $this->photo_model->retrieve_photo($GUID);
+        if($row['IsPrivate'] == 1) return;
         //Set all public photo Cover is false
         $reset_data = array(
             'IsCover' => 0
@@ -215,20 +224,13 @@ class Photo extends Site_Base_Controller {
         );
 
         
-        $this->db->update('[dbo].[i_photo]', $update_data, array('GUID' => $GUID, 'UserGUID'=> $UserGUID));
+        $this->db->update('[dbo].[i_photo]', $update_data, array('GUID' => $GUID, 'IsPrivate' => 0, 'UserGUID'=> $UserGUID));
 
     }
     public function test(){
-        $this->load->library('azure');
-        $blobRestProxy = $this->azure->createBlobService();
-        $blob_list = $blobRestProxy->listBlobs("container-male");
-        $blobs = $blob_list->getBlobs();
-
-        foreach($blobs as $blob)
-        {
-            echo $blob->getName().": ".$blob->getUrl()."<br />";
-            echo "<img src='".$blob->getUrl()."'>";
-        }
+        $userGUID = $this->session->userdata('GUID');
+        $public = $this->db->query("SELECT [GUID] FROM [dbo].[i_photo] WHERE UserGUID = '".$userGUID."' AND IsPrivate = 0 ORDER BY PhotoID");
+        print_r($public->row_array());
     }
 }
 

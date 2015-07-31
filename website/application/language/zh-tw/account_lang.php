@@ -12,11 +12,12 @@ $lang['account_profile_review_date']        = "(審核時間 %s)";
 $lang['account_profile_latest_update_date']        = "(最後更新 %s)";
 $lang['account_photo_review_count']        = "上傳 %s 張照片 %s 張照片通過審查";
 $lang['account_photo_total_count']        = "%s 張";
-$lang['account_change_password']        = "變更密碼";
+$lang['account_change_settings']        = "設定";
 $lang['account_change_password']        = "變更密碼";
 $lang['account_settings_timezone']        = "設定時區";
 $lang['account_settings_success']        = "設定成功。";
 $lang['account_settings_fail']        = "設定失敗，請再試一次。";
+$lang['account_logout']        = "登出";
 
 
 

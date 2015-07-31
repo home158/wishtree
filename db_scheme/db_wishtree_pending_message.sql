@@ -23,7 +23,7 @@ SET @GUID = NEWID()
 			[TargetUserGUID] [char](36) NOT NULL,  -- GUID
 			[MessageContent] [nvarchar](max) NOT NULL,		
 			[MessageReviewStatus] [char] NOT NULL default 0, -- 0:等待審核 1: 審核不通過 2: 審核通過
-			[MessageReviewTime] [datetime]  NULL , -- 審核時間
+			[MessageReviewDate] [datetime]  NULL , -- 審核時間
 			[MessageReviewRejectReason] [nvarchar](30) NULL , --訊息審核未通過原因
 			[MessageReviewByGUID] [char](36) NULL,  -- GUID
 			[DateCreate] [datetime] NOT NULL default CURRENT_TIMESTAMP,	-- 資料建立時間

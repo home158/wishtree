@@ -232,6 +232,46 @@ class Photo_model extends CI_Model {
         );
         return $result;
     }
+    function set_public_cover($userGUID)
+    {
+        $public_cover = $this->db->query("
+            SELECT 
+                [GUID] 
+            FROM 
+                [dbo].[i_photo] 
+            WHERE 
+                    UserGUID = '".$userGUID."' 
+                AND 
+                    IsPrivate = 0
+                AND 
+                    IsCover = 1
+            ORDER BY PhotoID
+        ");
+        $public = $this->db->query("SELECT [GUID] FROM [dbo].[i_photo] WHERE UserGUID = '".$userGUID."' AND IsPrivate = 0 ORDER BY PhotoID");
+
+        if($public->num_rows() == 0 ){
+            return TRUE;
+        }
+        if($public_cover->num_rows() != 1 ){
+            //Set all public photo Cover is false
+            $reset_data = array(
+                'IsCover' => 0
+            );
+
+            $this->db->update('[dbo].[i_photo]', $reset_data, array('IsPrivate' => 0, 'UserGUID'=> $userGUID));
+
+            $update_data = array(
+                'IsCover' => 1,
+                'DateModify' => date('Y-m-d H:i:s')
+            );
+            $public_row = $public->row_array();
+            $this->db->update('[dbo].[i_photo]', $update_data, array('GUID' => $public_row['GUID'], 'UserGUID'=> $userGUID));
+
+            return TRUE;
+        }
+        return TRUE;
+
+    }
 }
 
 /* End of file photo_model.php */

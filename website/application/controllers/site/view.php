@@ -7,7 +7,7 @@ class View extends Site_Base_Controller {
     {
         parent::__construct();
         $this->parse_display_data(
-            array('btn', 'grid', 'city', 'income', 'language', 'height', 'bodytype', 'race', 'Education', 'maritalstatus', 'smoking', 'drinking')
+            array('btn', 'grid', 'city', 'income', 'language', 'height', 'bodytype', 'race', 'Education', 'maritalstatus', 'smoking', 'drinking' , 'view')
         );
         
         $this->login_required_validation();
@@ -18,6 +18,7 @@ class View extends Site_Base_Controller {
         
         $this->display_data['profile'] = $this->user_profile($GUID);
         $this->display_data['CropBasename'] = $this->view_model->get_cover_photo($GUID , $this->Role);
+        $this->display_data['UserGUID'] = $GUID;
 
 		$this->parser->parse('site/_default/header',$this->display_data);
 		$this->parser->parse('site/_default/header_logout',$this->display_data);

@@ -13,6 +13,18 @@ $lang['grid_column_ReviewDate']      = "審核時間";
 $lang['grid_column_IsPrivate']      = "公開/私人";
 $lang['grid_column_FullBasename']        = "1比1照片";
 $lang['grid_column_CropBasename']        = "截圖照片";
+$lang['grid_column_IsCover']        = "封面";
+
+
+$lang['grid_column_MessageID'] = "編號";
+$lang['grid_column_FromUserNickname'] = "發訊者暱稱";
+$lang['grid_column_FromUserEmail'] = "發訊者Email";
+$lang['grid_column_FromUserRole'] = "發訊者帳戶類型";
+$lang['grid_column_TargetUserNickname'] = "收訊者暱稱";
+$lang['grid_column_TargetUserEmail'] = "收訊者Email";
+$lang['grid_column_TargetUserRole'] = "收訊者帳戶類型";
+$lang['grid_column_MessageContent'] = "訊息內容";
+
 
 $lang['grid_column_PasswordCheck'] = "再輸入一次密碼";
 $lang['grid_column_Nickname'] = "暱稱";
