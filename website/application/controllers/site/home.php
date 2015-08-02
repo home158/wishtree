@@ -49,7 +49,7 @@ class Home extends Site_Base_Controller {
         }
 		
 		$this->parser->parse('site/home/index',$this->display_data);
-		$this->parser->parse('site/notification/index',$this->display_data);
+		
 
 		$this->parser->parse('site/_default/footer',$this->display_data);
 

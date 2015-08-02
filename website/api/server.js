@@ -11,18 +11,23 @@ var my_socket_id;
 server.listen(port, function () {
     console.log('Server listening at port %d', port);
 });
-var nsp_notification = io.of('/notification');
-nsp_notification.on('connection', function (socket) {
+var nsp_chatroom = io.of('/chatroom');
+nsp_chatroom.on('connection', function (socket) {
 
     //User connect create 
-    console.log('User connection');
-    socket.on('add-client', function(data){
+    console.log('[connection] =>'+ 'socket id = ' + socket.id + ';');
+    socket.on('join-chatroom', function(data){
         if(!clients[data.UserGUID]){
             clients[data.UserGUID] = {
+                "Thumb" : data.Thumb,
+                "Nickname" : data.Nickname,
+                "Role" : data.Role,
+                "UserGUID" : data.UserGUID,
                 "socket": socket.id
             };
             my_socket_id = socket.id;
-            console.log('[add-client] => UserGUID = ' + data.UserGUID + '; socket id = ' + socket.id + ';');
+            console.log('[join-chatroom] => UserGUID = ' + data.UserGUID + ' Nickname = ' + data.Nickname + '; socket id = ' + socket.id + ';');
+            nsp_chatroom.emit("client-join", clients[data.UserGUID]);
 
         }
         if(data.tracker.length > 0){
@@ -32,26 +37,33 @@ nsp_notification.on('connection', function (socket) {
                 console.log('[login-notify] => ready to emit message to trackerGUID = ' + trackerGUID);
                 if(clients[trackerGUID]){
                     console.log('[login-notify] => trackerGUID = ' + trackerGUID);
-                    nsp_notification.connected[clients[trackerGUID].socket].emit("login-notify", data);
+                    nsp_chatroom.connected[clients[trackerGUID].socket].emit("login-notify", data);
                 }
             }
         }
 
     });
-
+    
     socket.on('private-message', function(data){
         console.log("Sending: " + data.content + " to " + data.username);
 
         if (clients[data.username]){
             console.log('Get username = ' + clients[data.username]);
-            nsp_notification.connected[clients[data.username].socket].emit("add-message", data);
+            nsp_chatroom.connected[clients[data.username].socket].emit("add-message", data);
         } else {
             console.log("User does not exist: " + data.username); 
         }
     });
 
-    socket.on('user-list',function(data){
+    socket.on('client-list',function(GUID){
+        console.log('[client-list] = ' );
+        nsp_chatroom.connected[clients[GUID].socket].emit("client-list", clients);
         
-        nsp_notification.connected[my_socket_id].emit("user-list", clients);
     });
+    socket.on('public-message',function(data){
+        console.log('[public-message] = ' );
+        nsp_chatroom.emit("new-message", data);
+      
+    });
+    
 });

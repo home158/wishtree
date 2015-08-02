@@ -34,6 +34,26 @@ class Photo_model extends CI_Model {
             return FALSE;
         }
     }
+    function retrieve_public_cover_photo($userGUID)
+    {
+        $query = $this->db->query("
+            SELECT 
+                * 
+            FROM 
+                [dbo].[i_photo] 
+            WHERE 
+                    UserGUID = '".$userGUID."' 
+                AND 
+                    IsPrivate = 0
+                AND
+                    IsCover = 1
+        ");
+        $row = $query->row_array();
+        $thumb_image_url = $this->config->item('azure_storage_baseurl') . $row['UserGUID'] . '/' . $row['ThumbBasename'].'?'.time();
+
+        return $thumb_image_url;
+
+    }
     function retrieve_my_photos($userGUID , $type)
     {
         if($type == 'public'){

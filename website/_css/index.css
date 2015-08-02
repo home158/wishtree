@@ -5,7 +5,9 @@ body {
 a{
     text-decoration: none;
 }
-
+.btn:focus {
+  outline: none;
+}
 .wrap{
     -moz-box-shadow: 0 -1px 4px #cfcfcf;
     -webkit-box-shadow: 0 -1px 4px #cfcfcf;
