@@ -25,7 +25,7 @@ class Photo extends Site_Base_Controller {
             $public_photo_reviewed_count = 0;
             foreach( $public as $key => $row){
                 if($row['ReviewStatus'] == 2){
-                    $public_photo_reviewed++;
+                    $public_photo_reviewed_count++;
                 }
             }
             if( $public_photo_count == 0){

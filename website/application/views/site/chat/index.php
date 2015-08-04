@@ -15,8 +15,8 @@
 $(function() {
     $('#chat_open').bind('click',function(){
         $.popupWindow('/chat/room/', { 
-            height: 600, 
-            width: 800,
+            height: 700, 
+            width: 900,
             createNew: false,
             onUnload: function(){
             }

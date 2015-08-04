@@ -7,7 +7,7 @@ body{
     bottom: 10px;        
     right: 10px;
     left: 0px;
-    
+    min-width: 750px;
 }
 #widget a{
     text-decoration: none;
@@ -21,16 +21,7 @@ body{
     text-decoration: none;
     color: #004F00;
 }
-#message_list a{
-    font-weight: 900;
-    text-decoration: underline;
-}
-#message_list a.female{
-    color: #FF00FF;
-}
-#message_list a.male{
-    color: #004F00;
-}
+
 
 #widget ul{
     margin: 0px;
@@ -39,18 +30,39 @@ body{
 .widget_left{
     position: absolute;
     top: 0px;
-    bottom: 100px;        
+    bottom: 120px;        
     right: 200px;
     left: 0px;
     background:#FFF0F8;
     padding: 10px;
+}
+.widget_left a{
+    font-weight: 900;
+    text-decoration: underline;
+}
+.widget_left a.female{
+    color: #FF00FF;
+}
+.widget_left a.male{
+    color: #004F00;
+}
+.widget_left li span.private{
+    background-color: #F4B779;
+}
+#message_list_all{
+    height: 100%;
+    
+}
+#message_list_private{
+    display: none;
+    height: 100%;
 }
 .widget_talk{
     position: absolute;
     bottom: 0px;        
     left: 0px;
     right: 200px;
-    height: 100px;
+    height: 120px;
     padding: 10px;
 }
 .widget_talk .type_message{
@@ -69,10 +81,17 @@ body{
     padding: 10px;
 }
 .widget_control{
-    height: 100px;
+    height: 120px;
     position: absolute;
     width: 200px;
     bottom: 0px;        
     right: 0px;
     padding: 10px;
+}
+.scrollbar-container {
+    max-width: 1200px;
+}
+.scrollbar-container > div {
+    max-height: 100%;
+    overflow: auto;
 }

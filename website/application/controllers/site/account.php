@@ -17,7 +17,7 @@ class Account extends Site_Base_Controller {
         $this->alertMsg();
 
     }
-    private function alertMsg()
+    public function alertMsg()
     {
         if ( $this->session->userdata('Rank') <= 2){
             $this->display_data['alert_content'] = $this->display_data['alert_mail_need_to_vaildate_at_account'];

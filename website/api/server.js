@@ -60,9 +60,17 @@ nsp_chatroom.on('connection', function (socket) {
         nsp_chatroom.connected[clients[GUID].socket].emit("client-list", clients);
         
     });
-    socket.on('public-message',function(data){
-        console.log('[public-message] = ' );
-        nsp_chatroom.emit("new-message", data);
+    socket.on('send-message',function(data){
+        console.log('[send-message] = ' );
+        if(data.visibile == 'public'){
+            nsp_chatroom.emit("new-message", data);
+        }
+        if(data.visibile == 'private'){
+            nsp_chatroom.connected[clients[data.receive].socket].emit("new-message", data);
+            nsp_chatroom.connected[clients[data.from].socket].emit("new-message", data);
+        }
+
+        
       
     });
     
