@@ -57,6 +57,7 @@
                 <input type="checkbox" id="chat_coming" > <label for="chat_coming">{chat_client_coming_info}</label> 
                 <input type="checkbox" id="chat_double_window" > <label for="chat_double_window">{chat_double_window}</label> 
                 <input type="checkbox" id="chat_private_window" > <label for="chat_private_window">{chat_private_window}</label> 
+                <input type="checkbox" id="chat_scrolling" > <label for="chat_scrolling">{chat_scrolling}</label> 
                 
             </div>
     </div>
@@ -86,6 +87,11 @@ var O_PARENT = {
             $receive_GUID.val(default_GUID);
 
         },
+        scrolling: function(){
+            if( $('#chat_scrolling').prop('checked') ){
+                $('.scrollbar-dynamic').scrollTop(99999999999);
+            }
+        },
         send:function(){
             var visibile =  $( "#chat_visibile" ).prop('checked')? 'private' : 'public';
             console.log(visibile);
@@ -105,6 +111,7 @@ var O_PARENT = {
             if(data.receive == O_PARENT.GUID || data.from ==O_PARENT.GUID){
                 $('<li data-type="'+data.type+'" data-visibile="'+data.visibile+'" >'+O_PARENT.message.line(data)+'</li>').appendTo( $('#message_list_private') );
             }
+            O_PARENT.message.scrolling();
         },
         line: function(data){
             var user = O_PARENT.user;
@@ -138,7 +145,6 @@ var O_PARENT = {
             }); 
 
             $('#chat_coming').on('click',function(){
-                
                 $('li[data-type="coming"]' ).toggle(  );
             });
             $('#chat_double_window').on('click',function(){
@@ -165,8 +171,11 @@ var O_PARENT = {
                     $('#message_list_private').parent().hide();
                 }
             });
-
-            
+            $('#chat_scrolling').on('click',function(){
+                if( $(this).prop('checked') ){
+                    $('.scrollbar-dynamic').scrollTop(99999999999);
+                }
+            });
         }
     },
     client :{

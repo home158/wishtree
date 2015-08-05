@@ -75,10 +75,10 @@ SET @GUID = NEWID()
 			[ProfileReviewDate]  [datetime] NULL, --個人資料審核時間
 			[ProfileLatestUpdateDate]  [datetime] NULL, --個人資料更新時間
 			
-			[DeleteStatus]  [bit] NOT NULL default 0, -- 刪除註記 0:刪除 1:非刪除
+			[DeleteStatus]  [bit] NOT NULL default 0, -- 刪除註記 0:非刪除 1:刪除
 			[DeleteDate]  [datetime] NULL, --刪除註記時間
 			
-			[ForbiddenStatus]  [bit] NOT NULL default 0, -- 停用註記 0:停用 1:非停用
+			[ForbiddenStatus]  [bit] NOT NULL default 0, -- 停用註記 0:非停用 1:停用
 			[ForbiddenDate]  [datetime] NULL, --停用註記時間
 
 			[LastLoginTime] [datetime] NOT NULL  default CURRENT_TIMESTAMP,						-- 最後登入時間

@@ -82,10 +82,43 @@ class Site_Base_Controller extends BASE_Controller {
             redirect( base_url().'home' );
         }
     }
+    public function not_Forbidden_required_validation()
+    {
+        if( !$this->session->userdata('Email') ){
+            $this->session->sess_destroy();
+            redirect( base_url() );
+            return;
+        }
+        //check forbidden or delete
+        $this->utility_model->refresh_session( $this->session->userdata('GUID') );
+        //check delete
+        if( $this->session->userdata('DeleteStatus')==1 ){
+            $this->session->sess_destroy();
+            redirect( base_url() );
+            return;
+        }
+    }
     public function login_required_validation()
     {
         if( !$this->session->userdata('Email') ){
+            $this->session->sess_destroy();
             redirect( base_url() );
+            return;
+        }
+
+        //check forbidden or delete
+        $this->utility_model->refresh_session( $this->session->userdata('GUID') );
+
+        //check forbidden
+        if( $this->session->userdata('ForbiddenStatus')==1 ){
+            redirect( base_url().'account' ,'refresh');
+            return;
+        }
+        //check delete
+        if( $this->session->userdata('DeleteStatus')==1 ){
+            $this->session->sess_destroy();
+            redirect( base_url() );
+            return;
         }
     }
     public function alertMsg()

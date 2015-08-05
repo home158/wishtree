@@ -180,6 +180,7 @@ class Register extends Site_Base_Controller {
             $data = array(
                 'GUID' => $GUID,
                 'ValidateKey' => $ValidateKey,
+                'Validated' => 1,
                 'Rank'  => 3
             );
             //驗證後直接登入

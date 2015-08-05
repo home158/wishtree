@@ -11,6 +11,7 @@ $lang['chat_to_private']        = "私人";
 $lang['chat_client_coming_info']        = "進出";
 $lang['chat_double_window']        = "雙窗";
 $lang['chat_private_window']        = "私窗";
+$lang['chat_scrolling']        = "捲動";
 
 /* End of file chat_lang.php */
 /* Location: ./application/language/zh-tw/chat_lang.php */

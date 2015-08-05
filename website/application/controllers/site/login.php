@@ -72,40 +72,20 @@ class Login extends Site_Base_Controller {
                     break;
                     //未認證會員帳號
                     case 2:
-                        $data_db['Nickname'] = $row->Nickname;
-                        $data_db['Email'] = $row->Email;
-                        $data_db['Rank'] = $row->Rank;
-                        $data_db['GUID'] = $row->GUID;
-                        $data_db['Role'] = $row->Role;
-                        $this->utility_model->setTimezoneOffset($row->TimezoneOffset , $row->DST);
-                        $this->session->set_userdata($data_db);
+                        $this->login_model->set_login_session($row);
                         $this->login_model->set_info_cookie($row, $remember_me);
-
                         redirect( base_url().'home' , 'refresh');
-                        
                     break;
                     //已認證會員帳號
                     case 3:
-                        $data_db['Nickname'] = $row->Nickname;
-                        $data_db['Email'] = $row->Email;
-                        $data_db['Rank'] = $row->Rank;
-                        $data_db['GUID'] = $row->GUID;
-                        $data_db['Role'] = $row->Role;
-                        $this->utility_model->setTimezoneOffset($row->TimezoneOffset , $row->DST);
+                        $this->login_model->set_login_session($row);
                         $this->login_model->set_info_cookie($row, $remember_me);
-                        $this->session->set_userdata($data_db);
                         redirect( base_url().'home' , 'refresh');
                     break;
                     //管理員
                     case 255:
-                        $data_db['Nickname'] = $row->Nickname;
-                        $data_db['Email'] = $row->Email;
-                        $data_db['Rank'] = $row->Rank;
-                        $data_db['GUID'] = $row->GUID;
-                        $data_db['Role'] = $row->Role;
-                        $this->utility_model->setTimezoneOffset($row->TimezoneOffset , $row->DST);
+                        $this->login_model->set_login_session($row);
                         $this->login_model->set_info_cookie($row, $remember_me);
-                        $this->session->set_userdata($data_db);
                         redirect( base_url().'admin' , 'refresh');
                     break;
                 }

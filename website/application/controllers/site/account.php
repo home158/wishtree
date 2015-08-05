@@ -4,12 +4,11 @@ class Account extends Site_Base_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->login_required_validation();
+        $this->not_Forbidden_required_validation();
         $this->parse_display_data(
             array( 'account' , 'rank' , 'email' , 'role' ,'btn', 'grid','register','member','city','language','birthday','height','bodytype','race',
                 'income','property','education','maritalstatus' ,'smoking','drinking' , 'timezoneoffset' , 'dst' , 'alert')
         );
-        $this->login_required_validation();
         $this->load->model('account_model');
         $this->load->model('photo_model');
         $this->load->model('register_model');
@@ -21,6 +20,9 @@ class Account extends Site_Base_Controller {
     {
         if ( $this->session->userdata('Rank') <= 2){
             $this->display_data['alert_content'] = $this->display_data['alert_mail_need_to_vaildate_at_account'];
+        }
+        if ( $this->session->userdata('ForbiddenStatus') == 1){
+            $this->display_data['alert_content'] = $this->display_data['alert_this_account_has_been_forbidden'];
         }
     }
 
@@ -223,11 +225,11 @@ class Account extends Site_Base_Controller {
             break;
             case 1:
                 $this->display_data['profile_review_date'] = sprintf( $this->display_data['account_profile_review_date'] , $data['ProfileReviewDate']);
-                $this->display_data['profile_review'] = $this->display_data['account_profile_review_pass'];
+                $this->display_data['profile_review'] = sprintf( $this->display_data['account_profile_review_reject'] , $data['ProfileReviewRejectReason']);
             break;
             case 2:
                 $this->display_data['profile_review_date'] = sprintf( $this->display_data['account_profile_review_date'] , $data['ProfileReviewDate']);
-                $this->display_data['profile_review'] = sprintf( $this->display_data['account_profile_review_reject'] , $data['ProfileReviewRejectReason']);
+                $this->display_data['profile_review'] = $this->display_data['account_profile_review_pass'];
             break;
 
         }

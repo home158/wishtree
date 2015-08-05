@@ -175,6 +175,57 @@ class Utility_model extends CI_Model {
             return FALSE;
         }
     }
+    function update_rank($GUID)
+    {
+        $query = $this->db->query(
+        "
+        SELECT
+            *
+        FROM 
+            [dbo].[i_user]
+        WHERE 
+            [GUID] = '".$GUID."'
+        ");
+        $r = $query->row_array();
+
+
+
+        //電子郵件已認證
+        if($r['Validated'] == 1) $rank = 3;
+
+        //電子郵件未認證
+        if($r['Validated'] == 0) $rank = 2;
+
+        //停用註記
+        if($r['ForbiddenStatus'] == 1) $rank = 1;
+
+        //刪除註記 rank = 0
+        if($r['DeleteStatus'] == 1) $rank = 0;
+
+        if( $r['Rank'] > 50 ) return;
+        $update_data = array(
+            'Rank' => $rank
+        );
+
+        $query = $this->db->update('[dbo].[i_user]', $update_data, array('GUID' => $GUID));
+
+
+    }
+    function refresh_session($GUID)
+    {
+        $this->load->model('login_model');
+        $query = $this->db->query(
+        "
+        SELECT
+            *
+        FROM 
+            [dbo].[i_user]
+        WHERE 
+            [GUID] = '".$GUID."'
+        ");
+        $row = $query->row();
+        $this->login_model->set_login_session($row);
+    }
 }
 
 /* End of file utility_model.php */

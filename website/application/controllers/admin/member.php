@@ -87,7 +87,7 @@ class Member extends Admin_Base_Controller {
             $update_data['DeleteDate'] = NULL;
         }
         $query = $this->db->update('[dbo].[i_user]', $update_data, array('GUID' => $GUID));
-
+        $this->utility_model->update_rank($GUID);
         $this->additionalColumn();
         $result_info = $this->member_model->retrive_row_data_by_GUID($GUID ,   $this->UI_columns);
 
@@ -110,6 +110,7 @@ class Member extends Admin_Base_Controller {
             $update_data['ForbiddenDate'] = NULL;
         }
         $query = $this->db->update('[dbo].[i_user]', $update_data, array('GUID' => $GUID));
+        $this->utility_model->update_rank($GUID);
 
         $this->additionalColumn();
         $result_info = $this->member_model->retrive_row_data_by_GUID($GUID ,   $this->UI_columns);

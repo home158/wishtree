@@ -15,7 +15,23 @@ class Login_model extends CI_Model {
         $query = $this->db->query("SELECT * FROM [dbo].[i_user] WHERE Email = '".$data['Email']."' AND PasswordEncrypt = '".$data['PasswordEncrypt']."' AND Rank >= ".$data['Rank']);
         return $query;
     }
-    function set_info_cookie($user_info, $remember_me){
+    
+    function set_login_session($row)
+    {
+        $data_db['Nickname'] = $row->Nickname;
+        $data_db['Email'] = $row->Email;
+        $data_db['Rank'] = $row->Rank;
+        $data_db['GUID'] = $row->GUID;
+        $data_db['Role'] = $row->Role;
+        $data_db['Validated'] = $row->Validated;//電子郵件認證
+        $data_db['DeleteStatus'] = $row->DeleteStatus;//刪除註記
+        $data_db['ForbiddenStatus'] = $row->ForbiddenStatus;//停權註記
+        
+        $this->utility_model->setTimezoneOffset($row->TimezoneOffset , $row->DST);
+        $this->session->set_userdata($data_db);
+    }
+    function set_info_cookie($user_info, $remember_me)
+    {
         if( $remember_me ){
             $cookie_email = array(
                 'name'   => 'email',
