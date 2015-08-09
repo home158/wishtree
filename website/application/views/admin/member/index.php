@@ -282,6 +282,36 @@ var O_PARENT = {
                     }
                 },
                 {
+                    TEXT: '{contextmenu_mail_vaildate_pass}',
+                    GROUP: 0,
+                    DISABLED : true,
+                    BACKGROUND_POSITION: {
+                        DEFAULT: [-0, -144],
+                        GRAYOUT: [-0, -168]
+                    },
+                    ONCLICK: function(e) {
+                        $('#myGrid').trendGrid('getSelected', function(r){
+                            var GUID = O_PARENT.grid.GUID_list[r];
+                            O_PARENT.menu.ajax_mail_vaildate_pass(GUID,r[0] , 1);
+                        });
+                    }
+                },
+                {
+                    TEXT: '{contextmenu_mail_vaildate_pending}',
+                    GROUP: 0,
+                    DISABLED : true,
+                    BACKGROUND_POSITION: {
+                        DEFAULT: [-0, -144],
+                        GRAYOUT: [-0, -168]
+                    },
+                    ONCLICK: function(e) {
+                        $('#myGrid').trendGrid('getSelected', function(r){
+                            var GUID = O_PARENT.grid.GUID_list[r];
+                            O_PARENT.menu.ajax_mail_vaildate_pass(GUID,r[0] , 0);
+                        });
+                    }
+                },
+                {
                     TEXT: '{contextmenu_profile_review_pass}',
                     GROUP: 0,
                     DISABLED : true,
@@ -462,6 +492,37 @@ var O_PARENT = {
                 }
             });
         },
+        ajax_mail_vaildate_pass: function(GUID , top , status){
+            $.isLoading({
+                    text: "Loading" ,
+                    position:   "overlay"
+            });
+
+            $.ajax({
+                //must to set synchronous, otherwise your need good design concept
+                url: '/admin/member/mail_vaildate',
+                dataType: 'json',
+                type: 'POST',
+                data: {
+                    status: status,
+                    GUID:GUID
+                },
+                success: function(r) {
+                    if(r.error_code == 0){
+
+                        $('#myGrid').trendGrid('registerRowsData', {
+                            data: [
+                                    r.content
+                            ],
+                            top: top
+                        });
+                        $('#myGrid').trendGrid('renderContent');
+                        O_PARENT.menu.toggle_contextmenu([]);
+                        $.isLoading( "hide" );
+                    }
+                }
+            });
+        },
         ajax_profile_review_pass: function(GUID , top , status){
             $.isLoading({
                     text: "Loading" ,
@@ -564,27 +625,38 @@ var O_PARENT = {
                     CLIENT_MENU.menu[5].DISABLED = false;
                     CLIENT_MENU.menu[6].DISABLED = false;
                     CLIENT_MENU.menu[7].DISABLED = false;
+                    CLIENT_MENU.menu[8].DISABLED = false;
+                    CLIENT_MENU.menu[9].DISABLED = false;
+
+                    //Validated 
+                    if(r[0].Validated == 0){
+                        CLIENT_MENU.menu[2].DISABLED = true;
+                    }else{
+                        CLIENT_MENU.menu[1].DISABLED = true;
+                        CLIENT_MENU.menu[2].DISABLED = false;
+                        
+                    }
 
                     //ProfileReviewStatus 
                     if(r[0].ProfileReviewStatus == 0){
-                        CLIENT_MENU.menu[3].DISABLED = true;
+                        CLIENT_MENU.menu[5].DISABLED = true;
                     }else{
-                        CLIENT_MENU.menu[1].DISABLED = true;
-                        CLIENT_MENU.menu[2].DISABLED = true;
-                        CLIENT_MENU.menu[3].DISABLED = false;
+                        CLIENT_MENU.menu[3].DISABLED = true;
+                        CLIENT_MENU.menu[4].DISABLED = true;
+                        CLIENT_MENU.menu[5].DISABLED = false;
                     }
 
                     //Delete Rank = 0
                     if(r[0].DeleteStatus == 1){
-                        CLIENT_MENU.menu[4].DISABLED = true;
-                    }else{
-                        CLIENT_MENU.menu[5].DISABLED = true;
-                    }
-                    //Forbidden Rank = 1
-                    if(r[0].ForbiddenStatus == 1){
                         CLIENT_MENU.menu[6].DISABLED = true;
                     }else{
                         CLIENT_MENU.menu[7].DISABLED = true;
+                    }
+                    //Forbidden Rank = 1
+                    if(r[0].ForbiddenStatus == 1){
+                        CLIENT_MENU.menu[8].DISABLED = true;
+                    }else{
+                        CLIENT_MENU.menu[9].DISABLED = true;
                     }
                     $myMenu.contextMenu('reload', CLIENT_MENU);
 
@@ -597,6 +669,8 @@ var O_PARENT = {
                     CLIENT_MENU.menu[5].DISABLED = true;
                     CLIENT_MENU.menu[6].DISABLED = true;
                     CLIENT_MENU.menu[7].DISABLED = true;
+                    CLIENT_MENU.menu[8].DISABLED = true;
+                    CLIENT_MENU.menu[9].DISABLED = true;
                     $myMenu.contextMenu('reload', CLIENT_MENU);
                 }
             });
@@ -637,16 +711,29 @@ var O_PARENT = {
                         width: 155,
                         sortAsc: true
                     },
+                    
+                    {
+                        id: "Validated",
+                        name: '{grid_column_Validated}',
+                        width: 65,
+                        sortAsc: true
+                    },
+                    {
+                        id: "ValidatedDate",
+                        name: '{grid_column_ValidatedDate}',
+                        width: 130,
+                        sortAsc: true
+                    },
                     {
                         id: "ProfileReviewStatus",
                         name: '{grid_column_ProfileReviewStatus}',
-                        width: 55,
+                        width: 65,
                         sortAsc: true
                     },
                     {
                         id: "ProfileReviewDate",
                         name: '{grid_column_ProfileReviewDate}',
-                        width: 55,
+                        width: 130,
                         sortAsc: true
                     },
                     {
@@ -726,6 +813,16 @@ var O_PARENT = {
                     UserID : function(o){
                         o.$cell.css('text-align','center');
                         return o.text;
+                    },
+                    Validated: function(o){
+                        switch(parseInt(o.text,10)){
+                            case 0:
+                                return '{account_mail_validate_pending_s}';
+                            break;
+                            case 1:
+                                return '{account_mail_validate_pass_s}';
+                            break;
+                        }
                     },
                     ProfileReviewStatus: function(o){
                         switch(parseInt(o.text,10)){

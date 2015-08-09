@@ -18,7 +18,17 @@ $lang['account_settings_timezone']        = "設定時區";
 $lang['account_settings_success']        = "設定成功。";
 $lang['account_settings_fail']        = "設定失敗，請再試一次。";
 $lang['account_logout']        = "登出";
+$lang['account_priviliege_check_my_private_photo']        = "我己授權查看我的私人照片：%s";
+$lang['account_has_been_added_to_white_list']        = "已被加入收藏：<a href='/account/added_to_while_list'>%s</a>";
+$lang['account_my_favorite']        = "我的收藏：<a href='/account/favorite'>%s</a>";
+$lang['account_my_blocked_list']        = "我的黑名單：<a href='/account/blocked'>%s</a>";
 
+$lang['account_has_been_added_to_white_list_s']        = "被加入收藏";
+$lang['account_my_favorite_s']        = "我的收藏";
+$lang['account_my_blocked_list_s']        = "黑名單";
+
+$lang['account_mail_validate_pending_s']        = "等待認證";
+$lang['account_mail_validate_pass_s']        = "已認證";
 
 
 

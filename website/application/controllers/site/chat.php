@@ -15,9 +15,30 @@ class Chat extends Site_Base_Controller {
     }
     public function alertMsg()
     {
+        $this->load->model('photo_model');
         if ( $this->session->userdata('Rank') <= 2){
             $this->display_data['alert_content'] = $this->display_data['alert_mail_need_to_vaildate_at_account'];
+            return;
         }
+        if( $this->session->userdata('Rank') <= 3  ){
+            $public = $this->photo_model->retrieve_my_photos( $this->session->userdata('GUID') , 'public');
+            $public_photo_count = count($public);
+
+            $public_photo_reviewed_count = 0;
+            foreach( $public as $key => $row){
+                if($row['ReviewStatus'] == 2){
+                    $public_photo_reviewed_count++;
+                }
+            }
+            if( $public_photo_count == 0){
+                $this->display_data['alert_content'] = $this->display_data['alert_upload_a_photo_to_public_before_chat'];
+            }else{
+                if( $public_photo_reviewed_count == 0){
+                    $this->display_data['alert_content'] = $this->display_data['alert_upload_a_photo_to_public_under_review_before_chat'];
+                }
+            }
+        }
+
     }
 
 	public function index()

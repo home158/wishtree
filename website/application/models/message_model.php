@@ -190,7 +190,7 @@ class Message_model extends CI_Model {
 			B.[ReadTime],
             ".$this->utility_model->dbColumnDatetime('B.[DateModify]' , '[DateModify]' ).",
 
-			U.[Nickname],
+			U.[Nickname] AS [db_Nickname],
 			U.[Birthday],
 			U.[Role],
 			U.[Bodytype],

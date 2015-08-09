@@ -3,7 +3,7 @@
         <div class="contentl fl">
             <!-- main content -->
             <div >
-                <p class="hd">個人帳戶</p>
+                <p class="hd">個人帳戶 {Nickname}</p>
                 <ul>
                     <li>會員資格：{member_ship}</li>
                     <li>帳戶類型：{role}</li>
@@ -13,7 +13,10 @@
                 <ul>
                     <li>公開照片：{public_photo_total_count}</li>
                     <li>私人照片：{private_photo_total_count}</li>
-                    <li>我己授權查看我的私人照片：</li>
+                    <li>{account_priviliege_check_my_private_photo}</li>
+                    <li>{account_has_been_added_to_white_list}</li>
+                    <li>{account_my_favorite}</li>
+                    <li>{account_my_blocked_list}</li>
     
                 </ul>
                 <p class="hd">提醒設置</p>

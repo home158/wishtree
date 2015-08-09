@@ -24,6 +24,7 @@ class Login_model extends CI_Model {
         $data_db['GUID'] = $row->GUID;
         $data_db['Role'] = $row->Role;
         $data_db['Validated'] = $row->Validated;//電子郵件認證
+        $data_db['ProfileReviewStatus'] = $row->ProfileReviewStatus;//人工資料審核註記
         $data_db['DeleteStatus'] = $row->DeleteStatus;//刪除註記
         $data_db['ForbiddenStatus'] = $row->ForbiddenStatus;//停權註記
         

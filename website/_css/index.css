@@ -478,6 +478,27 @@ select {
 .profile_set{
 
 }
+.profile_set .cover_photo{
+    position: relative;
+}
+.profile_set #cover_photo{
+}
+.profile_set .other_photo{
+    margin-top: 10px;
+}
+.profile_set .other_photo ul{
+    margin: 0px;
+    padding: 0px;
+}
+
+.profile_set .other_photo ul li{
+    float: left;
+}
+.profile_set .other_photo ul li img{
+    width: 50px;
+    height: 60px;
+    cursor: pointer;
+}
 
 .write_set .write_right{
     margin: 15px;
@@ -570,7 +591,7 @@ select {
   font-weight: bold;
 }
 .profile_left{
-    width:30%;
+    width:300px;
 }
 .profile_right{
     width:62%;
@@ -597,4 +618,61 @@ select {
     font-size: 200px;
     direction: ltr;
     cursor: pointer;
+}
+.action_set ul{
+    margin: 0px;
+    padding: 0px;
+}
+.action_set ul li.user{
+    padding: 10px 0;
+    border-bottom: 1px solid #dfdfdf;
+    position: relative;
+}
+.action_set .avatar{
+    float: left;
+    position: relative;
+    margin: 0 12px 0 0;
+    text-decoration: none;
+    background-color: #f3f3f3;
+    height: 120px;
+    width: 100px;
+}
+.action_set .message-info {
+    float: left;
+    position: relative;
+}
+.action_set .identity a {
+    color: #333;
+    font-size: 16px;
+}
+.action_set .identity strong {
+    font-size: 16px;
+}
+.action_set .identity {
+    width: 630px;
+    position: absolute;
+    left: 0;
+    top: 13px;
+}
+.block-wrapper{
+    margin-bottom: 14px;
+    display: block;
+    position: relative;
+
+}
+.block-wrapper li{
+    float: left;
+}
+.tabs.general li a.ctrl {
+    float: left;
+    height: 30px;
+    margin-right: 20px;
+    padding: 0 2px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #333;
+    line-height: 180%;
+}
+.tabs.general li.active .ctrl {
+    border-bottom: 4px solid #2d9cd3;
 }

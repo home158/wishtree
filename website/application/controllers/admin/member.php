@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Member extends Admin_Base_Controller {
-    private $UI_columns = array('UserID','Nickname','GUID','ProfileReviewStatus','DeleteStatus','ForbiddenStatus');
+    private $UI_columns = array('UserID','Nickname','GUID','Validated','ProfileReviewStatus','DeleteStatus','ForbiddenStatus');
     public function __construct()
     {
         parent::__construct();
@@ -122,6 +122,37 @@ class Member extends Admin_Base_Controller {
             echo $this->error_model->retrieve_error_msg(1);
         }
     }
+    public function mail_vaildate()
+    {
+        $this->load->model('error_model');
+        $this->load->model('register_model');
+        $GUID = $this->input->post('GUID');
+        $update_data = array(
+            'ValidateKey' => NULL,
+            'Validated' => $this->input->post('status'),
+            'ValidatedDate' => date('Y-m-d H:i:s')
+        );
+        if($update_data['Validated'] == 0){
+            $update_data['ValidatedDate'] = NULL;
+        }
+        $query = $this->db->update('[dbo].[i_user]', $update_data, array('GUID' => $GUID));
+        $this->utility_model->update_rank($GUID);
+
+        $this->additionalColumn();
+        $result_info = $this->member_model->retrive_row_data_by_GUID($GUID ,   $this->UI_columns);
+
+        //Create Azure storage
+        $this->register_model->create_container($GUID);
+        //Create  repositories
+        $this->register_model->create_repository($GUID);
+
+        header('Content-Type: application/json');
+        if($query == true){
+            echo $this->error_model->retrieve_error_msg(0 , NULL , (array) $result_info['object']->row() );
+        }else{
+            echo $this->error_model->retrieve_error_msg(1);
+        }
+    }
     public function profile_review()
     {
         $this->load->model('error_model');
@@ -153,7 +184,9 @@ class Member extends Admin_Base_Controller {
                 $this->utility_model->dbColumnDatetime('[DateCreate]' ),
                 $this->utility_model->dbColumnDatetime('[ProfileReviewDate]' ),
                 $this->utility_model->dbColumnDatetime('[DeleteDate]' ),
-                $this->utility_model->dbColumnDatetime('[ForbiddenDate]' )
+                $this->utility_model->dbColumnDatetime('[ForbiddenDate]' ),
+                $this->utility_model->dbColumnDatetime('[ValidatedDate]' )
+                
         );
     }
 

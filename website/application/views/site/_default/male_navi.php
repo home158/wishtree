@@ -11,8 +11,17 @@
         <li><a id="account" href="/account">帳號</a></li>
     </ul>
 </div>
+<div id="bs_alert">
+    <div class="alert alert-warning alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div id="alert_content">{alert_content}</div>
+    </div>
+</div>
 <script>
 $(function() {
     $('a#{highlight_navi}').addClass('highlight');
+    if( $('#alert_content').text() != ''){
+        $('#bs_alert').fadeIn();
+    }
 });
 </script>

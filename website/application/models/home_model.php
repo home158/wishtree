@@ -15,7 +15,7 @@ class Home_model extends CI_Model {
         $query = $this->db->query(
         "
         SELECT TOP 10
-            P.[UserGUID],
+            U.[GUID] AS [UserGUID],
             U.[Role],
             U.[Nickname],
             P.[ThumbBasename],
@@ -38,6 +38,8 @@ class Home_model extends CI_Model {
         )
 		WHERE 
 				Role = '".$role."'
+			AND 
+				U.[ProfileReviewStatus] = 2
 			AND
 				U.[DateCreate] >  DATEADD(d,-30,GETUTCDATE())
         ORDER BY NEWID()
@@ -46,19 +48,23 @@ class Home_model extends CI_Model {
         $r = $query->result_array(); 
         foreach($r as $key => $row){
             if( is_null($row['ThumbBasename']) ){
-                $r[$key]['ThumbBasename'] = $this->config->item('photo_'.$row['Role'].'_default');
+                $r[$key]['ThumbBasename'] = $this->config->item('photo_'.$row['Role'].'_default_thumb');
             }else{
                 $r[$key]['ThumbBasename'] = $this->config->item('azure_storage_baseurl').$row['UserGUID'].'/'.$row['ThumbBasename'];
             }
         }
         return $r;
     }
+    /*
+    * 使用者必須完成資料驗證才可以被瀏覽到
+    *
+    */
     function get_random_user($role)
     {
         $query = $this->db->query(
         "
         SELECT TOP 10
-            P.[UserGUID],
+            U.[GUID] AS [UserGUID],
             U.[Role],
             U.[Nickname],
             P.[ThumbBasename],
@@ -79,14 +85,17 @@ class Home_model extends CI_Model {
                 P.[ReviewStatus] = 2
         )
 		WHERE 
-            Role = '".$role."'
+				Role = '".$role."'
+			AND 
+				U.[ProfileReviewStatus] = 2
         ORDER BY NEWID()
+
         ");
 
         $r = $query->result_array(); 
         foreach($r as $key => $row){
             if( is_null($row['ThumbBasename']) ){
-                $r[$key]['ThumbBasename'] = $this->config->item('photo_'.$row['Role'].'_default');
+                $r[$key]['ThumbBasename'] = $this->config->item('photo_'.$row['Role'].'_default_thumb');
             }else{
                 $r[$key]['ThumbBasename'] = $this->config->item('azure_storage_baseurl').$row['UserGUID'].'/'.$row['ThumbBasename'];
             }

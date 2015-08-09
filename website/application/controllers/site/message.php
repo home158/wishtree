@@ -12,6 +12,7 @@ class Message extends Site_Base_Controller {
         $this->display_data["highlight_navi"] = "message";
         $this->load->model('message_model');
         $this->load->model('utility_model');
+        $this->load->model('photo_model');
         $this->alertMsg();
 
     }
@@ -22,6 +23,25 @@ class Message extends Site_Base_Controller {
                 $this->display_data['alert_content'] = $this->display_data['alert_mail_need_to_vaildate_before_message_to_femele'];
             }else{
                 $this->display_data['alert_content'] = $this->display_data['alert_mail_need_to_vaildate_before_message_to_mele'];
+            }
+            return;
+        }
+        if( $this->session->userdata('Rank') <= 3  ){
+            $public = $this->photo_model->retrieve_my_photos( $this->session->userdata('GUID') , 'public');
+            $public_photo_count = count($public);
+
+            $public_photo_reviewed_count = 0;
+            foreach( $public as $key => $row){
+                if($row['ReviewStatus'] == 2){
+                    $public_photo_reviewed_count++;
+                }
+            }
+            if( $public_photo_count == 0){
+                $this->display_data['alert_content'] = $this->display_data['alert_upload_a_photo_to_public_before_send_message'];
+            }else{
+                if( $public_photo_reviewed_count == 0){
+                    $this->display_data['alert_content'] = $this->display_data['alert_upload_a_photo_to_public_under_review_before_send_message'];
+                }
             }
         }
     }
@@ -109,7 +129,7 @@ class Message extends Site_Base_Controller {
                 'TargetUserGUID' => $GUID,
                 'MessageContent' => $this->input->post('message_content'),
                 'MessageReviewStatus' => 2,//無需審核
-                'MessageReviewTime' => date('Y-m-d H:i:s'),
+                'MessageReviewDate' => date('Y-m-d H:i:s'),
                 'MessageReviewByGUID' => NULL
             );
             $pending_message_insert_string = $this->db->insert_string('[dbo].[i_pending_message]', $pending_message_data);
@@ -141,7 +161,7 @@ class Message extends Site_Base_Controller {
             'TargetUserGUID' => $GUID,
             'MessageContent' => $msg_content,
             'MessageReviewStatus' => 2,//無需審核
-            'MessageReviewTime' => date('Y-m-d H:i:s'),
+            'MessageReviewDate' => date('Y-m-d H:i:s'),
             'MessageReviewByGUID' => NULL
         );
         $pending_message_insert_string = $this->db->insert_string('[dbo].[i_pending_message]', $pending_message_data);

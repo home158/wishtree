@@ -375,6 +375,21 @@ $config['azure_storage_temp_forder'] = './temp';
 
 /*
 | -------------------------------------------------------------------
+|  Photo
+| -------------------------------------------------------------------
+| Prototype:
+|
+|	
+|
+*/
+$config['photo_male_default_thumb'] = '/_images/null_face_100x120.png';
+$config['photo_female_default_thumb'] = '/_images/null_face_100x120.png';
+
+$config['photo_male_default_crop'] = '/_images/null_face_300X360.png';
+$config['photo_female_default_crop'] = '/_images/null_face_300X360.png';
+
+/*
+| -------------------------------------------------------------------
 |  Message
 | -------------------------------------------------------------------
 | Prototype:

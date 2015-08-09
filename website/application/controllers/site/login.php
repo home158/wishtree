@@ -62,12 +62,9 @@ class Login extends Site_Base_Controller {
                     break;
                     //停權帳號
                     case 1:
-                        $this->display_data['return_msg'] = $this->display_data['login_forbidden'] . $row->ForbiddenMsg;
-
-                        $this->parser->parse('site/_default/header',$this->display_data);
-		                $this->parser->parse('site/_default/header_login',$this->display_data);
-		                $this->parser->parse('site/login/login_normal',$this->display_data);
-                        $this->parser->parse('site/_default/footer',$this->display_data);
+                        $this->login_model->set_login_session($row);
+                        $this->login_model->set_info_cookie($row, $remember_me);
+                        redirect( base_url().'account' , 'refresh');
 
                     break;
                     //未認證會員帳號

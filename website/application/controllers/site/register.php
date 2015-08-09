@@ -7,7 +7,7 @@ class Register extends Site_Base_Controller {
         parent::__construct();
         $this->parse_display_data(
             array('btn', 'grid','register','member','city','language','birthday','height','bodytype','race',
-                'income','property','education','maritalstatus' ,'smoking','drinking' , 'timezoneoffset' , 'dst'
+                'income','property','education','maritalstatus' ,'smoking','drinking' , 'timezoneoffset' , 'dst' ,'role'
             )
         );
         $this->load->model('register_model');
@@ -85,8 +85,8 @@ class Register extends Site_Base_Controller {
 		$this->form_validation->set_rules('race', $this->display_data['grid_column_Race'], 'trim|required');
 		$this->form_validation->set_rules('education', $this->display_data['grid_column_Education'], 'trim');
 		$this->form_validation->set_rules('maritalstatus', $this->display_data['grid_column_Maritalstatus'], 'trim');
-        $this->form_validation->set_rules('smoking', $this->display_data['grid_column_Smoking'], 'trim|required');
-        $this->form_validation->set_rules('drinking', $this->display_data['grid_column_Drinking'], 'trim|required');
+        $this->form_validation->set_rules('smoking', $this->display_data['grid_column_Smoking'], 'trim');
+        $this->form_validation->set_rules('drinking', $this->display_data['grid_column_Drinking'], 'trim');
         $this->form_validation->set_rules('ideal_desc', $this->display_data['grid_column_IdealDesc'], 'trim|required');
 
         if( $this->input->cookie("WG_role") == 'male' ){

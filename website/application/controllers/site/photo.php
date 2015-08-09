@@ -4,7 +4,7 @@ class Photo extends Site_Base_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->login_required_validation();
+        $this->not_Forbidden_required_validation();
         $this->parse_display_data(
             array('btn' ,'alert')
         );
@@ -17,6 +17,7 @@ class Photo extends Site_Base_Controller {
     {
         if( $this->session->userdata('Rank') <= 2){
             $this->display_data['alert_content'] = $this->display_data['alert_mail_need_to_vaildate_before_upload_photo'];
+            return;
         }
         if( $this->session->userdata('Rank') <= 3  ){
             $public = $this->photo_model->retrieve_my_photos( $this->session->userdata('GUID') , 'public');
@@ -29,13 +30,17 @@ class Photo extends Site_Base_Controller {
                 }
             }
             if( $public_photo_count == 0){
-                $this->display_data['alert_content'] = $this->display_data['alert_upload_a_photo_to_public_before_send_message'];
+                $this->display_data['alert_content'] = $this->display_data['alert_upload_a_photo_to_public_before_been_viewed_profile'];
             }else{
                 if( $public_photo_reviewed_count == 0){
-                    $this->display_data['alert_content'] = $this->display_data['alert_upload_a_photo_to_public_under_review_before_send_message'];
+                    $this->display_data['alert_content'] = $this->display_data['alert_upload_a_photo_to_public_under_review_before_been_viewed_profile'];
                 }
             }
         }
+        if( $this->session->userdata('ForbiddenStatus')==1 ){
+            $this->display_data['alert_content'] = $this->display_data['alert_this_account_has_been_forbidden'];
+        }
+
     }
 
 	public function show($type = 'public')

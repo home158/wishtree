@@ -18,9 +18,9 @@
                 {my_photos}
                     <li >
                         <label class="redF">{review_status}</label>
-                        <div class="image-box image-box-{IsCover}"><img class="update_image" src="{thumb_image_url}" data-GUID="{GUID}" data-full="{full_image_url}" data-crop="{crop_image_url}"/><div class="btn-clickboard" data-GUID="{GUID}" >Top</div>
+                        <div class="image-box image-box-{IsCover}"><img class="update_image" src="{thumb_image_url}" data-GUID="{db_GUID}" data-full="{full_image_url}" data-crop="{crop_image_url}"/><div class="btn-clickboard" data-GUID="{db_GUID}" >Top</div>
                         </div>
-                        <button type="button" class="delete_image btn btn-danger delete btn-sm " data-GUID="{GUID}" >
+                        <button type="button" class="delete_image btn btn-danger delete btn-sm " data-GUID="{db_GUID}" >
                             <i class="glyphicon glyphicon-trash"></i>
                             <span>{btn_delete}</span>
                         </button>

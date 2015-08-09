@@ -25,7 +25,7 @@
                                             <div class="new_icon">{new}</div>
                                         </ul>
                                     </div>
-                                    <p>{Nickname}, {NationalCode}</p>
+                                    <p>{db_Nickname}, {NationalCode}</p>
                                 </div>
                                 {/message_box}
 

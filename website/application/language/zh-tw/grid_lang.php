@@ -38,7 +38,7 @@ $lang['grid_column_City_s'] = "<li>城市：%s</li>";
 $lang['grid_column_Language'] = "慣用語言";
 $lang['grid_column_Language_s'] = "<li>慣用語言：%s</li>";
 $lang['grid_column_Birthday'] = "出生日期";
-$lang['grid_column_old_s'] = "<li>年齡：%s</li>";
+$lang['grid_column_old_s'] = "<li>年齡：%s歲</li>";
 $lang['grid_column_Height'] = "身高";
 $lang['grid_column_Height_s'] = "<li>身高：%s</li>";
 $lang['grid_column_Bodytype'] = "體型";
@@ -69,6 +69,8 @@ $lang['grid_column_DeleteStatus'] = "刪除註記";
 $lang['grid_column_DeleteDate'] = "刪除時間";
 $lang['grid_column_ForbiddenStatus'] = "停權註記";
 $lang['grid_column_ForbiddenDate'] = "停權時間";
+$lang['grid_column_Validated'] = "電子郵件認證";
+$lang['grid_column_ValidatedDate'] = "電子郵件認證時間";
 
 /* End of file grid_lang.php */
 /* Location: ./application/language/zh-tw/grid_lang.php */

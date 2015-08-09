@@ -80,7 +80,7 @@ class Photo_model extends CI_Model {
             }
             $photo = array(
                 'IsPrivate' => $row['IsPrivate'],
-                'GUID' => $row['GUID'],
+                'db_GUID' => $row['GUID'],
                 'full_image_url' => $this->config->item('azure_storage_baseurl') . $row['UserGUID'] . '/' . $row['FullBasename'].'?'.time(),
                 'crop_image_url' =>$this->config->item('azure_storage_baseurl') . $row['UserGUID'] . '/' . $row['CropBasename'].'?'.time(),
                 'thumb_image_url' =>$this->config->item('azure_storage_baseurl') . $row['UserGUID'] . '/' . $row['ThumbBasename'].'?'.time(),

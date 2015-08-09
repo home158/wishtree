@@ -3,11 +3,17 @@ DECLARE @GUID uniqueidentifier
 SET @GUID = NEWID()
 
 --Drop tables
--- Drop the i_favor.
+--Drop tables
+-- Drop the i_blocked_list.
 	IF EXISTS (SELECT * FROM sys.objects 
-		WHERE object_id = OBJECT_ID(N'[dbo].[i_favor]') 
+		WHERE object_id = OBJECT_ID(N'[dbo].[i_blocked_list]') 
 		AND type in (N'U'))
-	DROP TABLE [dbo].[i_favor]
+	DROP TABLE [dbo].[i_blocked_list]
+-- Drop the i_white_list.
+	IF EXISTS (SELECT * FROM sys.objects 
+		WHERE object_id = OBJECT_ID(N'[dbo].[i_white_list]') 
+		AND type in (N'U'))
+	DROP TABLE [dbo].[i_white_list]
 -- Drop the i_photo.
 	IF EXISTS (SELECT * FROM sys.objects 
 		WHERE object_id = OBJECT_ID(N'[dbo].[i_photo]') 

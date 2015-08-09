@@ -7,7 +7,7 @@ class Account extends Site_Base_Controller {
         $this->not_Forbidden_required_validation();
         $this->parse_display_data(
             array( 'account' , 'rank' , 'email' , 'role' ,'btn', 'grid','register','member','city','language','birthday','height','bodytype','race',
-                'income','property','education','maritalstatus' ,'smoking','drinking' , 'timezoneoffset' , 'dst' , 'alert')
+                'income','property','education','maritalstatus' ,'smoking','drinking' , 'timezoneoffset' , 'dst' , 'alert' ,'view')
         );
         $this->load->model('account_model');
         $this->load->model('photo_model');
@@ -18,11 +18,26 @@ class Account extends Site_Base_Controller {
     }
     public function alertMsg()
     {
-        if ( $this->session->userdata('Rank') <= 2){
+        if ( $this->session->userdata('Validated') == 0){
             $this->display_data['alert_content'] = $this->display_data['alert_mail_need_to_vaildate_at_account'];
+            return;
         }
+
+        //等待審核中
+        if ( $this->session->userdata('ProfileReviewStatus') == 0){
+            $this->display_data['alert_content'] = $this->display_data['alert_prifile_review_processing'];
+            return;
+        }
+
+        //審核不通過
+        if ( $this->session->userdata('ProfileReviewStatus') == 1){
+            $this->display_data['alert_content'] = $this->display_data['alert_prifile_review_reject'];
+            return;
+        }
+
         if ( $this->session->userdata('ForbiddenStatus') == 1){
             $this->display_data['alert_content'] = $this->display_data['alert_this_account_has_been_forbidden'];
+            return;
         }
     }
 
@@ -31,6 +46,8 @@ class Account extends Site_Base_Controller {
         $this->rank_validated_role_profileReview_updateProfile();
         $this->public_photos();
         $this->private_photos();
+        $this->whilelist();
+        $this->blockedlist();
 
 		$this->parser->parse('site/_default/header',$this->display_data);
 		$this->parser->parse('site/_default/header_logout',$this->display_data);
@@ -44,6 +61,45 @@ class Account extends Site_Base_Controller {
 		$this->parser->parse('site/_default/header_logout',$this->display_data);
 		$this->parser->parse('site/_default/female_navi',$this->display_data);
 		$this->parser->parse('site/account/profile',$this->display_data);
+		$this->parser->parse('site/_default/footer',$this->display_data);
+    }
+    public function blocked()
+    {
+        $this->load->model('action_model');
+        $blocked_list = $this->action_model->retrieve_blockedlist( $this->session->userdata('GUID') );
+        $this->display_data['blocked_list'] = $blocked_list;
+
+        $list = $this->action_model->retrieve_whitelist( $this->session->userdata('GUID') );
+		$this->parser->parse('site/_default/header',$this->display_data);
+		$this->parser->parse('site/_default/header_logout',$this->display_data);
+		$this->parser->parse('site/_default/female_navi',$this->display_data);
+		$this->parser->parse('site/account/blocked',$this->display_data);
+		$this->parser->parse('site/_default/footer',$this->display_data);
+    }
+    public function favorite()
+    {
+        $this->load->model('action_model');
+        $favorite_list = $this->action_model->retrieve_whitelist( $this->session->userdata('GUID') );
+        $this->display_data['favorite_list'] = $favorite_list;
+
+        $list = $this->action_model->retrieve_whitelist( $this->session->userdata('GUID') );
+		$this->parser->parse('site/_default/header',$this->display_data);
+		$this->parser->parse('site/_default/header_logout',$this->display_data);
+		$this->parser->parse('site/_default/female_navi',$this->display_data);
+		$this->parser->parse('site/account/favorite',$this->display_data);
+		$this->parser->parse('site/_default/footer',$this->display_data);
+    }
+    public function added_to_while_list()
+    {
+        $this->load->model('action_model');
+        $added_list = $this->action_model->retrieve_has_been_added_to_whitelist( $this->session->userdata('GUID') );
+        $this->display_data['added_list'] = $added_list;
+
+        $list = $this->action_model->retrieve_whitelist( $this->session->userdata('GUID') );
+		$this->parser->parse('site/_default/header',$this->display_data);
+		$this->parser->parse('site/_default/header_logout',$this->display_data);
+		$this->parser->parse('site/_default/female_navi',$this->display_data);
+		$this->parser->parse('site/account/added_to_while_list',$this->display_data);
 		$this->parser->parse('site/_default/footer',$this->display_data);
     }
     public function update_profile()
@@ -142,6 +198,26 @@ class Account extends Site_Base_Controller {
 		$this->parser->parse('site/_default/footer',$this->display_data);
 
     }
+    private function blockedlist()
+    {
+        //我的黑名單
+        $this->load->model('action_model');
+        $list = $this->action_model->retrieve_blockedlist( $this->session->userdata('GUID') );
+        $this->display_data['account_my_blocked_list'] = sprintf( $this->display_data['account_my_blocked_list'] , count($list) );
+    }
+    private function whilelist()
+    {
+        //我的收藏
+        $this->load->model('action_model');
+        $list = $this->action_model->retrieve_whitelist( $this->session->userdata('GUID') );
+        $this->display_data['account_my_favorite'] = sprintf( $this->display_data['account_my_favorite'] , count($list) );
+
+        //已被加入收藏
+        $added_list = $this->action_model->retrieve_has_been_added_to_whitelist( $this->session->userdata('GUID') );
+        $this->display_data['account_has_been_added_to_white_list'] = sprintf( $this->display_data['account_has_been_added_to_white_list'] , count($added_list) );
+
+    }
+
     private function public_photos()
     {
         $public = $this->photo_model->retrieve_my_photos( $this->session->userdata('GUID') , 'public');

@@ -5,11 +5,11 @@ class Home extends Site_Base_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->display_data["highlight_navi"] = "home";
         $this->parse_display_data(
             array('btn' ,'alert' ,'role')
         );
-        
+        $this->display_data["highlight_navi"] = "home";
+
         $this->login_required_validation();
         $this->load->model('home_model');
 

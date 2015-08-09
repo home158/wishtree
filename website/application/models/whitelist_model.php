@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Favor_model extends CI_Model {
+class Whitelist_model extends CI_Model {
 
     function __construct()
     {
@@ -14,7 +14,7 @@ class Favor_model extends CI_Model {
         SELECT
             [UserGUID]
         FROM 
-            [dbo].[i_favor]
+            [dbo].[i_white_list]
         WHERE 
             [TrackUserGUID] = '".$userGUID."'
         ");
@@ -25,14 +25,14 @@ class Favor_model extends CI_Model {
         }
         return $tracker;
     }
-    function is_favor_exist($userGUID , $targetGUID)
+    function is_exist($userGUID , $targetGUID)
     {
         $query = $this->db->query(
         "
         SELECT
             *
         FROM 
-            [dbo].[i_favor]
+            [dbo].[i_white_list]
         WHERE 
                 [UserGUID] = '".$userGUID."'
             AND
@@ -46,5 +46,5 @@ class Favor_model extends CI_Model {
     }
 }
 
-/* End of file error_model.php */
-/* Location: ./application/model/error_model.php */
+/* End of file whitelist_model.php */
+/* Location: ./application/model/whitelist_model.php */
