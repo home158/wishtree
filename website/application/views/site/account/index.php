@@ -11,8 +11,8 @@
                 </ul>
                 <p class="hd">帳戶統計資料</p>
                 <ul>
-                    <li>公開照片：{public_photo_total_count}</li>
-                    <li>私人照片：{private_photo_total_count}</li>
+                    <li>{account_public_photo}</li>
+                    <li>{account_private_photo}</li>
                     <li>{account_priviliege_check_my_private_photo}</li>
                     <li>{account_has_been_added_to_white_list}</li>
                     <li>{account_my_favorite}</li>

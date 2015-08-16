@@ -7,7 +7,7 @@ class Account extends Site_Base_Controller {
         $this->not_Forbidden_required_validation();
         $this->parse_display_data(
             array( 'account' , 'rank' , 'email' , 'role' ,'btn', 'grid','register','member','city','language','birthday','height','bodytype','race',
-                'income','property','education','maritalstatus' ,'smoking','drinking' , 'timezoneoffset' , 'dst' , 'alert' ,'view')
+                'income','property','education','maritalstatus' ,'smoking','drinking' , 'timezoneoffset' , 'dst' , 'alert' ,'view','message')
         );
         $this->load->model('account_model');
         $this->load->model('photo_model');
@@ -61,6 +61,60 @@ class Account extends Site_Base_Controller {
 		$this->parser->parse('site/_default/header_logout',$this->display_data);
 		$this->parser->parse('site/_default/female_navi',$this->display_data);
 		$this->parser->parse('site/account/profile',$this->display_data);
+		$this->parser->parse('site/_default/footer',$this->display_data);
+    }
+    public function private_approved()
+    {
+        $this->load->model('action_model');
+
+        $approved_list = $this->photo_model->retrieve_private_privilege( $this->session->userdata('GUID') , 2 );
+        $this->display_data['approved_list'] = $approved_list;
+
+		$this->parser->parse('site/_default/header',$this->display_data);
+		$this->parser->parse('site/_default/header_logout',$this->display_data);
+		$this->parser->parse('site/_default/female_navi',$this->display_data);
+		$this->parser->parse('site/account/approved',$this->display_data);
+		$this->parser->parse('site/_default/footer',$this->display_data);
+    }
+
+    public function private_reject()
+    {
+        $this->load->model('action_model');
+
+        $reject_list = $this->photo_model->retrieve_private_privilege( $this->session->userdata('GUID') , 1 );
+        $this->display_data['reject_list'] = $reject_list;
+
+		$this->parser->parse('site/_default/header',$this->display_data);
+		$this->parser->parse('site/_default/header_logout',$this->display_data);
+		$this->parser->parse('site/_default/female_navi',$this->display_data);
+		$this->parser->parse('site/account/reject',$this->display_data);
+		$this->parser->parse('site/_default/footer',$this->display_data);
+    }
+    public function private_pendding()
+    {
+        $this->load->model('action_model');
+
+        $pending_list = $this->photo_model->retrieve_private_privilege( $this->session->userdata('GUID') , 0 );
+        $this->display_data['pending_list'] = $pending_list;
+
+		$this->parser->parse('site/_default/header',$this->display_data);
+		$this->parser->parse('site/_default/header_logout',$this->display_data);
+		$this->parser->parse('site/_default/female_navi',$this->display_data);
+		$this->parser->parse('site/account/pending',$this->display_data);
+		$this->parser->parse('site/_default/footer',$this->display_data);
+    }
+    public function private_all()
+    {
+        $this->load->model('action_model');
+
+        $all_list = $this->photo_model->retrieve_private_privilege( $this->session->userdata('GUID') );
+        $this->display_data['all_list'] = $all_list;
+
+        $list = $this->action_model->retrieve_whitelist( $this->session->userdata('GUID') );
+		$this->parser->parse('site/_default/header',$this->display_data);
+		$this->parser->parse('site/_default/header_logout',$this->display_data);
+		$this->parser->parse('site/_default/female_navi',$this->display_data);
+		$this->parser->parse('site/account/private_all',$this->display_data);
 		$this->parser->parse('site/_default/footer',$this->display_data);
     }
     public function blocked()
@@ -159,6 +213,7 @@ class Account extends Site_Base_Controller {
 			    'NationalCode' => $this->input->post('national_code',true),
 			    'City' => $this->input->post('city',true),
 			    'Language' => $this->input->post('language',true),
+			    'Lang' => $this->session->userdata('WG_lang'),
 			    'Income' => $this->input->post('income',true),
 			    'Property' => $this->input->post('property',true),
 			    'Birthday' => $birthday,
@@ -229,12 +284,14 @@ class Account extends Site_Base_Controller {
             }
         }
         $this->display_data['public_photo_review'] = sprintf( $this->display_data['account_photo_review_count'] , $public_photo , $public_photo_reviewed );
-        $this->display_data['public_photo_total_count'] = sprintf( $this->display_data['account_photo_total_count'] , $public_photo );
+        $this->display_data['account_public_photo'] = sprintf( $this->display_data['account_public_photo'] , $public_photo );
         
     }
     private function private_photos()
     {
         $private = $this->photo_model->retrieve_my_photos( $this->session->userdata('GUID') , 'private');
+        $approve_private = $this->photo_model->retrieve_private_privilege( $this->session->userdata('GUID') , 2 );
+        $approve_private_count = count($approve_private);
         $private_photo = count($private);
         $private_photo_reviewed = 0;
         foreach( $private as $key => $row){
@@ -243,7 +300,8 @@ class Account extends Site_Base_Controller {
             }
         }
         $this->display_data['private_photo_review'] = sprintf( $this->display_data['account_photo_review_count'] , $private_photo , $private_photo_reviewed );
-        $this->display_data['private_photo_total_count'] = sprintf( $this->display_data['account_photo_total_count'] , $private_photo );
+        $this->display_data['account_private_photo'] = sprintf( $this->display_data['account_private_photo'] , $private_photo );
+        $this->display_data['account_priviliege_check_my_private_photo'] = sprintf( $this->display_data['account_priviliege_check_my_private_photo'] , $approve_private_count );
     }
     //會員資格
     private function rank_validated_role_profileReview_updateProfile()

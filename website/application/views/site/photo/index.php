@@ -1,29 +1,34 @@
 <script src="/_js/jquery.Jcrop.min.js"></script>
 <link rel="stylesheet" href="/_css/jquery.Jcrop.min.css" type="text/css" />
 <div id="content">
-    <div class="bg clearfix">
+    <div class="bg photo_set clearfix">
         <div class="msg deal_msg">
             <p class="hd">{account_update_profile}</p>
         </div>
         <div class="well well-lg">
             <p class="redF hd "></p>  
-            <div class="borR">
-                  <ul>
-                    <li><a class="on" href="/photo/public">上傳公開照片</a></li>
-                    <li><a href="/photo/private">上傳私人照片</a></li>
-                  </ul>
-            </div>                      
+            <div class="block-wrapper clearfix">
+                    <ul class="tabs general" >
+                        <li class="{active_public}">
+                            <a href="/photo/public" class="ctrl">{photo_upload_public}</a>
+                        </li>
+                        <li class="{active_private}">
+                            <a href="/photo/private" class="ctrl">{photo_upload_private}</a>
+                        </li>
+                    </ul>
+            </div>
+
             <div class="photo_list">
                 <ul class="clearfix">
                 {my_photos}
                     <li >
                         <label class="redF">{review_status}</label>
-                        <div class="image-box image-box-{IsCover}"><img class="update_image" src="{thumb_image_url}" data-GUID="{db_GUID}" data-full="{full_image_url}" data-crop="{crop_image_url}"/><div class="btn-clickboard" data-GUID="{db_GUID}" >Top</div>
+                        <div class="image-box image-box-{IsCover}"><img class="update_image" src="{thumb_image_url}" data-GUID="{db_GUID}" data-full="{full_image_url}" data-crop="{crop_image_url}"/><div class="btn-clickboard" data-GUID="{db_GUID}" >{photo_cover}</div>
                         </div>
-                        <button type="button" class="delete_image btn btn-danger delete btn-sm " data-GUID="{db_GUID}" >
+                        <span type="button" class="delete_image btn btn-danger delete btn-sm " data-GUID="{db_GUID}" >
                             <i class="glyphicon glyphicon-trash"></i>
                             <span>{btn_delete}</span>
-                        </button>
+                        </span>
                     
                     </li>
                 {/my_photos}

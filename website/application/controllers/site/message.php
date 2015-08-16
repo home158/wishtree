@@ -83,9 +83,10 @@ class Message extends Site_Base_Controller {
         $this->message_model->update_message_box($message_box_data);
 
 
-
+        $privilege_state = $this->photo_model->retrieve_privilege($owner , $sender);
         $msg = $this->message_model->get_history($owner , $sender);
 
+        $this->display_data['privilege_state'] = $privilege_state;
         $this->display_data['msg'] = $msg;
 
 	    echo $this->parser->parse('site/message/history',$this->display_data , true);
@@ -114,31 +115,8 @@ class Message extends Site_Base_Controller {
 	        $this->parser->parse('site/message/write',$this->display_data);
 	        $this->parser->parse('site/_default/footer',$this->display_data);
         }else{
-            //無需審核
-            $message_box_data = array(
-                'UserGUID' => $GUID,
-                'FromUserGUID' => $this->session->userdata('GUID'),
-                'IsNew' => 1,
-                'DateModify' => date('Y-m-d H:i:s')
-            );
-            $this->message_model->update_message_box($message_box_data);
-            //無需審核
-            $pending_message_data = array(
-                'FromUserGUID' => $this->session->userdata('GUID'),
-                'FromUserNickname' => $this->session->userdata('Nickname'),
-                'TargetUserGUID' => $GUID,
-                'MessageContent' => $this->input->post('message_content'),
-                'MessageReviewStatus' => 2,//無需審核
-                'MessageReviewDate' => date('Y-m-d H:i:s'),
-                'MessageReviewByGUID' => NULL
-            );
-            $pending_message_insert_string = $this->db->insert_string('[dbo].[i_pending_message]', $pending_message_data);
-            $this->db->query( $pending_message_insert_string );
-            
-            //寫入FILE
-            $this->message_model->save_message_history($this->session->userdata('GUID') , $this->session->userdata('Nickname') ,$GUID , $pending_message_data['MessageContent'] , 'say');
-            $this->message_model->save_message_history($this->session->userdata('GUID') , $this->session->userdata('Nickname') ,$GUID , $pending_message_data['MessageContent'] , 'target');
-            
+            $message_content = $this->input->post('message_content');
+            $this->message_model->write($GUID ,  $message_content);
             redirect( base_url().'view/'.$GUID , 'refresh');
         }
     }
@@ -146,30 +124,8 @@ class Message extends Site_Base_Controller {
     {
         $GUID = $this->input->post('targetGUID' , TRUE);
         $msg_content = $this->input->post('content');
-        //無需審核
-        $message_box_data = array(
-            'UserGUID' => $GUID,
-            'FromUserGUID' => $this->session->userdata('GUID'),
-            'IsNew' => 1,
-            'DateModify' => date('Y-m-d H:i:s')
-        );
-        $this->message_model->update_message_box($message_box_data);
-        //無需審核
-        $pending_message_data = array(
-            'FromUserGUID' => $this->session->userdata('GUID'),
-            'FromUserNickname' => $this->session->userdata('Nickname'),
-            'TargetUserGUID' => $GUID,
-            'MessageContent' => $msg_content,
-            'MessageReviewStatus' => 2,//無需審核
-            'MessageReviewDate' => date('Y-m-d H:i:s'),
-            'MessageReviewByGUID' => NULL
-        );
-        $pending_message_insert_string = $this->db->insert_string('[dbo].[i_pending_message]', $pending_message_data);
-        $this->db->query( $pending_message_insert_string );
-        //寫入FILE
-        $msg = $this->message_model->save_message_history($this->session->userdata('GUID') , $this->session->userdata('Nickname') ,$GUID , $msg_content , 'say');
-        $this->message_model->save_message_history($this->session->userdata('GUID') , $this->session->userdata('Nickname') ,$GUID , $msg_content , 'target');
-        $msg = $this->message_model->message_to_convert($msg);
+
+        $msg = $this->message_model->write($GUID ,  $msg_content);
         $this->display_data['msg'] = array($msg);
 
 	    echo $this->parser->parse('site/message/history',$this->display_data , true);

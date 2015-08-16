@@ -10,6 +10,10 @@ $lang['message_view_all']      = "總覽";
 $lang['message_review_pending']      = "等待審核";
 $lang['message_review_pass']      = "審核通過";
 $lang['message_review_reject']      = "審核不通過";
+$lang['message_approve']      = "On";
+$lang['message_reject']      = "Off";
+$lang['message_approve_for_private_photo']      = "授權開放私人照片:";
+
 
 
 /* End of file member_lang.php */

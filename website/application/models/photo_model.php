@@ -24,6 +24,105 @@ class Photo_model extends CI_Model {
         }
 
     }
+    function retrieve_private_privilege($UserGUID , $privilege='0,1,2')
+    {
+        $query = $this->db->query("
+        SELECT 
+            A.[UserGUID] AS [UserGUID],
+            A.[TrackUserGUID] AS [TrackUserGUID],
+            A.[Privilege] AS [Privilege],
+            
+            P.[ThumbBasename] AS [ThumbBasename],
+            U.[Nickname] AS [db_Nickname],
+            U.[Role] AS [Role],
+            U.[City] AS [City],
+            DATEDIFF(YEAR, [Birthday] ,GETDATE()) AS [YearsOld]
+        FROM 
+                [dbo].[i_photo_privilege] AS A
+            LEFT JOIN 
+                [dbo].[i_user] AS U
+            ON
+                A.[TrackUserGUID] = U.[GUID]
+            LEFT JOIN 
+                [dbo].[i_photo] AS P 
+            ON
+                    A.[TrackUserGUID] = P.[UserGUID]
+                AND
+                    P.[IsCover] = 1
+                AND 
+                    p.[IsPrivate] = 0
+        WHERE 
+                A.UserGUID = '".$UserGUID."'
+            AND
+                A.Privilege IN (".$privilege.")
+        ");
+        $r = $query->result_array();
+        $this->lang->load('city');
+        foreach($r as $key => $value){
+             $r[$key]['City'] = $this->lang->line('city_'.$value['City']);
+            if($value['ThumbBasename']){
+                $r[$key]['ThumbBasename'] = $this->config->item('azure_storage_baseurl') . $value['TrackUserGUID'] . '/' . $value['ThumbBasename'];
+            }else{
+                $r[$key]['ThumbBasename'] = $this->config->item('photo_'.$value['Role'].'_default_thumb');
+            }
+            if($value['Privilege'] == 2){
+                $r[$key]['Privilege_checkbox'] = 'checked';
+            }else{
+                $r[$key]['Privilege_checkbox'] = '';
+            }
+        }
+        return $r;
+    }
+    function is_privilege_exist($userGUID , $trackUserGUID)
+    {
+        $query = $this->db->query("
+        SELECT 
+            * 
+        FROM 
+            [dbo].[i_photo_privilege] 
+        WHERE 
+                UserGUID = '".$trackUserGUID."'
+            AND
+                TrackUserGUID = '".$userGUID."'
+        ");
+        if ($query->num_rows() > 0)
+        {
+            return TRUE; 
+        }else{
+            return FALSE;
+        }
+    }
+    function retrieve_privilege($GUID , $TrackUserGUID)
+    {
+        $query = $this->db->query("
+                SELECT 
+                    [Privilege]
+                FROM 
+                    [dbo].[i_photo_privilege] 
+                WHERE 
+                        UserGUID = '".$GUID."'
+                    AND
+                        TrackUserGUID = '".$TrackUserGUID."'
+                ");
+        if ($query->num_rows() > 0)
+        {
+            $r = $query->row_array(); 
+            switch($r['Privilege']){
+                case 0:
+                    $privilege = 0;
+                break;
+                case 1:
+                    $privilege = 0;
+                break;
+                case 2:
+                    $privilege = 1;
+                break;
+            }
+            return $privilege; 
+        }else{
+            return 0;
+        }
+    }
     function retrieve_photo($GUID)
     {
         $query = $this->db->query("SELECT * FROM [dbo].[i_photo] WHERE GUID = '".$GUID."'");

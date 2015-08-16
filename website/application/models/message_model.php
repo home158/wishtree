@@ -7,6 +7,34 @@ class Message_model extends CI_Model {
         parent::__construct();
         $this->lang->load('message');
     }
+    function write($targetGUID , $message_content)
+    {
+        //無需審核
+        $message_box_data = array(
+            'UserGUID' => $targetGUID,
+            'FromUserGUID' => $this->session->userdata('GUID'),
+            'IsNew' => 1,
+            'DateModify' => date('Y-m-d H:i:s')
+        );
+        $this->update_message_box($message_box_data);
+        //無需審核
+        $pending_message_data = array(
+            'FromUserGUID' => $this->session->userdata('GUID'),
+            'FromUserNickname' => $this->session->userdata('Nickname'),
+            'TargetUserGUID' => $targetGUID,
+            'MessageContent' => $message_content,
+            'MessageReviewStatus' => 2,//無需審核
+            'MessageReviewDate' => date('Y-m-d H:i:s'),
+            'MessageReviewByGUID' => NULL
+        );
+        $pending_message_insert_string = $this->db->insert_string('[dbo].[i_pending_message]', $pending_message_data);
+        $this->db->query( $pending_message_insert_string );
+        //寫入FILE
+        $msg = $this->message_model->save_message_history($this->session->userdata('GUID') , $this->session->userdata('Nickname') ,$targetGUID , $pending_message_data['MessageContent'] , 'say');
+        $this->message_model->save_message_history($this->session->userdata('GUID') , $this->session->userdata('Nickname') ,$targetGUID , $pending_message_data['MessageContent'] , 'target');
+        $msg = $this->message_model->message_to_convert($msg);
+        return $msg;
+    }
     function select_data_limit_offset($table , 
                     $top = 0, $bottom = 20 ,
                     $column ='*',

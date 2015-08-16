@@ -1,5 +1,7 @@
 <script src="/_js/jquery.scrollbar.js"></script>
+<script src="/_js/bootstrap-switch.min.js"></script>
 <link rel="stylesheet" href="/_css/scrollbar-macosx.css">
+<link rel="stylesheet" href="/_css/bootstrap-switch.min.css">
 
 
 <link rel="stylesheet" href="/_css/jquery.Jcrop.min.css" type="text/css" />
@@ -46,16 +48,20 @@
                     <textarea name="message_content" ></textarea>
                     <em class="note"></em><br>
                     
-                    <div class="tr">
-                    <input id="send_message" type="submit" class="btn-xl btn-emp" value="{btn_submit}">
+                    <div class="tr clearfix">
+                        <div class="fl">
+                            {message_approve_for_private_photo} <input type="checkbox" name="private_photo">
+                        </div>
+                        <div class="fr ">
+                            <input id="send_message" type="submit" class="btn-xl btn-emp" value="{btn_submit}">
+                        </div>
                     </div>
                 </div>
-                        <div class="scrollbar-container-history">
-                            <div class="scrollbar-macosx">
-
-                                <div id="message_history"></div>
-                            </div>
-                        </div>
+                <div class="scrollbar-container-history">
+                    <div class="scrollbar-macosx">
+                        <div id="message_history"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -111,6 +117,26 @@ $(function() {
             }
         });
 
+    });
+    $("[name='private_photo']").bootstrapSwitch({
+        onText: '{message_approve}',
+        offText: '{message_reject}',
+        state : false,
+        disabled : true,
+        onSwitchChange:function(event, state){
+            $.ajax({
+                url: '/action/set_privilege',
+                dataType: 'json',
+                type: 'POST',
+                data: {
+                    privilege : state?2:1,
+                    trackUserGUID : $('#targetGUID').val()
+                },
+                success: function(r) {
+               
+                }
+            });
+        }
     });
 });   
 </script>

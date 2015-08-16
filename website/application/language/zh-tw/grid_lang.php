@@ -71,6 +71,14 @@ $lang['grid_column_ForbiddenStatus'] = "停權註記";
 $lang['grid_column_ForbiddenDate'] = "停權時間";
 $lang['grid_column_Validated'] = "電子郵件認證";
 $lang['grid_column_ValidatedDate'] = "電子郵件認證時間";
+$lang['grid_column_WishID'] = "編號";
+$lang['grid_column_WishTitle'] = "願望標題";
+$lang['grid_column_WishContent'] = "願望內容";
+$lang['grid_column_WishReviewStatus'] = "審核狀態";
+$lang['grid_column_WishReviewDate'] = "審核時間";
+$lang['grid_column_DateExpire'] = "過期時間";
+$lang['grid_column_MothballStatus'] = "封存狀態";
+$lang['grid_column_MothballDate'] = "封存時間";
 
 /* End of file grid_lang.php */
 /* Location: ./application/language/zh-tw/grid_lang.php */

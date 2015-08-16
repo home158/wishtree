@@ -41,13 +41,23 @@
 
 $(function() {
     $('#footer a.lang_choose').bind('click',function(){
+        var lang_code = $(this).attr('lang_code');
+        $.ajax({
+            url: '/action/save_lang',
+            dataType: 'json',
+            type: 'POST',
+            data: {
+                lang : lang_code
+            },
+            complete:function(){
+                $.cookie("WG_lang", lang_code , {
+                   expires : 30,
 
-        $.cookie("WG_lang", $(this).attr('lang_code') , {
-           expires : 30,           
-
-           path    : '/'
+                   path    : '/'
+                });
+                window.location.reload();
+            }
         });
-        window.location.reload();
     });
 });
     

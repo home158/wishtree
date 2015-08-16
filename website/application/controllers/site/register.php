@@ -128,6 +128,7 @@ class Register extends Site_Base_Controller {
 			    'NationalCode' => $this->input->post('national_code',true),
 			    'City' => $this->input->post('city',true),
 			    'Language' => $this->input->post('language',true),
+			    'Lang' => $this->session->userdata('WG_lang'),
 			    'Income' => $this->input->post('income',true),
 			    'Property' => $this->input->post('property',true),
 			    'Birthday' => $birthday,

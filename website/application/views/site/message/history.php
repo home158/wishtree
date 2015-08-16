@@ -12,3 +12,9 @@
     </div>
 </div>
 {/msg}
+<script>
+
+$("[name='private_photo']").bootstrapSwitch('disabled', false);
+$("[name='private_photo']").bootstrapSwitch('state', {privilege_state} , true);
+
+</script>

@@ -70,7 +70,7 @@ $config['url_suffix'] = '';
 |
 */
 $config['language']	= 'zh-tw';
-$config['available_lang'] = array("en-us", "zh-tw");
+$config['available_lang'] = array("en-us", "zh-tw", "zh-cn");
 
 /*
 |--------------------------------------------------------------------------

@@ -5,7 +5,7 @@
         <li><a id="message" href="/message">留言板</a></li>
         <li><a id="chat" href="/chat">聊天室</a></li>
         <li><a href="#">誰看過我</a></li>
-        <li><a href="#">我的願望</a></li>
+        <li><a id="mywish" href="/mywish">我的願望</a></li>
         <li><a href="#">搜索</a></li>
         <li><a id="photo" href="/photo">照片</a></li>
         <li><a id="account" href="/account">帳號</a></li>

@@ -58,6 +58,9 @@ $route['account/(:any)'] = 'site/account/$1';
 $route['message'] = "site/message";
 $route['message/(:any)'] = 'site/message/$1';
 
+$route['mywish'] = "site/mywish";
+$route['mywish/(:any)'] = 'site/mywish/$1';
+
 $route['chat'] = "site/chat";
 $route['chat/(:any)'] = 'site/chat/$1';
 

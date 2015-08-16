@@ -60,6 +60,7 @@ SET @GUID = NEWID()
 			[NationalCode] [char](2) NOT NULL, -- 國籍
 			[City] [nvarchar](3) NOT NULL, -- 城市
 			[Language] [nvarchar](20) NOT NULL, -- 慣用語言
+			[Lang] [nvarchar](5) NOT NULL default 'zh-tw', -- UI語言
 			[Income] [nvarchar](30) NOT NULL,-- 年收入
 			[Property] [nvarchar](30) NOT NULL,-- 總資產
 			[Birthday] [datetime] NOT NULL, -- 出生日期

@@ -1,6 +1,6 @@
 body {
     background: #EEEDE8;
-    font: 14px/1.5 'Gotham Narrow SSm', "Microsoft YaHei", "微軟雅黑", "Microsoft Jhenghei", "Helvetica Neue", HelveticaNeue, Arial, sans-serif;
+    font: 14px/1.8 'Gotham Narrow SSm', "Microsoft YaHei", "微軟雅黑", "Microsoft Jhenghei", "Helvetica Neue", HelveticaNeue, Arial, sans-serif;
 }
 a{
     text-decoration: none;
@@ -654,6 +654,7 @@ select {
     left: 0;
     top: 13px;
 }
+/* submenu */
 .block-wrapper{
     margin-bottom: 14px;
     display: block;
@@ -675,4 +676,149 @@ select {
 }
 .tabs.general li.active .ctrl {
     border-bottom: 4px solid #2d9cd3;
+}
+.photo_set ul{
+    margin: 0px;
+    padding: 0px;
+}
+/*
+    
+wish    
+*/
+.mywish_set  ul{
+    margin: 0px;
+    padding: 0px;
+}
+.mywish_set .wish_card{
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #dfdfdf;
+    float: left;
+    border-radius: 10px;
+}
+.mywish_set textarea[name=wish_content]{
+    width: 400px;
+    height: 120px;
+}
+.mywish_set input[name=wish_title]{
+    width: 400px;
+}
+.mywish_set .blk-wish{
+    margin-left: 0px;
+}
+.mywish_set .identity-content{
+    width: 600px;
+    margin-left: 20px;
+}
+.mywish_set .wish_content{
+    margin-bottom: 20px;
+}
+.mywish_set .edit_model{
+    display: none;
+}
+.mywish_set .edit_model textarea[name=wish_content]
+{
+    width: 100%;
+    background:linear-gradient(#F9EFAF, #F7E98D);
+    background:-o-linear-gradient(#F9EFAF, #F7E98D);
+    background:-ms-linear-gradient(#F9EFAF, #F7E98D);
+    background:-moz-linear-gradient(#F9EFAF, #F7E98D);
+    background:-webkit-linear-gradient(#F9EFAF, #F7E98D);   
+    margin-top: 5px;
+}
+.mywish_set .edit_model input[name=wish_title]
+{
+    width: 100%;
+    font-weight: normal;
+}
+.mywish_set .btn_submit,
+.mywish_set .btn_cancel{
+    display: none;
+}
+.mywish_set .wish_ctrl .btn{
+    margin-right:10px;
+}
+
+/* 區塊-填寫會員資料
+---------------------------------------------------- */
+.blk-wish .item {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	margin-left: -200px;
+	width: 200px;
+
+}
+.blk-wish form {
+	margin-left: 200px;
+}
+.blk-wish p{
+	margin-left: -200px;
+}
+.blk-wish input[type=text],
+.blk-wish input[type=email],
+.blk-wish input[type=password],
+.blk-wish select {
+    margin-left: -4px;
+}
+input[type=text],
+input[type=email],
+input[type=password],
+input[type=password],
+select {
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;    
+    display: inline-block;
+    margin-bottom: 4px;
+  
+}
+.blk-wish .section{
+    margin-top: 10px;
+    border-bottom: 1px solid #ff5b7e;
+}
+.blk-wish em.note {
+    font-style: normal;
+    color: #000;
+}
+.blk-wish em {
+    color: #F00;
+}
+
+.blk-wish textarea{
+    height: 150px;
+    width: 100%;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;    
+    display: inline-block;
+    border-radius: 4px;
+}
+
+.wish_title{
+    font-size: 17px;
+    font-weight: bold;
+    color: #5d008c;
 }

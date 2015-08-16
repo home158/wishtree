@@ -30,7 +30,20 @@
               <li><a tabindex="-1" href="/admin/photo/view/">{photo_review_pass}</a></li>
               <li><a tabindex="-1" href="/admin/photo/view/">{photo_review_reject}</a></li>
             </ul>
-          </li>      
+          </li>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">{menu_admin_wish}<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a tabindex="-1" href="/admin/wish/view">{wish_view_all}</a></li>
+              <li class="divider"></li>
+              <li><a tabindex="-1" href="/admin/wish/view/">{wish_review_pending}</a></li>
+              <li><a tabindex="-1" href="/admin/wish/view/">{wish_review_pass}</a></li>
+              <li><a tabindex="-1" href="/admin/wish/view/">{wish_review_reject}</a></li>
+            </ul>
+          </li>
+
+
           <li class="dropdown">
             <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">訂單<b class="caret"></b></a>
             <ul class="dropdown-menu">

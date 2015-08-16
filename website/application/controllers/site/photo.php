@@ -6,7 +6,7 @@ class Photo extends Site_Base_Controller {
         parent::__construct();
         $this->not_Forbidden_required_validation();
         $this->parse_display_data(
-            array('btn' ,'alert')
+            array('btn' ,'alert','photo')
         );
         $this->display_data["highlight_navi"] = "photo";
         $this->load->model('photo_model');
@@ -65,7 +65,15 @@ class Photo extends Site_Base_Controller {
 			$this->display_data['error'] = $this->upload->display_errors( '<p class="redF tl">','</p>');
 			$this->display_data['form_action'] = '/photo/'.$type;
 			$this->display_data['form_update_action'] = '/photo/update/'.$type;
+            if($type == 'public'){
+                $this->display_data['active_public'] = 'active';
+                $this->display_data['active_private'] = '';
 
+            }
+            if($type == 'private'){
+                $this->display_data['active_public'] = '';
+                $this->display_data['active_private'] = 'active';
+            }
 		    $this->parser->parse('site/_default/header',$this->display_data);
 		    $this->parser->parse('site/_default/header_logout',$this->display_data);
 		    $this->parser->parse('site/_default/female_navi',$this->display_data);
@@ -123,6 +131,7 @@ class Photo extends Site_Base_Controller {
             );
             if($type == 'public'){
                 $photo_data['IsPrivate'] = 0;
+
             }
             if($type == 'private'){
                 $photo_data['IsPrivate'] = 1;

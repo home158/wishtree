@@ -31,8 +31,27 @@ class View extends Site_Base_Controller {
         $this->display_data['view_lightbox_data_title'] = sprintf($this->display_data['view_lightbox_data_title'] , $this->session->userdata['Nickname']);
         
         $this->display_data['public_photo'] = $this->view_model->get_public_photo($GUID);
-        $this->display_data['private_photo'] = $this->view_model->get_private_photo($GUID);
+        $myGUID = $this->session->userdata('GUID');
+        $private_photos = $this->view_model->get_private_photo($GUID);
+
         
+        $this->load->model('photo_model');
+        $privilege = $this->photo_model->retrieve_privilege($GUID  , $myGUID);
+        
+        //是否有瀏覽私人照片權限
+        if($privilege == 0 ){
+            $this->display_data['private_photo'] = array();
+            //沒有私人照片權限時，私人照片wording 替換
+            if(count($private_photos)==0 ){
+                $this->display_data['view_photo_private'] = '';
+            }else{
+                $this->display_data['view_photo_private'] = '<a id="ask_private_photo_privilege" href="javascript:;" data-tracker="'.$GUID.'">'.$this->display_data['view_ask_private_photo_privilege'].'</a>';
+            }
+        }else{
+            $this->display_data['private_photo'] = $private_photos;
+        }
+
+
         $this->display_data['UserGUID'] = $GUID;
 
 		$this->parser->parse('site/_default/header',$this->display_data);

@@ -14,8 +14,8 @@
                     {/public_photo}
                     </ul>
                 </div>
-                <p>私人相片</p>
                 <div class="other_photo clearfix">
+                    <p>{view_photo_private}</p>
                     <ul>
                     {private_photo}
                         <li><img src="{_ThumbBasename}" data-title="{view_lightbox_data_title}" data-crop="{_CropBasename}" data-full="{_FullBasename}" data-remote="{_FullBasename}" data-toggle="lightbox" data-gallery="A{IsCover}"/></li>
@@ -34,6 +34,9 @@
                         </li>
                         <li>
                             <a id="add_blocked_list" href="javascript:;" data-tracker="{UserGUID}">{view_add_black_list}</a>
+                        </li>
+                        <li>
+                            
                         </li>
                     </ul>
                 </div>
@@ -71,6 +74,20 @@ $(function() {
             type: 'POST',
             data: {
                 trackUserGUID : trackUserGUID
+            },
+            success: function(r) {
+                alert(r.content);
+            }
+        });
+    });
+    $('#ask_private_photo_privilege').bind('click',function(){
+        var trackUserGUID = $(this).attr('data-tracker');
+        $.ajax({
+            url: '/action/ask_private_photo_privilege',
+            dataType: 'json',
+            type: 'POST',
+            data: {
+                askGUID : trackUserGUID
             },
             success: function(r) {
                 alert(r.content);
