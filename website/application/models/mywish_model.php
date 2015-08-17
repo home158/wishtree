@@ -6,8 +6,19 @@ class Mywish_model extends CI_Model {
     {
         parent::__construct();
     }
-    function retrive_mywish($UserGUID ,  $ReviewStatus = '0,1,2' , $DeleteStatus = '0,1' , $MothballStatus = '0,1')
+    function retrive_mywish($UserGUID ,  $ReviewStatus = '0,1,2' , $DeleteStatus = '0,1' , $MothballStatus = '0,1' , $expire = NULL)
     {
+        if(is_null($expire )){
+            $expire_str = "";
+        }else{
+            if($expire === TRUE){
+                $expire_str = " AND W.[DateExpire] < '".date('Y-m-d ').'23:59:59'."' ";
+            }
+            if($expire === FALSE){
+                $expire_str = " AND W.[DateExpire] > '".date('Y-m-d ').'23:59:59'."' ";
+            }
+ 
+        }
         $query = $this->db->query("
         SELECT 
             W.[GUID] AS [db_GUID],
@@ -15,7 +26,9 @@ class Mywish_model extends CI_Model {
             W.[WishCategory] AS [WishCategory],
             W.[WishTitle] AS [WishTitle],
             W.[WishContent] AS [WishContent],
+            W.[WishReviewStatus] AS [WishReviewStatus],
             
+            ".$this->utility_model->dbColumnDatetime('W.[DateExpire]' , '[DateExpire]' , 10).",
             P.[ThumbBasename] AS [ThumbBasename],
             U.[Nickname] AS [db_Nickname],
             U.[Role] AS [Role],
@@ -43,6 +56,7 @@ class Mywish_model extends CI_Model {
                 W.DeleteStatus IN (".$DeleteStatus.")
             AND 
                 W.MothballStatus IN (".$MothballStatus.")
+            ".$expire_str."
         ORDER BY
             W.DateCreate DESC
         ");
@@ -60,6 +74,20 @@ class Mywish_model extends CI_Model {
                 $r[$key]['ThumbBasename'] = $this->config->item('azure_storage_baseurl') . $value['UserGUID'] . '/' . $value['ThumbBasename'];
             }else{
                 $r[$key]['ThumbBasename'] = $this->config->item('photo_'.$value['Role'].'_default_thumb');
+            }
+            if($value['WishReviewStatus'] == 1 ){
+                $r[$key]['DateExpire'] = $this->lang->line('mywish_wish_reject_s');
+                $r[$key]['DateExpireClass'] = 'danger';
+            }
+            if($value['WishReviewStatus'] == 0 ){
+                $r[$key]['DateExpireClass'] = 'warning';
+                $r[$key]['DateExpire'] = $this->lang->line('mywish_wish_not_review');
+
+            }
+            if($value['WishReviewStatus'] == 2 ){
+                $r[$key]['DateExpireClass'] = 'success';
+
+
             }
         }
         return $r;

@@ -5,7 +5,7 @@
                     <li>
                         <a href="/mywish/make" class="ctrl">{mywish_make_a_wish}</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="/mywish" class="ctrl">{mywish_wish_online}</a>
                     </li>
                     <li>
@@ -14,7 +14,7 @@
                     <li>
                         <a href="/mywish/reject" class="ctrl">{mywish_wish_reject}</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="/mywish/expire" class="ctrl">{mywish_wish_expire}</a>
                     </li>
                     <li>
@@ -70,10 +70,6 @@
                     </div>
                     <div class="wish_ctrl">
 
-                        <span class="btn_delete btn btn-danger btn-sm " data-guid="{db_GUID}" >
-                            <i class="glyphicon glyphicon-trash"></i>
-                            <span>{btn_delete}</span>
-                        </span>
                         
                     </div>
                 </div>
@@ -82,27 +78,3 @@
             {/mywish_list}
     </div>
 </div>
-<script>
-    $('.btn_delete').on('click',function(){
-        var $read_model = $(this).parent().parent().find('.read_model');
-        var GUID = $(this).attr('data-guid');
-        if(confirm('{mywish_delete_comfirm_msg}')){
-            $.ajax({
-                url: '/mywish/delete',
-                dataType:'json',
-                type: 'POST',
-                data: {
-                    GUID : GUID
-                },
-                success: function(r) {
-                    if(r.error_code == 0){
-                        $read_model.parent().parent().fadeOut();
-                    }else{
-                        alert(r.content);
-                    }
-                }
-            });
-        }
-    });
-
-</script>

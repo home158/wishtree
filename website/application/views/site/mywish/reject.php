@@ -15,13 +15,13 @@
                         <a href="/mywish/reject" class="ctrl">{mywish_wish_reject}</a>
                     </li>
                     <li>
+                        <a href="/mywish/expire" class="ctrl">{mywish_wish_expire}</a>
+                    </li>
+                    <li>
                         <a href="/mywish/removed" class="ctrl">{mywish_wish_delete}</a>
                     </li>
                     <li>
                         <a href="/mywish/mothball" class="ctrl">{mywish_wish_mothball}</a>
-                    </li>
-                    <li>
-                        <a href="/mywish/expire" class="ctrl">{mywish_wish_expire}</a>
                     </li>
                 </ul>
         </div>

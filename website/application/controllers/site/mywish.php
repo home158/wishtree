@@ -17,7 +17,7 @@ class Mywish extends Site_Base_Controller {
 	public function index()
 	{
 
-        $mywish_list = $this->mywish_model->retrive_mywish( $this->session->userdata('GUID') , 2 ,0, 0);
+        $mywish_list = $this->mywish_model->retrive_mywish( $this->session->userdata('GUID') , 2 ,0, 0 , FALSE);
         $this->display_data['mywish_list'] = $mywish_list;
 
 
@@ -194,6 +194,17 @@ class Mywish extends Site_Base_Controller {
 	    $this->parser->parse('site/_default/header_logout',$this->display_data);
 	    $this->parser->parse('site/_default/female_navi',$this->display_data);
 	    $this->parser->parse('site/mywish/mothball',$this->display_data);
+	    $this->parser->parse('site/_default/footer',$this->display_data);
+    }
+    public function expire()
+    {
+        $mywish_list = $this->mywish_model->retrive_mywish( $this->session->userdata('GUID') , '2' , '0' , '0',TRUE);
+        $this->display_data['mywish_list'] = $mywish_list;
+
+        $this->parser->parse('site/_default/header',$this->display_data);
+	    $this->parser->parse('site/_default/header_logout',$this->display_data);
+	    $this->parser->parse('site/_default/female_navi',$this->display_data);
+	    $this->parser->parse('site/mywish/expire',$this->display_data);
 	    $this->parser->parse('site/_default/footer',$this->display_data);
     }
     public function reject()

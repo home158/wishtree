@@ -3,7 +3,7 @@
 <div id="content">
     <div class="bg photo_set clearfix">
         <div class="msg deal_msg">
-            <p class="hd">{account_update_profile}</p>
+            <p class="hd"></p>
         </div>
         <div class="well well-lg">
             <p class="redF hd "></p>  

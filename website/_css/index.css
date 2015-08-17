@@ -707,8 +707,14 @@ wish
     margin-left: 0px;
 }
 .mywish_set .identity-content{
+    position: relative;
     width: 600px;
     margin-left: 20px;
+}
+.mywish_set .expire_date{
+    position: absolute;
+    right: 0px;
+    top: 0px;
 }
 .mywish_set .wish_content{
     margin-bottom: 20px;

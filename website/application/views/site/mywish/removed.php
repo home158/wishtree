@@ -14,14 +14,14 @@
                     <li>
                         <a href="/mywish/reject" class="ctrl">{mywish_wish_reject}</a>
                     </li>
+                    <li>
+                        <a href="/mywish/expire" class="ctrl">{mywish_wish_expire}</a>
+                    </li>
                     <li class="active">
                         <a href="/mywish/removed" class="ctrl">{mywish_wish_delete}</a>
                     </li>
                     <li>
                         <a href="/mywish/mothball" class="ctrl">{mywish_wish_mothball}</a>
-                    </li>
-                    <li>
-                        <a href="/mywish/expire" class="ctrl">{mywish_wish_expire}</a>
                     </li>
                 </ul>
         </div>
@@ -31,6 +31,7 @@
                     <a href="/view/{UserGUID}"><img src="{ThumbBasename}"></a>
                 </div>
                 <div class="fl identity-content ">
+                    <div class="expire_date"><span class="label label-{DateExpireClass}">{DateExpire}</span></div>
                     <div>
                         <a href="/view/{UserGUID}">{db_Nickname}</a>,
                         <strong>{YearsOld}</strong> {view_years_old},

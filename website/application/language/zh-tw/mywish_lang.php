@@ -3,7 +3,9 @@
 $lang['mywish_make_a_wish']        = "許個願";
 $lang['mywish_wish_online']        = "正在水池中的願望";
 $lang['mywish_wish_pending']        = "審核中";
+$lang['mywish_wish_not_review']        = "未審核";
 $lang['mywish_wish_reject']        = "審核不通過";
+$lang['mywish_wish_reject_s']        = "不通過";
 $lang['mywish_wish_delete']        = "刪除";
 $lang['mywish_wish_expire']        = "過期";
 $lang['mywish_wish_mothball']        = "封存";
