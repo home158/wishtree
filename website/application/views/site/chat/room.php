@@ -288,6 +288,8 @@ $(function() {
   socket.on('stop typing', function (data) {
     removeChatTyping(data);
   });
+  /**************************************/
+  socket.emit('add user', 'ivan');
 });
 
 
