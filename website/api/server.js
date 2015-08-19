@@ -16,19 +16,15 @@ app.use(express.static(__dirname + '/public'));
 
 // Chatroom
 
-// usernames which are currently connected to the chat
-var usernames = {};
-var numUsers = 0;
+
 /*
     socket.emit 只有自己
     socket.broadcast.emit 除了自己
     io.emit 包含自己
 */
-io.on('connection', function (socket) {
+io.sockets.on('connection', function (socket) {
     socket.on('join_chatroom', function (data) {
-        io.emit('send_message', {
-            numUsers: 5
-        });
+
         socket.emit('login_welcome', {
             numUsers: 5
         });
@@ -38,34 +34,12 @@ io.on('connection', function (socket) {
         });
 
     });
-    var addedUser = false;
 
     // when the client emits 'new message', this listens and executes
-    socket.on('new message', function (data) {
-        // we tell the client to execute 'new message'
-        socket.broadcast.emit('new message', {
-            username: socket.username,
-            message: data
-        });
+    socket.on('send_message', function (data) {
+        io.to(data.targetGUID).emit('send_message', 'hello');
     });
 
-    // when the client emits 'add user', this listens and executes
-    socket.on('add user', function (username) {
-        // we store the username in the socket session for this client
-        socket.username = username;
-        // add the client's username to the global list
-        usernames[username] = username;
-        ++numUsers;
-        addedUser = true;
-        socket.emit('login', {
-            numUsers: numUsers
-        });
-        // echo globally (all clients) that a person has connected
-        socket.broadcast.emit('user joined', {
-            username: socket.username,
-            numUsers: numUsers
-        });
-    });
 
 
 

@@ -5,31 +5,20 @@
   <title>Socket.IO Chat Example</title>
 </head>
 <body>
-  <ul class="pages">
-    <li class="chat page">
-      <div class="chatArea">
-        <ul class="messages"></ul>
-      </div>
-      <input class="inputMessage" placeholder="Type here..."/>
-    </li>
-    <li class="login page">
-      <div class="form">
-        <h3 class="title">What's your nickname?</h3>
-        <input class="usernameInput" type="text" maxlength="14" />
-      </div>
-    </li>
-  </ul>
+  
+    <input id="targetGUID" type="text" value="" />
+    <button id="private">Send</button>
+  
 
   <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script>
 $(function() {
     var connected = false;
-    var socket = io();
-
-    socket.on('send_message', function (data) {
-        console.log('包含自己');
+    var socket = io.connect('http://wishpool.azurewebsites.net/chat/room', {
+        query: 'userId={GUID}'
     });
+
     
     socket.on('client_joined', function (data) {
         console.log('除了自己');
@@ -43,6 +32,15 @@ $(function() {
         UserGUID: '{GUID}', 
         Role: '{Role}',
         Nickname: '{Nickname}'
+    });
+    socket.emit("send_message", function(data){
+        console.log(data)
+    });
+    $('#private').on('click',function(){
+        socket.emit("send_message", {
+            targetGUID: $('#targetGUID').val(),
+            message: 'Hello private message from {Nickname}'
+        });
     });
 });
 
