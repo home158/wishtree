@@ -275,18 +275,18 @@ $(function() {
     removeChatTyping(data);
   });
   /***********************************************************/
-  socket.emit("join-chatroom", {
+    console.log('data');
+    socket.on("client-join", function(data){
+        console.log(data);
+        
+    });    socket.emit("join-chatroom", {
         UserGUID: '{GUID}', 
         Role: '{Role}',
         Nickname: '{Nickname}',
        // Thumb : '{Thumb}',
         tracker:[]
     });
-    console.log('data');
-    socket.on("client-join", function(data){
-        console.log(data);
-        
-    });
+
 
 });
 
