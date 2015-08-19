@@ -31,7 +31,7 @@ $(function() {
         Role: '{Role}',
         Nickname: '{Nickname}'
     });
-    socket.emit("send_message", function(data){
+    socket.on("send_message", function(data){
         console.log(data)
     });
     $('#private').on('click',function(){
