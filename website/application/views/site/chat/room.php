@@ -27,6 +27,11 @@ $(function() {
   var socket = io();
 
   /***********************************************************/
+    console.log('data');
+    socket.on("client-join", function(data){
+        console.log(data);
+        
+    });
 
     socket.emit("join-chatroom", {
         UserGUID: '{GUID}', 
@@ -36,11 +41,6 @@ $(function() {
         tracker:[]
     });
 
-    console.log('data');
-    socket.on("client-join", function(data){
-        console.log(data);
-        
-    });
 });
 
 
