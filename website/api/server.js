@@ -23,7 +23,7 @@ var userId;
     io.emit 包含自己
 */
 io.sockets.on('connection', function (socket) {
-    userId = client.handshake.query.guid;
+    userId = socket.handshake.query.guid;
 
     socket.on('join_chatroom', function (data) {
         /*
