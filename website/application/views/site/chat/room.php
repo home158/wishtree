@@ -65,190 +65,22 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
     
-var socket = io("wishpool.azurewebsites.net/chatroom");
-var O_PARENT = {
-    GUID: '{GUID}',
-    user: {
-    },
-    system :{
-        client_coming : '{chat_client_coming}',
-        public_message : '{chat_public_message}',
-        private_message : '{chat_private_message}'
-    },
-    message:{
-        receiver: {},
-        build_receiver: function(default_GUID){
-            var $receive_GUID = $('#receive_GUID');
-            $receive_GUID.empty();
-            $('<option value=""></option>').appendTo($receive_GUID);
-            $.each(O_PARENT.message.receiver , function(guid,e){
-                $('<option value="'+guid+'">'+e.Nickname+'</option>').appendTo($('#receive_GUID'));
-            });
-            $receive_GUID.val(default_GUID);
+var socket = io();
 
-        },
-        scrolling: function(){
-            if( $('#chat_scrolling').prop('checked') ){
-                $('.scrollbar-dynamic').scrollTop(99999999999);
-            }
-        },
-        send:function(){
-            var visibile =  $( "#chat_visibile" ).prop('checked')? 'private' : 'public';
-            console.log(visibile);
-            var data = {
-                    type: 'msg',
-                    visibile: visibile, 
-                    receive : $('#receive_GUID').val(),
-                    from: O_PARENT.GUID,
-                    message : $('#type_message').val()
-                };
-            console.log(data);
-            socket.emit("send-message" , data);
-        },
-        append:function(data){
-
-            $('<li data-type="'+data.type+'" data-visibile="'+data.visibile+'" >'+O_PARENT.message.line(data)+'</li>').appendTo( $('#message_list_all') );
-            if(data.receive == O_PARENT.GUID || data.from ==O_PARENT.GUID){
-                $('<li data-type="'+data.type+'" data-visibile="'+data.visibile+'" >'+O_PARENT.message.line(data)+'</li>').appendTo( $('#message_list_private') );
-            }
-            O_PARENT.message.scrolling();
-        },
-        line: function(data){
-            var user = O_PARENT.user;
-            var from = '<a class="'+user[data.from].Role+'" href="javascript:;" data-guid="'+user[data.from].UserGUID+'" data-toggle="private">'+user[data.from].Nickname+'</a>';
-            var msg;
-            var receive = '';
-            if(data.receive){
-                receive = '<a class="'+user[data.receive].Role+'" href="javascript:;" data-guid="'+user[data.receive].UserGUID+'" data-toggle="private">'+user[data.receive].Nickname+'</a>';
-            }
-            if(data.visibile == 'public'){
-                msg = sprintf( O_PARENT.system.public_message ,from , receive , data.message );
-            }else{
-                msg = sprintf( O_PARENT.system.private_message ,from , receive , data.message );
-            }
-            return '<span class="'+data.visibile+'">'+msg+'</span>';
-        },
-        nickname: function(data)
-        {
-            return '<a class="'+data.Role+'" href="javascript:;" data-guid="'+data.UserGUID+'" data-toggle="private">'+data.Nickname+'</a>';
-        },
-        init: function(){
-            $('#submit_message').on('click',O_PARENT.message.send);
-
-            $(document).delegate('*[data-toggle="private"]', 'click', function(event) {
-                event.preventDefault();
-                var receive_GUID = $(this).attr('data-guid');
-                if(O_PARENT.GUID == receive_GUID) return;
-                var receive_nickname = O_PARENT.user[receive_GUID].Nickname;
-                O_PARENT.message.receiver[receive_GUID] = {Nickname : receive_nickname};
-                O_PARENT.message.build_receiver(receive_GUID);
-            }); 
-
-            $('#chat_coming').on('click',function(){
-                $('li[data-type="coming"]' ).toggle(  );
-            });
-            $('#chat_double_window').on('click',function(){
-                 $('#chat_private_window').attr('checked',false);
-                if( $(this).prop('checked') ){
-                    $('#message_list_all').parent().css('height','60%').show();
-                    $('#message_list_private').parent().css('border-top', '1px dotted gray').css('height','40%').show();
-                    $('#message_list_private').show();
-                }else{
-                    $('#message_list_all').parent().css('height','100%').show();
-                    $('#message_list_private').parent().hide();
-                }
-
-              
-            });
-            $('#chat_private_window').on('click',function(){
-                 $('#chat_double_window').attr('checked',false);
-                if( $(this).prop('checked') ){
-                    $('#message_list_all').parent().hide();
-                    $('#message_list_private').parent().css('border-top', '1px dotted gray').css('height','100%').show();
-                    $('#message_list_private').show();
-                }else{
-                    $('#message_list_all').parent().css('height','100%').show();
-                    $('#message_list_private').parent().hide();
-                }
-            });
-            $('#chat_scrolling').on('click',function(){
-                if( $(this).prop('checked') ){
-                    $('.scrollbar-dynamic').scrollTop(99999999999);
-                }
-            });
-        }
-    },
-    client :{
-        nickname: function(data)
-        {
-            return '<a class="'+data.Role+'" href="javascript:;" data-guid="'+data.UserGUID+'" data-toggle="private">'+data.Nickname+'</a>';
-        },
-        disconnect:function(data){
-            console.log(data);
-            O_PARENT.user[data.UserGUID] = data;
-            $('<li data-type="coming">Someone disconnect</li>').appendTo( $('#message_list_all') );
-        },
-        join: function(data){
-            console.log(data);
-            O_PARENT.user[data.UserGUID] = data;
-            $('<li>'+O_PARENT.client.nickname(data)+'</li>').appendTo( $('#client_list') );
-            $('<li data-type="coming">'+sprintf( O_PARENT.system.client_coming, O_PARENT.message.nickname(data) )+'</li>').appendTo( $('#message_list_all') );
-            if(data.UserGUID == O_PARENT.GUID){
-                $('<li data-type="coming">'+sprintf( O_PARENT.system.client_coming, O_PARENT.message.nickname(data) )+'</li>').appendTo( $('#message_list_private') );
-            }
-        },
-        refresh: function(data){
-            delete O_PARENT.user;
-            O_PARENT.user = {};
-            $('#client_list').empty();
-            console.log(data);
-            $.each(data , function(i,e){
-                $('<li id="'+e.UserGUID+'">'+O_PARENT.client.nickname(e)+'</li>').appendTo( $('#client_list') );
-                O_PARENT.user[e.UserGUID] = e;
-            });
-        },
-        init:function(){
-            $('#get_client_list').bind('click',function(){
-                socket.emit("client-list" , O_PARENT.GUID);
-            });
-        }
-
-    },
-    utility: {
-    }
-};
-var $type_message = $('#type_message');
-var $submit_message = $('#submit_message');
-var $target_GUID = $('#target_GUID');
-var send_message = function(){
-
-};
 $(function() {
 
     socket.emit("join-chatroom", {
-        UserGUID: O_PARENT.GUID, 
+        UserGUID: '{GUID}', 
         Role: '{Role}',
         Nickname: '{Nickname}',
        // Thumb : '{Thumb}',
         tracker:[]
     });
-    //Call server retrieve client-list
-    socket.emit("client-list" , O_PARENT.GUID);
-    O_PARENT.client.init();
-    O_PARENT.message.init();
-    $('.scrollbar-dynamic').scrollbar();
-});
-
-socket.on("login-notify", function(data){
-    alert(data.UserGUID +' online');
 
 });
-    
-socket.on("client-join", O_PARENT.client.join );
-socket.on("client-list", O_PARENT.client.refresh);
-socket.on("new-message", O_PARENT.message.append);
-socket.on("client-disconnect", O_PARENT.client.disconnect);
-    
+socket.on("client-join",function(data){
+    console.log(data);
+});
 </script>
 </body>
 </html>
