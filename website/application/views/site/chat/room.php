@@ -15,7 +15,7 @@
   <script>
 $(function() {
     var connected = false;
-    var socket = io.connect('http://wishpool.azurewebsites.net', {
+    var socket = io.connect('http://wishpool.azurewebsites.net/chat/room/', {
         query: 'guid={GUID}'
     });
     socket.on("GUID_duplicated",function(){
