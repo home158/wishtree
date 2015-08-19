@@ -7,13 +7,15 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var port = process.env.PORT || 3000;
 var clients = {};
+var arr_socket = {};
 var my_socket_id;
 server.listen(port, function () {
     console.log('Server listening at port %d', port);
 });
 var nsp_chatroom = io.of('/chatroom');
 nsp_chatroom.on('connection', function (socket) {
-
+    var addedUser = false;
+        my_socket_id = socket.id;
     //User connect create 
     console.log('[connection] =>'+ 'socket id = ' + socket.id + ';');
     socket.on('join-chatroom', function(data){
@@ -25,7 +27,8 @@ nsp_chatroom.on('connection', function (socket) {
                 "UserGUID" : data.UserGUID,
                 "socket": socket.id
             };
-            my_socket_id = socket.id;
+            
+            arr_socket[my_socket_id] = data.UserGUID;
             console.log('[join-chatroom] => UserGUID = ' + data.UserGUID + ' Nickname = ' + data.Nickname + '; socket id = ' + socket.id + ';');
             nsp_chatroom.emit("client-join", clients[data.UserGUID]);
 
@@ -41,6 +44,7 @@ nsp_chatroom.on('connection', function (socket) {
                 }
             }
         }
+        addedUser = true;
 
     });
     
@@ -73,5 +77,14 @@ nsp_chatroom.on('connection', function (socket) {
         
       
     });
-    
+    // when the user disconnects.. perform this
+    socket.on('disconnect', function () {
+        // remove the username from global usernames list
+        if (addedUser) {
+            var GUID = arr_socket[my_socket_id];
+            nsp_chatroom.emit("client-disconnect", clients[GUID]);
+            delete clients[GUID];
+        }
+
+    });
 });

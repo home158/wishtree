@@ -183,6 +183,11 @@ var O_PARENT = {
         {
             return '<a class="'+data.Role+'" href="javascript:;" data-guid="'+data.UserGUID+'" data-toggle="private">'+data.Nickname+'</a>';
         },
+        disconnect:function(data){
+            console.log(data);
+            O_PARENT.user[data.UserGUID] = data;
+            $('<li data-type="coming">Someone disconnect</li>').appendTo( $('#message_list_all') );
+        },
         join: function(data){
             console.log(data);
             O_PARENT.user[data.UserGUID] = data;
@@ -242,7 +247,8 @@ socket.on("login-notify", function(data){
 socket.on("client-join", O_PARENT.client.join );
 socket.on("client-list", O_PARENT.client.refresh);
 socket.on("new-message", O_PARENT.message.append);
-
+socket.on("client-disconnect", O_PARENT.client.disconnect);
+    
 </script>
 </body>
 </html>
