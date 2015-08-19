@@ -15,9 +15,7 @@
   <script>
 $(function() {
     var connected = false;
-    var socket = io.connect('http://wishpool.azurewebsites.net', {
-        query: 'userId={GUID}'
-    });
+    var socket = io();
 
     
     socket.on('client_joined', function (data) {

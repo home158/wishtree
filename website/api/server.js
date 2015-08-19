@@ -15,7 +15,7 @@ server.listen(port, function () {
 app.use(express.static(__dirname + '/public'));
 
 // Chatroom
-
+var clients = [];
 
 /*
     socket.emit 只有自己
@@ -23,6 +23,7 @@ app.use(express.static(__dirname + '/public'));
     io.emit 包含自己
 */
 io.sockets.on('connection', function (socket) {
+    clients.push(socket.id);
     socket.on('join_chatroom', function (data) {
 
         socket.emit('login_welcome', {
@@ -37,7 +38,7 @@ io.sockets.on('connection', function (socket) {
 
     // when the client emits 'new message', this listens and executes
     socket.on('send_message', function (data) {
-        io.to(data.targetGUID).emit('send_message', 'hello');
+        io.sockets.connected[clients[0]].emit('send_message', 'hello');
     });
 
 
