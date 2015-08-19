@@ -17,22 +17,24 @@ $(function() {
     var connected = false;
     var socket = io();
 
-    
+    socket.on("send_message", function(data){
+        console.log(data)
+    });
+
     socket.on('client_joined', function (data) {
         console.log('除了自己');
+        console.log(data);
     });
 
     socket.on('login_welcome', function (data) {
         console.log('只有自己');
+        console.log(data);
     });    
 
     socket.emit("join_chatroom", {
         UserGUID: '{GUID}', 
         Role: '{Role}',
         Nickname: '{Nickname}'
-    });
-    socket.on("send_message", function(data){
-        console.log(data)
     });
     $('#private').on('click',function(){
         alert('s');

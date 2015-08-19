@@ -26,19 +26,14 @@ io.sockets.on('connection', function (socket) {
     clients.push(socket.id);
     socket.on('join_chatroom', function (data) {
 
-        socket.emit('login_welcome', {
-            numUsers: 5
-        });
-        socket.broadcast.emit('client_joined', {
-            username: data.Nickname,
-            numUsers: 15
-        });
+        socket.emit('login_welcome', clients);
+        socket.broadcast.emit('client_joined', clients);
 
     });
 
     // when the client emits 'new message', this listens and executes
     socket.on('send_message', function (data) {
-        io.sockets.connected[clients[0]].emit('send_message', 'hello');
+        io.sockets.connected[clients[0]].emit('send_message', clients);
     });
 
 
