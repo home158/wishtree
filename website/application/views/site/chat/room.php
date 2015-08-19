@@ -18,7 +18,7 @@ $(function() {
     var socket = io.connect('http://wishpool.azurewebsites.net', {
         query: 'guid={GUID}'
     });
-    socket.on("GUID_duplicated",function(){
+    socket.on("client_duplicated",function(){
        console.log('重覆guid不得進入'); 
     });
     socket.on("send_message", function(data){
@@ -34,7 +34,11 @@ $(function() {
         console.log('只有自己');
         console.log(data);
     });    
-
+    socket.on('client_left', function (data) {
+        console.log('有人離開了');
+        console.log(data);
+    });    
+    
     socket.emit("join_chatroom", {
         UserGUID: '{GUID}', 
         Role: '{Role}',

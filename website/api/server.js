@@ -23,27 +23,27 @@ var userId;
     io.emit 包含自己
 */
 io.sockets.on('connection', function (socket) {
-    userId = socket.handshake.query.guid;
+    userGUID = socket.handshake.query.guid;
 
     socket.on('join_chatroom', function (data) {
-        /*
-        if(clients[data.UserGUID]){
-            socket.emit('GUID_duplicated', data.UserGUID);
+        
+        if(clients[userGUID]){
+            socket.emit('client_duplicated', data.UserGUID);
         }else{
-            clients[data.UserGUID] = {
+            clients[userGUID] = {
                 socketID : socket.id,
                 Nickname : data.Nickname
             };
         }
-        */
-        socket.emit('login_welcome', userId);
-        socket.broadcast.emit('client_joined', userId);
+        
+        socket.emit('login_welcome', userGUID);
+        socket.broadcast.emit('client_joined', clients);
 
     });
 
     // when the client emits 'new message', this listens and executes
     socket.on('send_message', function (data) {
-        io.sockets.connected[clients[0]].emit('send_message', userId);
+        io.sockets.connected[clients[0]].emit('send_message', clients);
     });
 
 
@@ -51,6 +51,6 @@ io.sockets.on('connection', function (socket) {
 
     // when the user disconnects.. perform this
     socket.on('disconnect', function () {
-        
+        socket.broadcast.emit('client_left', clients);
     });
 });
