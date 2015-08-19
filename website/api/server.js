@@ -34,10 +34,10 @@ io.sockets.on('connection', function (socket) {
                 socketID : socket.id,
                 Nickname : data.Nickname
             };
+            socket.emit('login_welcome', userGUID);
+            socket.broadcast.emit('client_joined', clients);
         }
         
-        socket.emit('login_welcome', userGUID);
-        socket.broadcast.emit('client_joined', clients);
 
     });
 
@@ -51,6 +51,7 @@ io.sockets.on('connection', function (socket) {
 
     // when the user disconnects.. perform this
     socket.on('disconnect', function () {
+        delete clients[userGUID];
         socket.broadcast.emit('client_left', clients);
     });
 });
