@@ -22,14 +22,11 @@ var numUsers = 0;
 
 io.on('connection', function (socket) {
     socket.on('join_chatroom', function (data) {
-        /*
-        //只有自己
         socket.emit('login', {
             numUsers: 5
         });
-        */
         // echo globally (all clients) that a person has connected
-        socket.emit('client_joined', {
+        socket.broadcast.emit('client_joined', {
             username: data.Nickname,
             numUsers: 15
         });
