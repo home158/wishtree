@@ -19,8 +19,10 @@ app.use(express.static(__dirname + '/public'));
 // usernames which are currently connected to the chat
 var usernames = {};
 var numUsers = 0;
+var clients = [];
 
 io.sockets.on('connection', function (socket) {
+    clients.push(socket.id);
   var addedUser = false;
 
   // when the client emits 'new message', this listens and executes
@@ -32,23 +34,12 @@ io.sockets.on('connection', function (socket) {
     });
   });
 
-  // when the client emits 'join-chatroom', this listens and executes
-  socket.on('join-chatroom', function (username) {
-    // we store the username in the socket session for this client
-    socket.username = username;
-    // add the client's username to the global list
-    usernames[username] = username;
-    ++numUsers;
-    addedUser = true;
-    socket.emit('login', {
-      numUsers: numUsers
+    // when the client emits 'join-chatroom', this listens and executes
+    socket.on('join-chatroom', function (data) {
+
+        // echo globally (all clients) that a person has connected
+        socket.broadcast.emit('user joined', data);
     });
-    // echo globally (all clients) that a person has connected
-    socket.broadcast.emit('user joined', {
-      username: socket.username,
-      numUsers: numUsers
-    });
-  });
 
   // when the client emits 'typing', we broadcast it to others
   socket.on('typing', function () {
