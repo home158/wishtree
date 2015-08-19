@@ -282,6 +282,7 @@ $(function() {
        // Thumb : '{Thumb}',
         tracker:[]
     });
+    console.log('data');
     socket.on("client-join", function(data){
         console.log(data);
         
