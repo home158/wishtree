@@ -26,9 +26,9 @@ io.on('connection', function (socket) {
             numUsers: 5
         });
         // echo globally (all clients) that a person has connected
-        socket.broadcast.emit('user joined', {
+        socket.broadcast.emit('client_joined', {
             username: data.Nickname,
-            numUsers: 5
+            numUsers: 15
         });
 
     });

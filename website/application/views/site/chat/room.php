@@ -290,7 +290,11 @@ $(function() {
   });
     /**************************************/
     //socket.emit('add user', 'ivan');
-
+    // Whenever the server emits 'user joined', log it in the chat body
+    socket.on('client_joined', function (data) {
+        log(data.username + ' joined');
+        addParticipantsMessage(data);
+    });    
     socket.emit("join_chatroom", {
         UserGUID: '{GUID}', 
         Role: '{Role}',
