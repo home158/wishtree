@@ -65,9 +65,7 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
     
-//var socket = io("wishpool.azurewebsites.net/chatroom");
-var socket = io();
-
+var socket = io("wishpool.azurewebsites.net/chatroom");
 var O_PARENT = {
     GUID: '{GUID}',
     user: {
