@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Socket.IO Chat Example</title>
-  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <ul class="pages">
@@ -61,7 +60,21 @@ $(function() {
     log(message);
   }
 
+  // Sets the client's username
+  function setUsername () {
+    username = cleanInput($usernameInput.val().trim());
 
+    // If the username is valid
+    if (username) {
+      $loginPage.fadeOut();
+      $chatPage.show();
+      $loginPage.off('click');
+      $currentInput = $inputMessage.focus();
+
+      // Tell the server your username
+      socket.emit('add user', username);
+    }
+  }
 
   // Sends a chat message
   function sendMessage () {
@@ -214,7 +227,7 @@ $(function() {
         socket.emit('stop typing');
         typing = false;
       } else {
-        
+        setUsername();
       }
     }
   });
@@ -275,19 +288,6 @@ $(function() {
   socket.on('stop typing', function (data) {
     removeChatTyping(data);
   });
-  /***********************************************************/
-  socket.emit("join-chatroom", {
-        UserGUID: '{GUID}', 
-        Role: '{Role}',
-        Nickname: '{Nickname}',
-       // Thumb : '{Thumb}',
-        tracker:[]
-    });
-    socket.on("client-join", function(data){
-        console.log(data);
-        
-    });
-
 });
 
 
