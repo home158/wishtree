@@ -19,7 +19,7 @@ app.use(express.static(__dirname + '/public'));
 // usernames which are currently connected to the chat
 
 
-io.sockets.on('connection', function (socket) {
+io.on('connection', function (socket) {
 
     // when the client emits 'join-chatroom', this listens and executes
     socket.on('join-chatroom', function (data) {
