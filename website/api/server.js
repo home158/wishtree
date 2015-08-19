@@ -38,7 +38,7 @@ io.sockets.on('connection', function (socket) {
     socket.on('join-chatroom', function (data) {
 
         // echo globally (all clients) that a person has connected
-        socket.broadcast.emit('user joined', data);
+        socket.broadcast.emit('client-join', data);
     });
 
   // when the client emits 'typing', we broadcast it to others
