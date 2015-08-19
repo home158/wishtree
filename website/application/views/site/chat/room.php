@@ -37,6 +37,7 @@ $(function() {
         console.log(data)
     });
     $('#private').on('click',function(){
+        alert('s');
         socket.emit("send_message", {
             targetGUID: $('#targetGUID').val(),
             message: 'Hello private message from {Nickname}'
