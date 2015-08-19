@@ -19,13 +19,19 @@ app.use(express.static(__dirname + '/public'));
 // usernames which are currently connected to the chat
 var usernames = {};
 var numUsers = 0;
-
+/*
+    socket.emit 只有自己
+    socket.broadcast.emit 除了自己
+    io.emit 包含自己
+*/
 io.on('connection', function (socket) {
     socket.on('join_chatroom', function (data) {
-        socket.emit('login', {
+        io.emit('send_message', {
             numUsers: 5
         });
-        // echo globally (all clients) that a person has connected
+        socket.emit('login_welcome', {
+            numUsers: 5
+        });
         socket.broadcast.emit('client_joined', {
             username: data.Nickname,
             numUsers: 15
