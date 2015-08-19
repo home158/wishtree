@@ -22,7 +22,6 @@ var numUsers = 0;
 var clients = [];
 
 io.sockets.on('connection', function (socket) {
-    clients.push(socket.id);
   var addedUser = false;
 
   // when the client emits 'new message', this listens and executes
