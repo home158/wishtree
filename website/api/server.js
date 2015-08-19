@@ -15,25 +15,35 @@ server.listen(port, function () {
 app.use(express.static(__dirname + '/public'));
 
 // Chatroom
-var clients = [];
-
+var clients = {};
+var userId;
 /*
     socket.emit 只有自己
     socket.broadcast.emit 除了自己
     io.emit 包含自己
 */
 io.sockets.on('connection', function (socket) {
-    clients.push(socket.id);
-    socket.on('join_chatroom', function (data) {
+    userId = client.handshake.query.userId;
 
-        socket.emit('login_welcome', clients);
-        socket.broadcast.emit('client_joined', clients);
+    socket.on('join_chatroom', function (data) {
+        /*
+        if(clients[data.UserGUID]){
+            socket.emit('GUID_duplicated', data.UserGUID);
+        }else{
+            clients[data.UserGUID] = {
+                socketID : socket.id,
+                Nickname : data.Nickname
+            };
+        }
+        */
+        socket.emit('login_welcome', userId);
+        socket.broadcast.emit('client_joined', userId);
 
     });
 
     // when the client emits 'new message', this listens and executes
     socket.on('send_message', function (data) {
-        io.sockets.connected[clients[0]].emit('send_message', clients);
+        io.sockets.connected[clients[0]].emit('send_message', userId);
     });
 
 
@@ -41,6 +51,6 @@ io.sockets.on('connection', function (socket) {
 
     // when the user disconnects.. perform this
     socket.on('disconnect', function () {
-
+        
     });
 });

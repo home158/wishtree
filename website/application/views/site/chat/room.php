@@ -15,8 +15,12 @@
   <script>
 $(function() {
     var connected = false;
-    var socket = io();
-
+    var socket = io.connect('http://wishpool.azurewebsites.net/', {
+        query: 'guid={GUID}'
+    });
+    socket.on("GUID_duplicated",function(){
+       console.log('重覆guid不得進入'); 
+    });
     socket.on("send_message", function(data){
         console.log(data)
     });
