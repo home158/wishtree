@@ -12,7 +12,8 @@ var my_socket_id;
 server.listen(port, function () {
     console.log('Server listening at port %d', port);
 });
-var nsp_chatroom = io.of('/chatroom');
+//var nsp_chatroom = io.of('/chatroom');
+var nsp_chatroom = io;
 nsp_chatroom.on('connection', function (socket) {
     var addedUser = false;
         my_socket_id = socket.id;
