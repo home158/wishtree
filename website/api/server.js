@@ -34,7 +34,7 @@ io.sockets.on('connection', function (socket) {
                 socketID : socket.id,
                 Nickname : data.Nickname
             };
-            socket.emit('login_welcome', userGUID);
+            socket.emit('login_welcome', clients);
             socket.broadcast.emit('client_joined', clients);
         }
         
