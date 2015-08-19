@@ -26,8 +26,8 @@ io.sockets.on('connection', function (socket) {
     userGUID = socket.handshake.query.guid;
 
     socket.on('join_chatroom', function (data) {
-        socket.emit('login_welcome', clients);
-        socket.broadcast.emit('client_joined', clients);
+        socket.emit('login_welcome', userGUID);
+        socket.broadcast.emit('client_joined', userGUID);
         /*
         if(clients[userGUID]){
             socket.emit('client_duplicated', data.UserGUID);
