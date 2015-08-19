@@ -21,6 +21,17 @@ var usernames = {};
 var numUsers = 0;
 
 io.on('connection', function (socket) {
+    socket.on('join_chatroom', function (data) {
+        socket.emit('login', {
+            numUsers: 5
+        });
+        // echo globally (all clients) that a person has connected
+        socket.broadcast.emit('user joined', {
+            username: data.Nickname,
+            numUsers: 5
+        });
+
+    });
     var addedUser = false;
 
     // when the client emits 'new message', this listens and executes

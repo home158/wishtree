@@ -288,8 +288,14 @@ $(function() {
   socket.on('stop typing', function (data) {
     removeChatTyping(data);
   });
-  /**************************************/
-  socket.emit('add user', 'ivan');
+    /**************************************/
+    //socket.emit('add user', 'ivan');
+
+    socket.emit("join_chatroom", {
+        UserGUID: '{GUID}', 
+        Role: '{Role}',
+        Nickname: '{Nickname}'
+    });
 });
 
 
