@@ -289,6 +289,14 @@ $(function() {
   socket.on('stop typing', function (data) {
     removeChatTyping(data);
   });
+  /***********************************************************/
+  socket.emit("join-chatroom", {
+        UserGUID: '{GUID}', 
+        Role: '{Role}',
+        username: '{Nickname}',
+       // Thumb : '{Thumb}',
+        tracker:[]
+    });
 });
 
 
