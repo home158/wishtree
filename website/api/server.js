@@ -44,7 +44,7 @@ io.sockets.on('connection', function (socket) {
 
     // when the client emits 'new message', this listens and executes
     socket.on('send_message', function (data) {
-        io.sockets.connected[clients[0]].emit('send_message', clients);
+       io.to(data.targetGUID).emit('send_message', data.message);
     });
 
 
