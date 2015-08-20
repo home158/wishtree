@@ -56,7 +56,7 @@ io.sockets.on('connection', function (socket) {
     });
     // when the user disconnects.. perform this
     socket.on('disconnect', function () {
+        socket.broadcast.emit('client_left', clients[userGUID]);
         delete clients[userGUID];
-        socket.broadcast.emit('client_left', clients);
     });
 });
