@@ -26,11 +26,9 @@ io.sockets.on('connection', function (socket) {
     var userGUID = socket.handshake.query.guid;
 
     socket.on('join_chatroom', function (data) {
-        socket.emit('login_welcome', userGUID);
-        socket.broadcast.emit('client_joined', userGUID);
-        /*
+
         if(clients[userGUID]){
-            socket.emit('client_duplicated', data.UserGUID);
+            socket.emit('client_duplicated', userGUID);
         }else{
             clients[userGUID] = {
                 socketID : socket.id,
@@ -39,7 +37,7 @@ io.sockets.on('connection', function (socket) {
             socket.emit('login_welcome', clients);
             socket.broadcast.emit('client_joined', clients);
         }
-        */
+        
         
 
     });
@@ -54,7 +52,7 @@ io.sockets.on('connection', function (socket) {
 
     // when the user disconnects.. perform this
     socket.on('disconnect', function () {
-       // delete clients[userGUID];
+        delete clients[userGUID];
         socket.broadcast.emit('client_left', clients);
     });
 });
