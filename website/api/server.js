@@ -16,7 +16,6 @@ app.use(express.static(__dirname + '/public'));
 
 // Chatroom
 var clients = {};
-var socket_maps = {};
 var UserGUID;
 /*
     socket.emit 只有自己
@@ -30,7 +29,6 @@ io.sockets.on('connection', function (socket) {
         if(clients[UserGUID]){
             socket.emit('client_duplicated', data.UserGUID);
         }else{
-            socket_maps[socket.id] = UserGUID;
             clients[UserGUID] = {
                 socketID : socket.id,
                 Nickname : data.Nickname
@@ -53,7 +51,7 @@ io.sockets.on('connection', function (socket) {
 
     // when the user disconnects.. perform this
     socket.on('disconnect', function () {
-        delete clients[socket_maps[socket.id]];
+        //delete clients[UserGUID];
         socket.broadcast.emit('client_left', clients);
     });
 });
