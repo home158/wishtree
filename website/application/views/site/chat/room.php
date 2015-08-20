@@ -15,9 +15,7 @@
   <script>
 $(function() {
     var connected = false;
-    var socket = io.connect('http://wishpool.azurewebsites.net:80', {
-        query: 'guid=5'
-    });
+    var socket = io();
     socket.on("client_duplicated",function(){
        console.log('重覆guid不得進入'); 
     });

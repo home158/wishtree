@@ -23,12 +23,9 @@ var userId;
     io.emit 包含自己
 */
 io.sockets.on('connection', function (socket) {
-    userGUID = socket.handshake.query.guid;
 
     socket.on('join_chatroom', function (data) {
-        socket.emit('login_welcome', userGUID);
-        socket.broadcast.emit('client_joined', userGUID);
-        /*
+
         if(clients[userGUID]){
             socket.emit('client_duplicated', data.UserGUID);
         }else{
@@ -39,7 +36,7 @@ io.sockets.on('connection', function (socket) {
             socket.emit('login_welcome', clients);
             socket.broadcast.emit('client_joined', clients);
         }
-        */
+        
         
 
     });
