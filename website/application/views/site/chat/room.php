@@ -189,6 +189,10 @@ var O_PARENT = {
             O_PARENT.user[data.UserGUID] = data;
             $('<li data-type="coming">Someone disconnect</li>').appendTo( $('#message_list_all') );
         },
+        left: function(data){
+            console.log('有人離開了');
+            console.log(data);
+        },
         join: function(data){
             console.log(data);
             O_PARENT.user[data.UserGUID] = data;
@@ -228,6 +232,8 @@ $(function() {
         tracker:[]
     });
 });
+    
+socket.on("client_left", O_PARENT.client.left );
 socket.on("client-join", O_PARENT.client.join );
 
 </script>

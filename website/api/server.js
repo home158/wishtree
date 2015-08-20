@@ -54,5 +54,9 @@ io.sockets.on('connection', function (socket) {
         addedUser = true;
 
     });
-
+    // when the user disconnects.. perform this
+    socket.on('disconnect', function () {
+        delete clients[userGUID];
+        socket.broadcast.emit('client_left', clients);
+    });
 });
