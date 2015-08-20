@@ -107,7 +107,7 @@ var O_PARENT = {
             socket.emit("send-message" , data);
         },
         append:function(data){
-
+            console.log(data);
             $('<li data-type="'+data.type+'" data-visibile="'+data.visibile+'" >'+O_PARENT.message.line(data)+'</li>').appendTo( $('#message_list_all') );
             if(data.receive == O_PARENT.GUID || data.from ==O_PARENT.GUID){
                 $('<li data-type="'+data.type+'" data-visibile="'+data.visibile+'" >'+O_PARENT.message.line(data)+'</li>').appendTo( $('#message_list_private') );
@@ -227,6 +227,10 @@ $(function() {
        // Thumb : '{Thumb}',
         tracker:[]
     });
+    O_PARENT.client.init();
+    O_PARENT.message.init();
+    $('.scrollbar-dynamic').scrollbar();
+
 });
     
 socket.on("client_left", O_PARENT.client.disconnect );
