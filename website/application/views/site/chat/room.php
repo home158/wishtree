@@ -20,6 +20,7 @@ $(function() {
        console.log('重覆guid不得進入'); 
     });
     socket.on("send_message", function(data){
+        console.log('私人訊息');
         console.log(data)
     });
 
