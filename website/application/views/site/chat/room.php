@@ -231,5 +231,7 @@ $(function() {
     
 socket.on("client_left", O_PARENT.client.disconnect );
 socket.on("client-join", O_PARENT.client.join );
+socket.on("client-list", O_PARENT.client.refresh);
+socket.on("new-message", O_PARENT.message.append);
 
 </script>
