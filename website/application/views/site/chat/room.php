@@ -186,12 +186,8 @@ var O_PARENT = {
         },
         disconnect:function(data){
             console.log(data);
-            O_PARENT.user[data.UserGUID] = data;
-            $('<li data-type="coming">Someone disconnect</li>').appendTo( $('#message_list_all') );
-        },
-        left: function(data){
-            console.log('有人離開了');
-            console.log(data);
+            delete O_PARENT.user[data.UserGUID];
+            $('<li data-type="coming">'+O_PARENT.client.nickname(data)+' disconnect</li>').appendTo( $('#message_list_all') );
         },
         join: function(data){
             console.log(data);
@@ -233,7 +229,7 @@ $(function() {
     });
 });
     
-socket.on("client_left", O_PARENT.client.left );
+socket.on("client_left", O_PARENT.client.disconnect );
 socket.on("client-join", O_PARENT.client.join );
 
 </script>
