@@ -16,34 +16,37 @@ app.use(express.static(__dirname + '/public'));
 
 // Chatroom
 var clients = {};
-var UserGUID;
+var userId;
 /*
     socket.emit 只有自己
     socket.broadcast.emit 除了自己
     io.emit 包含自己
 */
 io.sockets.on('connection', function (socket) {
+    var userGUID = socket.handshake.query.guid;
 
     socket.on('join_chatroom', function (data) {
-        UserGUID = data.UserGUID;
-        if(clients[UserGUID]){
+        socket.emit('login_welcome', userGUID);
+        socket.broadcast.emit('client_joined', userGUID);
+        /*
+        if(clients[userGUID]){
             socket.emit('client_duplicated', data.UserGUID);
         }else{
-            clients[UserGUID] = {
+            clients[userGUID] = {
                 socketID : socket.id,
                 Nickname : data.Nickname
             };
             socket.emit('login_welcome', clients);
             socket.broadcast.emit('client_joined', clients);
         }
-        
+        */
         
 
     });
 
     // when the client emits 'new message', this listens and executes
     socket.on('send_message', function (data) {
-        io.sockets.connected[clients[data.targetGUID].socketID].emit('send_message', data.message);
+        io.sockets.connected[clients[0]].emit('send_message', clients);
     });
 
 
@@ -51,7 +54,7 @@ io.sockets.on('connection', function (socket) {
 
     // when the user disconnects.. perform this
     socket.on('disconnect', function () {
-        delete clients[UserGUID];
+        delete clients[userGUID];
         socket.broadcast.emit('client_left', clients);
     });
 });
