@@ -16,6 +16,7 @@ app.use(express.static(__dirname + '/public'));
 
 // Chatroom
 var clients = {};
+var socket_maps = {};
 var UserGUID;
 /*
     socket.emit 只有自己
@@ -25,10 +26,11 @@ var UserGUID;
 io.sockets.on('connection', function (socket) {
 
     socket.on('join_chatroom', function (data) {
-        UserGUID = data.UserGUID
+        UserGUID = data.UserGUID;
         if(clients[UserGUID]){
             socket.emit('client_duplicated', data.UserGUID);
         }else{
+            socket_maps[socket.id] = UserGUID;
             clients[UserGUID] = {
                 socketID : socket.id,
                 Nickname : data.Nickname
@@ -51,7 +53,7 @@ io.sockets.on('connection', function (socket) {
 
     // when the user disconnects.. perform this
     socket.on('disconnect', function () {
-        delete clients[UserGUID];
+        delete clients[socket_maps[socket.id]];
         socket.broadcast.emit('client_left', clients);
     });
 });
