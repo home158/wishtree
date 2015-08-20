@@ -116,6 +116,7 @@ var O_PARENT = {
         },
         line: function(data){
             var user = O_PARENT.user;
+            console.log(user);
             var from = '<a class="'+user[data.from].Role+'" href="javascript:;" data-guid="'+user[data.from].UserGUID+'" data-toggle="private">'+user[data.from].Nickname+'</a>';
             var msg;
             var receive = '';
