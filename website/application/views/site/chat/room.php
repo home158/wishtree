@@ -64,7 +64,9 @@
 </div>
 <script src="/socket.io/socket.io.js"></script>
 <script>
-var socket = io();
+var socket = io.connect('http://wishpool.azurewebsites.net:80', {
+    query: 'guid={GUID}'
+});
 var O_PARENT = {
     GUID: '{GUID}',
     user: {
