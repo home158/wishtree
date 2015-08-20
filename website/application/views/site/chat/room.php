@@ -228,6 +228,7 @@ $(function() {
        // Thumb : '{Thumb}',
         tracker:[]
     });
+    socket.emit("client-list" , O_PARENT.GUID);
     O_PARENT.client.init();
     O_PARENT.message.init();
     $('.scrollbar-dynamic').scrollbar();
