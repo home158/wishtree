@@ -25,34 +25,34 @@ var userId;
 io.sockets.on('connection', function (socket) {
     var userGUID = socket.handshake.query.guid;
 
-    socket.on('join_chatroom', function (data) {
-
-        if(clients[userGUID]){
-            socket.emit('client_duplicated', userGUID);
-        }else{
+    socket.on('join-chatroom', function(data){
+        if(!clients[userGUID]){
             clients[userGUID] = {
-                socketID : socket.id,
-                Nickname : data.Nickname
+                "Thumb" : data.Thumb,
+                "Nickname" : data.Nickname,
+                "Role" : data.Role,
+                "UserGUID" : data.UserGUID,
+                "socket": socket.id
             };
-            socket.emit('login_welcome', clients);
-            socket.broadcast.emit('client_joined', clients);
+            
+            
+            //console.log('[join-chatroom] => UserGUID = ' + data.UserGUID + ' Nickname = ' + data.Nickname + '; socket id = ' + socket.id + ';');
+            io.emit("client-join", clients[data.UserGUID]);
+
         }
-        
-        
+        if(data.tracker.length > 0){
+            var trackerGUID;
+            for(var i in data.tracker){ 
+                trackerGUID =  data.tracker[i];
+                console.log('[login-notify] => ready to emit message to trackerGUID = ' + trackerGUID);
+                if(clients[trackerGUID]){
+                    console.log('[login-notify] => trackerGUID = ' + trackerGUID);
+                    nsp_chatroom.connected[clients[trackerGUID].socket].emit("login-notify", data);
+                }
+            }
+        }
+        addedUser = true;
 
     });
 
-    // when the client emits 'new message', this listens and executes
-    socket.on('send_message', function (data) {
-        io.sockets.connected[clients[data.targetGUID].socketID].emit('send_message', clients);
-    });
-
-
-
-
-    // when the user disconnects.. perform this
-    socket.on('disconnect', function () {
-        delete clients[userGUID];
-        socket.broadcast.emit('client_left', clients);
-    });
 });

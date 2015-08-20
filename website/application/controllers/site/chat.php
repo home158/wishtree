@@ -49,6 +49,15 @@ class Chat extends Site_Base_Controller {
 		$this->parser->parse('site/chat/index',$this->display_data);
 		$this->parser->parse('site/_default/footer',$this->display_data);
 	}
+    public function room1()
+    {
+        $this->load->model('photo_model');
+        $userGUID = $this->session->userdata('GUID');
+        
+        $this->display_data['Thumb'] = $this->photo_model->retrieve_public_cover_photo($userGUID);
+
+		$this->parser->parse('site/chat/room1',$this->display_data);
+    }
     public function room()
     {
         $this->load->model('photo_model');
