@@ -11,13 +11,13 @@ class Mywish extends Site_Base_Controller {
         );
         $this->display_data["highlight_navi"] = "mywish";
         $this->alertMsg();
-        $this->load->model('mywish_model');
+        $this->load->model('wish_model');
 
     }
 	public function index()
 	{
 
-        $mywish_list = $this->mywish_model->retrive_mywish( $this->session->userdata('GUID') , 2 ,0, 0 , FALSE);
+        $mywish_list = $this->wish_model->retrive_mywish( $this->session->userdata('GUID') ,FALSE ,  2 ,0, 0 , FALSE);
         $this->display_data['mywish_list'] = $mywish_list;
 
 
@@ -30,10 +30,9 @@ class Mywish extends Site_Base_Controller {
     public function action_mothball()
     {
         $this->load->model('error_model');
-        $this->load->model('mywish_model');
         $GUID = $this->input->post('GUID');
         //check GUID is exist in i_user
-        $mywish = $this->mywish_model->retrive_mywish_by_GUID( $GUID );
+        $mywish = $this->wish_model->retrive_mywish_by_GUID( $GUID );
 
         if($mywish == FALSE)
         {
@@ -69,10 +68,9 @@ class Mywish extends Site_Base_Controller {
     public function delete()
     {
         $this->load->model('error_model');
-        $this->load->model('mywish_model');
         $GUID = $this->input->post('GUID');
         //check GUID is exist in i_user
-        $mywish = $this->mywish_model->retrive_mywish_by_GUID( $GUID );
+        $mywish = $this->wish_model->retrive_mywish_by_GUID( $GUID );
 
         if($mywish == FALSE)
         {
@@ -111,12 +109,12 @@ class Mywish extends Site_Base_Controller {
     public function update()
     {
         $this->load->model('error_model');
-        $this->load->model('mywish_model');
+        $this->load->model('wish_model');
         
         $userGUID = $this->session->userdata('GUID');
         $GUID = $this->input->post('GUID');
         //check GUID is exist in i_user
-        $mywish = $this->mywish_model->retrive_mywish_by_GUID( $GUID );
+        $mywish = $this->wish_model->retrive_mywish_by_GUID( $GUID );
         if($mywish == FALSE)
         {
             echo $this->error_model->retrieve_error_msg(7 , NULL , $this->display_data['mywish_no_record']);
@@ -163,7 +161,7 @@ class Mywish extends Site_Base_Controller {
     }
     public function removed()
     {
-        $mywish_list = $this->mywish_model->retrive_mywish( $this->session->userdata('GUID') , '0,1,2' ,1 , 0);
+        $mywish_list = $this->wish_model->retrive_mywish( $this->session->userdata('GUID') ,FALSE ,  '0,1,2' ,1 , 0);
         $this->display_data['mywish_list'] = $mywish_list;
 
 
@@ -175,7 +173,7 @@ class Mywish extends Site_Base_Controller {
     }
     public function pending()
     {
-        $mywish_list = $this->mywish_model->retrive_mywish( $this->session->userdata('GUID') , 0 ,0 , 0);
+        $mywish_list = $this->wish_model->retrive_mywish( $this->session->userdata('GUID') ,FALSE ,  0 ,0 , 0);
         $this->display_data['mywish_list'] = $mywish_list;
 
 
@@ -187,7 +185,7 @@ class Mywish extends Site_Base_Controller {
     }
     public function mothball()
     {
-        $mywish_list = $this->mywish_model->retrive_mywish( $this->session->userdata('GUID') , '0,1,2' , '0,1' , 1);
+        $mywish_list = $this->wish_model->retrive_mywish( $this->session->userdata('GUID') ,FALSE ,  '0,1,2' , '0,1' , 1);
         $this->display_data['mywish_list'] = $mywish_list;
 
         $this->parser->parse('site/_default/header',$this->display_data);
@@ -198,7 +196,7 @@ class Mywish extends Site_Base_Controller {
     }
     public function expire()
     {
-        $mywish_list = $this->mywish_model->retrive_mywish( $this->session->userdata('GUID') , '2' , '0' , '0',TRUE);
+        $mywish_list = $this->wish_model->retrive_mywish( $this->session->userdata('GUID') ,FALSE ,  '2' , '0' , '0',TRUE);
         $this->display_data['mywish_list'] = $mywish_list;
 
         $this->parser->parse('site/_default/header',$this->display_data);
@@ -209,7 +207,7 @@ class Mywish extends Site_Base_Controller {
     }
     public function reject()
     {
-        $mywish_list = $this->mywish_model->retrive_mywish( $this->session->userdata('GUID') , 1 ,0 , 0);
+        $mywish_list = $this->wish_model->retrive_mywish( $this->session->userdata('GUID') ,FALSE ,  1 ,0 , 0);
         $this->display_data['mywish_list'] = $mywish_list;
 
 
@@ -218,6 +216,14 @@ class Mywish extends Site_Base_Controller {
 	    $this->parser->parse('site/_default/female_navi',$this->display_data);
 	    $this->parser->parse('site/mywish/reject',$this->display_data);
 	    $this->parser->parse('site/_default/footer',$this->display_data);
+    }
+    public function rule()
+    {
+            $this->parser->parse('site/_default/header',$this->display_data);
+	        $this->parser->parse('site/_default/header_logout',$this->display_data);
+	        $this->parser->parse('site/_default/female_navi',$this->display_data);
+	        $this->parser->parse('site/mywish/rule',$this->display_data);
+	        $this->parser->parse('site/_default/footer',$this->display_data);
     }
     public function make()
     {

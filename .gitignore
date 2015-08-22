@@ -1,5 +1,7 @@
 # Images
 website/temp/
 website/api/iisnode
+website/application/config/config.php
+website/application/config/database.php
 tools/
 website/repositories/

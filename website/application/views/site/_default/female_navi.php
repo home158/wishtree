@@ -1,7 +1,7 @@
 <div id="navi">
     <ul>
         <li><a id="home" href="/home">首頁</a></li>
-        <li><a id="wish" href="#">許願池</a></li>
+        <li><a id="wish" href="/wish">許願池</a></li>
         <li><a id="message" href="/message">留言板</a></li>
         <li><a id="chat" href="/chat">聊天室</a></li>
         <li><a href="#">誰看過我</a></li>

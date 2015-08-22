@@ -689,12 +689,31 @@ wish
     margin: 0px;
     padding: 0px;
 }
+.mywish_set img.thumb{
+    width: 100px;
+    height: 120px;
+}
+.mywish_set img.crop{
+    width: 300px;
+    height: 360px;
+}
+.mywish_set .wish_message{
+    width: 640px;
+}
 .mywish_set .wish_card{
     margin-bottom: 20px;
     padding: 10px;
     border: 1px solid #dfdfdf;
-    float: left;
     border-radius: 10px;
+}
+.mywish_set .wish_reply{
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #dfdfdf;
+    border-radius: 10px;
+}
+.mywish_set textarea[name=message_content]{
+    width: 100%;
 }
 .mywish_set textarea[name=wish_content]{
     width: 400px;
@@ -709,7 +728,7 @@ wish
 .mywish_set .identity-content{
     position: relative;
     width: 600px;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 .mywish_set .expire_date{
     position: absolute;
@@ -823,7 +842,8 @@ select {
     border-radius: 4px;
 }
 
-.wish_title{
+.wish_title,
+.wish_title a{
     font-size: 17px;
     font-weight: bold;
     color: #5d008c;

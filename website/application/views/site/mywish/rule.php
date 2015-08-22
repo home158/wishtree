@@ -17,50 +17,62 @@
                     <li>
                         <a href="/mywish/expire" class="ctrl">{mywish_wish_expire}</a>
                     </li>
-                    <li class="active">
+                    <li >
                         <a href="/mywish/removed" class="ctrl">{mywish_wish_delete}</a>
                     </li>
                     <li>
                         <a href="/mywish/mothball" class="ctrl">{mywish_wish_mothball}</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="/mywish/rule" class="ctrl">{mywish_wish_rule}</a>
                     </li>
                 </ul>
         </div>
-            {mywish_list}
-            <div class="wish_card clearfix">
-                <div class="fl">
-                    <a href="/view/{UserGUID}"><img src="{ThumbBasename}"></a>
-                </div>
-                <div class="fl identity-content ">
-                    <div class="expire_date"><span class="label label-{DateExpireClass}">{DateExpire}</span></div>
-                    <div>
-                        <a href="/view/{UserGUID}">{db_Nickname}</a>,
-                        <strong>{YearsOld}</strong> {view_years_old},
-                        {City}
-                    </div>
-                    <div class="read_model">
-
-                        <div class="wish_title">
-                            [{WishCategory}] {WishTitle}
-                        </div>
-                        <div class="wish_content">
-                            {WishContent}
-                        </div>
-                    </div>
-                    <div class="wish_ctrl">
-
-                        <span class="btn_mothball btn btn-danger btn-sm " data-guid="{db_GUID}" >
-                            <i class="glyphicon glyphicon-trash"></i>
-                            <span>{btn_mothball}</span>
-                        </span>
-                        
-                    </div>
-                </div>
-
-            </div>
-            {/mywish_list}
+        <p class="hd">{mywish_wish_rule}</p>
+        <ol>
+            <li>
+                {mywish_rule1}
+            </li>
+            <li>
+                {mywish_rule2}
+            </li>
+            <li>
+                {mywish_rule3}
+            </li>
+            <li>
+                {mywish_rule4}
+            </li>
+            <li>
+                {mywish_rule5}
+            </li>
+            <li>
+                {mywish_rule6}
+            </li>
+            <li>
+                {mywish_rule7}
+            </li>
+        </ol>
+        <p class="hd">{mywish_review_principle}</p>
+        <ol>
+            <li>
+                {mywish_review_principle1}
+            </li>
+            <li>
+                {mywish_review_principle2}
+            </li>
+            <li>
+                {mywish_review_principle3}
+            </li>
+            <li>
+                {mywish_review_principle4}
+            </li>
+            <li>
+                {mywish_review_principle5}
+            </li>
+            <li>
+                {mywish_review_principle6}
+            </li>
+        </ol>
     </div>
 </div>
 <script>

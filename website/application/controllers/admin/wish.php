@@ -6,7 +6,7 @@ class Wish extends Admin_Base_Controller {
     {
         parent::__construct();
         $this->parse_display_data(
-            array( 'btn','alert', 'rank', 'role','photo','menu' , 'grid' , 'contextmenu', 'message', 'account','wish')
+            array( 'btn','alert', 'rank', 'role','photo','menu' , 'grid' , 'contextmenu', 'message', 'account','mywish','wish')
         );
         $this->load->model('wish_model');
 
@@ -70,11 +70,13 @@ class Wish extends Admin_Base_Controller {
         $order_method = $this->input->post('ORDER_METHOD',true); // true or false
         $search_txt = $this->input->post('SEARCH_TXT',true);
         $review_status = $this->input->post('REVIEW_STATUS',true);
-        $is_private = $this->input->post('IS_PRIVATE',true);
+        $delete_status = $this->input->post('DELETE_STATUS',true);
+        $mothball_status = $this->input->post('MOTHBALL_STATUS',true);
+        $expire = $this->input->post('EXPIRE',true);
         
-        $query = $this->photo_model->select_data_limit_offset('[dbo].[i_photo]' , $top , $bottom , 
+        $query = $this->wish_model->select_data_limit_offset('[dbo].[i_wish]' , $top , $bottom , 
                                                                 $this->UI_columns ,
-                                                                $review_status,$is_private,
+                                                                $review_status,$delete_status,$mothball_status,$expire,
                                                                 $sort_column_id , $order_method , $search_txt);
         $data = array(
             'grid_data' => $query['object']->result(),

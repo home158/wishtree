@@ -23,6 +23,9 @@
                     <li>
                         <a href="/mywish/mothball" class="ctrl">{mywish_wish_mothball}</a>
                     </li>
+                    <li>
+                        <a href="/mywish/rule" class="ctrl">{mywish_wish_rule}</a>
+                    </li>
                 </ul>
         </div>
             {mywish_list}

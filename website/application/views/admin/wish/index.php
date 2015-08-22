@@ -49,69 +49,75 @@ var O_PARENT = {
             NAME: "{photo_view_all}",
             GUID: '00000000-0000-0000-0000-000000000000',
             REVIEW_STATUS: '0,1,2',
-            IS_PRIVATE: '0,1',
+            DELETE_STATUS : '0,1',
+            MOTHBALL_STATUS : '0,1',
+            EXPIRE: '0',
             ICON:'/_images/friends-16.png',
             CHILD: [
                         {
-                            NAME:'{photo_review_pending}',
+                            NAME:'{mywish_wish_pending}',
                             GUID: '3359a0b5-1e32-430e-8d21-e3728a619387',
-                            HAS_EXPAND_COLLAPSE_ICON : true,
+                            HAS_EXPAND_COLLAPSE_ICON : false,
                             ICON:'/_images/people-16.png',
                             REVIEW_STATUS: '0',
-                            IS_PRIVATE: '0,1'
+                            DELETE_STATUS : '0',
+                            MOTHBALL_STATUS : '0',
+                            EXPIRE: '0'
                         },
                         {
-                            NAME:'{photo_review_pass}',
+                            NAME:'{mywish_wish_online}',
                             GUID: '5de4b16d-6acc-4264-8312-8c5ebbe94864',
-                            HAS_EXPAND_COLLAPSE_ICON : true,
+                            HAS_EXPAND_COLLAPSE_ICON : false,
                             ICON:'/_images/people-16.png',
                             REVIEW_STATUS: '2',
-                            IS_PRIVATE: '0,1'
+                            DELETE_STATUS : '0',
+                            MOTHBALL_STATUS : '0',
+                            EXPIRE: '0'
                         },
                         {
-                            NAME:'{photo_review_reject}',
+                            NAME:'{mywish_wish_reject}',
                             GUID: '6a928d1f-eb98-4d78-a792-f8b35b03e166',
-                            HAS_EXPAND_COLLAPSE_ICON : true,
+                            HAS_EXPAND_COLLAPSE_ICON : false,
                             ICON:'/_images/people-16.png',
                             REVIEW_STATUS: '1',
-                            IS_PRIVATE: '0,1'
+                            DELETE_STATUS : '0',
+                            MOTHBALL_STATUS : '0',
+                            EXPIRE: '0'
+                        },
+                        {
+                            NAME:'{mywish_wish_delete}',
+                            GUID: '29A067E7-F98B-4FDD-AAB5-7A87FB439838',
+                            HAS_EXPAND_COLLAPSE_ICON : false,
+                            ICON:'/_images/people-16.png',
+                            REVIEW_STATUS: '0,1,2',
+                            DELETE_STATUS : '1',
+                            MOTHBALL_STATUS : '0',
+                            EXPIRE: '0'
+                        },
+                        {
+                            NAME:'{mywish_wish_mothball}',
+                            GUID: 'B9F61346-AC2F-4F46-9594-71F87F3DE7BA',
+                            HAS_EXPAND_COLLAPSE_ICON : false,
+                            ICON:'/_images/people-16.png',
+                            REVIEW_STATUS: '0,1,2',
+                            DELETE_STATUS : '0,1',
+                            MOTHBALL_STATUS : '1',
+                            EXPIRE: '0'
+                        },
+                        {
+                            NAME:'{mywish_wish_expire}',
+                            GUID: 'B9F61346-AC2F-4F46-9594-71F87F3DE7BA',
+                            HAS_EXPAND_COLLAPSE_ICON : false,
+                            ICON:'/_images/people-16.png',
+                            REVIEW_STATUS: '2',
+                            DELETE_STATUS : '0',
+                            MOTHBALL_STATUS : '0',
+                            EXPIRE: '1'
                         }
                     ]
         },
         getSubDomain: function(GUID){
-            console.log(GUID);
-            switch(GUID){
-                case '3359a0b5-1e32-430e-8d21-e3728a619387':
-                    var REVIEW_STATUS = '0';
-                break;
-                case '5de4b16d-6acc-4264-8312-8c5ebbe94864':
-                    var REVIEW_STATUS = '2';
-                break;
-                case '6a928d1f-eb98-4d78-a792-f8b35b03e166':
-                    var REVIEW_STATUS = '1';
-                break;
-            }
-            var d1 = {
-                CHILD:[
-                    {
-                        NAME:'{photo_public}',
-                        GUID: '1F12F18F-60B8-4734-A2EF-B1AB138EA139',
-                        HAS_EXPAND_COLLAPSE_ICON : false,
-                        ICON:'/_images/people-16.png',
-                        REVIEW_STATUS : REVIEW_STATUS,
-                        IS_PRIVATE: '0'
-                    },
-                    {
-                        NAME:'{photo_private}',
-                        GUID: 'C3142A73-3D24-495A-B4C2-1EF6CA54CB9C',
-                        HAS_EXPAND_COLLAPSE_ICON : false,
-                        ICON:'/_images/people-16.png',
-                        REVIEW_STATUS : REVIEW_STATUS,
-                        IS_PRIVATE: '1'
-                    }
-                ]
-            };
-            return d1;
+
         },
         init: function(GUID){
             this.$myTree.trendTree(
@@ -119,7 +125,7 @@ var O_PARENT = {
                     getSubDomain: this.getSubDomain,
                     data: this.root,
                     expand: function(ui) {
-                        $('#myTree').trendTree('renderNode', ui, this.getSubDomain(ui.data.GUID));
+                        //$('#myTree').trendTree('renderNode', ui, this.getSubDomain(ui.data.GUID));
                     },
                     selected: function(ui) {
                         O_PARENT.tree.CURRENT_GUID = ui.data.GUID;
@@ -304,10 +310,12 @@ var O_PARENT = {
         post_data:{
             top:0,
             bottom:37,
-            SORT_COLUMN_ID: 'PhotoID',
+            SORT_COLUMN_ID: 'WishID',
             ORDER_METHOD: 'ASC',
             REVIEW_STATUS: '0,1,2',
-            IS_PRIVATE: '0,1'
+            DELETE_STATUS : '0,1',
+            MOTHBALL_STATUS : '0,1',
+            EXPIRE: '0'
         },
         init: function(){
             this.$myGrid.trendGrid({
@@ -367,7 +375,7 @@ var O_PARENT = {
                     {
                         id: "DeleteStatus",
                         name: '{grid_column_DeleteStatus}',
-                        width: 130,
+                        width: 55,
                         sortAsc: true
                     },
                     {
@@ -379,7 +387,7 @@ var O_PARENT = {
                     {
                         id: "MothballStatus",
                         name: '{grid_column_MothballStatus}',
-                        width: 130,
+                        width: 55,
                         sortAsc: true
                     },
                     {
@@ -452,17 +460,20 @@ var O_PARENT = {
                             break;
                         }
                     },
-                    IsPrivate: function(o){
+                    WishReviewStatus: function(o){
                         switch(parseInt(o.text,10)){
                             case 0:
-                                return '{photo_public}';
+                                return '{mywish_wish_pending}';
                             break;
                             case 1:
-                                return '{photo_private}';
+                                return '{mywish_wish_reject}';
+                            break;
+                            case 2:
+                                return '{mywish_wish_pass}';
                             break;
                         }
                     },
-                    IsCover: function(o){
+                    DeleteStatus: function(o){
                         o.$cell.css('text-align','center');
                         switch(parseInt(o.text,10)){
                             case 0:
@@ -473,29 +484,17 @@ var O_PARENT = {
                             break;
                         }
                     },
-                    WishReviewStatus: function(o){
+                    MothballStatus: function(o){
+                        o.$cell.css('text-align','center');
                         switch(parseInt(o.text,10)){
                             case 0:
-                                return '{wish_review_pending}';
+                                return '';
                             break;
                             case 1:
-                                return '{wish_review_reject}';
-                            break;
-                            case 2:
-                                return '{wish_review_pass}';
+                                return 'Y';
                             break;
                         }
-                    },
-                    FullBasename: function(o){
-                        return '<a href="{azure_storage_baseurl}'+o.data.UserGUID+'/'+o.text+'" data-footer="'+o.text+'" data-title="{grid_column_PhotoID}:'+o.data.PhotoID +'('+o.data.Nickname+')" data-toggle="lightbox" data-parent="" data-gallery="'+o.data.GUID+'">{photo_open_up}</a>';
-                    },
-                    CropBasename: function(o){
-                        return '<a href="{azure_storage_baseurl}'+o.data.UserGUID+'/'+o.text+'" data-footer="'+o.text+'" data-title="{grid_column_PhotoID}:'+o.data.PhotoID +'('+o.data.Nickname+')" data-toggle="lightbox" data-parent="" data-gallery="'+o.data.GUID+'">{photo_open_up}</a>';
                     }
-
-                    
-
-
                 }
             });
         },
@@ -513,7 +512,7 @@ var O_PARENT = {
                 O_PARENT.grid.post_data.bottom = bottom;
             $.ajax({
                 //must to set synchronous, otherwise your need good design concept
-                url: '/admin/photo/retrieve_list',
+                url: '/admin/wish/retrieve_list',
                 dataType: 'json',
                 type: 'POST',
                 data: O_PARENT.grid.post_data,
@@ -547,7 +546,7 @@ var O_PARENT = {
             $('#myTree').trendTree('ajaxLoading');
             $.ajax({
                 //must to set synchronous, otherwise your need good design concept
-                url: '/admin/photo/retrieve_list',
+                url: '/admin/wish/retrieve_list',
                 dataType: 'json',
                 type: 'POST',
                 data: O_PARENT.grid.post_data,

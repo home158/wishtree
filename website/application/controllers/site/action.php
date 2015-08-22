@@ -29,13 +29,32 @@ class Action extends Site_Base_Controller {
     }
     public function set_privilege()
     {
+        $this->load->model('photo_model');
         $trackUserGUID = $this->input->post('trackUserGUID' , TRUE);
         $GUID = $this->session->userdata('GUID');
-        $update_data = array(
-            'Privilege' => $this->input->post('privilege' , TRUE),
-            'DateModify' => date('Y-m-d H:i:s')
-        );
-        $this->db->update('[dbo].[i_photo_privilege]', $update_data, array('UserGUID' => $GUID, 'TrackUserGUID'=> $trackUserGUID));
+        $privilege_exist = $this->photo_model->is_privilege_exist( $trackUserGUID ,$GUID );
+
+        if($privilege_exist == FALSE){
+            $insert_data = array(
+                'UserGUID' => $GUID,
+                'TrackUserGUID' => $trackUserGUID,
+                'Privilege' => $this->input->post('privilege' , TRUE),
+                'DateModify' => date('Y-m-d H:i:s'),
+                'DateCreate' => date('Y-m-d H:i:s')
+            );
+
+
+            $insert_string = $this->db->insert_string('[dbo].[i_photo_privilege]', $insert_data);
+            $this->db->query( $insert_string );
+
+        }else{
+            $update_data = array(
+                'Privilege' => $this->input->post('privilege' , TRUE),
+                'DateModify' => date('Y-m-d H:i:s')
+            );
+
+            $this->db->update('[dbo].[i_photo_privilege]', $update_data, array('UserGUID' => $GUID, 'TrackUserGUID'=> $trackUserGUID));
+        }
     }
     public function ask_private_photo_privilege()
     {
@@ -55,7 +74,7 @@ class Action extends Site_Base_Controller {
                 'TrackUserGUID' => $userGUID,
                 'Privilege' => 0,
                 'DateModify' => date('Y-m-d H:i:s'),
-                'DateModify' => date('Y-m-d H:i:s')
+                'DateCreate' => date('Y-m-d H:i:s')
             );
 
 
