@@ -49,11 +49,11 @@ class Account extends Site_Base_Controller {
         $this->whilelist();
         $this->blockedlist();
 
-		$this->parser->parse('site/_default/header',$this->display_data);
-		$this->parser->parse('site/_default/header_logout',$this->display_data);
-		$this->parser->parse('site/_default/female_navi',$this->display_data);
-		$this->parser->parse('site/account/index',$this->display_data);
-		$this->parser->parse('site/_default/footer',$this->display_data);
+		$this->utility_model->parse('site/_default/header',$this->display_data);
+		$this->utility_model->parse('site/_default/header_logout',$this->display_data);
+		$this->utility_model->parse('site/_default/male_navi',$this->display_data);
+		$this->utility_model->parse('site/account/index',$this->display_data);
+		$this->utility_model->parse('site/_default/footer',$this->display_data);
 	}
     public function profile()
     {

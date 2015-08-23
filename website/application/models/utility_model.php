@@ -226,6 +226,15 @@ class Utility_model extends CI_Model {
         $row = $query->row();
         $this->login_model->set_login_session($row);
     }
+    function parse($template, $data, $return = FALSE)
+    {
+        $this->load->library('user_agent');
+        if($this->agent->is_mobile()){
+            $this->parser->parse('mobile/'.$template, $data, $return);
+        }else{
+            $this->parser->parse($template, $data, $return);
+        }
+    }
 }
 
 /* End of file utility_model.php */

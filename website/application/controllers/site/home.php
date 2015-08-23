@@ -38,20 +38,20 @@ class Home extends Site_Base_Controller {
             $this->display_data['newcomer_user'] = $this->home_model->get_newcomer_user('male');
         }
 
-		$this->parser->parse('site/_default/header',$this->display_data);
-		$this->parser->parse('site/_default/header_logout',$this->display_data);
+		$this->utility_model->parse('site/_default/header',$this->display_data);
+		$this->utility_model->parse('site/_default/header_logout',$this->display_data);
         if($this->session->userdata('Role') == 'male'){
             $this->display_data['role_random_title'] = $this->display_data['role_female_long'];
-            $this->parser->parse('site/_default/female_navi',$this->display_data);
+            $this->utility_model->parse('site/_default/female_navi',$this->display_data);
         }else{
             $this->display_data['role_random_title'] = $this->display_data['role_male_long'];
-            $this->parser->parse('site/_default/male_navi',$this->display_data);
+            $this->utility_model->parse('site/_default/male_navi',$this->display_data);
         }
 		
-		$this->parser->parse('site/home/index',$this->display_data);
+		$this->utility_model->parse('site/home/index',$this->display_data);
 		
 
-		$this->parser->parse('site/_default/footer',$this->display_data);
+		$this->utility_model->parse('site/_default/footer',$this->display_data);
 
 	}
     public function phpinfo()

@@ -17,41 +17,25 @@ a{
     border-radius: 8px 8px 0 0;
     -webkit-border-radius: 8px 8px 0 0;
     -moz-border-radius: 8px 8px 0 0;
-    width: 980px;
+    
     margin: 5px auto 0;
     padding-top: 10px;
 }
-#navi {
-    overflow: hidden;
-    height: 44px;
-    background: #000000 url("/_images/menu_bg.png") repeat-x 0 0;
-}
-#navi ul {
-    padding-left: 10px; 
-}
-#navi li {
-    /* line-height: 40px; */
-    height: 33px;
-    float: left;
-    
-    line-height: 33px;
-    font-weight: 700;
-    font-size: 14px;
-  
-}
-#navi li a {
-    float: left;
-    height: 44px;
-    line-height: 40px;
-    padding: 0 20px;
-    text-decoration: none;
-    color: #ffffff;
-}
-#navi li a:hover,#navi li a.highlight{
-    background: url("/_images/menu_bg_a.png") no-repeat 50% -44px;
-}
 ul li {
     list-style: none;
+}
+.menu-btn{
+    width: 100px;
+    padding: 10px;
+    margin-bottom: 30px;
+    background: #000;
+    color: #FFF;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    line-height: 20px;
 }
 #footer {
     width: 100%;
@@ -65,15 +49,23 @@ ul li {
 }
 #footer .timezone{
     color: #FFF;
-    position: absolute;
+    
     right: 10px;
     bottom: 10px;
 }
 #footer .language{
-    position: absolute;
+    
     right: 10px;
     top: 10px;
     color: #FFF;
+}
+#footer .language{
+    font-size: 16px;
+}
+#footer .language span.item{
+    margin-left: 10px;
+    font-size: 15px;
+    font-weight: 500;
 }
 #footer .language a{
     cursor: pointer;
@@ -97,13 +89,20 @@ ul li {
     font-weight: bold;
 }
 #header{
-    position: relative;
-    height: 50px;
+    height: 60px;
+    line-height: 60px;
+    top: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    background-color: #fff;
+    border-bottom: 1px solid blue;
 }
+
 #header .header-link{
     position: absolute;
     right: 10px;
-    bottom: 10px;
+    top: 10px;
 }
 #header .header-link li{
     float: left;
@@ -115,9 +114,7 @@ ul li {
    
 }
 #content{
-    
-    padding: 30px 10px;
-    _padding-top: 10px;
+    padding-top: 60px;
 }
 .clearfix {
     display: block;

@@ -12,6 +12,7 @@ $config['error_code_9']	= "Update fail, because wish has been deleted.";
 $config['error_code_10']	= "Update fail, because wish has been Mothballed.";
 $config['error_code_11']	= "Mothball fail, because wish has been Mothballed.";
 $config['error_code_12']	= "Mothball fail, because wish is under review.";
+$config['error_code_13']	= "Reply wish fail, please try again.";
 
 /* End of file config.php */
 /* Location: ./application/config/error.php */

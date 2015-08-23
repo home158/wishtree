@@ -117,8 +117,14 @@ class Wish_model extends CI_Model {
         );
         return $result;
     }
-    function retrive_mywish($UserGUID = FALSE , $wishGUID = FALSE,  $ReviewStatus = '0,1,2' , $DeleteStatus = '0,1' , $MothballStatus = '0,1' , $expire = NULL)
+    function retrive_mywish($UserGUID = FALSE , $wishGUID = FALSE, $w_role = NULL,  $ReviewStatus = '0,1,2' , $DeleteStatus = '0,1' , $MothballStatus = '0,1' , $expire = NULL)
     {
+        if(is_null($w_role )){
+            $query_role = "";
+        }else{
+            $query_role = " AND U.Role = '".$w_role."'";
+        }
+                
         if(is_null($expire )){
             $expire_str = "";
         }else{
@@ -142,6 +148,7 @@ class Wish_model extends CI_Model {
         }
         $query = $this->db->query("
         SELECT 
+            [Privilege] ,
             W.[GUID] AS [db_GUID],
             W.[UserGUID] AS [UserGUID],
             W.[WishCategory] AS [WishCategory],
@@ -170,6 +177,11 @@ class Wish_model extends CI_Model {
                     P.[IsCover] = 1
                 AND 
                     p.[IsPrivate] = 0
+            LEFT JOIN [dbo].[i_photo_privilege] AS R
+            ON 
+                    R.TrackUserGUID = W.[UserGUID]
+                AND
+                    R.UserGUID = '".$this->session->userdata('GUID')."'
         WHERE 
                 W.WishReviewStatus IN (".$ReviewStatus.")
             AND
@@ -178,11 +190,12 @@ class Wish_model extends CI_Model {
                 W.MothballStatus IN (".$MothballStatus.")
             ".$query_userGUID."
             ".$query_wishGUID."
+            ".$query_role."
             ".$expire_str."
         ORDER BY
             W.DateCreate DESC
         ");
-
+        
         $r = $query->result_array();
         $this->lang->load('city');
         $this->lang->load('mywish');
@@ -240,5 +253,49 @@ class Wish_model extends CI_Model {
             return $query->row_array();
         }
 
+    }
+    function retrive_reply($wishGUID)
+    {
+        $query = $this->db->query("
+        SELECT 
+            R.[UserGUID] AS [db_userGUID],
+            [ReplyContent],
+            U.[Nickname] AS [db_nickname],
+            U.[Role] AS [Role],
+            U.[City] AS [City],
+            ".$this->utility_model->dbColumnDatetime('R.[DateCreate]' , '[time]' , 16).",
+            [ThumbBasename]
+        FROM 
+                [dbo].[i_wish_reply] AS R
+            LEFT JOIN 
+                [dbo].[i_user] AS U
+            ON
+                R.[UserGUID] = U.[GUID]
+            LEFT JOIN 
+                [dbo].[i_photo] AS P 
+            ON
+                    R.[UserGUID] = P.[UserGUID]
+                AND
+                    P.[IsCover] = 1
+                AND 
+                    p.[IsPrivate] = 0       
+        WHERE
+            WishGUID = '".$wishGUID."'
+        ORDER BY
+            R.[DateCreate] DESC
+        ");
+
+        $r = $query->result_array();
+        $this->lang->load('city');
+        $this->lang->load('mywish');
+        foreach($r as $key => $value){
+            if($value['ThumbBasename']){
+                $r[$key]['ThumbBasename'] = $this->config->item('azure_storage_baseurl') . $value['db_userGUID'] . '/' . $value['ThumbBasename'];
+            }else{
+                $r[$key]['ThumbBasename'] = $this->config->item('photo_'.$value['Role'].'_default_thumb');
+            }
+            $r[$key]['content'] = nl2br($value['ReplyContent']);
+        }
+        return $r;
     }
 }
