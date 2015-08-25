@@ -27,11 +27,14 @@ socket.on("client-left", function(data){
     console.log(data);
     console.log('left');
 });
-socket.on("client-list", function(r){
-    console.log('client-list');
-    console.log(r);
-    $('*[name=status_'+r.UserGUID+']').removeClass('offline').addClass('online');
-
+socket.on("client-list", function(data){
+        console.log("client-list");
+        console.log(data);
+    $.each(data,function( i, r ) {
+        console.log('each');
+        console.log(r);
+        $('*[name=status_'+r.UserGUID+']').removeClass('offline').addClass('online');
+    });
 });
 
 $(function() {
