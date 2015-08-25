@@ -29,6 +29,7 @@ socket.on("client-left", function(data){
 });
 socket.on("client-list", function(data){
     $.each(data,function( i, r ) {
+        console.log(r);
         $('*name=[status_'+r.UserGUID+']').removeClass('offline').addClass('online');
     });
 });
