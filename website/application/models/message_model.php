@@ -237,12 +237,15 @@ class Message_model extends CI_Model {
         ) 
         WHERE 
             B.[UserGUID] = '".$GUID."'
+        ORDER BY 
+            B.[IsNew] DESC
         ");
         $r = $query->result_array();
         $this->config->load('photo');
         $this->lang->load('bodytype');
         $this->lang->load('city');
-        foreach($r as $key => $row){
+        $new_message_count = 0;
+         foreach($r as $key => $row){
             
             if( $row['IsNew'] ){
                 $r[$key]['new'] = '<img src="'.$this->config->item('message_new_icon').'">';
@@ -253,8 +256,13 @@ class Message_model extends CI_Model {
             $r[$key]['ThumbBasename'] =  $info['ThumbBasename'];
             $r[$key]['Bodytype'] = $this->lang->line('bodytype_'.$row['Bodytype']);
             $r[$key]['City'] = $this->lang->line('city_'.$row['City']);
+            if ($row['IsNew']){
+                $new_message_count++;
+            }
+
         }
         $result['message_box'] = $r;
+        $result['new_message_count'] = $new_message_count;
         return $result;
     }
     function message_to_convert($msg_line )

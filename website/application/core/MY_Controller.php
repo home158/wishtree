@@ -65,7 +65,7 @@ class Site_Base_Controller extends BASE_Controller {
     public function __construct() {
         parent::__construct();
         $this->parse_display_data(array('home' , 'footer'));
-
+        $this->message_of_count();
         //$cookie2 = $this->input->cookie();
         //var_dump($cookie2);
     }
@@ -119,6 +119,17 @@ class Site_Base_Controller extends BASE_Controller {
             $this->session->sess_destroy();
             redirect( base_url() );
             return;
+        }
+    }
+    public function message_of_count()
+    {
+        $this->load->model('message_model');
+        $GUID = $this->session->userdata('GUID');
+        if($GUID){
+            $message = $this->message_model->retrieve_message_box($GUID);
+            if($message['new_message_count']>0){
+                $this->display_data['message_of_count'] = $message['new_message_count'];
+            }
         }
     }
     public function alertMsg()
