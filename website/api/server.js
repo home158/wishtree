@@ -28,7 +28,6 @@ io.sockets.on('connection', function (socket) {
     socket.on('join-chatroom', function(data){
         if(!clients[userGUID]){
             clients[userGUID] = {
-                "Thumb" : data.Thumb,
                 "Nickname" : data.Nickname,
                 "Role" : data.Role,
                 "UserGUID" : data.UserGUID,
@@ -37,7 +36,7 @@ io.sockets.on('connection', function (socket) {
             
             
             //console.log('[join-chatroom] => UserGUID = ' + data.UserGUID + ' Nickname = ' + data.Nickname + '; socket id = ' + socket.id + ';');
-            io.emit("client-join", clients[data.UserGUID]);
+            socket.broadcast.emit("client-join", clients[data.UserGUID]);
 
         }
         if(data.tracker.length > 0){
@@ -51,38 +50,9 @@ io.sockets.on('connection', function (socket) {
                 }
             }
         }
-        addedUser = true;
 
     });
-    socket.on('private-message', function(data){
-        console.log("Sending: " + data.content + " to " + data.username);
 
-        if (clients[data.username]){
-            console.log('Get username = ' + clients[data.username]);
-            io.sockets.connected[clients[data.username].socket].emit("add-message", data);
-        } else {
-            console.log("User does not exist: " + data.username); 
-        }
-    });
-
-    socket.on('client-list',function(GUID){
-        console.log('[client-list] = ' );
-        socket.emit("client-list", clients);
-        
-    });
-    socket.on('send-message',function(data){
-        console.log('[send-message] = ' );
-        if(data.visibile == 'public'){
-            io.emit("new-message", data);
-        }
-        if(data.visibile == 'private'){
-            io.sockets.connected[clients[data.receive].socket].emit("new-message", data);
-            io.sockets.connected[clients[data.from].socket].emit("new-message", data);
-        }
-
-        
-      
-    });
 
     // when the user disconnects.. perform this
     socket.on('disconnect', function () {
