@@ -23,7 +23,7 @@ socket.on("client-join", function(data){
     console.log(data);
     console.log('coming');
 });
-socket.on("client_left", function(data){
+socket.on("client-left", function(data){
     console.log(data);
     console.log('left');
 });

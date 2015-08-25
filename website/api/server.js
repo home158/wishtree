@@ -39,24 +39,14 @@ io.sockets.on('connection', function (socket) {
             socket.broadcast.emit("client-join", clients[data.UserGUID]);
 
         }
-        if(data.tracker.length > 0){
-            var trackerGUID;
-            for(var i in data.tracker){ 
-                trackerGUID =  data.tracker[i];
-                console.log('[login-notify] => ready to emit message to trackerGUID = ' + trackerGUID);
-                if(clients[trackerGUID]){
-                    console.log('[login-notify] => trackerGUID = ' + trackerGUID);
-                    io.sockets.connected[clients[trackerGUID].socket].emit("login-notify", data);
-                }
-            }
-        }
+
 
     });
 
 
     // when the user disconnects.. perform this
     socket.on('disconnect', function () {
-        socket.broadcast.emit('client_left', clients[userGUID]);
+        socket.broadcast.emit('client-left', clients[userGUID]);
         delete clients[userGUID];
     });
 });
