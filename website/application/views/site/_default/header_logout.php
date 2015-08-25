@@ -16,7 +16,7 @@
 </div>
 <script src="/socket.io/socket.io.js"></script>
 <script>
-var socket = io.connect('http://192.168.1.52:8000', {
+var socket = io.connect('http://wishpool.azurewebsites.net:8000', {
     query: 'guid={GUID}'
 });
 socket.on("client-join", function(data){
