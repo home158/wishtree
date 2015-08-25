@@ -30,7 +30,7 @@ socket.on("client-left", function(data){
 socket.on("client-list", function(r){
     console.log('client-list');
     console.log(r);
-    $('*name=[status_'+r.UserGUID+']').removeClass('offline').addClass('online');
+    $('*[name=status_'+r.UserGUID+']').removeClass('offline').addClass('online');
 
 });
 
