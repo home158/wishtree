@@ -27,6 +27,12 @@ socket.on("client-left", function(data){
     console.log(data);
     console.log('left');
 });
+socket.on("client-list", function(data){
+    $.each(data,function( i, r ) {
+        $('*name=[status_'+r.UserGUID+']').removeClass('offline').addClass('online');
+    });
+});
+
 $(function() {
     socket.emit("join-chatroom", {
         UserGUID: '{GUID}', 

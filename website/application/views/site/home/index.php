@@ -7,7 +7,12 @@
                     <p class="title">{role_random_title}！</p>
                     <ul>
                         {random_user}
-                        <li><a href="/view/{UserGUID}"><img src="{ThumbBasename}"></a></li>
+                        <li class="user_list">
+                            <a href="/view/{UserGUID}"><img src="{ThumbBasename}"></a>
+                            <span name="status_{UserGUID}" class="status-wrapper offline" title="Online now">
+                                <span class="icon"></span>
+                            </span>
+                        </li>
                         {/random_user}
                     <ul>
                 </div>
@@ -15,7 +20,7 @@
                     <p class="title">新進會員！</p>
                     <ul>
                         {newcomer_user}
-                        <li><a href="/view/{UserGUID}"><img src="{ThumbBasename}"></a></li>
+                        <li class="user_list"><a href="/view/{UserGUID}"><img src="{ThumbBasename}"></a></li>
                         {/newcomer_user}
                     <ul>
                 </div>

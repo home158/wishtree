@@ -864,4 +864,30 @@ select {
     -webkit-border-radius: 25px;
     border-radius: 25px;
     -moz-border-radius: 25px;
-}    
+}
+li.user_list{
+    position: relative;
+}
+.status-wrapper{
+    display: block;
+    position: absolute;
+
+}
+.status-wrapper .icon {
+    position: absolute;
+    left: 4px;
+    bottom: 4px;
+    display: block;
+    width: 11px;
+    height: 11px;
+    background: url("/_images/online-status.png") no-repeat;
+}
+.status-wrapper.online .icon {
+    background-position: -44px -44px;
+}
+.status-wrapper .caption {
+    display: none;
+}
+.status-wrapper.offline .icon {
+    background-position: -44px -244px;
+}

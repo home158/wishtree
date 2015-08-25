@@ -37,12 +37,16 @@ io.sockets.on('connection', function (socket) {
             
             //console.log('[join-chatroom] => UserGUID = ' + data.UserGUID + ' Nickname = ' + data.Nickname + '; socket id = ' + socket.id + ';');
             socket.broadcast.emit("client-join", clients[data.UserGUID]);
+            socket.broadcast.emit("client-list", clients[data.UserGUID]);
 
         }
 
 
     });
 
+    socket.on('client-list',function(GUID){
+        socket.emit("client-list", clients);
+    });
 
     // when the user disconnects.. perform this
     socket.on('disconnect', function () {
