@@ -45,7 +45,7 @@ io.sockets.on('connection', function (socket) {
     });
 
     socket.on('client-list',function(GUID){
-        socket.emit("client-list", clients);
+        socket.emit("client-list", clients[userGUID]);
     });
 
     // when the user disconnects.. perform this
