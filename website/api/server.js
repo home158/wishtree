@@ -37,7 +37,7 @@ io.sockets.on('connection', function (socket) {
             
             //console.log('[join-chatroom] => UserGUID = ' + data.UserGUID + ' Nickname = ' + data.Nickname + '; socket id = ' + socket.id + ';');
             socket.broadcast.emit("client-join", clients[data.UserGUID]);
-            socket.broadcast.emit("client-list", clients);
+            io.emit("client-list", clients);
 
         }
 
