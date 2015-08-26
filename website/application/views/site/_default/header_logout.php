@@ -14,3 +14,6 @@
         </ul>
     </div>
 </div>
+<script>
+var socket_loading = false;
+</script> 

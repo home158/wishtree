@@ -31,5 +31,6 @@ $(function() {
         Role: '{Role}',
         Nickname: '{Nickname}'
     });
+    socket_loading = true;
 });
 </script>

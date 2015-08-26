@@ -33,7 +33,7 @@
 </div>
 <script>
 $(function() {
-    if(socket){
+    if(socket_loading){
         socket.emit("client-list");
         console.log('call emit at home');
     }
