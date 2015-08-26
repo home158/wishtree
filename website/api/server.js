@@ -37,13 +37,15 @@ io.sockets.on('connection', function (socket) {
             
             //console.log('[join-chatroom] => UserGUID = ' + data.UserGUID + ' Nickname = ' + data.Nickname + '; socket id = ' + socket.id + ';');
             socket.broadcast.emit("client-join", clients[data.UserGUID]);
-            io.emit("client-list", clients);
+            socket.broadcast.emit("client-list", clients);
 
         }
 
 
     });
-
+    socket.on('update-status',function(){
+        socket.emit("client-list", clients);
+    });
     socket.on('client-list',function(){
         io.emit("client-list", clients);
     });

@@ -34,7 +34,7 @@
 <script>
 $(function() {
     if(socket_loading){
-        socket.emit("client-list");
+        socket.emit("update-status");
         console.log('call emit at home');
     }
 });
