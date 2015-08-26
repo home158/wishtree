@@ -18,6 +18,7 @@ socket.on("client-list", function(data){
         $.each(data,function( i, r ) {
             console.log('each');
             console.log(r);
+            console.log( $('*[name=status_'+r.UserGUID+']') );
             $('*[name=status_'+r.UserGUID+']').removeClass('offline').addClass('online')
                 .attr('title','{status_online}')
                 .find('.caption').text('{status_online}');
