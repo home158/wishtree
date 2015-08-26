@@ -1,3 +1,5 @@
+</div>
+<!--"main-content end-->
 
 <div id="footer">
   <div class="ft clearfix">
@@ -59,9 +61,33 @@ $(function() {
             }
         });
     });
+    $(document).delegate('a[data-load="main_content"]', 'click', function(event) {
+        var href = $(this).attr("href");
+        loadMainContent(href);
+	    // HISTORY.PUSHSTATE
+	    history.pushState('', 'New URL: '+href, href);
+	    event.preventDefault();
+
+    });
+    // THIS EVENT MAKES SURE THAT THE BACK/FORWARD BUTTONS WORK AS WELL
+    window.onpopstate = function(event) {
+    	loadMainContent(location.pathname);
+    };
+
+    var loadMainContent = function(href){        var navi = ['home','wish','message','chat','mywish','photo','account'];        var highlight_id = href.replace('/','');        if( $.inArray(highlight_id , navi) != -1 ){            $('#navi a').removeClass('highlight');            $('#navi a#'+highlight_id).addClass('highlight');        }        $.ajax({
+            url: href,
+            dataType: 'html',
+            type: 'POST',
+            data: {
+                ajax : 1
+            },
+            success: function(r) {
+                $('#main_content').html(r);
+            },
+            complete : function(){
+            
+            }
+        });    };
 });
     
 </script>
-
-    </body>
-</html>

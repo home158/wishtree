@@ -49,11 +49,17 @@ class Account extends Site_Base_Controller {
         $this->whilelist();
         $this->blockedlist();
 
-		$this->utility_model->parse('site/_default/header',$this->display_data);
-		$this->utility_model->parse('site/_default/header_logout',$this->display_data);
-		$this->utility_model->parse('site/_default/male_navi',$this->display_data);
-		$this->utility_model->parse('site/account/index',$this->display_data);
-		$this->utility_model->parse('site/_default/footer',$this->display_data);
+        if($this->ajax){
+		    $this->utility_model->parse('site/account/index',$this->display_data,TRUE);
+        }else{
+		    $this->utility_model->parse('site/_default/header',$this->display_data);
+		    $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+		    $this->utility_model->parse('site/_default/male_navi',$this->display_data);
+		    $this->utility_model->parse('site/account/index',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer',$this->display_data);
+		    $this->utility_model->parse('site/_default/socket_io',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }
 	}
     public function profile()
     {
@@ -62,6 +68,7 @@ class Account extends Site_Base_Controller {
 		$this->parser->parse('site/_default/female_navi',$this->display_data);
 		$this->parser->parse('site/account/profile',$this->display_data);
 		$this->parser->parse('site/_default/footer',$this->display_data);
+        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
     }
     public function private_approved()
     {
@@ -75,6 +82,7 @@ class Account extends Site_Base_Controller {
 		$this->parser->parse('site/_default/female_navi',$this->display_data);
 		$this->parser->parse('site/account/approved',$this->display_data);
 		$this->parser->parse('site/_default/footer',$this->display_data);
+        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
     }
 
     public function private_reject()
@@ -89,6 +97,7 @@ class Account extends Site_Base_Controller {
 		$this->parser->parse('site/_default/female_navi',$this->display_data);
 		$this->parser->parse('site/account/reject',$this->display_data);
 		$this->parser->parse('site/_default/footer',$this->display_data);
+        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
     }
     public function private_pendding()
     {
@@ -102,6 +111,7 @@ class Account extends Site_Base_Controller {
 		$this->parser->parse('site/_default/female_navi',$this->display_data);
 		$this->parser->parse('site/account/pending',$this->display_data);
 		$this->parser->parse('site/_default/footer',$this->display_data);
+        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
     }
     public function private_all()
     {
@@ -116,6 +126,7 @@ class Account extends Site_Base_Controller {
 		$this->parser->parse('site/_default/female_navi',$this->display_data);
 		$this->parser->parse('site/account/private_all',$this->display_data);
 		$this->parser->parse('site/_default/footer',$this->display_data);
+        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
     }
     public function blocked()
     {
@@ -129,6 +140,7 @@ class Account extends Site_Base_Controller {
 		$this->parser->parse('site/_default/female_navi',$this->display_data);
 		$this->parser->parse('site/account/blocked',$this->display_data);
 		$this->parser->parse('site/_default/footer',$this->display_data);
+        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
     }
     public function favorite()
     {
@@ -142,6 +154,7 @@ class Account extends Site_Base_Controller {
 		$this->parser->parse('site/_default/female_navi',$this->display_data);
 		$this->parser->parse('site/account/favorite',$this->display_data);
 		$this->parser->parse('site/_default/footer',$this->display_data);
+        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
     }
     public function added_to_while_list()
     {
@@ -155,6 +168,7 @@ class Account extends Site_Base_Controller {
 		$this->parser->parse('site/_default/female_navi',$this->display_data);
 		$this->parser->parse('site/account/added_to_while_list',$this->display_data);
 		$this->parser->parse('site/_default/footer',$this->display_data);
+        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
     }
     public function update_profile()
     {
@@ -200,6 +214,7 @@ class Account extends Site_Base_Controller {
 		    $this->parser->parse('site/_default/female_navi',$this->display_data);
 		    $this->parser->parse('site/account/update_profile',$this->display_data);
 		    $this->parser->parse('site/_default/footer',$this->display_data);
+            $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
         }else{
             $birthday = date(
                             $this->input->post('birthday_year',true).'-'.
@@ -251,6 +266,7 @@ class Account extends Site_Base_Controller {
 		$this->parser->parse('site/_default/female_navi',$this->display_data);
 		$this->parser->parse('site/account/update_profile_success',$this->display_data);
 		$this->parser->parse('site/_default/footer',$this->display_data);
+        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
 
     }
     private function blockedlist()

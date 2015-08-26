@@ -54,12 +54,16 @@ class View extends Site_Base_Controller {
 
         $this->display_data['UserGUID'] = $GUID;
 
-		$this->parser->parse('site/_default/header',$this->display_data);
-		$this->parser->parse('site/_default/header_logout',$this->display_data);
-		$this->parser->parse('site/_default/female_navi',$this->display_data);
-		$this->parser->parse('site/view/profile',$this->display_data);
-
-		$this->parser->parse('site/_default/footer',$this->display_data);
+        if($this->ajax){
+		    $this->utility_model->parse('site/view/profile',$this->display_data , TRUE);
+        }else{
+		    $this->utility_model->parse('site/_default/header',$this->display_data);
+		    $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+		    $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+		    $this->utility_model->parse('site/view/profile',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }
 
 	}
     private function user_profile($GUID)

@@ -3,7 +3,7 @@ class BASE_Controller extends CI_Controller{
     public $session_data ;
     public $display_data = array();
     public $timezoneOffset;
-
+    public $ajax = FALSE;
     public function __construct() {
         parent::__construct();
         $this->get_lang();
@@ -13,7 +13,7 @@ class BASE_Controller extends CI_Controller{
 
         $this->timezoneOffset = $this->utility_model->getTimezoneOffset();
         $this->parse_display_data();
-        
+        $this->ajax = $this->input->post('ajax' , TRUE);
     }
     public function parse_display_data($data = array()){
         foreach($data as $key){

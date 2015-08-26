@@ -45,6 +45,24 @@ class Message extends Site_Base_Controller {
             }
         }
     }
+	public function index()
+	{
+        $message_box = $this->message_model->retrieve_message_box($this->session->userdata('GUID'));
+
+        $this->display_data = array_merge( $this->display_data , $message_box);
+
+        if($this->ajax){
+	        $this->utility_model->parse('site/message/index',$this->display_data,TRUE);
+        }else{
+            $this->utility_model->parse('site/_default/header',$this->display_data);
+	        $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+	        $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+	        $this->utility_model->parse('site/message/index',$this->display_data);
+	        $this->utility_model->parse('site/_default/footer',$this->display_data);
+		    $this->utility_model->parse('site/_default/socket_io',$this->display_data);
+            $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }
+    }
     function require_public_photo()
     {
         $this->parser->parse('site/_default/header',$this->display_data);
@@ -52,21 +70,9 @@ class Message extends Site_Base_Controller {
 	    $this->parser->parse('site/_default/female_navi',$this->display_data);
 	    $this->parser->parse('site/message/require_public_photo',$this->display_data);
 	    $this->parser->parse('site/_default/footer',$this->display_data);
+        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
 
         exit;
-    }
-	public function index()
-	{
-        $message_box = $this->message_model->retrieve_message_box($this->session->userdata('GUID'));
-
-        $this->display_data = array_merge( $this->display_data , $message_box);
-
-        $this->parser->parse('site/_default/header',$this->display_data);
-	    $this->parser->parse('site/_default/header_logout',$this->display_data);
-	    $this->parser->parse('site/_default/female_navi',$this->display_data);
-	    $this->parser->parse('site/message/index',$this->display_data);
-	    $this->parser->parse('site/_default/footer',$this->display_data);
-
     }
     public function history()
     {
@@ -114,6 +120,7 @@ class Message extends Site_Base_Controller {
 	        $this->parser->parse('site/_default/female_navi',$this->display_data);
 	        $this->parser->parse('site/message/write',$this->display_data);
 	        $this->parser->parse('site/_default/footer',$this->display_data);
+            $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
         }else{
             $message_content = $this->input->post('message_content');
             $this->message_model->write($GUID ,  $message_content);

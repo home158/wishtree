@@ -230,9 +230,17 @@ class Utility_model extends CI_Model {
     {
         $this->load->library('user_agent');
         if($this->agent->is_mobile()){
-            $this->parser->parse('mobile/'.$template, $data, $return);
+            if($return){
+                echo $this->parser->parse('mobile/'.$template, $data, $return);
+            }else{
+                $this->parser->parse('mobile/'.$template, $data, $return);
+            }
         }else{
-            $this->parser->parse($template, $data, $return);
+            if($return){
+                echo $this->parser->parse($template, $data, $return);
+            }else{
+                $this->parser->parse($template, $data, $return);
+            }
         }
     }
 }

@@ -31,6 +31,7 @@ class Register extends Site_Base_Controller {
 		    $this->parser->parse('site/register/step1',$this->display_data);
 		
 		    $this->parser->parse('site/_default/footer',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
         }else{
             //save agree to cookie
             $this->register_model->set_agree_cookie();
@@ -49,6 +50,7 @@ class Register extends Site_Base_Controller {
 		$this->parser->parse('site/register/step2',$this->display_data);
 		
 		$this->parser->parse('site/_default/footer',$this->display_data);
+        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
         
         
         
@@ -106,6 +108,7 @@ class Register extends Site_Base_Controller {
             $this->parser->parse('site/_default/header_login',$this->display_data);
 		    $this->parser->parse('site/register/step3',$this->display_data);
 		    $this->parser->parse('site/_default/footer',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
         }else{
             $this->load->library('uuid');
             $uuid = $this->uuid->v4();
@@ -173,6 +176,7 @@ class Register extends Site_Base_Controller {
         $this->parser->parse('site/_default/header_logout',$this->display_data);
 		$this->parser->parse('site/register/sending_validate_mail',$this->display_data);
 		$this->parser->parse('site/_default/footer',$this->display_data);
+        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
     }
     public function validate_mail($GUID = NULL , $ValidateKey = NULL)
     {
@@ -200,6 +204,7 @@ class Register extends Site_Base_Controller {
             $this->parser->parse('site/_default/header_logout',$this->display_data);
 		    $this->parser->parse('site/register/validate_mail_success',$this->display_data);
 		    $this->parser->parse('site/_default/footer',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
             //Create Azure storage
             $this->register_model->create_container($row->GUID);
             //Create  repositories
@@ -210,6 +215,7 @@ class Register extends Site_Base_Controller {
             $this->parser->parse('site/_default/header_login',$this->display_data);
 		    $this->parser->parse('site/register/validate_mail_fail',$this->display_data);
 		    $this->parser->parse('site/_default/footer',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
 
         }
     }

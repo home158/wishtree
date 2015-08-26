@@ -79,6 +79,8 @@ class Photo extends Site_Base_Controller {
 		    $this->parser->parse('site/_default/female_navi',$this->display_data);
 		    $this->parser->parse('site/photo/index',$this->display_data);
 		    $this->parser->parse('site/_default/footer',$this->display_data);
+		    $this->utility_model->parse('site/_default/socket_io',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
 		}
 		else
 		{

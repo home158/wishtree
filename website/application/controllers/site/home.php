@@ -6,7 +6,7 @@ class Home extends Site_Base_Controller {
     {
         parent::__construct();
         $this->parse_display_data(
-            array('btn' ,'alert' ,'role')
+            array('btn' ,'alert' ,'role','status')
         );
         $this->display_data["highlight_navi"] = "home";
 
@@ -37,22 +37,23 @@ class Home extends Site_Base_Controller {
             $this->display_data['random_user'] = $this->home_model->get_random_user('male');
             $this->display_data['newcomer_user'] = $this->home_model->get_newcomer_user('male');
         }
-
-		$this->utility_model->parse('site/_default/header',$this->display_data);
-		$this->utility_model->parse('site/_default/header_logout',$this->display_data);
         if($this->session->userdata('Role') == 'male'){
             $this->display_data['role_random_title'] = $this->display_data['role_female_long'];
-            $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+           
         }else{
             $this->display_data['role_random_title'] = $this->display_data['role_male_long'];
-            $this->utility_model->parse('site/_default/male_navi',$this->display_data);
         }
-		
-		$this->utility_model->parse('site/home/index',$this->display_data);
-		
-
-		$this->utility_model->parse('site/_default/footer',$this->display_data);
-
+        if($this->ajax){
+            $this->utility_model->parse('site/home/index',$this->display_data , TRUE);
+        }else{
+		    $this->utility_model->parse('site/_default/header',$this->display_data);
+		    $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+		    $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+		    $this->utility_model->parse('site/home/index',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer',$this->display_data);
+		    $this->utility_model->parse('site/_default/socket_io',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }
 	}
     public function phpinfo()
     {

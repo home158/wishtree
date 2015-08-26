@@ -26,6 +26,7 @@ class Login extends Site_Base_Controller {
 		    $this->parser->parse('site/login/login_normal',$this->display_data);
 
             $this->parser->parse('site/_default/footer',$this->display_data);
+            $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
         }else{
             $data = array( 
                             'Email' => $this->input->post('email',true),
@@ -58,6 +59,7 @@ class Login extends Site_Base_Controller {
 		                $this->parser->parse('site/_default/header_login',$this->display_data);
 		                $this->parser->parse('site/login/login_normal',$this->display_data);
                         $this->parser->parse('site/_default/footer',$this->display_data);
+                        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
 
                     break;
                     //停權帳號
@@ -94,6 +96,7 @@ class Login extends Site_Base_Controller {
 		        $this->parser->parse('site/_default/header_login',$this->display_data);
 		        $this->parser->parse('site/login/login_normal',$this->display_data);
                 $this->parser->parse('site/_default/footer',$this->display_data);
+                $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
 
             }
             //Rank = 0 停權

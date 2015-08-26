@@ -8,6 +8,7 @@ class Welcome extends Site_Base_Controller {
 		$this->utility_model->parse('site/_default/header_login',$this->display_data,null);
 		$this->utility_model->parse('site/welcome/index',$this->display_data,null);
 		$this->utility_model->parse('site/_default/footer',$this->display_data,null);
+        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
 
 	}
     public function mobile()

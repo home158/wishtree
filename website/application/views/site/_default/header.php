@@ -22,5 +22,5 @@
         
     </title>
 </head>
-<body class="">
+<body>
 <div class="wrap">

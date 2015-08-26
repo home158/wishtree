@@ -24,11 +24,17 @@ class Wish extends Site_Base_Controller {
         $mywish_list = $this->wish_model->retrive_mywish( FALSE , FALSE , $w_role , 2 ,0, 0 , FALSE);
         $this->display_data['wish_list'] = $mywish_list;
 
-        $this->parser->parse('site/_default/header',$this->display_data);
-	    $this->parser->parse('site/_default/header_logout',$this->display_data);
-	    $this->parser->parse('site/_default/female_navi',$this->display_data);
-	    $this->parser->parse('site/wish/index',$this->display_data);
-	    $this->parser->parse('site/_default/footer',$this->display_data);
+        if($this->ajax){
+            $this->utility_model->parse('site/wish/index',$this->display_data , TRUE);
+        }else{
+            $this->utility_model->parse('site/_default/header',$this->display_data);
+	        $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+	        $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+	        $this->utility_model->parse('site/wish/index',$this->display_data);
+	        $this->utility_model->parse('site/_default/footer',$this->display_data);
+		    $this->utility_model->parse('site/_default/socket_io',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }
     }
     public function view($GUID = NULL)
     {
@@ -47,6 +53,7 @@ class Wish extends Site_Base_Controller {
 	    $this->parser->parse('site/_default/female_navi',$this->display_data);
 	    $this->parser->parse('site/wish/detail',$this->display_data);
 	    $this->parser->parse('site/_default/footer',$this->display_data);
+        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
     }
     public function get_reply()
     {
