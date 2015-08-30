@@ -42,8 +42,118 @@ class Photo extends Site_Base_Controller {
         }
 
     }
+    public function show($type = 'public')
+    {   
+        $my_photos = $this->photo_model->retrieve_my_photos( $this->session->userdata('GUID') , $type);
+        $this->display_data['type'] = $type;
+        $this->display_data['my_photos'] = $my_photos;
+        if($type == 'public'){
+            $this->display_data['active_public'] = 'active';
+            $this->display_data['active_private'] = '';
 
-	public function show($type = 'public')
+        }
+        if($type == 'private'){
+            $this->display_data['active_public'] = '';
+            $this->display_data['active_private'] = 'active';
+        }
+        if($this->ajax){
+		    $this->utility_model->parse('site/photo/index',$this->display_data,TRUE);
+        }else{
+		    $this->utility_model->parse('site/_default/header',$this->display_data);
+		    $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+		    $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+		    $this->utility_model->parse('site/photo/index',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer',$this->display_data);
+		    $this->utility_model->parse('site/_default/socket_io',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }
+
+    }
+    public function upload($type = 'public')
+    {
+		$config['upload_path'] = $this->config->item('azure_storage_temp_forder');
+		$config['allowed_types'] = 'gif|jpg|jpeg|png';
+		//$config['max_size']	= '1000';
+		//$config['max_width']  = '1024';
+		//$config['max_height']  = '768';
+        $config['encrypt_name'] = TRUE;
+
+		$this->load->library('upload',$config);
+        $this->load->helper('file');
+        $this->load->helper('form');
+        $this->display_data['error'] = $this->upload->display_errors( '<p class="redF tl">','</p>');
+        $this->display_data['form_action'] = '/photo/upload/'.$type;
+        $this->display_data['form_update_action'] = '/photo/update/'.$type;
+
+		if ( ! $this->upload->do_upload() )
+		{
+	        $this->utility_model->parse('site/_default/header_popup',$this->display_data);
+	        $this->utility_model->parse('site/photo/upload',$this->display_data);
+	        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }else{
+			$data = $this->upload->data();
+            $container = $this->session->userdata('GUID');
+
+            //Scale
+            $full_path = $data['full_path'];
+            $scale_image = $this->photo_model->scale($full_path , 500 ,500);
+            //Upload image to Azure Storage
+            $full_path_parts = pathinfo($full_path);
+            $this->photo_model->saveToAzureStorage($container , $full_path_parts['basename'] , $full_path );
+
+
+            //Crop
+            $crop_path = $this->config->item('azure_storage_temp_forder').'/'.$data['raw_name'].'_crop'.$data['file_ext'];
+            $this->photo_model->crop($scale_image , $crop_path , 300 , 360 ,
+                $this->input->post('x',true),
+                $this->input->post('y',true),
+                $this->input->post('w',true),
+                $this->input->post('h',true)
+            );
+            //Upload image to Azure Storage
+            $crop_path_parts = pathinfo($crop_path);
+            $this->photo_model->saveToAzureStorage($container , $crop_path_parts['basename'] , $crop_path );
+
+
+            //thumb
+            $thumb_path = $this->config->item('azure_storage_temp_forder').'/'.$data['raw_name'].'_thumb'.$data['file_ext'];
+            $this->photo_model->crop($scale_image , $thumb_path , 100 , 120 ,
+                $this->input->post('x',true),
+                $this->input->post('y',true),
+                $this->input->post('w',true),
+                $this->input->post('h',true)
+            );
+            //Upload image to Azure Storage
+            $thumb_path_parts = pathinfo($thumb_path);
+            $this->photo_model->saveToAzureStorage($container , $thumb_path_parts['basename'] , $thumb_path );
+           
+
+            //Save to db_photo
+            $photo_data = array(
+                'UserGUID' => $this->session->userdata('GUID'),
+                'FullBasename' => $full_path_parts['basename'] ,
+                'ThumbBasename' => $thumb_path_parts['basename'],
+                'CropBasename' => $crop_path_parts['basename'],
+                'ReviewStatus' => 0,
+                'DateModify' => date('Y-m-d H:i:s'),
+                'DateCreate' => date('Y-m-d H:i:s')
+            );
+            if($type == 'public'){
+                $photo_data['IsPrivate'] = 0;
+
+            }
+            if($type == 'private'){
+                $photo_data['IsPrivate'] = 1;
+            }
+
+            $insert_string = $this->db->insert_string('[dbo].[i_photo]', $photo_data);
+            $this->db->query( $insert_string );
+            $this->photo_model->set_public_cover( $this->session->userdata('GUID') );
+
+            redirect( base_url().'photo/upload/'.$type , 'refresh');
+        }
+    }
+	public function show2($type = 'public')
 	{
 
         $my_photos = $this->photo_model->retrieve_my_photos( $this->session->userdata('GUID') , $type);
@@ -148,7 +258,77 @@ class Photo extends Site_Base_Controller {
 
 
 	}
-    public function update($type = 'public')
+    public function update($type,$GUID)
+    {
+        $this->display_data['error'] = '<p class="redF tl"></p>';
+        $image_data = $this->photo_model->download_remote_file_to_local($this->session->userdata('GUID') , $GUID );
+        if(! $image_data){
+            redirect( base_url().'photo/upload' , 'refresh');
+            exit;
+        }
+
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('x', '', 'trim|required');
+		if ($this->form_validation->run() == FALSE){
+
+            $this->display_data['form_action'] = '/photo/upload/'.$type;
+            $this->display_data['form_update_action'] = '/photo/update/'.$type.'/'.$GUID;
+            $this->display_data['full_image_url'] = base_url().$image_data['file'];
+	        $this->utility_model->parse('site/_default/header_popup',$this->display_data);
+	        $this->utility_model->parse('site/photo/update',$this->display_data);
+	        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }else{
+            $container = $this->session->userdata('GUID');
+            //Scale
+            $full_path = $this->config->item('azure_storage_temp_forder').'/'.$image_data['FullBasename'];
+            $scale_image = $this->photo_model->scale($full_path , 500 ,500);
+
+
+            //Crop
+            $crop_path = $this->config->item('azure_storage_temp_forder').'/'.$image_data['CropBasename'];
+            $this->photo_model->crop($scale_image , $crop_path , 300 , 360 ,
+                $this->input->post('x',true),
+                $this->input->post('y',true),
+                $this->input->post('w',true),
+                $this->input->post('h',true)
+            );
+            //Upload image to Azure Storage
+            $crop_path_parts = pathinfo($crop_path);
+            $this->photo_model->saveToAzureStorage($container , $crop_path_parts['basename'] , $crop_path );
+
+
+            //thumb
+            $thumb_path = $this->config->item('azure_storage_temp_forder').'/'.$image_data['ThumbBasename'];
+            $this->photo_model->crop($scale_image , $thumb_path , 100 , 120 ,
+                $this->input->post('x',true),
+                $this->input->post('y',true),
+                $this->input->post('w',true),
+                $this->input->post('h',true)
+            );
+            //Upload image to Azure Storage
+            $thumb_path_parts = pathinfo($thumb_path);
+            $this->photo_model->saveToAzureStorage($container , $thumb_path_parts['basename'] , $thumb_path );
+
+            $update_data = array(
+                'ReviewStatus' => 0,
+                'ReviewDate' => NULL,
+                'ReviewRejectReason' => NULL,
+                'DateModify' => date('Y-m-d H:i:s')
+            );
+        
+        
+            $result = $this->db->update('[dbo].[i_photo]', $update_data, array('GUID' => $image_data['GUID'] ));
+
+            if($result == TRUE){
+                $this->photo_model->set_public_cover( $this->session->userdata('GUID') );
+
+                redirect( base_url().'photo' , 'refresh');
+            }else{
+                //DB error
+            }
+        }
+    }
+    public function update2($type = 'public')
     {
         $image_data = $this->photo_model->download_remote_file_to_local($this->session->userdata('GUID') , $this->input->post('GUID') );
         if(! $image_data){

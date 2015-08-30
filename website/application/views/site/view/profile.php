@@ -36,7 +36,10 @@
                             <a id="add_blocked_list" href="javascript:;" data-tracker="{UserGUID}">{view_add_black_list}</a>
                         </li>
                         <li>
-                            
+                            <span name="status_{UserGUID}" class="status-wrapper-block offline" title="{status_offline}">
+                                <span class="icon"></span>
+                                <span class="caption">{status_offline}</span>
+                            </span>
                         </li>
                     </ul>
                 </div>
@@ -50,7 +53,6 @@
 </div>
 
 <script>
-
 $(function() {
     $('#add_white_list').bind('click',function(){
         var trackUserGUID = $(this).attr('data-tracker');
@@ -113,7 +115,9 @@ $(function() {
         event.preventDefault();
         $(this).ekkoLightbox();
     }); 
-
+    if(socket_loading){
+        socket.emit("update-status");
+    }
 });
     
 </script>

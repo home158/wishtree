@@ -21,6 +21,19 @@ a{
     margin: 5px auto 0;
     padding-top: 10px;
 }
+.wrap-popup{
+    -moz-box-shadow: 0 -1px 4px #cfcfcf;
+    -webkit-box-shadow: 0 -1px 4px #cfcfcf;
+    box-shadow: 0 -1px 4px #cfcfcf;
+    background: #fff;
+    clear: both;
+    border-radius: 8px 8px 8px 8px;
+    -webkit-border-radius: 8px 8px 8px 8px;
+    -moz-border-radius: 8px 8px 8px 8px;
+    width: 800px;
+    margin: 5px auto 0;
+    padding-top: 10px;
+}
 #navi {
     overflow: hidden;
     height: 44px;
@@ -395,6 +408,12 @@ select {
   height: 240px;
   overflow: hidden;
 }
+#preview{
+    margin-left: 20px;
+}
+#crop-pane{
+    margin-right: 20px;
+}
 #crop-pane , #preview{
     margin-bottom:20px;
 }
@@ -403,7 +422,6 @@ select {
   max-width: 500px;
 }
 .photo_update{
-    width: 800px;
     margin: 0 auto;
     margin-bottom: 15px;
 }
@@ -873,6 +891,11 @@ li.user_list{
     position: absolute;
 
 }
+.status-wrapper-block{
+    display: block;
+    position: relative;
+
+}
 .status-wrapper .icon {
     position: absolute;
     left: 4px;
@@ -882,12 +905,33 @@ li.user_list{
     height: 11px;
     background: url("/_images/online-status.png") no-repeat;
 }
-.status-wrapper.online .icon {
+.status-wrapper-block .icon{
+    position: absolute;
+    left: 0px;
+    bottom: 6px;
+    width: 11px;
+    height: 11px;
+    background: url("/_images/online-status.png") no-repeat;
+}
+.status-wrapper.online .icon,
+.status-wrapper-block.online .icon{
     background-position: -44px -44px;
 }
 .status-wrapper .caption {
     display: none;
 }
-.status-wrapper.offline .icon {
+.status-wrapper-block .caption {
+    margin-left: 14px;
+}
+
+.status-wrapper.offline .icon,
+.status-wrapper-block.offline .icon{
     background-position: -44px -244px;
+}
+.status-wrapper.pending .icon,
+.status-wrapper-block.pending .icon{
+    background-position: -44px -144px;
+}
+.upload_image{
+    padding: 10px 10px;
 }

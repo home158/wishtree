@@ -7,7 +7,7 @@ class View extends Site_Base_Controller {
     {
         parent::__construct();
         $this->parse_display_data(
-            array('btn', 'grid', 'city', 'income', 'language', 'height', 'bodytype', 'race', 'Education', 'maritalstatus', 'smoking', 'drinking' , 'view')
+            array('btn', 'grid', 'city', 'income', 'language', 'height', 'bodytype', 'race', 'Education', 'maritalstatus', 'smoking', 'drinking' , 'view','status')
         );
         $this->display_data["highlight_navi"] = "home";
         
@@ -62,6 +62,7 @@ class View extends Site_Base_Controller {
 		    $this->utility_model->parse('site/_default/female_navi',$this->display_data);
 		    $this->utility_model->parse('site/view/profile',$this->display_data);
 		    $this->utility_model->parse('site/_default/footer',$this->display_data);
+		    $this->utility_model->parse('site/_default/socket_io',$this->display_data);
 		    $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
         }
 

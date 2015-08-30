@@ -20,12 +20,13 @@ class Login extends Site_Base_Controller {
 		if ($this->form_validation->run() == FALSE)
 		{
             $this->display_data['return_msg'] = '';
-            $this->parser->parse('site/_default/header',$this->display_data);
+            $this->utility_model->parse('site/_default/header',$this->display_data);
             
-		    $this->parser->parse('site/_default/header_login',$this->display_data);
-		    $this->parser->parse('site/login/login_normal',$this->display_data);
+		    $this->utility_model->parse('site/_default/header_login',$this->display_data);
+            $this->utility_model->parse('site/_default/no_navi',$this->display_data,null);
+		    $this->utility_model->parse('site/login/login_normal',$this->display_data);
 
-            $this->parser->parse('site/_default/footer',$this->display_data);
+            $this->utility_model->parse('site/_default/footer',$this->display_data);
             $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
         }else{
             $data = array( 
@@ -55,10 +56,11 @@ class Login extends Site_Base_Controller {
                     case 0:
                         $this->display_data['return_msg'] = $this->display_data['login_deleted'];
 
-                        $this->parser->parse('site/_default/header',$this->display_data);
-		                $this->parser->parse('site/_default/header_login',$this->display_data);
-		                $this->parser->parse('site/login/login_normal',$this->display_data);
-                        $this->parser->parse('site/_default/footer',$this->display_data);
+                        $this->utility_model->parse('site/_default/header',$this->display_data);
+		                $this->utility_model->parse('site/_default/header_login',$this->display_data);
+		                $this->utility_model->parse('site/_default/no_navi',$this->display_data,null);
+		                $this->utility_model->parse('site/login/login_normal',$this->display_data);
+                        $this->utility_model->parse('site/_default/footer',$this->display_data);
                         $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
 
                     break;

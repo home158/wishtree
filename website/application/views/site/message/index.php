@@ -18,7 +18,11 @@
                                     <div class="clearfix" >
                                         <div class="fl">
                                             <img src="{ThumbBasename}" style="width:75px;height:84px;">
-                                            
+                                            <span name="status_{FromUserGUID}" class="status-wrapper offline" title="{status_offline}">
+                                                <span class="icon"></span>
+                                                <span class="caption">{status_offline}</span>
+                                            </span>
+
                                         </div>
                                         <ul class="text fl">
                                             <li>{Bodytype}</li>
@@ -138,5 +142,8 @@ $(function() {
             });
         }
     });
+    if(socket_loading){
+        socket.emit("update-status");
+    }
 });   
 </script>

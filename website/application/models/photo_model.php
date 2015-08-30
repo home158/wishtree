@@ -209,6 +209,7 @@ class Photo_model extends CI_Model {
             $source = stream_get_contents($blob->getContentStream());
             
             $file = $this->config->item('azure_storage_temp_forder').'/'.$row['FullBasename'];
+            $row['file'] = $file;
             $result = file_put_contents($file, $source);
             return $row;
         }else{
