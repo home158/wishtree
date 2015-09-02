@@ -18,10 +18,10 @@ $lang['account_settings_timezone']        = "設定時區";
 $lang['account_settings_success']        = "設定成功。";
 $lang['account_settings_fail']        = "設定失敗，請再試一次。";
 $lang['account_logout']        = "登出";
-$lang['account_priviliege_check_my_private_photo']        = "我己授權查看我的私人照片：<a href='/account/private_approved'>%s</a>";
-$lang['account_has_been_added_to_white_list']        = "已被加入收藏：<a href='/account/added_to_while_list'>%s</a>";
-$lang['account_my_favorite']        = "我的收藏：<a href='/account/favorite'>%s</a>";
-$lang['account_my_blocked_list']        = "我的黑名單：<a href='/account/blocked'>%s</a>";
+$lang['account_priviliege_check_my_private_photo']        = '我己授權查看我的私人照片：<a data-load="main_content" href="/account/private_approved">%s</a>';
+$lang['account_has_been_added_to_white_list']        = '已被加入收藏：<a data-load="main_content" href="/account/added_to_while_list">%s</a>';
+$lang['account_my_favorite']        = '我的收藏：<a data-load="main_content" href="/account/favorite">%s</a>';
+$lang['account_my_blocked_list']        = '我的黑名單：<a data-load="main_content" href="/account/blocked">%s</a>';
 
 $lang['account_has_been_added_to_white_list_s']        = "被加入收藏";
 $lang['account_my_favorite_s']        = "我的收藏";
@@ -33,8 +33,8 @@ $lang['account_private_all']        = "全部";
 $lang['account_private_approved']        = "授權";
 $lang['account_private_reject']        = "拒絕";
 $lang['account_private_pendding']        = "等待授權";
-$lang['account_public_photo']        = '公開照片：<a href="/photo/public">%s</a>';
-$lang['account_private_photo']        = '私人照片：<a href="/photo/private">%s</a>';
+$lang['account_public_photo']        = '公開照片：<a data-load="main_content" href="/photo/public">%s</a>';
+$lang['account_private_photo']        = '私人照片：<a data-load="main_content" href="/photo/private">%s</a>';
 
 
 /* End of file birthday_lang.php */

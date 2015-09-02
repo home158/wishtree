@@ -3,13 +3,13 @@
         <div class="block-wrapper clearfix">
                 <ul class="tabs general" >
                     <li class="active">
-                        <a href="/account/favorite" class="ctrl">{account_my_favorite_s}</a>
+                        <a data-load="main_content" href="/account/favorite" class="ctrl">{account_my_favorite_s}</a>
                     </li>
                     <li>
-                        <a href="/account/blocked" class="ctrl">{account_my_blocked_list_s}</a>
+                        <a data-load="main_content" href="/account/blocked" class="ctrl">{account_my_blocked_list_s}</a>
                     </li>
                     <li>
-                        <a href="/account/added_to_while_list" class="ctrl">{account_has_been_added_to_white_list_s}</a>
+                        <a data-load="main_content" href="/account/added_to_while_list" class="ctrl">{account_has_been_added_to_white_list_s}</a>
                     </li>
                 </ul>
         </div>
@@ -18,12 +18,12 @@
             {favorite_list}
             <li class="user clearfix">
                 <div class="avatar">
-                    <a href="/view/{TrackUserGUID}"><img src="{ThumbBasename}"></a>
+                    <a data-load="main_content" href="/view/{TrackUserGUID}"><img src="{ThumbBasename}"></a>
                 </div>
                 <div class="message-info">
                     <div class="identity">
                         <div class="identity-content">
-                            <a href="/view/{TrackUserGUID}">{db_Nickname}</a>,
+                            <a data-load="main_content" href="/view/{TrackUserGUID}">{db_Nickname}</a>,
                             <strong>{YearsOld}</strong> {view_years_old},
                             {City}                              
                         </div>

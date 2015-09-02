@@ -4,16 +4,16 @@
         <div class="block-wrapper clearfix">
                 <ul class="tabs general" >
                     <li class="active">
-                        <a href="/account/private_all" class="ctrl">{account_private_all}</a>
+                        <a data-load="main_content" href="/account/private_all" class="ctrl">{account_private_all}</a>
                     </li>
                     <li>
-                        <a href="/account/private_approved" class="ctrl">{account_private_approved}</a>
+                        <a data-load="main_content" href="/account/private_approved" class="ctrl">{account_private_approved}</a>
                     </li>
                     <li>
-                        <a href="/account/private_reject" class="ctrl">{account_private_reject}</a>
+                        <a data-load="main_content" href="/account/private_reject" class="ctrl">{account_private_reject}</a>
                     </li>
                     <li>
-                        <a href="/account/private_pendding" class="ctrl">{account_private_pendding}</a>
+                        <a data-load="main_content" href="/account/private_pendding" class="ctrl">{account_private_pendding}</a>
                     </li>
                 </ul>
         </div>
@@ -22,12 +22,12 @@
             {all_list}
             <li class="user clearfix">
                 <div class="avatar">
-                    <a href="/view/{TrackUserGUID}"><img src="{ThumbBasename}"></a>
+                    <a data-load="main_content" href="/view/{TrackUserGUID}"><img src="{ThumbBasename}"></a>
                 </div>
                 <div class="message-info">
                     <div class="identity">
                         <div class="identity-content">
-                            <a href="/view/{TrackUserGUID}">{db_Nickname}</a>,
+                            <a data-load="main_content" href="/view/{TrackUserGUID}">{db_Nickname}</a>,
                             <strong>{YearsOld}</strong> {view_years_old},
                             {City}                              
                         </div>

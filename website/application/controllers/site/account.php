@@ -63,12 +63,16 @@ class Account extends Site_Base_Controller {
 	}
     public function profile()
     {
-		$this->parser->parse('site/_default/header',$this->display_data);
-		$this->parser->parse('site/_default/header_logout',$this->display_data);
-		$this->parser->parse('site/_default/female_navi',$this->display_data);
-		$this->parser->parse('site/account/profile',$this->display_data);
-		$this->parser->parse('site/_default/footer',$this->display_data);
-        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        if($this->ajax){
+		    $this->utility_model->parse('site/account/profile',$this->display_data);
+        }else{
+		    $this->utility_model->parse('site/_default/header',$this->display_data);
+		    $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+		    $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+		    $this->utility_model->parse('site/account/profile',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer',$this->display_data);
+            $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }
     }
     public function private_approved()
     {
@@ -77,12 +81,16 @@ class Account extends Site_Base_Controller {
         $approved_list = $this->photo_model->retrieve_private_privilege( $this->session->userdata('GUID') , 2 );
         $this->display_data['approved_list'] = $approved_list;
 
-		$this->parser->parse('site/_default/header',$this->display_data);
-		$this->parser->parse('site/_default/header_logout',$this->display_data);
-		$this->parser->parse('site/_default/female_navi',$this->display_data);
-		$this->parser->parse('site/account/approved',$this->display_data);
-		$this->parser->parse('site/_default/footer',$this->display_data);
-        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        if($this->ajax){
+		    $this->utility_model->parse('site/account/approved',$this->display_data,TRUE);
+        }else{
+		    $this->utility_model->parse('site/_default/header',$this->display_data);
+		    $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+		    $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+		    $this->utility_model->parse('site/account/approved',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer',$this->display_data);
+            $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }
     }
 
     public function private_reject()
@@ -92,12 +100,16 @@ class Account extends Site_Base_Controller {
         $reject_list = $this->photo_model->retrieve_private_privilege( $this->session->userdata('GUID') , 1 );
         $this->display_data['reject_list'] = $reject_list;
 
-		$this->parser->parse('site/_default/header',$this->display_data);
-		$this->parser->parse('site/_default/header_logout',$this->display_data);
-		$this->parser->parse('site/_default/female_navi',$this->display_data);
-		$this->parser->parse('site/account/reject',$this->display_data);
-		$this->parser->parse('site/_default/footer',$this->display_data);
-        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        if($this->ajax){
+		    $this->utility_model->parse('site/account/reject',$this->display_data,TRUE);
+        }else{
+		    $this->utility_model->parse('site/_default/header',$this->display_data);
+		    $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+		    $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+		    $this->utility_model->parse('site/account/reject',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer',$this->display_data);
+            $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }
     }
     public function private_pendding()
     {
@@ -106,12 +118,16 @@ class Account extends Site_Base_Controller {
         $pending_list = $this->photo_model->retrieve_private_privilege( $this->session->userdata('GUID') , 0 );
         $this->display_data['pending_list'] = $pending_list;
 
-		$this->parser->parse('site/_default/header',$this->display_data);
-		$this->parser->parse('site/_default/header_logout',$this->display_data);
-		$this->parser->parse('site/_default/female_navi',$this->display_data);
-		$this->parser->parse('site/account/pending',$this->display_data);
-		$this->parser->parse('site/_default/footer',$this->display_data);
-        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        if($this->ajax){
+		    $this->utility_model->parse('site/account/pending',$this->display_data,TRUE);
+        }else{
+		    $this->utility_model->parse('site/_default/header',$this->display_data);
+		    $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+		    $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+		    $this->utility_model->parse('site/account/pending',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer',$this->display_data);
+            $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }
     }
     public function private_all()
     {
@@ -121,12 +137,16 @@ class Account extends Site_Base_Controller {
         $this->display_data['all_list'] = $all_list;
 
         $list = $this->action_model->retrieve_whitelist( $this->session->userdata('GUID') );
-		$this->parser->parse('site/_default/header',$this->display_data);
-		$this->parser->parse('site/_default/header_logout',$this->display_data);
-		$this->parser->parse('site/_default/female_navi',$this->display_data);
-		$this->parser->parse('site/account/private_all',$this->display_data);
-		$this->parser->parse('site/_default/footer',$this->display_data);
-        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        if($this->ajax){
+		    $this->utility_model->parse('site/account/private_all',$this->display_data,TRUE);
+        }else{
+		    $this->utility_model->parse('site/_default/header',$this->display_data);
+		    $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+		    $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+		    $this->utility_model->parse('site/account/private_all',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer',$this->display_data);
+            $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }
     }
     public function blocked()
     {
@@ -135,12 +155,16 @@ class Account extends Site_Base_Controller {
         $this->display_data['blocked_list'] = $blocked_list;
 
         $list = $this->action_model->retrieve_whitelist( $this->session->userdata('GUID') );
-		$this->parser->parse('site/_default/header',$this->display_data);
-		$this->parser->parse('site/_default/header_logout',$this->display_data);
-		$this->parser->parse('site/_default/female_navi',$this->display_data);
-		$this->parser->parse('site/account/blocked',$this->display_data);
-		$this->parser->parse('site/_default/footer',$this->display_data);
-        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        if($this->ajax){
+		    $this->utility_model->parse('site/account/blocked',$this->display_data,TRUE);
+        }else{
+		    $this->utility_model->parse('site/_default/header',$this->display_data);
+		    $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+		    $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+		    $this->utility_model->parse('site/account/blocked',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer',$this->display_data);
+            $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }
     }
     public function favorite()
     {
@@ -149,12 +173,16 @@ class Account extends Site_Base_Controller {
         $this->display_data['favorite_list'] = $favorite_list;
 
         $list = $this->action_model->retrieve_whitelist( $this->session->userdata('GUID') );
-		$this->parser->parse('site/_default/header',$this->display_data);
-		$this->parser->parse('site/_default/header_logout',$this->display_data);
-		$this->parser->parse('site/_default/female_navi',$this->display_data);
-		$this->parser->parse('site/account/favorite',$this->display_data);
-		$this->parser->parse('site/_default/footer',$this->display_data);
-        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        if($this->ajax){
+		    $this->utility_model->parse('site/account/favorite',$this->display_data,TRUE);
+        }else{
+		    $this->utility_model->parse('site/_default/header',$this->display_data);
+		    $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+		    $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+		    $this->utility_model->parse('site/account/favorite',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer',$this->display_data);
+            $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }
     }
     public function added_to_while_list()
     {
@@ -163,12 +191,16 @@ class Account extends Site_Base_Controller {
         $this->display_data['added_list'] = $added_list;
 
         $list = $this->action_model->retrieve_whitelist( $this->session->userdata('GUID') );
-		$this->parser->parse('site/_default/header',$this->display_data);
-		$this->parser->parse('site/_default/header_logout',$this->display_data);
-		$this->parser->parse('site/_default/female_navi',$this->display_data);
-		$this->parser->parse('site/account/added_to_while_list',$this->display_data);
-		$this->parser->parse('site/_default/footer',$this->display_data);
-        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        if($this->ajax){
+		    $this->utility_model->parse('site/account/added_to_while_list',$this->display_data,TRUE);
+        }else{
+		    $this->utility_model->parse('site/_default/header',$this->display_data);
+		    $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+		    $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+		    $this->utility_model->parse('site/account/added_to_while_list',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer',$this->display_data);
+            $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }
     }
     public function update_profile()
     {
@@ -209,12 +241,17 @@ class Account extends Site_Base_Controller {
             $this->display_data['birthday_month_options'] = $this->register_model->birthday_month_options();
             $this->display_data['birthday_date_options'] = $this->register_model->birthday_date_options();
 
-            $this->parser->parse('site/_default/header',$this->display_data);
-            $this->parser->parse('site/_default/header_logout',$this->display_data);
-		    $this->parser->parse('site/_default/female_navi',$this->display_data);
-		    $this->parser->parse('site/account/update_profile',$this->display_data);
-		    $this->parser->parse('site/_default/footer',$this->display_data);
-            $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+            if($this->ajax){
+		        $this->utility_model->parse('site/account/update_profile',$this->display_data,TRUE);
+            }else{
+                $this->utility_model->parse('site/_default/header',$this->display_data);
+                $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+		        $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+		        $this->utility_model->parse('site/account/update_profile',$this->display_data);
+		        $this->utility_model->parse('site/_default/footer',$this->display_data);
+		        $this->utility_model->parse('site/_default/socket_io',$this->display_data);
+                $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+            }
         }else{
             $birthday = date(
                             $this->input->post('birthday_year',true).'-'.
@@ -261,11 +298,11 @@ class Account extends Site_Base_Controller {
     }
     public function update_profile_success()
     {
-		$this->parser->parse('site/_default/header',$this->display_data);
-		$this->parser->parse('site/_default/header_logout',$this->display_data);
-		$this->parser->parse('site/_default/female_navi',$this->display_data);
-		$this->parser->parse('site/account/update_profile_success',$this->display_data);
-		$this->parser->parse('site/_default/footer',$this->display_data);
+		$this->utility_model->parse('site/_default/header',$this->display_data);
+		$this->utility_model->parse('site/_default/header_logout',$this->display_data);
+		$this->utility_model->parse('site/_default/female_navi',$this->display_data);
+		$this->utility_model->parse('site/account/update_profile_success',$this->display_data);
+		$this->utility_model->parse('site/_default/footer',$this->display_data);
         $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
 
     }

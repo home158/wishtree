@@ -3,29 +3,29 @@
         <div class="block-wrapper clearfix">
                 <ul class="tabs general" >
                     <li class="active">
-                        <a href="/mywish/make" class="ctrl">{mywish_make_a_wish}</a>
+                        <a data-load="main_content" href="/mywish/make" class="ctrl">{mywish_make_a_wish}</a>
                     </li>
                     <li>
-                        <a href="/mywish" class="ctrl">{mywish_wish_online}</a>
+                        <a data-load="main_content" href="/mywish" class="ctrl">{mywish_wish_online}</a>
                     </li>
                     <li>
-                        <a href="/mywish/pending" class="ctrl">{mywish_wish_pending}</a>
+                        <a data-load="main_content" href="/mywish/pending" class="ctrl">{mywish_wish_pending}</a>
                     </li>
                     <li>
-                        <a href="/mywish/reject" class="ctrl">{mywish_wish_reject}</a>
+                        <a data-load="main_content" href="/mywish/reject" class="ctrl">{mywish_wish_reject}</a>
                     </li>
                     <li>
-                        <a href="/mywish/expire" class="ctrl">{mywish_wish_expire}</a>
+                        <a data-load="main_content" href="/mywish/expire" class="ctrl">{mywish_wish_expire}</a>
                     </li>
                     <li>
-                        <a href="/mywish/removed" class="ctrl">{mywish_wish_delete}</a>
+                        <a data-load="main_content" href="/mywish/removed" class="ctrl">{mywish_wish_delete}</a>
                     </li>
 
                     <li>
-                        <a href="/mywish/mothball" class="ctrl">{mywish_wish_mothball}</a>
+                        <a data-load="main_content" href="/mywish/mothball" class="ctrl">{mywish_wish_mothball}</a>
                     </li>
                     <li>
-                        <a href="/mywish/rule" class="ctrl">{mywish_wish_rule}</a>
+                        <a data-load="main_content" href="/mywish/rule" class="ctrl">{mywish_wish_rule}</a>
                     </li>
                 </ul>
         </div>

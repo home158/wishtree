@@ -306,7 +306,7 @@
                         
                         <p class="redF hd">{account_update_profile_review_again}</p>
 	                    <p class="tc">
-                          <input id="go_back" type="button" class="btn-xl btn-ele" value="{btn_goback}">
+                          <input id="go_back" data-load="main_content" href="/account" type="button" class="btn-xl btn-ele" value="{btn_goback}">
                             &nbsp;&nbsp;&nbsp;
                           <input type="submit" class="btn-xl btn-emp" value="{btn_update_profile}">
                         </p>
@@ -318,12 +318,10 @@
     </div>
 </div>
 <script>
+
 $(function(){
     if( $.cookie("WG_role") != 'male'){
         $('.male_only').hide();
     }
-    $('#go_back').click(function(){
-       window.location.href = "/account";
-    });
 });
 </script>

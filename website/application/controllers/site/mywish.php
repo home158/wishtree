@@ -170,12 +170,16 @@ class Mywish extends Site_Base_Controller {
         $this->display_data['mywish_list'] = $mywish_list;
 
 
-        $this->parser->parse('site/_default/header',$this->display_data);
-	    $this->parser->parse('site/_default/header_logout',$this->display_data);
-	    $this->parser->parse('site/_default/female_navi',$this->display_data);
-	    $this->parser->parse('site/mywish/removed',$this->display_data);
-	    $this->parser->parse('site/_default/footer',$this->display_data);
-        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        if($this->ajax){
+            $this->utility_model->parse('site/mywish/removed',$this->display_data,TRUE);
+        }else{
+            $this->utility_model->parse('site/_default/header',$this->display_data);
+	        $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+	        $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+	        $this->utility_model->parse('site/mywish/removed',$this->display_data);
+	        $this->utility_model->parse('site/_default/footer',$this->display_data);
+            $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }
     }
     public function pending()
     {
@@ -183,36 +187,48 @@ class Mywish extends Site_Base_Controller {
         $this->display_data['mywish_list'] = $mywish_list;
 
 
-        $this->parser->parse('site/_default/header',$this->display_data);
-	    $this->parser->parse('site/_default/header_logout',$this->display_data);
-	    $this->parser->parse('site/_default/female_navi',$this->display_data);
-	    $this->parser->parse('site/mywish/pending',$this->display_data);
-	    $this->parser->parse('site/_default/footer',$this->display_data);
-        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        if($this->ajax){
+            $this->utility_model->parse('site/mywish/pending',$this->display_data,TRUE);
+        }else{
+            $this->utility_model->parse('site/_default/header',$this->display_data);
+	        $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+	        $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+	        $this->utility_model->parse('site/mywish/pending',$this->display_data);
+	        $this->utility_model->parse('site/_default/footer',$this->display_data);
+            $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }
     }
     public function mothball()
     {
         $mywish_list = $this->wish_model->retrive_mywish( $this->session->userdata('GUID') ,FALSE , NULL ,  '0,1,2' , '0,1' , 1);
         $this->display_data['mywish_list'] = $mywish_list;
 
-        $this->parser->parse('site/_default/header',$this->display_data);
-	    $this->parser->parse('site/_default/header_logout',$this->display_data);
-	    $this->parser->parse('site/_default/female_navi',$this->display_data);
-	    $this->parser->parse('site/mywish/mothball',$this->display_data);
-	    $this->parser->parse('site/_default/footer',$this->display_data);
-        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        if($this->ajax){
+            $this->utility_model->parse('site/mywish/mothball',$this->display_data,TRUE);
+        }else{
+            $this->utility_model->parse('site/_default/header',$this->display_data);
+	        $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+	        $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+	        $this->utility_model->parse('site/mywish/mothball',$this->display_data);
+	        $this->utility_model->parse('site/_default/footer',$this->display_data);
+            $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }
     }
     public function expire()
     {
         $mywish_list = $this->wish_model->retrive_mywish( $this->session->userdata('GUID') ,FALSE , NULL ,  '2' , '0' , '0',TRUE);
         $this->display_data['mywish_list'] = $mywish_list;
 
-        $this->parser->parse('site/_default/header',$this->display_data);
-	    $this->parser->parse('site/_default/header_logout',$this->display_data);
-	    $this->parser->parse('site/_default/female_navi',$this->display_data);
-	    $this->parser->parse('site/mywish/expire',$this->display_data);
-	    $this->parser->parse('site/_default/footer',$this->display_data);
-        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        if($this->ajax){
+            $this->utility_model->parse('site/mywish/expire',$this->display_data,TRUE);
+        }else{
+            $this->utility_model->parse('site/_default/header',$this->display_data);
+	        $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+	        $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+	        $this->utility_model->parse('site/mywish/expire',$this->display_data);
+	        $this->utility_model->parse('site/_default/footer',$this->display_data);
+            $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }
     }
     public function reject()
     {
@@ -220,21 +236,29 @@ class Mywish extends Site_Base_Controller {
         $this->display_data['mywish_list'] = $mywish_list;
 
 
-        $this->parser->parse('site/_default/header',$this->display_data);
-	    $this->parser->parse('site/_default/header_logout',$this->display_data);
-	    $this->parser->parse('site/_default/female_navi',$this->display_data);
-	    $this->parser->parse('site/mywish/reject',$this->display_data);
-	    $this->parser->parse('site/_default/footer',$this->display_data);
-        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        if($this->ajax){
+            $this->utility_model->parse('site/mywish/reject',$this->display_data,TRUE);
+        }else{
+            $this->utility_model->parse('site/_default/header',$this->display_data);
+	        $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+	        $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+	        $this->utility_model->parse('site/mywish/reject',$this->display_data);
+	        $this->utility_model->parse('site/_default/footer',$this->display_data);
+            $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }
     }
     public function rule()
     {
-            $this->parser->parse('site/_default/header',$this->display_data);
-	        $this->parser->parse('site/_default/header_logout',$this->display_data);
-	        $this->parser->parse('site/_default/female_navi',$this->display_data);
-	        $this->parser->parse('site/mywish/rule',$this->display_data);
-	        $this->parser->parse('site/_default/footer',$this->display_data);
+        if($this->ajax){
+            $this->utility_model->parse('site/mywish/rule',$this->display_data,TRUE);
+        }else{
+            $this->utility_model->parse('site/_default/header',$this->display_data);
+	        $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+	        $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+	        $this->utility_model->parse('site/mywish/rule',$this->display_data);
+	        $this->utility_model->parse('site/_default/footer',$this->display_data);
 		    $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }
     }
     public function make()
     {
@@ -246,12 +270,16 @@ class Mywish extends Site_Base_Controller {
 
 		if ($this->form_validation->run() == FALSE)
 		{
-            $this->parser->parse('site/_default/header',$this->display_data);
-	        $this->parser->parse('site/_default/header_logout',$this->display_data);
-	        $this->parser->parse('site/_default/female_navi',$this->display_data);
-	        $this->parser->parse('site/mywish/make',$this->display_data);
-	        $this->parser->parse('site/_default/footer',$this->display_data);
-		    $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+            if($this->ajax){
+                $this->utility_model->parse('site/mywish/make',$this->display_data,TRUE);
+            }else{
+                $this->utility_model->parse('site/_default/header',$this->display_data);
+	            $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+	            $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+	            $this->utility_model->parse('site/mywish/make',$this->display_data);
+	            $this->utility_model->parse('site/_default/footer',$this->display_data);
+		        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+            }
         }else{
             $this->load->library('uuid');
             $uuid = $this->uuid->v4();

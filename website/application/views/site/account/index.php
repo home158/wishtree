@@ -25,7 +25,7 @@
                     <li>更改密碼</li>
                     <li>刪除帳號</li>
                     <li><a href="/account/update_profile">編輯您的個人檔案</a> {profile_latest_update_date}</li>
-                    <li><a href="/account/profile">瀏覽我的主頁</a></li>
+                    <li><a data-load="main_content" href="/account/profile">瀏覽我的主頁</a></li>
                 </ul>
                 <p class="hd">審核狀態</p>
                 <ul>
