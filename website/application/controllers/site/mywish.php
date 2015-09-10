@@ -7,7 +7,7 @@ class Mywish extends Site_Base_Controller {
         $this->login_required_validation();
         
         $this->parse_display_data(
-            array('btn','grid','alert' ,'mywish','view')
+            array('btn','grid','alert' ,'mywish' ,'wish','view','message')
         );
         $this->display_data["highlight_navi"] = "mywish";
         $this->alertMsg();
@@ -260,6 +260,51 @@ class Mywish extends Site_Base_Controller {
 		    $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
         }
     }
+    public function view($GUID = NULL)
+    {
+        if(is_null($GUID)){
+            redirect(base_url().'mywish', 'refresh');
+        }
+        $wish = $this->wish_model->retrive_mywish_by_GUID($GUID);
+        if($wish == FALSE){
+            redirect(base_url().'mywish', 'refresh');
+        }
+        $this->display_data['document_element_style'] = 'display:none;';
+        $mywish_list = $this->wish_model->retrive_mywish( $this->session->userdata('GUID') , $GUID , NULL);
+
+        $this->display_data['reply_content_element_style'] = '';
+        //未通過審核的願望 不出現回覆歷史資料
+        if($mywish_list['WishReviewStatus'] < 2 ){
+            $this->display_data['reply_content_element_style'] = 'display:none;';
+        }
+
+        $this->display_data['reply_wish_element_style'] = '';
+        //過期的願望不能回覆
+        if($mywish_list['WishReviewStatus'] < date('Y-m-d H:i:s')){
+            $this->display_data['reply_wish_element_style'] = 'display:none;';
+        }
+        //刪除的願望不能回覆
+        if($mywish_list['DeleteStatus'] == 1 ){
+            $this->display_data['reply_wish_element_style'] = 'display:none;';
+        }
+        //封存的願望不能回覆
+        if($mywish_list['MothballStatus'] == 1 ){
+            $this->display_data['reply_wish_element_style'] = 'display:none;';
+        }
+        
+        $this->display_data = array_merge( $this->display_data , $mywish_list );
+        if($this->ajax){
+            $this->utility_model->parse('site/wish/detail',$this->display_data , TRUE);
+        }else{
+
+            $this->utility_model->parse('site/_default/header',$this->display_data);
+	        $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+	        $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+	        $this->utility_model->parse('site/wish/detail',$this->display_data);
+	        $this->utility_model->parse('site/_default/footer',$this->display_data);
+            $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }
+    }
     public function make()
     {
 		$this->load->library('form_validation');
@@ -270,16 +315,16 @@ class Mywish extends Site_Base_Controller {
 
 		if ($this->form_validation->run() == FALSE)
 		{
-            if($this->ajax){
-                $this->utility_model->parse('site/mywish/make',$this->display_data,TRUE);
-            }else{
-                $this->utility_model->parse('site/_default/header',$this->display_data);
-	            $this->utility_model->parse('site/_default/header_logout',$this->display_data);
-	            $this->utility_model->parse('site/_default/female_navi',$this->display_data);
-	            $this->utility_model->parse('site/mywish/make',$this->display_data);
-	            $this->utility_model->parse('site/_default/footer',$this->display_data);
-		        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
-            }
+
+            $this->utility_model->parse('site/_default/header',$this->display_data);
+	        $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+	        $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+	        $this->utility_model->parse('site/mywish/make',$this->display_data);
+	        $this->utility_model->parse('site/_default/footer',$this->display_data);
+            $this->utility_model->parse('site/_default/socket_io',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+            
+
         }else{
             $this->load->library('uuid');
             $uuid = $this->uuid->v4();

@@ -7,7 +7,7 @@ class Wish extends Site_Base_Controller {
         $this->login_required_validation();
         
         $this->parse_display_data(
-            array('btn','grid','alert' ,'message','mywish','view')
+            array('btn','grid','alert' ,'message','wish','view')
         );
         $this->display_data["highlight_navi"] = "wish";
         $this->alertMsg();
@@ -48,12 +48,17 @@ class Wish extends Site_Base_Controller {
 
         $mywish_list = $this->wish_model->retrive_mywish( FALSE , $GUID , NULL , 2 ,0, 0 , FALSE);
         $this->display_data = array_merge( $this->display_data , $mywish_list );
-        $this->parser->parse('site/_default/header',$this->display_data);
-	    $this->parser->parse('site/_default/header_logout',$this->display_data);
-	    $this->parser->parse('site/_default/female_navi',$this->display_data);
-	    $this->parser->parse('site/wish/detail',$this->display_data);
-	    $this->parser->parse('site/_default/footer',$this->display_data);
-        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        if($this->ajax){
+            $this->utility_model->parse('site/wish/detail',$this->display_data , TRUE);
+        }else{
+
+            $this->utility_model->parse('site/_default/header',$this->display_data);
+	        $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+	        $this->utility_model->parse('site/_default/female_navi',$this->display_data);
+	        $this->utility_model->parse('site/wish/detail',$this->display_data);
+	        $this->utility_model->parse('site/_default/footer',$this->display_data);
+            $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
+        }
     }
     public function get_reply()
     {

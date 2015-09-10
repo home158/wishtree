@@ -155,6 +155,8 @@ class Wish_model extends CI_Model {
             W.[WishTitle] AS [WishTitle],
             W.[WishContent] AS [WishContent],
             W.[WishReviewStatus] AS [WishReviewStatus],
+            W.[DeleteStatus] AS [DeleteStatus],
+            W.[MothballStatus] AS [MothballStatus],
             
             ".$this->utility_model->dbColumnDatetime('W.[DateExpire]' , '[DateExpire]' , 10).",
             P.[ThumbBasename] AS [ThumbBasename],

@@ -737,6 +737,7 @@ wish
 .mywish_set textarea[name=wish_content]{
     width: 400px;
     height: 120px;
+    font-size: 14px;
 }
 .mywish_set input[name=wish_title]{
     width: 400px;
@@ -763,6 +764,7 @@ wish
 .mywish_set .edit_model textarea[name=wish_content]
 {
     width: 100%;
+    height: 100%;
     background:linear-gradient(#F9EFAF, #F7E98D);
     background:-o-linear-gradient(#F9EFAF, #F7E98D);
     background:-ms-linear-gradient(#F9EFAF, #F7E98D);

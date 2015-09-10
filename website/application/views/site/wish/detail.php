@@ -7,7 +7,7 @@
     <div class="mywish_set clearfix">
         <div class="block-wrapper clearfix">
             <div class="wish_avatar fl">
-                <a href="/view/{UserGUID}"><img class="crop" src="{CropBasename}"></a>
+                <a data-load="main_content" href="/view/{UserGUID}"><img class="crop" src="{CropBasename}"></a>
             </div>
             <div class="wish_card wish_message clearfix fr">
                 <div class=" identity-content ">
@@ -29,16 +29,16 @@
                 </div>
             </div>
 
-            <div class="wish_reply wish_message fr">
+            <div class="wish_reply wish_message fr" style="{reply_content_element_style}">
                 <div class="identity-content">
                     <p class="hd">{wish_reply}</p>
-                    <div>
+                    <div style="{reply_wish_element_style}">
                         <input id="wishGUID" type="hidden" value="{db_GUID}"/>
                         <textarea name="message_content" ></textarea>
                         <em class="note"></em><br>
                 
-                        <div class="tr clearfix">
-                            <div class="fl">
+                        <div class="tr clearfix" style="margin-top: 10px;">
+                            <div class="fl" style="{document_element_style}">
                                 {message_approve_for_private_photo} <input type="checkbox" name="private_photo" data-value="{UserGUID}">
                             </div>
                             <div class="fr ">
@@ -82,23 +82,30 @@
         }
     });
     $('#send_message').on('click',function(){
-        $.ajax({
-            url: '/wish/reply',
-            dataType: 'html',
-            type: 'POST',
-            data: {
-                wish_GUID : $('#wishGUID').val(),
-                wish_content : $('textarea[name=message_content]').val()
-            },
-            success: function(r) {
-                alert('{message_send_success}');
-                $('#message_history').html(r);
+        var $message_content = $('textarea[name=message_content]');
+        if(!$.trim($message_content.val())){
+            alert("{wish_reply_content_request}");
+            $message_content.focus();
 
-            },
-            complete : function(){
-                
-            }
-        });
+        }else{
+            $.ajax({
+                url: '/wish/reply',
+                dataType: 'html',
+                type: 'POST',
+                data: {
+                    wish_GUID : $('#wishGUID').val(),
+                    wish_content : $.trim($message_content.val())
+                },
+                success: function(r) {
+                    $message_content.val('');
+                    alert('{message_send_success}');
+                    $('#message_history').html(r);
+                },
+                complete : function(){
+                    
+                }
+            });
+        }
     });
     $.ajax({
         url: '/wish/get_reply',

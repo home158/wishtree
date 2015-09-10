@@ -3,7 +3,7 @@
         <div class="block-wrapper clearfix">
                 <ul class="tabs general" >
                     <li>
-                        <a data-load="main_content" href="/mywish/make" class="ctrl">{mywish_make_a_wish}</a>
+                        <a href="/mywish/make" class="ctrl">{mywish_make_a_wish}</a>
                     </li>
                     <li>
                         <a data-load="main_content" href="/mywish" class="ctrl">{mywish_wish_online}</a>

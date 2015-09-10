@@ -3,7 +3,7 @@
         <div class="block-wrapper clearfix">
                 <ul class="tabs general" >
                     <li>
-                        <a data-load="main_content" href="/mywish/make" class="ctrl">{mywish_make_a_wish}</a>
+                        <a href="/mywish/make" class="ctrl">{mywish_make_a_wish}</a>
                     </li>
                     <li>
                         <a data-load="main_content" href="/mywish" class="ctrl">{mywish_wish_online}</a>
@@ -120,9 +120,15 @@
         $(this).parent().find('.btn_submit').show();
         $(this).parent().find('.btn_cancel').show();
          
-        $(this).parent().parent().find('.read_model').hide();
-        $(this).parent().parent().find('.edit_model').show();
-        
+        var $read_model = $(this).parent().parent().find('.read_model');
+        var h = $read_model.find('.wish_content').height();
+        $read_model.hide();
+
+        var $edit_model = $(this).parent().parent().find('.edit_model');
+        $edit_model.show();
+
+        console.log(h);
+        $edit_model.find('.wish_content').height(h);
     });
     $('.btn_cancel').on('click',function(){
         var $edit_model = $(this).parent().parent().find('.edit_model');
