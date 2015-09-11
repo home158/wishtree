@@ -28,6 +28,7 @@ $lang['grid_column_MessageContent'] = "訊息內容";
 
 $lang['grid_column_PasswordCheck'] = "再輸入一次密碼";
 $lang['grid_column_Nickname'] = "暱稱";
+$lang['grid_column_Nickname_or_Real'] = "暱稱或真實姓名";
 $lang['grid_column_Nickname_s'] = "<li>暱稱：%s</li>";
 $lang['grid_column_AboutMe'] = "關於我";
 $lang['grid_column_IdealDesc'] = "描述您理想中的約會對象";

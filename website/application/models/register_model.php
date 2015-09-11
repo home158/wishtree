@@ -47,36 +47,70 @@ class Register_model extends CI_Model {
         }
         */
     }
-    function birthday_year_options($from = 1997 , $to = 1917)
+    function birthday_year_options($from = 1997 , $to = 1917 , $header = TRUE)
     {
         $this->lang->load('birthday');
         $str = '<div data-value="%s">%s</div>';
-        $option = sprintf($str , "" , $this->lang->line('birthday_year') );
+        if($header){
+            $option = sprintf($str , "" , $this->lang->line('birthday_year') );
+        }else{
+            $option = "";
+        }
         for( $i = $from ; $i>= $to ; $i--){
             $option .= sprintf($str , strval($i) , strval($i));
         }
         return $option;
     }
-    function birthday_month_options($from = 1 , $to = 12)
+    function birthday_month_options($from = 1 , $to = 12, $header = TRUE)
     {
         $this->lang->load('birthday');
         $str = '<div data-value="%s">%s</div>';
-        $option = sprintf($str , "" , $this->lang->line('birthday_month') );
+        if($header){
+            $option = sprintf($str , "" , $this->lang->line('birthday_month') );
+        }else{
+            $option = "";
+        }
         for( $i = $from ; $i<= $to ; $i++){
             $option .= sprintf($str , strval($i) , strval($i));
         }
         return $option;
     }
-    function birthday_date_options($from = 1 , $to = 31)
+    function birthday_date_options($from = 1 , $to = 31, $header = TRUE)
     {
         $this->lang->load('birthday');
         $str = '<div data-value="%s">%s</div>';
-        $option = sprintf($str , "" , $this->lang->line('birthday_date') );
+        if($header){
+            $option = sprintf($str , "" , $this->lang->line('birthday_date') );
+        }else{
+            $option = "";
+        }
         for( $i = $from ; $i<= $to ; $i++){
             $option .= sprintf($str , strval($i) , strval($i));
         }
         return $option;
     }
+    function birthday_hour_options()
+    {
+        $this->lang->load('birthday');
+        $str = '<div data-value="%s">%s</div>';
+        $option = sprintf($str , "" , $this->lang->line('birthday_hour') );
+        $option .= sprintf($str , strval(0) ,  $this->lang->line('birthday_hour_0'));
+        $option .= sprintf($str , strval(1) ,  $this->lang->line('birthday_hour_1'));
+        $option .= sprintf($str , strval(3) ,  $this->lang->line('birthday_hour_3'));
+        $option .= sprintf($str , strval(5) ,  $this->lang->line('birthday_hour_5'));
+        $option .= sprintf($str , strval(7) ,  $this->lang->line('birthday_hour_7'));
+        $option .= sprintf($str , strval(9) ,  $this->lang->line('birthday_hour_9'));
+        $option .= sprintf($str , strval(11) ,  $this->lang->line('birthday_hour_11'));
+        $option .= sprintf($str , strval(13) ,  $this->lang->line('birthday_hour_13'));
+        $option .= sprintf($str , strval(15) ,  $this->lang->line('birthday_hour_15'));
+        $option .= sprintf($str , strval(17) ,  $this->lang->line('birthday_hour_17'));
+        $option .= sprintf($str , strval(19) ,  $this->lang->line('birthday_hour_19'));
+        $option .= sprintf($str , strval(21) ,  $this->lang->line('birthday_hour_21'));
+        $option .= sprintf($str , strval(23) ,  $this->lang->line('birthday_hour_23'));
+        
+        return $option;
+    }
+    
     function sent_email_verification($GUID , $email , $nickname)
     {
         $this->config->load('email');
@@ -118,6 +152,21 @@ class Register_model extends CI_Model {
     function retrieve_user_info_by_account_passwd($data)
     {
         $query = $this->db->query("SELECT * FROM [dbo].[i_user] WHERE Email = '".$data['Email']."' AND PasswordEncrypt = '".$data['PasswordEncrypt']."' AND Rank >= ".$data['Rank']);
+        return $query;
+    }
+    function retrieve_user_info_by_GUID($GUID)
+    {
+        $query = $this->db->query("
+            SELECT 
+                datepart(month,[Birthday]) AS Birthday_Month,
+                datepart(year,[Birthday]) AS Birthday_Year,
+                datepart(day,[Birthday]) AS Birthday_Day,
+                datepart(hour,[Birthday]) AS Birthday_Hour,
+                Maritalstatus
+            FROM 
+                [dbo].[i_user] 
+            WHERE 
+                GUID = '".$GUID."'");
         return $query;
     }
     function validate_mail($GUID , $ValidateKey)

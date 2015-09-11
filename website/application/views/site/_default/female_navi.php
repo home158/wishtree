@@ -4,6 +4,7 @@
         <li><a data-load="main_content" id="wish" href="/wish">許願池</a></li>
         <li><a data-load="main_content" id="message" href="/message">留言板</a></li>
         <li><a data-load="main_content" id="chat" href="/chat">聊天室</a></li>
+        <li><a data-load="main_content" id="fortune" href="/fortune">算命</a></li>
         <li><a data-load="main_content" href="#">誰看過我</a></li>
         <li><a data-load="main_content" id="mywish" href="/mywish">我的願望</a></li>
         <li><a data-load="main_content" href="#">搜索</a></li>

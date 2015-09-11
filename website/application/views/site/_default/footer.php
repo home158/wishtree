@@ -71,7 +71,7 @@ $(function() {
     	loadMainContent(location.pathname);
     };
     var loadMainContent = function(href){
-        var navi = ['home','wish','message','chat','mywish','photo','account'];
+        var navi = ['home','wish','message','chat','mywish','photo','account','fortune'];
         var highlight_id = href.replace('/','');
         if( $.inArray(highlight_id , navi) != -1 ){
             $('#navi a').removeClass('highlight');

@@ -784,6 +784,11 @@ wish
 .mywish_set .wish_ctrl .btn{
     margin-right:10px;
 }
+/* fortune */
+.fortune_set ul{
+    margin: 0px;
+    padding: 0px;
+}
 
 /* 區塊-填寫會員資料
 ---------------------------------------------------- */

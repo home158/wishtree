@@ -65,6 +65,9 @@ $route['mywish/(:any)'] = 'site/mywish/$1';
 $route['chat'] = "site/chat";
 $route['chat/(:any)'] = 'site/chat/$1';
 
+$route['fortune'] = "site/fortune";
+$route['fortune/(:any)'] = 'site/fortune/$1';
+
 $route['wish'] = "site/wish";
 $route['wish/(:any)'] = 'site/wish/$1';
 
