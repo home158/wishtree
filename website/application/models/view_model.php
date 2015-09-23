@@ -99,6 +99,7 @@ class View_model extends CI_Model {
             P.[CropBasename],
             P.[FullBasename],
             P.[UserGUID],
+            U.[Nickname],
             U.[Role],
             U.[City]
         FROM 

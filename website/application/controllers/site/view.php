@@ -26,9 +26,10 @@ class View extends Site_Base_Controller {
         
         $this->display_data['profile'] = $this->user_profile($GUID);
         $r = $this->view_model->get_cover_photo($GUID , $this->Role);
+       
         $this->display_data['CropBasename'] = $r['CropBasename'];
         $this->display_data['FullBasename'] = $r['FullBasename'];
-        $this->display_data['view_lightbox_data_title'] = sprintf($this->display_data['view_lightbox_data_title'] , $this->session->userdata['Nickname']);
+        $this->display_data['view_lightbox_data_title'] = sprintf($this->display_data['view_lightbox_data_title'] , $r['Nickname']);
         
         $this->display_data['public_photo'] = $this->view_model->get_public_photo($GUID);
         $myGUID = $this->session->userdata('GUID');

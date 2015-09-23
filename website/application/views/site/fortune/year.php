@@ -29,6 +29,14 @@
                 <div class="well well-lg  msg clearfix blk-reg">
                     <form>
                         <div>
+                            <!-- Services -->
+                            <!-- Lunar Birthday -->
+                            <span class="item" style="margin-top:0px;position: absolute;">{fortune_services}</span>
+                            <div style="display: inline-block;width: 100%;">
+                                <span class="hd">{fortune_services_year}</span>
+                            </div>
+                            <br><br>
+                            
                             <!-- Realname -->
                             <span class="item" >{grid_column_Nickname_or_Real}</span>
                             <input name="nickname" type="text" value="<?= set_value('nickname','{Nickname}'); ?>" />
@@ -36,7 +44,7 @@
                             <?= form_error('nickname'); ?><br>
 
                             <!-- Birthday -->
-                            <span class="item" style="margin-top:10px;position: absolute;">{birthday_please_select_general_calender}</span>
+                            <span class="item" style="margin-top:5px;position: absolute;">{birthday_please_select_general_calender}</span>
                             <div id="birthday_date" style="display: inline-block;width: 33%;" class="bfh-selectbox" data-value="<?= set_value('birthday_date','{birthday_day}'); ?>" data-name="birthday_date" >
                                 {birthday_date_options}
                             </div>
@@ -50,14 +58,14 @@
                             <?= form_error('birthday_date'); ?> <?= form_error('birthday_month'); ?> <?= form_error('birthday_year'); ?><br>
 
                             <!-- Lunar Birthday -->
-                            <span class="item" style="margin-top:10px;position: absolute;">{birthday_lunar_calender}</span>
+                            <span class="item" style="margin-top:0px;position: absolute;">{birthday_lunar_calender}</span>
                             <div style="display: inline-block;width: 100%;">
-                                <span id="nongli">ss</span>
+                                <span id="nongli"></span>
                             </div>
                             <br><br>
 
                             <!-- Birthday time -->
-                            <span class="item" style="margin-top:10px;position: absolute;">{birthday_please_select_hour}</span>
+                            <span class="item" style="margin-top:5px;position: absolute;">{birthday_please_select_hour}</span>
                             <div style="display: inline-block;width: 100%;" class="bfh-selectbox" data-value="<?= set_value('birthday_hour'); ?>" data-name="birthday_hour" >
                                 {birthday_hour_options}
                             </div>
@@ -65,7 +73,7 @@
                             <?= form_error('birthday_time'); ?><br>
 
                             <!-- Maritalstatus -->
-                            <span class="item" style="margin-top:10px;position: absolute;">{grid_column_Maritalstatus}</span>
+                            <span class="item" style="margin-top:5px;position: absolute;">{grid_column_Maritalstatus}</span>
                             <div style="display: inline-block;width: 100%;" class="bfh-selectbox" data-value="<?= set_value('maritalstatus','{Maritalstatus}'); ?>" data-name="maritalstatus" >
                                 <div data-value="">{maritalstatus_please_select}</div>
                                 <div data-value="single">{maritalstatus_single}</div>
@@ -76,13 +84,62 @@
                             <em class="note"></em><br>
                             <?= form_error('maritalstatus'); ?><br>
 
+                            
+                            <!-- Consultation 
+                            <span class="item" style="margin-top:0px;position: absolute;">{grid_column_Consultation}</span>
+
+                            <div style="display: inline-block;width: 100%;">
+                                <input type="radio" name="consultation" id="fortune_consultation_text" /><label for="fortune_consultation_text">{fortune_consultation_text}</label>
+
+                                <div style="width: 100%;">
+                                    <div class="input-group" >
+                                        <span class="input-group-addon" style="background-color:transparent;color:#000;padding-left: 0px; border: 0px;">
+                                            <input name="consultation" id="fortune_consultation_comm" type="radio" ><label style="margin-bottom: 0px;" for="fortune_consultation_comm">{fortune_consultation_comm}</label>
+                                        </span>
+
+                                            <div class="input-group-btn">
+                                              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                  <span id="consultation_comm">Line</span>
+                                                  <span class="caret"></span></button>
+                                                  <ul class="dropdown-menu dropdown-menu-left">
+                                                    <li><a >Line</a></li>
+                                                    <li><a >Skype</a></li>
+                                                    <li><a >Google plus</a></li>
+                                                  </ul>
+                                            </div>
+                                        <input type="text" class="form-control" placeholder="{fortune_comm_account}">
+                                    </div>
+                                </div>
+                                
+                                <input type="radio" name="consultation" id="fortune_consultation_face_to_face" /><label for="fortune_consultation_face_to_face">{fortune_consultation_face_to_face}</label>
+
+                            </div>
+                            <em class="note"></em><br>
+                            <?= form_error('consultation'); ?><br>
+                            -->
+                            <!-- Question -->
+                            <span class="item" style="position: absolute;">{grid_column_Question}</span>
+                                <textarea name="question" placeholder="{fortune_question_placeholder}"><?= set_value('question'); ?></textarea>
+                            <em class="note"></em><br>
+                            
+                            <!-- Agreement -->
+                            <span class="item" style="margin-top:0px;position: absolute;"></span>
+                            <div style="display: inline-block;width: 100%;">
+                                <input type="checkbox" id="agree" /><label for="agree">我已詳細閱讀注意事項，並同意接受</label>
+                            </div>
+                            <br><br>
+                            <p class="redF hd">{fortune_need_pay}</p>
+	                        <p class="tc">
+                              <input id="go_step2" type="submit" class="btn-xl btn-ele" value="{register_submit}">
+                            </p>
                         </div>
+                        
                     </form>
                 </div>
             </div>
         </div>
-        我已詳細閱讀注意事項，並同意接受
-        今天的农历时间是：<span id="nongli"></span>
+        
+        
 
     </div>
 </div>

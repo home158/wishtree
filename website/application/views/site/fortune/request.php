@@ -42,7 +42,7 @@
             </li>
         </ol>
         <div>
-            <a href="/fortune/year">批流年</a>
+            <a href="/fortune/year">{fortune_services_year}</a>
         </div>
         <div>
             <a href="/fortune/future">論命</a>

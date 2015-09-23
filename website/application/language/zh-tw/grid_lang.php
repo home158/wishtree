@@ -80,6 +80,8 @@ $lang['grid_column_WishReviewDate'] = "審核時間";
 $lang['grid_column_DateExpire'] = "過期時間";
 $lang['grid_column_MothballStatus'] = "封存狀態";
 $lang['grid_column_MothballDate'] = "封存時間";
+$lang['grid_column_Consultation'] = "諮詢方式";
+$lang['grid_column_Question'] = "問題(可不填)";
 
 /* End of file grid_lang.php */
 /* Location: ./application/language/zh-tw/grid_lang.php */
