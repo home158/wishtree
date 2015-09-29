@@ -18,7 +18,7 @@
                         <a data-load="main_content" href="/fortune/expire" class="ctrl">{fortune_sharing}</a>
                     </li>
                     <li>
-                        <a data-load="main_content" href="/fortune/removed" class="ctrl">{fortune_history}</a>
+                        <a data-load="main_content" href="/fortune/history" class="ctrl">{fortune_history}</a>
                     </li>
                 </ul>
         </div>

@@ -20,20 +20,20 @@
                     <a data-load="main_content" href="/fortune/expire" class="ctrl">{fortune_sharing}</a>
                 </li>
                 <li>
-                    <a data-load="main_content" href="/fortune/removed" class="ctrl">{fortune_history}</a>
+                    <a data-load="main_content" href="/fortune/history" class="ctrl">{fortune_history}</a>
                 </li>
             </ul>
         </div>
         <div class="login_gp">
             <div class="login_type borR register ">
                 <div class="well well-lg  msg clearfix blk-reg">
-                    <form>
+                    <form id="form" action="/fortune/year" method="POST">
                         <div>
                             <!-- Services -->
-                            <!-- Lunar Birthday -->
                             <span class="item" style="margin-top:0px;position: absolute;">{fortune_services}</span>
                             <div style="display: inline-block;width: 100%;">
                                 <span class="hd">{fortune_services_year}</span>
+                                <input name="services" type="hidden" value="0" />
                             </div>
                             <br><br>
                             
@@ -43,16 +43,33 @@
                             <em class="note"></em><br>
                             <?= form_error('nickname'); ?><br>
 
+                            <!-- Role -->
+                            <span class="item" style="margin-top:5px;position: absolute;">{grid_column_Gender}</span>
+                            <div style="display: inline-block;width: 100%;" class="bfh-selectbox" data-value="<?= set_value('role','{Role}'); ?>" data-name="role" >
+                                <div data-value="female">{role_gender_female}</div>
+                                <div data-value="male">{role_gender_male}</div>
+                            </div>
+                            <em class="note"></em><br>
+                            <?= form_error('role'); ?><br>
+
+
+                            <!-- pblm_tel -->
+                            <span class="item" >{grid_column_pblm_tel}</span>
+                            <input name="pblm_tel" type="text" value="<?= set_value('pblm_tel'); ?>" />
+                            <em class="note">範例: line:wendy787; 手機:0912345678</em><br>
+                            <?= form_error('pblm_tel'); ?><br>
+
+
                             <!-- Birthday -->
                             <span class="item" style="margin-top:5px;position: absolute;">{birthday_please_select_general_calender}</span>
-                            <div id="birthday_date" style="display: inline-block;width: 33%;" class="bfh-selectbox" data-value="<?= set_value('birthday_date','{birthday_day}'); ?>" data-name="birthday_date" >
-                                {birthday_date_options}
+                            <div id="birthday_year" style="display: inline-block;width: 32.5%;" class="bfh-selectbox" data-value="<?= set_value('birthday_year','{birthday_year_db}'); ?>" data-name="birthday_year" >
+                                {birthday_year_options}
                             </div>
-                            <div id="birthday_month" style="display: inline-block;width: 32.5%;" class="bfh-selectbox" data-value="<?= set_value('birthday_month','{birthday_month}'); ?>" data-name="birthday_month" >
+                            <div id="birthday_month" style="display: inline-block;width: 32.5%;" class="bfh-selectbox" data-value="<?= set_value('birthday_month','{birthday_month_db}'); ?>" data-name="birthday_month" >
                                 {birthday_month_options}
                             </div>
-                            <div id="birthday_year" style="display: inline-block;width: 32.5%;" class="bfh-selectbox" data-value="<?= set_value('birthday_year','{birthday_year}'); ?>" data-name="birthday_year" >
-                                {birthday_year_options}
+                            <div id="birthday_date" style="display: inline-block;width: 33%;" class="bfh-selectbox" data-value="<?= set_value('birthday_date','{birthday_day_db}'); ?>" data-name="birthday_date" >
+                                {birthday_date_options}
                             </div>
                             <em class="note"></em><br>
                             <?= form_error('birthday_date'); ?> <?= form_error('birthday_month'); ?> <?= form_error('birthday_year'); ?><br>
@@ -61,16 +78,17 @@
                             <span class="item" style="margin-top:0px;position: absolute;">{birthday_lunar_calender}</span>
                             <div style="display: inline-block;width: 100%;">
                                 <span id="nongli"></span>
+                                <input name="lunar" type="hidden" value="" />
                             </div>
                             <br><br>
 
                             <!-- Birthday time -->
-                            <span class="item" style="margin-top:5px;position: absolute;">{birthday_please_select_hour}</span>
+                            <span class="item" style="margin-top:5px;position: absolute;">{birthday_hour_s}</span>
                             <div style="display: inline-block;width: 100%;" class="bfh-selectbox" data-value="<?= set_value('birthday_hour'); ?>" data-name="birthday_hour" >
                                 {birthday_hour_options}
                             </div>
                             <em class="note"></em><br>
-                            <?= form_error('birthday_time'); ?><br>
+                            <?= form_error('birthday_hour'); ?><br>
 
                             <!-- Maritalstatus -->
                             <span class="item" style="margin-top:5px;position: absolute;">{grid_column_Maritalstatus}</span>
@@ -117,20 +135,32 @@
                             <em class="note"></em><br>
                             <?= form_error('consultation'); ?><br>
                             -->
-                            <!-- Question -->
-                            <span class="item" style="position: absolute;">{grid_column_Question}</span>
-                                <textarea name="question" placeholder="{fortune_question_placeholder}"><?= set_value('question'); ?></textarea>
+                            <!-- pblm_code -->
+                            <span class="item" style="margin-top:5px;position: absolute;">{grid_column_fortune_pblm_code}</span>
+                            <div style="display: inline-block;width: 100%;" class="bfh-selectbox" data-value="<?= set_value('pblm_code'); ?>" data-name="pblm_code" >
+                                <div data-value="">{fortune_pblm_plesae_select}</div>
+                                {fortune_pblm}
+                            </div>
                             <em class="note"></em><br>
-                            
+                            <?= form_error('pblm_code'); ?><br>
+
+
+
+                            <!-- Question -->
+                            <span class="item" style="position: absolute;">{grid_column_fortune_pblm_s}</span>
+                                <textarea name="fortune_message" placeholder="{fortune_question_placeholder}"><?= set_value('fortune_message'); ?></textarea>
+                            <em class="note"></em><br>
+                            <?= form_error('fortune_message'); ?><br>
+
                             <!-- Agreement -->
                             <span class="item" style="margin-top:0px;position: absolute;"></span>
                             <div style="display: inline-block;width: 100%;">
-                                <input type="checkbox" id="agree" /><label for="agree">我已詳細閱讀注意事項，並同意接受</label>
+                                <input type="checkbox" name="agree" id="agree" /><label for="agree">{fortune_aggrement}</label>
                             </div>
                             <br><br>
                             <p class="redF hd">{fortune_need_pay}</p>
 	                        <p class="tc">
-                              <input id="go_step2" type="submit" class="btn-xl btn-ele" value="{register_submit}">
+                              <input id="submit" type="submit" class="btn-xl btn-ele" value="{btn_submit}">
                             </p>
                         </div>
                         
@@ -149,6 +179,13 @@
 <script type="text/javascript">
 
 function lunar_date_display(yy , mm , dd){
+    var option_year = $('#birthday_year').find('.bfh-selectbox-option');
+    option_year.text( yy + ' {birthday_year_s}');
+    var option_month = $('#birthday_month').find('.bfh-selectbox-option');
+    option_month.text( mm + ' {birthday_month_s}');
+    var option_date = $('#birthday_date').find('.bfh-selectbox-option');
+    option_date.text( dd+ ' {birthday_date_s}');
+
     var D=new Date(); 
     var ww=D.getDay(); 
     var ss=parseInt(D.getTime() / 1000); 
@@ -156,16 +193,23 @@ function lunar_date_display(yy , mm , dd){
     $("#nongli").html(GetLunarDay(yy,mm,dd));
 }
 function lunar_change(){
+    
     var yy = $('#birthday_year').val();
     var mm = $('#birthday_month').val();
     var dd = $('#birthday_date').val();
-    console.log(yy);
-    console.log(mm);
-    console.log(dd);
     lunar_date_display(yy , mm , dd);
 }
 $(document).ready(function(){
-    lunar_date_display({birthday_year} , {birthday_month} , {birthday_day});
+    lunar_date_display($('#birthday_year').val() , $('#birthday_month').val() ,$('#birthday_date').val());
+
+    $("#form").submit(function(e) {
+         $('input[name=lunar]').val($("#nongli").text());
+
+         if(!$('#agree').is(':checked')){
+            alert('s');
+            return false; 
+         }
+    });
 });
 $('#birthday_year').on('change.bfhselectbox', lunar_change);
 $('#birthday_month').on('change.bfhselectbox', lunar_change);

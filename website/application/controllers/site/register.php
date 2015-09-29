@@ -79,9 +79,9 @@ class Register extends Site_Base_Controller {
 		$this->form_validation->set_rules('national_code', $this->display_data['grid_column_NationalCode'], 'trim|required');
 		$this->form_validation->set_rules('city', $this->display_data['grid_column_City'], 'trim|required');
 		$this->form_validation->set_rules('language', $this->display_data['grid_column_Language'], 'trim|required');
-		$this->form_validation->set_rules('birthday_date', $this->display_data['birthday_date'], 'trim|required');
-		$this->form_validation->set_rules('birthday_month', $this->display_data['birthday_month'], 'trim|required');
-		$this->form_validation->set_rules('birthday_year', $this->display_data['birthday_year'], 'trim|required');
+		$this->form_validation->set_rules('birthday_date', $this->display_data['birthday_date_s'], 'trim|required');
+		$this->form_validation->set_rules('birthday_month', $this->display_data['birthday_month_s'], 'trim|required');
+		$this->form_validation->set_rules('birthday_year', $this->display_data['birthday_year_s'], 'trim|required');
 		$this->form_validation->set_rules('height', $this->display_data['grid_column_Height'], 'trim|required');
 		$this->form_validation->set_rules('bodytype', $this->display_data['grid_column_Bodytype'], 'trim|required');
 		$this->form_validation->set_rules('race', $this->display_data['grid_column_Race'], 'trim|required');
@@ -172,10 +172,10 @@ class Register extends Site_Base_Controller {
         
         $this->display_data['register_sent_email_verification'] = sprintf($this->display_data['register_sent_email_verification'],$this->session->userdata('Email') );
 
-        $this->parser->parse('site/_default/header',$this->display_data);
-        $this->parser->parse('site/_default/header_logout',$this->display_data);
-		$this->parser->parse('site/register/sending_validate_mail',$this->display_data);
-		$this->parser->parse('site/_default/footer',$this->display_data);
+        $this->utility_model->parse('site/_default/header',$this->display_data);
+        $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+		$this->utility_model->parse('site/register/sending_validate_mail',$this->display_data);
+		$this->utility_model->parse('site/_default/footer',$this->display_data);
         $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
     }
     public function validate_mail($GUID = NULL , $ValidateKey = NULL)

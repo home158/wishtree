@@ -2,6 +2,8 @@
 
 $lang['grid_column_UserID']      = "編號";
 $lang['grid_column_Role']      = "帳戶類型";
+$lang['grid_column_Gender']      = "稱謂";
+
 $lang['grid_column_Email']      = "電子郵件";
 $lang['grid_column_Password'] = "密碼";
 $lang['grid_column_OldPassword'] = "原始密碼";
@@ -82,6 +84,13 @@ $lang['grid_column_MothballStatus'] = "封存狀態";
 $lang['grid_column_MothballDate'] = "封存時間";
 $lang['grid_column_Consultation'] = "諮詢方式";
 $lang['grid_column_Question'] = "問題(可不填)";
+
+$lang['grid_column_pblm_email'] = "聯絡E-mail";
+$lang['grid_column_pblm_tel'] = "聯絡方式";
+$lang['grid_column_fortune_pblm'] = "問題或建議";
+$lang['grid_column_fortune_pblm_s'] = "問題或建議(可不填)";
+$lang['grid_column_fortune_pblm_code'] = "問題類別";
+
 
 /* End of file grid_lang.php */
 /* Location: ./application/language/zh-tw/grid_lang.php */

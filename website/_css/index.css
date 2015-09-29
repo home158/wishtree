@@ -942,3 +942,94 @@ li.user_list{
 .upload_image{
     padding: 10px 10px;
 }
+/* listtable */
+.boldhead {
+    background: #e0edf3 url(rc_round_a.gif) no-repeat top left;
+}
+.boldhead .wraper {
+    position: relative;
+    padding: 4px 5px 23px 15px;
+    border-bottom: 1px solid #9CC6DA;
+}
+.listtable {
+    font: 13px/1.231 Arial;
+    width: 100%;
+}
+.listtable thead.gray td, .listtable thead.gray th {
+    background-color: #eee;
+    padding: 8px 9px 4px 9px;
+    border-bottom: 1px solid #bbb;
+    font-family: "PMingLiu";
+}
+.listtable tbody td, .listtable tbody th {
+    padding: 8px 5px 4px 5px;
+    border-top: 1px solid #DDDDDD;
+    line-height: 1.3;
+    vertical-align: top;
+    font-weight: 400;
+}
+.listtable td, .listtable th {
+    padding: 9px;
+    background: transparent url(/_images/bg_dot_v.gif) repeat-y;
+    border-bottom: none;
+    word-wrap: break-word;
+}
+.listtable td.dot, .listtable th.dot {
+    
+}
+.table-bborder {
+    border-bottom: 1px solid #9CC6DA;
+}
+.infotable th {
+    background: #F4F7F8;
+}    
+.listtable em{
+    font-style: normal;
+    color: red;
+}
+.listtable .right {
+    text-align: right;
+}
+.iconhead {
+    background: url(/_images/bg_dot_4.gif) repeat-x left bottom;
+    padding: 0px 0 1px 0;
+}
+.iconhead h3 {
+    padding-left: 25px;
+    font-size: 100%;
+    font-weight: bold;
+}
+.iconhead.green h3 {
+    background: url(/_images/ico_head.gif) no-repeat left center;
+}
+.response .boldhead .wraper {
+    padding: 4px 5px 3px 15px;
+    min-height: 21px;
+}
+.mtop25{
+    margin-top: 25px;
+}
+.tit-box {
+    border: 1px solid #CCC;
+    background: #EEE;
+    padding: 5px 15px;
+}
+.listtable tbody td.v_middle, .listtable tbody th.v_middle{
+    vertical-align:middle;
+}
+.QTd ul li{
+    float: left;
+    display: inline;
+}
+.QTextarea{
+    width: 100%;
+    height: 150px;
+}
+input.text_count{
+    width: 30px;
+    height: 20px;
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+    border-radius: 0px;
+}

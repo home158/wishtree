@@ -2,6 +2,8 @@
 
 $lang['fortune_services']    = "服務項目";
 $lang['fortune_services_year']    = "批流年";
+$lang['fortune_services_future']    = "論命";
+
 $lang['fortune_request']    = "我要算命";
 $lang['fortune_teller_info']        = "命理師簡介";
 $lang['fortune_services']        = "服務項目";
@@ -20,7 +22,27 @@ $lang['fortune_consultation_text']        = "線上親算";
 $lang['fortune_comm_account']        = "留下您的帳號或連絡方式";
 $lang['fortune_question_placeholder']        = "您如果未留下任何問題，您可以當面詢問諮詢師問題，或諮詢師針對您的命格加以分析並給予建議。";
 $lang['fortune_need_pay']        = "表單送出後，您必須在「消費紀錄」完成付費，諮詢師會與您聯繫並開始定盤。";
+$lang['fortune_aggrement']        = "我已詳細閱讀注意事項，並同意接受";
+$lang['fortune_paymentstatus_0']        = "等待付款<br/><a href='#'>通知已付款</a>";
+$lang['fortune_paymentstatus_1']        = "不須付費";
+$lang['fortune_paymentstatus_2']        = "已通知付費<br>等待確認";
+$lang['fortune_paymentstatus_3']        = "付費確認";
+$lang['fortune_status_0']        = "等待定盤";
+$lang['fortune_status_1']        = "定盤確認<br/>開始論命";
+$lang['fortune_status_2']        = "論命結束";
+$lang['fortune_st']        = "";
+$lang['fortune_st_0']        = "<a href='#'>取消</a>";
+$lang['fortune_st_1']        = "已取消";
+$lang['fortune_new_pblm']        = "<a href='/fortune/new_problem/%s'>詢問</a>";
+$lang['fortune_response']        = "<a href='/fortune/response/%s'>查看</a>";
 
+$lang['fortune_pblm_plesae_select']        = "請選擇問題類別";
+$lang['fortune_pblm_12890']        = "論命諮詢";
+$lang['fortune_pblm_12893']        = "訂購是否成功";
+$lang['fortune_pblm_12901']        = "付款是否成功";
+$lang['fortune_pblm_12910']        = "更改論命資料";
+$lang['fortune_pblm_12913']        = "取消訂單-客服";
+$lang['fortune_pblm_12914']        = "其他";
 
 /* End of file fortune_lang.php */
 /* Location: ./application/language/zh-tw/fortune_lang.php */

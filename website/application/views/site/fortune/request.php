@@ -18,7 +18,7 @@
                         <a data-load="main_content" href="/fortune/expire" class="ctrl">{fortune_sharing}</a>
                     </li>
                     <li>
-                        <a data-load="main_content" href="/fortune/removed" class="ctrl">{fortune_history}</a>
+                        <a data-load="main_content" href="/fortune/history" class="ctrl">{fortune_history}</a>
                     </li>
                 </ul>
 
@@ -45,7 +45,7 @@
             <a href="/fortune/year">{fortune_services_year}</a>
         </div>
         <div>
-            <a href="/fortune/future">論命</a>
+            <a href="/fortune/future">{fortune_services_future}</a>
         </div>
     </div>
 </div>
