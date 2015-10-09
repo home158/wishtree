@@ -51,14 +51,14 @@ $active_record = TRUE;
 $db['default']['hostname'] = 'rlfvopadtu.database.windows.net';
 $db['default']['username'] = 'db_wishpool@rlfvopadtu';
 $db['default']['password'] = 'cadu@4023';
-$db['default']['database'] = 'db_wishpool';
-
+$db['default']['database'] = 'db_wishpool2';
 /*
 $db['default']['hostname'] = '127.0.0.1';
 $db['default']['username'] = 'home158';
 $db['default']['password'] = 'cadu@4023';
 $db['default']['database'] = 'db_wishtree';
 */
+
 $db['default']['dbdriver'] = 'sqlsrv';
 $db['default']['port'] = 1433;
 $db['default']['dbprefix'] = '';
