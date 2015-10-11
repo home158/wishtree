@@ -66,7 +66,7 @@ $(function(){
             }
         });
     });
-    $('button.delete_image').bind('click',function(){
+    $('.delete_image').bind('click',function(){
         var $this = $(this);
         $this.parent().fadeOut();
         

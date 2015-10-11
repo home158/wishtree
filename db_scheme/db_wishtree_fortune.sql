@@ -37,10 +37,16 @@ SET @GUID = NEWID()
 			--[Request] [nvarchar](max) NULL default NULL, -- 問題(可不填)
 			[PblmEmail] [nvarchar](255) NOT NULL , -- 聯絡用 email,存最後一次資料
 			[PblmTel] [nvarchar](255) NOT NULL , -- 聯絡方式,存最後一次資料
-			[PaymentStatus] [tinyint] NOT NULL default 0, --付費註記 0 : 等待付費，1:不需付費 2 : 已通知付費，3:已付費，
+			[PaymentStatus] [tinyint] NOT NULL default 0, --付費註記 0 : 等待付費，1:不需付費 :已付費，
+			[DatePayment] [datetime] NULL default NULL,	-- 付費註記時間
+			[NotifyPaymentStatus] [tinyint] NOT NULL default 0, --通知付費註記 0 : 等待通知 ; 1:已通知付費
+			[DateNotifyPayment] [datetime] NULL default NULL,	-- 通知付費註記時間
+
 			[FortuneStatus] [tinyint] NOT NULL default 0, --算命註記 0 : 等待定盤，1 : 定盤確認開始分析 2:分析結束
 			[ST] [bit] NOT NULL default 0, --取消註記 0 : 未取消，1:己取消 [PaymentStatus] = 0 AND [FortuneStatus] = 0 才可取消
+			[DateST] [datetime] NULL default NULL,	-- 取消註記時間
 			[MT] [bit] NOT NULL default 0, --審結註記 0 : 未審結，1:己審結
+			[DateMT] [datetime] NULL default NULL,	-- 審結註記時間
 
 			[TypeDiscussion] [tinyint] NOT NULL default 0, --論命方式 0 : 線上，1:通訊工具，2:面對面
 			[LocationDiscussion] [nvarchar](256) NULL default NULL, --預定論命地點

@@ -27,12 +27,12 @@
         <div class="login_gp">
             <div class="login_type borR register ">
                 <div class="well well-lg  msg clearfix blk-reg">
-                    <form id="form" action="/fortune/year" method="POST">
+                    <form id="form" action="/fortune/future" method="POST">
                         <div>
                             <!-- Services -->
                             <span class="item" style="margin-top:0px;position: absolute;">{fortune_services}</span>
                             <div style="display: inline-block;width: 100%;">
-                                <span class="hd">{fortune_services_year}</span>
+                                <span class="hd">{fortune_services_future}</span>
                                 <input name="services" type="hidden" value="0" />
                             </div>
                             <br><br>

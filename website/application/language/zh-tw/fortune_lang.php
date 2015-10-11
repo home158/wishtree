@@ -3,6 +3,19 @@
 $lang['fortune_services']    = "服務項目";
 $lang['fortune_services_year']    = "批流年";
 $lang['fortune_services_future']    = "論命";
+$lang['fortune_btn_go_services_future']    = "前往論命";
+$lang['fortune_view_all']    = "總覽";
+$lang['fortune_future_ST']    = "已取消(未審結)";
+$lang['fortune_future_MT']    = "已審結";
+
+$lang['fortune_payment_pending']    = "等待付款";
+$lang['fortune_payment_vip']    = "VIP免費算命";
+$lang['fortune_payment_notify']    = "通知付款";
+$lang['fortune_payment_already']    = "已付款";
+
+$lang['fortune_future_pending']    = "等待定盤";
+$lang['fortune_future_analysing']    = "定盤確認開始分析";
+$lang['fortune_future_already']    = "分析結束";
 
 $lang['fortune_request']    = "我要算命";
 $lang['fortune_teller_info']        = "命理師簡介";

@@ -143,6 +143,14 @@ class Utility_model extends CI_Model {
 
         return $str;
     }
+    function dbColumnDatetimeNoOffset($column , $AS_column = NULL , $chars = 16 , $style = 121)
+    {
+        if(  $AS_column == NULL)  $AS_column = $column;
+
+        $str = "CONVERT(VARCHAR(".$chars.") , CONVERT(datetimeoffset, ".$column.")  ,".$style." ) AS ".$AS_column;
+
+        return $str;
+    }
     function convertTimestampFormat($format, $timestamp)
     {
         $timezone_offset = $this->getTimezoneOffset();

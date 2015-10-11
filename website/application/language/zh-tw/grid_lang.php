@@ -91,6 +91,22 @@ $lang['grid_column_fortune_pblm'] = "問題或建議";
 $lang['grid_column_fortune_pblm_s'] = "問題或建議(可不填)";
 $lang['grid_column_fortune_pblm_code'] = "問題類別";
 
+$lang['grid_column_FortuneID'] = "編號";
+$lang['grid_fortune_column_Nickname'] = "算命者暱稱或姓名";
+$lang['grid_fortune_column_Role'] = "算命者性別";
+$lang['grid_column_Lunar'] = "算命者生時辰(農曆)";
+$lang['grid_column_Birth'] = "算命者生日(國曆)";
+$lang['grid_fortune_column_Email'] = "註冊的電子郵件";
+$lang['grid_column_PaymentStatus'] = "付費狀態";//0 : 等待付費，1:不需付費 2 : 已通知付費，3:已付費，
+$lang['grid_column_FortuneStatus'] = "算命狀態";
+$lang['grid_column_ST'] = "取消註記";
+$lang['grid_column_DateST'] = "取消日期";
+$lang['grid_column_MT'] = "審結註記";
+$lang['grid_column_DateMT'] = "審結日期";
+$lang['grid_column_DatePayment'] = "付款時間";
+$lang['grid_column_NotifyPaymentStatus'] = "通知付款註記";
+$lang['grid_column_DateNotifyPayment'] = "通知付款日期";
+
 
 /* End of file grid_lang.php */
 /* Location: ./application/language/zh-tw/grid_lang.php */

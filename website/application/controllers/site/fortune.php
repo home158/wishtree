@@ -134,7 +134,7 @@ class Fortune extends Site_Base_Controller {
 		    $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
         }
     }
-    public function year()
+    public function future()
     {
         $this->load->model('register_model');
         $q = $this->register_model->retrieve_user_info_by_GUID($this->session->userdata('GUID'));
@@ -191,7 +191,7 @@ class Fortune extends Site_Base_Controller {
 		        $this->utility_model->parse('site/_default/header',$this->display_data);
 		        $this->utility_model->parse('site/_default/header_logout',$this->display_data);
 		        $this->utility_model->parse('site/_default/female_navi',$this->display_data);
-		        $this->utility_model->parse('site/fortune/year',$this->display_data);
+		        $this->utility_model->parse('site/fortune/future',$this->display_data);
 		        $this->utility_model->parse('site/_default/footer',$this->display_data);
 		        $this->utility_model->parse('site/_default/socket_io',$this->display_data);
 		        $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
@@ -228,10 +228,9 @@ class Fortune extends Site_Base_Controller {
                 $insert_string = $this->db->insert_string('[dbo].[i_fortune_message]', $message_data);
                 $this->db->query( $insert_string );
             }
+            redirect( base_url() , 'fortune/history');
         }
     }
-    public function future()
-    {
-    }
+
 
 }

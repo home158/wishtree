@@ -11,5 +11,6 @@
             {FortuneMessage}
         </div>
         {/reply}
+
     </td>
 </tr>

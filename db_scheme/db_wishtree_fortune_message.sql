@@ -23,9 +23,9 @@ SET @GUID = NEWID()
 			[UserGUID] [char](36) NOT NULL  
 					REFERENCES [dbo].[i_user](GUID)						
 					ON DELETE CASCADE, 
-			[PblmEmail] [nvarchar](255) NOT NULL , -- 聯絡用 email,存最後一次資料
-			[PblmTel] [nvarchar](255) NOT NULL , -- 聯絡方式,存最後一次資料
-			[PblmCode] [nvarchar](5) NOT NULL , -- 問題類別
+			[PblmEmail] [nvarchar](255) NULL default NULL, -- 聯絡用 email,存最後一次資料
+			[PblmTel] [nvarchar](255) NULL default NULL, -- 聯絡方式,存最後一次資料
+			[PblmCode] [nvarchar](5) NOT NULL default 0, -- 問題類別
 
 			[FortuneMessage] [nvarchar](max) NULL default NULL, -- 問題(可不填)
 			[ReplyParent][char](36) NULL default NULL, -- GUID

@@ -1,6 +1,6 @@
 <div id="content">
-    <div class="fortune_set response clearfix">
-        <div class="block-wrapper clearfix">
+    <div class="fortune_set response clearfix ">
+        <div class="block-wrapper clearfix site">
             <ul class="tabs general" >
                 <li>
                     <a data-load="main_content" href="/fortune/request" class="ctrl">{fortune_request}</a>
@@ -22,10 +22,10 @@
                 </li>
             </ul>
         </div>
-        <div class="hd iconhead green">
+        <div class="hd iconhead green ">
             <h3>諮詢紀錄</h3>
         </div>
-        <div class="selectctr right">
+        <div class="selectctr right site">
             <a data-load="main_content" href="/fortune/history"><img src="/_images/ico_re_list.gif"> 回算命記錄清單</a>
         </div>
 
@@ -89,7 +89,7 @@
                         以下是您的詢問與回覆紀錄：
                     </th>
                     <th class="right NoDotV">
-                        <div class="IWantQbtn">
+                        <div class="IWantQbtn site">
                             <a href="/fortune/new_problem/{fortune_GUID}">我要詢問</a>
                         </div>
                     </th>
@@ -106,16 +106,70 @@
                             <em>發問時間：{DateCreate}(問題類別：{PblmCode})</em>
                         </div>
                         <div>{FortuneMessage}</div>
+                        <div class="admin">
+                            <span class="btn-reply btn btn-default btn-s" data-value="{MessageID}">
+                                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> 回覆
+                            </span>
+                        </div>
                     </td>
                 </tr>
 
                         {MessageReply}
+
+                <tr class="gray2 _default_hidden_" id="{MessageID}">
+                    <th class="right dot">
+                        回覆
+                    </th>
+                    <td class="left dot">
+                        <div>
+                            <form action="/admin/fortune/reply/{fortune_GUID}" method="POST">
+                                <input type="text" name="reply_parent" value="{db_GUID}" />
+                                <textarea class="QTextarea" name="fortune_message"></textarea>
+                                <input type="submit" value="{btn_submit}" class="btn-relax btn-m">
+                            </form>
+                        </div>
+                    </td>
+                </tr>
                 {/message_list}
 
             </tbody>
         </table>
-        <div class="selectctr right">
+        <div class="selectctr right site">
             <a data-load="main_content" href="/fortune/history"><img src="/_images/ico_re_list.gif"> 回算命記錄清單</a>
         </div>
     </div>
 </div>
+<script type="text/javascript" src="/_js/tinymce/tinymce.min.js"></script>
+
+<script>
+$(function () {
+    //tinyMCE init
+    tinyMCE.init({                'selector' : "textarea",
+                'theme' : "modern",
+                'language' : 'zh_TW',
+                'width' : '100%',
+                'height' : '100%',
+                'toolbar1' : "insertfile undo redo| preview | forecolor backcolor",
+                'plugins' : [
+                    "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                    "searchreplace wordcount visualblocks visualchars code fullscreen",
+                    "insertdatetime media nonbreaking save table contextmenu directionality",
+                    "paste textcolor colorpicker textpattern autoresize"
+                ],
+                menubar : false,
+                setup : function(ed)
+                {
+                    ed.on('init', function() 
+                    {
+                        this.getDoc().body.style.fontSize = '19px';
+                        this.getDoc().body.style.fontFamily = 'Helvetica, Arial, "微軟正黑體", sans-serif;';
+                    });
+                }
+                
+    });
+    $('.btn-reply').on('click',function(){
+       $('#'+$(this).attr('data-value')).toggle();
+    });
+});
+
+</script>

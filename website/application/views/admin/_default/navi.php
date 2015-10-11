@@ -56,6 +56,20 @@
           </li>
 
           <li class="dropdown">
+            <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">{fortune_services_future}<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a tabindex="-1" href="/admin/fortune/view">{fortune_view_all}</a></li>
+              <li class="divider"></li>
+              <li><a tabindex="-1" href="/admin/fortune/view/CD081E64-8314-4C4F-B010-EF734BCE6FB1">{fortune_payment_already}</a></li>
+              <li><a tabindex="-1" href="/admin/fortune/view/CD081E64-8314-4C4F-B010-EF734BCE6FB1">{fortune_payment_vip}</a></li>
+              <li><a tabindex="-1" href="/admin/fortune/view/CD081E64-8314-4C4F-B010-EF734BCE6FB1">{fortune_payment_pending}</a></li>
+              <li><a tabindex="-1" href="/admin/fortune/view/CD081E64-8314-4C4F-B010-EF734BCE6FB1">{fortune_future_ST}</a></li>
+              <li><a tabindex="-1" href="/admin/fortune/view/3D06BDFD-B2FB-41DA-A472-E7DB9854D8B4">{fortune_future_MT}</a></li>
+                
+            </ul>
+          </li>
+
+          <li class="dropdown">
             <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">{menu_admin_member}<b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a tabindex="-1" href="/admin/member/view">{rank_view_all}</a></li>

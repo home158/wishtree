@@ -6,6 +6,102 @@ class Fortune_model extends CI_Model {
     {
         parent::__construct();
     }
+    function select_data_limit_offset($table , 
+                    $top = 0, $bottom = 20 ,
+                    $column ='*',
+                    $payment_status = '0,1,2',
+                    $ST = '0,1',
+                    $MT = '0,1',
+                    $sort_column_id = 'FortuneID' , $order_method = 'ASC' , 
+                    $search_txt = false)
+    {
+        if($search_txt === false){
+            $query_search = "";
+        }else{
+            $query_search = " AND (concat(U.Nickname, Email) LIKE '%".$search_txt."%')";
+        }
+        if(is_array($column)){
+            $column = join(",", $column);
+        }
+        $number_rows = $bottom - $top + 1 ;
+        $query_rows = $this->db->query(
+            "SELECT 
+                ".$column."
+            FROM 
+            (
+                    [dbo].[i_user] AS U
+                LEFT JOIN 
+                    ".$table." AS F
+                ON
+                    F.[UserGUID] = U.[GUID]
+            )
+            WHERE 
+                    PaymentStatus in (".$payment_status.") 
+                AND
+                    ST in (".$ST.") 
+                AND
+                    MT in (".$MT.") 
+
+                ".$query_search." 
+            ORDER BY ".$sort_column_id." ".$order_method."
+            OFFSET ".$top."  ROWS
+            FETCH NEXT ".$number_rows." ROWS ONLY"
+        );
+
+        $query_count = $this->db->query(
+            "SELECT 
+                F.[GUID] AS [GUID]
+            FROM 
+            (
+                    [dbo].[i_user] AS U
+                LEFT JOIN 
+                    ".$table." AS F
+                ON
+                    F.[UserGUID] = U.[GUID]
+            )
+            WHERE 
+                PaymentStatus in (".$payment_status.") 
+
+                ".$query_search." 
+            ORDER BY ".$sort_column_id." ".$order_method.""
+        );
+        $GUID = array();
+        foreach ($query_count->result_array() as $row)
+        {
+            array_push($GUID, $row['GUID']);
+        }
+
+        $result = array(
+            'object' => $query_rows,
+            'num_rows' => $query_count->num_rows(),
+            'GUID_list' => $GUID
+        );
+        return $result;
+    }
+    function retrive_row_data_by_GUID($GUID ,  $column = '*')
+    {
+        if(is_array($column)){
+            $column = join(",", $column);
+        }
+        $query_rows = $this->db->query(
+            "SELECT 
+                ".$column."
+            FROM 
+            (
+                    [dbo].[i_user] AS U
+                LEFT JOIN 
+                    [dbo].[i_fortune] AS F
+                ON
+                    F.[UserGUID] = U.[GUID]
+            )
+            WHERE 
+                F.GUID = '".$GUID."' 
+        ");
+        $result = array(
+            'object' => $query_rows
+        );
+        return $result;
+    }
     function retrieve_histories($GUID, $fortuneGUID = NULL)
     {
         if($fortuneGUID === NULL){

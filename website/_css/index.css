@@ -1033,3 +1033,6 @@ input.text_count{
     text-align: center;
     border-radius: 0px;
 }
+._default_hidden_{display: none;}
+.admin{display: none;}
+.site{display: block;}

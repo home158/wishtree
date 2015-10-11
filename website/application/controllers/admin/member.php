@@ -6,7 +6,7 @@ class Member extends Admin_Base_Controller {
     {
         parent::__construct();
         $this->parse_display_data(
-            array( 'account' , 'rank' , 'email' , 'role' ,'btn', 'grid','register','member','city','language','birthday','height','bodytype','race',
+            array( 'fortune','account' , 'rank' , 'email' , 'role' ,'btn', 'grid','register','member','city','language','birthday','height','bodytype','race',
                 'income','property','education','maritalstatus' ,'smoking','drinking' , 'timezoneoffset' , 'dst' , 'alert' , 'menu','photo' , 'contextmenu', 'message')
         );
         $this->load->model('member_model');

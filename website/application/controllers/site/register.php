@@ -26,11 +26,13 @@ class Register extends Site_Base_Controller {
 
 		if ($this->form_validation->run() == FALSE)
 		{
-		    $this->parser->parse('site/_default/header',$this->display_data);
-		    $this->parser->parse('site/_default/header_login',$this->display_data);
-		    $this->parser->parse('site/register/step1',$this->display_data);
+		    $this->utility_model->parse('site/_default/header',$this->display_data);
+		    $this->utility_model->parse('site/_default/header_login',$this->display_data);
+		    $this->utility_model->parse('site/_default/fake_navi',$this->display_data);
+            
+		    $this->utility_model->parse('site/register/step1',$this->display_data);
 		
-		    $this->parser->parse('site/_default/footer',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer',$this->display_data);
 		    $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
         }else{
             //save agree to cookie
@@ -47,6 +49,7 @@ class Register extends Site_Base_Controller {
 
 		$this->parser->parse('site/_default/header',$this->display_data);
 		$this->parser->parse('site/_default/header_login',$this->display_data);
+		    $this->utility_model->parse('site/_default/fake_navi',$this->display_data);
 		$this->parser->parse('site/register/step2',$this->display_data);
 		
 		$this->parser->parse('site/_default/footer',$this->display_data);
@@ -104,10 +107,11 @@ class Register extends Site_Base_Controller {
             $this->display_data['birthday_month_options'] = $this->register_model->birthday_month_options();
             $this->display_data['birthday_date_options'] = $this->register_model->birthday_date_options();
 
-            $this->parser->parse('site/_default/header',$this->display_data);
-            $this->parser->parse('site/_default/header_login',$this->display_data);
-		    $this->parser->parse('site/register/step3',$this->display_data);
-		    $this->parser->parse('site/_default/footer',$this->display_data);
+            $this->utility_model->parse('site/_default/header',$this->display_data);
+            $this->utility_model->parse('site/_default/header_login',$this->display_data);
+		    $this->utility_model->parse('site/_default/fake_navi',$this->display_data);
+		    $this->utility_model->parse('site/register/step3',$this->display_data);
+		    $this->utility_model->parse('site/_default/footer',$this->display_data);
 		    $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
         }else{
             $this->load->library('uuid');
@@ -174,6 +178,7 @@ class Register extends Site_Base_Controller {
 
         $this->utility_model->parse('site/_default/header',$this->display_data);
         $this->utility_model->parse('site/_default/header_logout',$this->display_data);
+        $this->utility_model->parse('site/_default/fake_navi',$this->display_data);
 		$this->utility_model->parse('site/register/sending_validate_mail',$this->display_data);
 		$this->utility_model->parse('site/_default/footer',$this->display_data);
         $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);

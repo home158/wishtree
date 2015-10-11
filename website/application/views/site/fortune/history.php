@@ -72,27 +72,6 @@
 
                 </tr>
                 {/orderlist}
-                <tr>
-                    <th>YM1509060072971</th>
-                    <th>alpha 先生,批流年,乙亥(豬)年 二月初一寅時</th>
-                    <td>2015-10-06 18:23</td>
-                    <th>600</th>
-                    <th>
-                        等待付款
-                        <br>
-                        通知已付款
-
-                    </th>
-                    <th>等待定盤</th>
-                    <th>取消</th>
-                    <th>滿意度</th>
-                    <th>
-                        詢問
-                        <br/>
-                        查看
-                    </th>
-                    	
-                </tr>
             </tbody>
         </table>
         <div class="boldhead">

@@ -1,5 +1,5 @@
 <div id="content">
-    <div class="fortune_set clearfix">
+    <div class="fortune_set clearfix ">
         <div class="block-wrapper clearfix">
                 <ul class="tabs general" >
                     <li class="active">
@@ -41,11 +41,20 @@
                 {fortune_rule5}
             </li>
         </ol>
-        <div>
-            <a href="/fortune/year">{fortune_services_year}</a>
+        <div class="tc">
+            <a href="/fortune/future" type="button" class="btn btn-default btn-lg">
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> {fortune_btn_go_services_future}
+            </a>
+          
         </div>
-        <div>
-            <a href="/fortune/future">{fortune_services_future}</a>
-        </div>
+        <流程圖><br>
+        1.輸入個人論命資料<br>
+        2.繳費或VIP會員免付費<br>
+        3.命理師與委託人連繫定盤事宜<br>
+        4.定盤確認、分析命盤
+        4.命理師線上回覆或面對面論命諮詢<br>
+        5.針對命理師回覆的內容不清楚的地方可再次詢問<br>
+        6.命理師再次回覆<br>
+        7.滿意度評分
     </div>
 </div>
