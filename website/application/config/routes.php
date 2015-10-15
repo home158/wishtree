@@ -74,6 +74,11 @@ $route['wish/(:any)'] = 'site/wish/$1';
 $route['action'] = "site/action";
 $route['action/(:any)'] = 'site/action/$1';
 
+$route['subscribe'] = "site/subscribe";
+$route['subscribe/(:any)'] = 'site/subscribe/$1';
+
+
+
 $route['photo'] = "site/photo/show/public";
 $route['photo/public'] = "site/photo/show/public";
 $route['photo/private'] = "site/photo/show/private";

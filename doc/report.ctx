@@ -1,0 +1,374 @@
+\documentclass[12pt]{report}
+\usepackage{amssymb}
+\usepackage[a4paper]{geometry}
+\usepackage{graphicx,psfrag,booktabs,comment}
+\usepackage[sf,small]{titlesec}
+\usepackage{tabularx,array}
+\usepackage{url}
+\usepackage{natbib}
+\newcommand{\chk}{$\square\kern -11pt {\footnotesize\surd}$}
+\renewcommand{\today}{\number\year.\number\month.\number\day}
+\def\tb#1#2{\mathop{#1\vphantom{\sum}}\limits_{\displaystyle #2}}
+\newcommand\laref{\smallskip\noindent\hangindent=\parindent}
+
+\newcount\fs
+\def\sz#1#2{\fs=#1#2
+ \ifnum\fs=10\fontsize{10}{13.5pt plus.2pt minus .1pt}\selectfont
+ \else\ifnum\fs=11\fontsize{10.95}{14.5pt plus.3pt minus.2pt}\selectfont
+ \else\ifnum\fs=12\fontsize{12}{20pt plus.3pt minus .2pt}\selectfont
+ \else\ifnum\fs=14\fontsize{14.4}{20pt plus.4pt minus .3pt}\selectfont
+ \else\ifnum\fs=17\fontsize{17.28}{22pt plus.5pt minus .3pt}\selectfont
+ \else\ifnum\fs=20\fontsize{20.73}{28pt plus.6pt minus .4pt}\selectfont
+ \else\ifnum\fs=25\fontsize{24.88}{33pt plus.7pt minus .4pt}\selectfont
+ \else\ifnum\fs=09\fontsize{9}{11pt plus.3pt minus .3pt}\selectfont
+ \else\ifnum\fs=08\fontsize{8}{9.5pt plus.3pt minus .2pt}\selectfont
+ \else\ifnum\fs=07\fontsize{7}{9pt plus.3pt minus .2pt}\selectfont
+ \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
+
+\renewcommand{\figurename}{圖}
+\renewcommand{\tablename}{表}
+\renewcommand{\abstractname}{}
+\newcommand{\ditto}{\rule{1cm}{.4pt}\ }
+\renewcommand{\refname}{\ctxfbb 參考文獻}
+
+\ctxfdef{\section}{\ctxfbb}
+\ctxfdef{\subsection}{\ctxfbb}
+\ctxfdef{\subsubsection}{\ctxfbb}
+
+\textwidth=5.2in
+\textheight=8.7in
+
+% \voffset=-1cm
+% \hoffset=-1cm \voffset=1.6cm  % 2-up
+
+\renewcommand{\textfraction}{0.15}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.65}
+\renewcommand{\floatpagefraction}{0.60}
+\abovecaptionskip=6pt
+\belowcaptionskip=6pt
+\setcounter{chapter}{-1}
+
+
+\begin{document}
+\thispagestyle{empty}
+\begin{center}
+{\Large \ctxfk
+許願池-全世界第一個算命交友網}\\[2cm]
+{\Large \ctxfbb
+ [UI/UX網站功能說明書]} \\[4cm]
+\fontsize{14.4}{24pt}\selectfont\ctxfk
+
+\end{center}
+
+\begin{center}
+\vfill
+中華民國104年10月14日
+\end{center}
+
+\newpage
+\sz12
+\begin{center}
+{\Large \ctxfbb
+ [UI/UX網站功能說明書]}\\[1cm]
+
+\end{center}
+
+\vspace{2cm}
+\noindent
+\chapter{全域功能}
+
+這裡包含了頁首(Header)、菜單(Navigation)、頁尾(Footer)的基本功能，這些功能都會在每頁出現，從Chapter1後將不再重複描述。
+
+
+\section{頁首(Header)}
+要有小型Logo或好記的標語。
+\subsection{登入}
+所有未登入的情況下，必定顯示登入連結。
+\subsection{升級VIP}
+從一般會員加入VIP的價錢。
+
+\section{菜單(Navigation)}
+\subsection{首頁}
+登入後的預設頁面。
+
+\subsection{許願池}
+刑登別入許下的願望，有回覆的功能。
+
+\subsection{留言板}
+本頁可以查看訊息，發送訊息。
+
+
+\subsection{聊天室}
+暫時不做。
+
+\subsection{算命}
+
+
+\subsection{誰看過我}
+路人瀏覽過你的資料，將在這裡出現列表。
+
+
+\subsection{我的願望}
+發表並管理我的願望。
+
+\subsection{搜索}
+利用簡單的搜索功能找到您有興趣的使用者。
+
+\subsection{照片}
+上傳並管理您的照片。
+
+\subsection{帳號}
+記錄您的帳號使用記錄及權限。
+
+
+\section{頁尾(Footer)}
+\subsection{免費註冊}
+提拱快速連結免費加入一般會員與方法。
+\subsection{語系切揬}
+提供三種語言\textbf{English、繁中、简中}。
+
+\subsection{隱私政策}
+\subsection{關於我們}
+\subsection{服務條款}
+1. 網站合法授權使用：
+
+當您進入並使用本網站時，即表示您已同意有關為保障合法或其他目的之系統監視執行；任何非經合法授權使用本網站之行為均可能使您遭致刑事起訴或罰款制裁。
+
+2. 用戶同意接受本「使用條款」：
+
+當您進入並使用本網站，即視同您已同意遵守本「使用條款」與其他有關著作權、版權、商標專用權、網路智慧財產權、隱私權等之法律規定。
+
+3. WishPool 保留權利：
+
+WishPool 不定時增刪修改網頁資訊內容，或變更網頁服務功能，無需事先或另行通知用戶；亦得不定時修訂本「使用條款」，並於網站張貼時隨即生效，無需事先或另行通知用戶或對用戶負擔任何責任。
+
+用戶須遵守之規則：
+電腦系統與網路通訊相關資源，包括所有電腦設備、週邊系統、伺服器、所有連接之網路、及資料、資訊、報告、相片、圖像、圖表、程式、與相關之儲存媒體如磁帶、磁碟、硬碟、光碟、記憶卡等在內之網站內容之著作權及一切專屬權利均屬於 WishPool 的財產；用戶進入並使用系統及資訊時，應遵守以下規定：
+
+(1). 用戶不得利用 WishPool 網站電腦系統、網路通訊相關資源、或提供之服務從事違法之行為；不得藉由本中心網站進行任何恐嚇、誹謗、騷擾、冒犯他人之活動，或其他任何犯罪行為；
+
+(2). WishPool 網站存用、顯示之資料與內容，包括企業標誌、商標、服務標章等一切智慧財產權屬於「THURS」的財產；用戶未經授權不得企圖使用、存取、或使用儲存於本中心系統之資料或程式；亦不得傳播、複製、修改、發佈或傳送；
+
+(3). 用戶不得進行任何不利於 WishPool 、可能對網路正常傳輸造成不利影響的行為；
+
+(4). 用戶對 WishPool 網站或其中提供之資訊不具備任何權利；用戶不得為其他任何目的，以其他任何方式使用本中心網站所提供之資訊或服務。
+
+(6). 用戶不得向 WishPool 網站輸入或上載任何含有病毒、或其他意圖損害、干擾、降低本中心之系統或網路效率或相關之服務品質之電腦程式路徑。
+
+4. 外部網站之連接：
+
+THURS 網站可能提供其他網站連結之情形，用戶承認並同意本中心對該等第三方網站之內容、正確性、或有效性，不負任何責任。
+
+5. 違約賠償：
+
+用戶違反本使用條款或其他相關之著作權法、民法、刑法法律規定，以致對本中心或其他任何第三者造成損失，用戶同意負擔由此造成之損害賠償責任。
+
+6. 法律管轄：
+
+本「使用條款」適用中華民國法律。
+\subsection{聯絡我們}
+
+\begin{itemize}
+\item info@wishpool.com
+\item +1 123-456-7890
+\item 646 9th Avenue, Suite A, New York
+\end{itemize}
+
+\chapter{歡迎頁}
+
+此頁為未登入的頁面，描述這個網站的功能，以簡單的文字圖像或背景圖吸引使用者註冊。需提到的功能如下：
+
+\noindent
+\framebox{
+\parbox[t]{15cm}{
+Welcome to wishpool since 2014. We provide a wide-ranging....\\
+}
+}
+\noindent
+\subsection{我們的服務}
+\begin{itemize}
+\item 交友
+\item 算命
+\end{itemize}
+
+\noindent
+\framebox{
+\parbox[t]{15cm}{
+(要呈現在網頁上的介紹文字)\\
+}
+}
+\noindent
+
+\subsection{我們的團隊}
+\noindent
+\framebox{
+\parbox[t]{15cm}{
+(要呈現在網頁上的介紹文字)\\
+}
+}
+\noindent
+\subsection{聯絡我們}
+\noindent
+\framebox{
+\parbox[t]{15cm}{
+(要呈現在網頁上的介紹文字)\\
+}
+}
+\noindent
+
+\chapter{註冊頁}
+在登入時必須要同意並閱讀我們的服務條款才能註冊，註冊成功後系統會發出認證信，認證通過後尚須通過人工資料審核。註冊的角色分為兩種類型
+\begin{itemize}
+\item Male
+\item Female
+\end{itemize}
+第一步驟：同意並閱讀我們的服務條款\\
+第二步驟：選擇帳戶類型\\
+第三步驟：用戶資料\\
+
+\noindent
+\framebox{
+\parbox[t]{15cm}{
+當您的個人檔案在審核中，或審核未通時，其他會員無法瀏覽您的個人資料。
+}
+}
+\noindent
+
+
+
+\section{第一部份：帳戶用戶名與密碼}
+\begin{itemize}
+\item 帳戶類型
+\item 電子郵件
+\item 密碼\\
+-* 密碼長度8-20位，內容至少要有一個數字與英文字母
+
+\item 再輸入一次密碼
+\item 時區
+\item 日光節約時間
+\end{itemize}
+
+\section{第二部份：個人資料}
+\begin{itemize}
+\item 暱稱
+\item 關於我
+\end{itemize}
+
+\section{第三部份：關於自己}
+\begin{itemize}
+\item 國籍
+\item 城市
+\item 慣用語言
+\item 年收入\footnote{\label{note1}帳戶類型為Female時此欄位隱藏}
+\item 總資產\footnotemark[\ref{note1}]
+\item 出生日期
+\item 身高
+\item 體型
+\item 種族
+\item 教育程度\footnote{\label{note2}非必填欄位}
+\item 婚姻狀態\footnotemark[\ref{note2}]
+\item 吸菸習慣\footnotemark[\ref{note2}]
+\item 飲酒習慣\footnotemark[\ref{note2}]
+\end{itemize}
+
+\section{第四部份：您想要的約會安排}
+\begin{itemize}
+\item 描述您理想中的約會對象
+\end{itemize}
+\chapter{登入頁}
+使用電子郵件與密碼登入\\
+\noindent
+\framebox{
+\parbox[t]{15cm}{
+「我的願望，最有力量!」\\
+芸芸眾生中普通的一員，一個真實而平凡的人，卻有著自己的願望，自己的性格和追求。
+}
+
+}
+\noindent
+
+
+\section{忘記密碼}
+前往忘記密碼表單
+
+\section{免費註冊}
+前往註冊頁面
+
+\section{登入}
+按入登入按鈕，檢查電子郵件與密碼正確性，進行登入程序。
+可能出現的錯誤：
+\noindent
+\framebox{
+\parbox[t]{15cm}{
+電子郵件或密碼錯誤。\\
+密碼 至少包含 8 個字。
+}
+}
+
+\section{自動記住帳號}
+勾選「自動記住帳號」下次登入自動將電子郵件及密碼填入。
+
+\chapter{首頁}
+登入後的預設頁面。此頁會亂數顯示十筆會員的封面照片以及亂數顯示十筆新加入的會員。
+帳戶類行為Male只會顯示Female的照片；同理Female只會顯示Male的照片。點擊會員照片可以顯示所有照片(公開或私人)及會員資訊(關於我)。
+
+\noindent
+\framebox{
+\parbox[t]{15cm}{
+歡迎!xxxxxxx\\
+富豪新貴 Daddy！\\
+新進會員！
+}
+}
+\noindent
+\section{會員狀態}
+要能夠顯示會員上線或離線的資訊。
+
+\section{會員資訊(關於我)}
+   
+顯示會員所有詳細的資訊及照片包含公開與私人。
+
+\noindent
+\framebox{
+\parbox[t]{15cm}{
+歡迎!xxxxxxx\\
+富豪新貴 Daddy！\\
+新進會員！
+}
+}
+\noindent
+
+\subsection{留言給他}
+進入留言表單快速發送訊息。
+
+\subsection{加入收藏、移除收藏}
+將您有興趣的會員加入收藏日後可以「帳戶」、「我的收藏」追蹤。\\
+操作上可能出現的訊息：\\
+\noindent
+\framebox{
+\parbox[t]{15cm}{
+已加入收藏，不可重覆加入。\\
+加入收藏成功。
+
+}
+}
+\noindent
+
+\subsection{加入黑名單、移除黑名單}
+將會員加入黑名單，加入後該會員不會看到您的照片資料及訊息，但您還是可以看到他的資訊，日後可以「帳戶」、「我的黑名單」解除。\\
+操作上可能出現的訊息：\\
+\noindent
+\framebox{
+\parbox[t]{15cm}{
+黑名單已加入，不可重覆加入。\\
+黑名單加入成功。
+
+}
+}
+\noindent
+\subsection{會員狀態}
+要能夠顯示會員上線或離線的資訊。
+
+
+\end{document}
