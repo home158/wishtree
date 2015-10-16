@@ -13,10 +13,12 @@ $lang['fortune_payment_vip']    = "VIP免費算命";
 $lang['fortune_payment_notify']    = "通知付款";
 $lang['fortune_payment_already']    = "已付款";
 
+$lang['fortune_no_status']  = "--";
 $lang['fortune_future_pending']    = "等待定盤";
 $lang['fortune_future_analysing']    = "定盤確認開始分析";
 $lang['fortune_future_already']    = "分析結束";
 
+$lang['fortune_advise_message']        = "命格分析";
 $lang['fortune_request']    = "我要算命";
 $lang['fortune_teller_info']        = "命理師簡介";
 $lang['fortune_services']        = "服務項目";
@@ -36,8 +38,7 @@ $lang['fortune_comm_account']        = "留下您的帳號或連絡方式";
 $lang['fortune_question_placeholder']        = "您如果未留下任何問題，您可以當面詢問諮詢師問題，或諮詢師針對您的命格加以分析並給予建議。";
 $lang['fortune_need_pay']        = "表單送出後，您必須在「消費紀錄」完成付費，諮詢師會與您聯繫並開始定盤。";
 $lang['fortune_aggrement']        = "我已詳細閱讀注意事項，並同意接受";
-$lang['fortune_paymentstatus_0']        = "等待付款<br/><a href='#'>通知已付款</a>";
-$lang['fortune_paymentstatus_1']        = "不須付費";
+$lang['fortune_paymentstatus_0']        = "等待付款<br/><a href='javascript:;' name='pay_notify' data-value='%s'>通知已付款</a>";
 $lang['fortune_paymentstatus_2']        = "已通知付費<br>等待確認";
 $lang['fortune_paymentstatus_3']        = "付費確認";
 $lang['fortune_status_0']        = "等待定盤";

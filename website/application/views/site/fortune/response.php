@@ -75,6 +75,29 @@
 
         <div class="boldhead mtop25">
             <div class="wraper">
+                命格分析(以下是命理師針對您的命盤的建議與分析)
+            </div>
+        </div>
+        <div>
+        {AdviseMessage}
+        </div>
+        <div class="admin">
+            <div>
+                <span class="btn-reply btn btn-default btn-s" data-value="{MessageID}">
+                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> 新增
+                </span>
+            </div>
+            <div>
+                <form action="/admin/fortune/advise_add/{fortune_GUID}" method="POST">
+                    <input type="text" name="advise_GUID" value="" />
+                    <textarea class="QTextarea" name="advise_message"></textarea>
+                    <input type="submit" value="{btn_submit}" class="btn-relax btn-m">
+                    <input id="post_publish" type="checkbox" checked /> <label for="post_publish">暫存文章，不發佈給算命者。</label>
+                </form>
+            </div>
+        </div>
+        <div class="boldhead mtop25">
+            <div class="wraper">
                 諮詢紀錄
             </div>
         </div>

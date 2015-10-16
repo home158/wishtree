@@ -104,3 +104,22 @@
         </ol>
     <div>
 </div>
+<script>
+    $('a[name="pay_notify"]').on('click',function(){
+        var GUID = $(this).attr('data-value');
+        console.log(GUID);
+            $.ajax({
+                url: '/fortune/payment_notify',
+                dataType: 'json',
+                type: 'POST',
+                data: {
+                    GUID:GUID
+                },
+                success: function(r) {
+                    console.log(r);
+                }
+            });
+
+    });
+    
+</script>

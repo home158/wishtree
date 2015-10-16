@@ -65,7 +65,7 @@ class Fortune extends Admin_Base_Controller {
                 'PblmTel' => NULL,
                 'PblmEmail' => NULL,
                 'PblmCode' => 0,
-                'FortuneMessage' => $this->input->post('fortune_message' , TRUE)
+                'FortuneMessage' => $this->input->post('fortune_message' )
             );
             $insert_string = $this->db->insert_string('[dbo].[i_fortune_message]', $message_data);
             $this->db->query( $insert_string );
@@ -199,6 +199,27 @@ class Fortune extends Admin_Base_Controller {
         }else{
             echo $this->error_model->retrieve_error_msg(1);
         }
+    }
+    public function advise_add($fortune_GUID)
+    {
+        $advise_GUID = $this->input->post('status',TRUE);
+        $advise_data = array(
+            'FortuneGUID' => $fortune_GUID,
+            'UserGUID' => $this->session->userdata('GUID',TRUE),
+            'AdviseMessage' => $this->input->post('advise_message' , TRUE),
+            'Publish' => $this->session->userdata('post_publish',TRUE)
+        );
+        if($advise_GUID){
+            $query = $this->db->update('[dbo].[i_fortune_advise]', $advise_data, array('GUID' => $advise_GUID));
+        
+        }else{
+            $this->load->library('uuid');
+            $advise_data['GUID'] = $this->uuid->v4();
+            $insert_string = $this->db->insert_string('[dbo].[i_fortune_advise]', $advise_data);
+            $this->db->query( $insert_string );
+        
+        }
+            redirect( base_url() , 'admin/fortune/detail/'.$fortune_GUID);
 
     }
     private function additionalColumn()

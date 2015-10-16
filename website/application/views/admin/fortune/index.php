@@ -695,7 +695,7 @@ var O_PARENT = {
                     {
                         id: "NotifyPaymentStatus",
                         name: '{grid_column_NotifyPaymentStatus}',
-                        width: 65,
+                        width: 95,
                         sortAsc: true
                     },
                     {

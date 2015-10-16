@@ -37,7 +37,7 @@ SET @GUID = NEWID()
 			--[Request] [nvarchar](max) NULL default NULL, -- 問題(可不填)
 			[PblmEmail] [nvarchar](255) NOT NULL , -- 聯絡用 email,存最後一次資料
 			[PblmTel] [nvarchar](255) NOT NULL , -- 聯絡方式,存最後一次資料
-			[PaymentStatus] [tinyint] NOT NULL default 0, --付費註記 0 : 等待付費，1:不需付費 :已付費，
+			[PaymentStatus] [tinyint] NOT NULL default 0, --付費註記 0 : 等待付費; 1:不需付費; 2:已付費，
 			[DatePayment] [datetime] NULL default NULL,	-- 付費註記時間
 			[NotifyPaymentStatus] [tinyint] NOT NULL default 0, --通知付費註記 0 : 等待通知 ; 1:已通知付費
 			[DateNotifyPayment] [datetime] NULL default NULL,	-- 通知付費註記時間

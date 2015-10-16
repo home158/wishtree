@@ -231,6 +231,25 @@ class Fortune extends Site_Base_Controller {
             redirect( base_url() , 'fortune/history');
         }
     }
+    public function payment_notify()
+    {
+        $this->load->model('error_model');
+        $GUID = $this->input->post('GUID');
+        $update_data = array(
+            'NotifyPaymentStatus' => 1,
+            'DateNotifyPayment' => date('Y-m-d H:i:s')
+        );
+        if($update_data['NotifyPaymentStatus'] == 0){
+            $update_data['DatePayment'] = NULL;
+        }
+        $query = $this->db->update('[dbo].[i_fortune]', $update_data, array('GUID' => $GUID));
 
+        header('Content-Type: application/json');
+        if($query == true){
+            echo $this->error_model->retrieve_error_msg(0 , NULL);
+        }else{
+            echo $this->error_model->retrieve_error_msg(1);
+        }
+    }
 
 }

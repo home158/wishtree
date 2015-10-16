@@ -123,6 +123,7 @@ class Fortune_model extends CI_Model {
         [Maritalstatus],
         [PaymentStatus],
         [FortuneStatus],
+        [NotifyPaymentStatus],
         [ST],
         ".$this->utility_model->dbColumnDatetime('[DateCreate]')."
 
@@ -218,13 +219,18 @@ class Fortune_model extends CI_Model {
     function fortune_ST($r)
     {
         $this->lang->load('fortune');
+        if($r['PaymentStatus'] == 2)
+            return $this->lang->line('fortune_no_status');
+        if($r['NotifyPaymentStatus'] == 1)
+            return $this->lang->line('fortune_no_status');
+
         if($r['ST'] == 1){
             return $this->lang->line('fortune_st_1');
         }else{
             if($r['PaymentStatus'] < 2){
                 return $this->lang->line('fortune_st_0');
             }else{
-                return '';
+                return $this->lang->line('fortune_no_status');
             }
         }
     }
@@ -257,34 +263,46 @@ class Fortune_model extends CI_Model {
     function fortune_status($r)
     {
         $this->lang->load('fortune');
-        if($r['FortuneStatus'] == 0){
-            return $this->lang->line('fortune_status_0');
-        }
-        if($r['FortuneStatus'] == 1){
-            return $this->lang->line('fortune_status_1');
-        }
-        if($r['FortuneStatus'] == 2){
-            return $this->lang->line('fortune_status_2');
-        }
-        if($r['FortuneStatus'] == 3){
-            return $this->lang->line('fortune_status_3');
+        if($r['ST'] == 1)
+            return $this->lang->line('fortune_no_status');
+        
+        if($r['PaymentStatus'] == 0)
+        {
+            return $this->lang->line('fortune_no_status');
+        }else{
+            if($r['FortuneStatus'] == 0){
+                return $this->lang->line('fortune_status_0');
+            }
+            if($r['FortuneStatus'] == 1){
+                return $this->lang->line('fortune_status_1');
+            }
+            if($r['FortuneStatus'] == 2){
+                return $this->lang->line('fortune_status_2');
+            }
+            if($r['FortuneStatus'] == 3){
+                return $this->lang->line('fortune_status_3');
+            }
         }
     }
     function order_status($r)
     {
         $this->lang->load('fortune');
+        if($r['ST'] == 1)
+            return $this->lang->line('fortune_no_status');
         if($r['PaymentStatus'] == 0){
-            return $this->lang->line('fortune_paymentstatus_0');
+            if($r['NotifyPaymentStatus'] == 0)
+                return sprintf( $this->lang->line('fortune_paymentstatus_0') , $r['db_GUID']);
+            else
+                return $this->lang->line('fortune_paymentstatus_2');
+                
         }
         if($r['PaymentStatus'] == 1){
-            return $this->lang->line('fortune_paymentstatus_1');
+            return $this->lang->line('fortune_payment_vip');
         }
         if($r['PaymentStatus'] == 2){
-            return $this->lang->line('fortune_paymentstatus_2');
-        }
-        if($r['PaymentStatus'] == 3){
             return $this->lang->line('fortune_paymentstatus_3');
         }
+
         
     }
 }
