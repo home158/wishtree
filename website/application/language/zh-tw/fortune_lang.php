@@ -58,5 +58,8 @@ $lang['fortune_pblm_12910']        = "更改論命資料";
 $lang['fortune_pblm_12913']        = "取消訂單-客服";
 $lang['fortune_pblm_12914']        = "其他";
 
+$lang['fortune_advise_delete_confirm'] = "請確認是否刪除命格分析?刪除後無流復原。";
+$lang['fortune_no_data_to_display'] = "目前沒有任何資料。";
+
 /* End of file fortune_lang.php */
 /* Location: ./application/language/zh-tw/fortune_lang.php */

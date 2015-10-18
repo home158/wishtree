@@ -142,7 +142,7 @@ ul li {
     color: #F00;
 }
 .msg .hd, .login_msg .hd {
-    font-family: "微軟正黑體","Microsoft JhengHei";
+   
     font-size: 22px;
     font-weight: bold;
 }
@@ -439,7 +439,7 @@ select {
     padding: 15px;
     float: left;
     width: 130px;
-    font-family: "Segoe UI Semibold";
+   
     margin-bottom: 0px;
 }
 .photo_list li .image-box{
@@ -952,21 +952,22 @@ li.user_list{
     border-bottom: 1px solid #9CC6DA;
 }
 .listtable {
-    font: 13px/1.231 Arial;
+    line-height: 1.2;
     width: 100%;
 }
 .listtable thead.gray td, .listtable thead.gray th {
     background-color: #eee;
     padding: 8px 9px 4px 9px;
     border-bottom: 1px solid #bbb;
-    font-family: "PMingLiu";
+    
 }
 .listtable tbody td, .listtable tbody th {
     padding: 8px 5px 4px 5px;
     border-top: 1px solid #DDDDDD;
-    line-height: 1.3;
+    line-height: 185%;
     vertical-align: top;
     font-weight: 400;
+    
 }
 .listtable td, .listtable th {
     padding: 9px;
@@ -977,6 +978,7 @@ li.user_list{
 .listtable td.dot, .listtable th.dot {
     
 }
+.reply_message{font-size: 16px;line-height: 185%;}
 .table-bborder {
     border-bottom: 1px solid #9CC6DA;
 }
@@ -1006,9 +1008,8 @@ li.user_list{
     padding: 4px 5px 3px 15px;
     min-height: 21px;
 }
-.mtop25{
-    margin-top: 25px;
-}
+.mtop25{margin-top: 25px;}
+.mbtn20{margin-bottom: 20px;}
 .tit-box {
     border: 1px solid #CCC;
     background: #EEE;

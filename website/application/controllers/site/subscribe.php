@@ -27,4 +27,31 @@ class Subscribe extends Site_Base_Controller {
             $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
         }
     }
+    public function ipn()
+    {
+        $this->load->helper('file');
+        $path = './temp/ipn.txt';
+
+        $history = read_file($path);
+        if($history){
+            $logs = json_decode($history);
+        }else{
+            $logs = array();
+        }
+        $this->load->library('uuid');
+        $uuid = $this->uuid->v4();
+        $line = array(
+                'track' => $uuid,
+                'time' => time()
+            );
+        $json_content = array(
+            $line
+        );
+        $new_logs = array_merge($json_content , $logs );
+        
+        
+        write_file($path, json_encode($new_logs));
+        print_r($new_logs);
+        return $line;
+    }
 }

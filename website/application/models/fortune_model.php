@@ -149,6 +149,61 @@ class Fortune_model extends CI_Model {
         }
         return $r;
     }
+    function retrive_advise_by_GUID($GUID)
+    {
+        $query = $this->db->query("
+        SELECT
+            [GUID] AS [db_GUID],
+            [AdviseMessage],
+            [Publish],
+            ".$this->utility_model->dbColumnDatetime('[DateCreate]' , NULL , 19)."
+        FROM
+            [dbo].[i_fortune_advise]
+        WHERE 
+            GUID = '".$GUID."'"
+        );
+        $r = $query->row_array();
+        return $r;
+    }
+    function retrieve_advise_messages($FortuneGUID, $type='site', $public = '1' )
+    {
+        $this->lang->load('fortune');
+        $this->lang->load('btn');
+        $query = $this->db->query("
+        SELECT
+            [GUID] AS [db_GUID],
+            [AdviseMessage],
+            [Publish],
+            ".$this->utility_model->dbColumnDatetime('[DateCreate]' , NULL , 19)."
+        FROM
+            [dbo].[i_fortune_advise]
+        WHERE 
+            FortuneGUID = '".$FortuneGUID."'
+            AND
+            Publish in (".$public.") 
+        ORDER BY FortuneAdviseID ASC
+            
+        ");
+        $r = $query->result_array();
+        foreach($r as $key => $value){
+            $value['btn_edit'] = $this->lang->line('btn_edit');
+            $value['btn_delete'] = $this->lang->line('btn_delete');
+            if($value['Publish'] == 1){
+                $value['btn_publish_or_anti_publish'] = $this->lang->line('btn_anti_publish');
+                $value['btn_publish_or_anti_publish_glyphicon'] = 'eye-close';
+                $value['label_fortune_publish'] = 'label-success';
+                $value['label_fortune_publish_text'] = $this->lang->line('btn_published_stasut');
+                
+            }else{
+                $value['btn_publish_or_anti_publish'] = $this->lang->line('btn_publish');
+                $value['btn_publish_or_anti_publish_glyphicon'] = 'eye-open';
+                $value['label_fortune_publish'] = 'label-danger';
+                $value['label_fortune_publish_text'] = $this->lang->line('btn_none_publish_stasut');
+            }
+            $r[$key]['AdviseMessage'] = $this->parser->parse($type.'/fortune/advise',$value , TRUE);
+        }
+        return $r;
+    }
     function retrieve_response_messages($GUID, $fortuneGUID)
     {
         $query = $this->db->query("

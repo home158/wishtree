@@ -7,7 +7,7 @@ class Fortune extends Admin_Base_Controller {
     {
         parent::__construct();
         $this->parse_display_data(
-            array( 'fortune','menu','btn','contextmenu','grid')
+            array( 'fortune','menu','btn','contextmenu','grid', 'mce')
         );
         $this->load->model('fortune_model');
 
@@ -22,28 +22,22 @@ class Fortune extends Admin_Base_Controller {
         $this->display_data['fortune_GUID'] = $GUID;
         $orderlist = $this->fortune_model->retrieve_histories($r['UserGUID'],$GUID);
         $message_list = $this->fortune_model->retrieve_response_messages($r['UserGUID'],$GUID);
+        $advise_list = $this->fortune_model->retrieve_advise_messages($GUID,'admin','0,1');
         $this->display_data['orderlist'] = $orderlist;
         $this->display_data['message_list'] = $message_list;
+        $this->display_data['advise_list'] = $advise_list;
+        
+        if(count($advise_list) == 0){
+            $this->display_data['__advise_no_data_to_display__'] = $this->lang->line('fortune_no_data_to_display');
+        }else{
+            $this->display_data['__advise_no_data_to_display__'] = '';
+        }
 
-
-        $this->load->library('tinymce');
-        $this->display_data['head'] = $this->tinymce->createhead();
-        $buttons = array(
-            array(
-                'name' => "Submit",
-                'type' => 'submit',
-                'class' => "btn-relax btn-xl",
-                'value' => "新增"
-            ),
-            array(
-                'name' => "Reset",
-                'type' => 'reset',
-                'class' => "btn-gray btn-xl",
-                'value' => "取消"
-            )
-        );
-
-        $this->display_data['mce'] = $this->tinymce->textarea(true , 'products_admin/add_process' , $buttons);
+        if(count($message_list) == 0){
+            $this->display_data['__message_no_data_to_display__'] = $this->lang->line('fortune_no_data_to_display');
+        }else{
+            $this->display_data['__message_no_data_to_display__'] = '';
+        }
 
         $this->utility_model->parse('site/_default/header',$this->display_data);
         
@@ -200,27 +194,83 @@ class Fortune extends Admin_Base_Controller {
             echo $this->error_model->retrieve_error_msg(1);
         }
     }
-    public function advise_add($fortune_GUID)
+    public function advise_result()
     {
-        $advise_GUID = $this->input->post('status',TRUE);
-        $advise_data = array(
-            'FortuneGUID' => $fortune_GUID,
-            'UserGUID' => $this->session->userdata('GUID',TRUE),
-            'AdviseMessage' => $this->input->post('advise_message' , TRUE),
-            'Publish' => $this->session->userdata('post_publish',TRUE)
-        );
-        if($advise_GUID){
-            $query = $this->db->update('[dbo].[i_fortune_advise]', $advise_data, array('GUID' => $advise_GUID));
-        
-        }else{
-            $this->load->library('uuid');
-            $advise_data['GUID'] = $this->uuid->v4();
-            $insert_string = $this->db->insert_string('[dbo].[i_fortune_advise]', $advise_data);
-            $this->db->query( $insert_string );
-        
-        }
-            redirect( base_url() , 'admin/fortune/detail/'.$fortune_GUID);
+            $this->parser->parse('admin/_default/popup_header' , $this->display_data);
+		    $this->parser->parse('admin/fortune/popup_mce_result' , $this->display_data);
+            $this->parser->parse('admin/_default/popup_footer' , $this->display_data);
 
+    }
+    public function advise_delete()
+    {
+        $this->load->model('error_model');
+        $advise_GUID = $this->input->post('GUID',TRUE);
+        $query = $this->db->delete('[dbo].[i_fortune_advise]', array('GUID' => $advise_GUID)); 
+        header('Content-Type: application/json');
+        if($query == true){
+            echo $this->error_model->retrieve_error_msg(0);
+        }else{
+            echo $this->error_model->retrieve_error_msg(1);
+        }
+
+
+    }
+    public function publish()
+    {
+        $this->load->model('error_model');
+        $advise_GUID = $this->input->post('GUID',TRUE);
+        $advise_data = array(
+            'Publish' => $this->input->post('status',TRUE)
+        );
+        $query = $this->db->update('[dbo].[i_fortune_advise]', $advise_data, array('GUID' => $advise_GUID));
+        //echo $this->db->last_query();
+
+        header('Content-Type: application/json');
+        if($query == true){
+            echo $this->error_model->retrieve_error_msg(0);
+        }else{
+            echo $this->error_model->retrieve_error_msg(1);
+        }
+
+    }
+    public function advise($fortune_GUID,$advise_GUID = FALSE)
+    {
+		$this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<em class="form_error">', '</em>');
+		$this->form_validation->set_rules('advise_message', $this->display_data['grid_column_fortune_pblm'], 'trim|required');
+        
+		if ($this->form_validation->run() == FALSE)
+		{
+            $this->display_data['popup_header_text'] = $this->display_data['fortune_advise_message'];
+            if($advise_GUID){
+                $result = $this->fortune_model->retrive_advise_by_GUID($advise_GUID);
+                $this->display_data['advise_message'] = $result['AdviseMessage'];
+            }else{
+                $this->display_data['advise_message'] = '';
+                
+            }
+            $this->parser->parse('admin/_default/popup_header' , $this->display_data);
+		    $this->parser->parse('admin/fortune/popup_mce' , $this->display_data);
+            $this->parser->parse('admin/_default/popup_footer' , $this->display_data);
+
+        }else{
+            $advise_data = array(
+                'FortuneGUID' => $fortune_GUID,
+                'UserGUID' => $this->session->userdata('GUID',TRUE),
+                'AdviseMessage' => $this->input->post('advise_message')
+            );
+            if($advise_GUID){
+                $query = $this->db->update('[dbo].[i_fortune_advise]', $advise_data, array('GUID' => $advise_GUID));
+            
+            }else{
+                $this->load->library('uuid');
+                $advise_data['GUID'] = $this->uuid->v4();
+                $insert_string = $this->db->insert_string('[dbo].[i_fortune_advise]', $advise_data);
+                $this->db->query( $insert_string );
+            
+            }
+            redirect(base_url() . 'admin/fortune/advise_result');
+        }
     }
     private function additionalColumn()
     {

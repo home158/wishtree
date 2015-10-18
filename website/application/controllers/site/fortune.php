@@ -72,9 +72,10 @@ class Fortune extends Site_Base_Controller {
         $this->display_data['fortune_GUID'] = $GUID;
         $orderlist = $this->fortune_model->retrieve_histories($this->session->userdata('GUID'),$GUID);
         $message_list = $this->fortune_model->retrieve_response_messages($this->session->userdata('GUID'),$GUID);
+        $advise_list = $this->fortune_model->retrieve_advise_messages($GUID);
         $this->display_data['orderlist'] = $orderlist;
         $this->display_data['message_list'] = $message_list;
-
+        $this->display_data['advise_list'] = $advise_list;
         if($this->ajax){
             $this->utility_model->parse('site/fortune/response',$this->display_data,TRUE);
         }else{

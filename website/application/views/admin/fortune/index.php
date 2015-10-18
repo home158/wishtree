@@ -217,7 +217,7 @@ var O_PARENT = {
                             var GUID = r[0].GUID;
                             $.popupWindow('/admin/fortune/detail/'+GUID, { 
                                 height: 600, 
-                                width: 800,
+                                width: 1000,
                                 createNew: true,
                                 onUnload: function(){
                                 }
