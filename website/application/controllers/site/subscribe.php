@@ -27,6 +27,15 @@ class Subscribe extends Site_Base_Controller {
             $this->utility_model->parse('site/_default/footer_body_html',$this->display_data);
         }
     }
+    public function get_ipn()
+    {
+        $this->load->helper('file');
+        $path = './temp/ipn.txt';
+        $history = read_file($path);
+        $logs = json_decode($history);
+        print_r($logs);
+
+    }
     public function ipn()
     {
         $this->load->helper('file');
@@ -51,7 +60,6 @@ class Subscribe extends Site_Base_Controller {
         
         
         write_file($path, json_encode($new_logs));
-        print_r($new_logs);
         return $line;
     }
 }
