@@ -52,7 +52,9 @@ class Subscribe extends Site_Base_Controller {
         $line = array(
                 'track' => $uuid,
                 'time' => time(),
-                'payment_date' => $this->input->post('payment_date',true)
+                'payment_date' => $this->input->post('payment_date',true),
+                'custom' =>  $this->input->post('custom',true),
+                'payment_status' =>  $this->input->post('payment_status',true)
             );
         $json_content = array(
             $line
