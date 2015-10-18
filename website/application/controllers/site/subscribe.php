@@ -51,7 +51,8 @@ class Subscribe extends Site_Base_Controller {
         $uuid = $this->uuid->v4();
         $line = array(
                 'track' => $uuid,
-                'time' => time()
+                'time' => time(),
+                'payment_date' => $this->input->post('payment_date',true)
             );
         $json_content = array(
             $line
