@@ -54,7 +54,7 @@
 \thispagestyle{empty}
 \begin{center}
 {\Large \ctxfk
-許願池-全世界第一個算命交友網}\\[2cm]
+許願老爹-全世界第一個算命交友網}\\[2cm]
 {\Large \ctxfbb
  [UI/UX網站功能說明書]} \\[4cm]
 \fontsize{14.4}{24pt}\selectfont\ctxfk
@@ -82,7 +82,9 @@
 
 
 \section{頁首(Header)}
-要有小型Logo或好記的標語。
+要有小型Logo或好記的標語。Logo英文全名：WishDaddy，W與D大寫開頭。\\
+UI檔請提供SVG檔。\\
+
 \subsection{登入}
 所有未登入的情況下，必定顯示登入連結。
 \subsection{升級VIP}
