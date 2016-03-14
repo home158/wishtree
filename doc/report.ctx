@@ -84,7 +84,7 @@ www.iwishdaddy.com\\[2cm]
 
 \section{頁首(Header)}
 要有小型Logo或好記的標語。Logo英文全名：WishDaddy，W與D大寫開頭。\\
-UI檔請提供SVG檔。\\
+圖檔請提供SVG檔。\\
 
 \subsection{登入}
 所有未登入的情況下，必定顯示登入連結。
@@ -94,6 +94,9 @@ UI檔請提供SVG檔。\\
 \section{菜單(Navigation)}
 \subsection{首頁}
 登入後的預設頁面。
+30天內剛加入的會員亂數選出10個。
+全部的隨機會員10個。
+目前在線上的會員，亂數選出10個，如果是VIP會員可以按下more會顯示更多。
 
 \subsection{許願池}
 刑登VIP會員許下的願望，有回覆的功能。
